@@ -1,0 +1,8 @@
+
+.layout{
+  display: flex;
+  gap: 30px;
+  padding: 10px 15px;
+  width: 80%;
+
+}

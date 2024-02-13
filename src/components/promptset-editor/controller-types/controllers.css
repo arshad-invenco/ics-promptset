@@ -1,0 +1,22 @@
+.controller-body{
+    padding: 10px 15px;
+    display: flex;
+}
+
+.d-flex-col{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+    width: fit-content;
+}
+
+.d-flex-row{
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+}
+
+input{
+    height: 20px;
+}

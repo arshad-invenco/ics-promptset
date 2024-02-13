@@ -1,0 +1,20 @@
+
+.editor{
+    height: 90vh;
+    width: 80%;
+    border: 1px solid green;
+}
+
+/* EDITOR CONTROLLER */
+.controller {
+    height: 15vh;
+}
+
+
+/*EDITOR BODY*/
+
+.body{
+    height: 75vh;
+    border: 1px solid blue;
+    position: relative;
+}
