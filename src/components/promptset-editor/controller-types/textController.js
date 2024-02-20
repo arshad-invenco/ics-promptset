@@ -44,7 +44,11 @@ export default function TextController() {
 
                 <div className='d-flex-row'>
                     <label htmlFor={"y-axis"}>Y</label>
-                    <input id={"y-axis"} value={yAxis} onChange={(e) => setYAxis(e.target.value)} type={"number"}/>
+                    <input id={"y-axis"} value={yAxis} onChange={(e) => {setYAxis(e.target.value);
+                        setActiveList({
+                        element: {...activeList.element, top: Number(e.target.value)},
+                        type: activeList.type
+                    })}} type={"number"}/>
                 </div>
 
                 <div className='d-flex-row'>

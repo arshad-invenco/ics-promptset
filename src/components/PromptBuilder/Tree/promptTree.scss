@@ -1,0 +1,100 @@
+
+.left-container{
+    padding: 10px;
+    width: 315px;
+    .ics-prompt-tree-container{
+        height: 300px;
+        border-right: 1px solid #e0e0e0;
+        background-color: white;
+        width: 100%;
+        .ics-prompt-set-heading{
+            width: 100%;
+            border-bottom: 1px solid #e0e0e0;
+            .prompt-heading-input{
+                width: 100%;
+                font-size: 17px;
+                font-weight: bold;
+                padding: 7px 0;
+                margin-right: -1px;
+                height: auto;
+                background-color: white;
+                border: none;
+                transition: background .25s ease-in-out;
+                border-radius: 0;
+
+                &:focus{
+                    outline: none;
+                }
+                &:hover{
+                    background-color: #fafafa;
+                }
+
+            }
+        }
+
+        .ics-prompt-builder-state{
+            .accordion{
+                .accordion-item{
+                    border: none;
+                    .accordion-header{
+                        .accordion-button{
+                            color: red;
+                            background-color: white;
+                            padding: 8px 10px 8px 5px;
+                            box-shadow: red;
+                            &:focus{
+                                box-shadow: none !important;
+                                border: none;
+                            }
+                            .prompt-set-status{
+                                width: 100%;
+                                display: flex;
+                                align-self: flex-start;
+                                justify-content: space-between;
+                                align-items: center;
+                                .left-status{
+                                    display: flex;
+                                    align-items: center;
+                                    .status-icon{
+                                        i{
+                                            color: #BDBDD3;
+                                            font-size: 18px;
+                                        }
+                                    }
+                                    .middle-text-status{
+                                        color: #616161;
+                                        font-weight: bold;
+                                        font-size: 14px;
+                                        padding-top: 2px;
+                                        padding-left: 13px;
+                                    }
+                                }
+
+                                .unsaved-status{
+                                    i{
+                                        color: #616161;
+                                        font-size: 18px;
+                                        margin-right: 10px;
+                                    }
+                                }
+                            }
+                            &:hover{
+                                background-color: #f5f5f5;
+                            }
+                        }
+                        .accordion-button::after{
+                            display: none;
+                        }
+                    }
+
+                    .accordion-collapse{
+                        .accordion-body{
+                            padding: 0;
+                            border: 1px solid green;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
-import './layout.css'
-import Toolbar from "../Toolbar/toolbar";
-import PromptSetEditor from "../promptset-editor/promptset-editor";
+import React, {useEffect, useState} from 'react'
+import './promptSet.scss'
+import PromptTree from "../../components/PromptBuilder/Tree/promptTree";
+import PromptSetEditor from "../../components/promptset-editor/promptset-editor";
 import {promptSetContext} from "../../hooks/promptsetContext";
+import {useDispatch, useSelector} from "react-redux";
+import {setPromptSetData} from "../../redux/reducers/promptsetSlice";
+import {useLocation, useParams} from "react-router-dom";
 
-export default function Layout() {
+export default function PromptSet() {
     const toolbarData = {
         id: "a4dc9706-5f47-4181-b501-c1975e2017da",
         code: "data-01",
@@ -58,16 +61,20 @@ export default function Layout() {
 
     const [activeList, setActiveList] = useState({element: null, type: ''});
 
-    const onListClick = (element) => {
-        setActiveList({element: element, type: element.type});
-        console.log(activeList.element, activeList.type, 'active list')
-    }
+    // const dispatch = useDispatch();
+    // dispatch(setPromptSetData(input));
+
+    const location = useLocation();
+
+    useEffect(() => {
+        console.log(location.pathname);
+    }, [location]);
 
     return (
         <div className="layout">
-            <promptSetContext.Provider value={{activeList, setActiveList, toolbarData}}>
-                <Toolbar toolbar={toolbarData}  listClick={onListClick}/>
-                <PromptSetEditor prompsetValues={activeList} />
+            <promptSetContext.Provider value={{activeList, setActiveList, toolbarData} }>
+                <PromptTree toolbar={toolbarData}/>
+                {/*<PromptSetEditor prompsetValues={activeList} />*/}
             </promptSetContext.Provider>
         </div>
     )
