@@ -1,22 +1,39 @@
-import React, {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import './promptTree.scss'
 import {Accordion} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchPromptSet} from "../../../redux/thunks/promptSetThunk";
 import InnerStates from "./TreeElements/innerStates";
 
-export default function PromptTree(props) {
-    console.log(props.toolbar, "INSIDE TREE");
+interface RootState {
+    promptset: {
+        data: any;
+        isLoading: boolean;
+        error: any;
+    };
+}
+
+type FetchPromptSetAction = ReturnType<any>;
+
+export default function PromptTree() {
+    const [isSaving, setIsSaving] = useState(false);
+
 
     const dispatch = useDispatch();
-    const promptSetData = useSelector(state => state.promptset.data);
-    console.log('useEffect', promptSetData);
+    const promptSetData = useSelector((state : RootState) => state.promptset.data);
 
     useEffect(() => {
-        dispatch(fetchPromptSet());
+        dispatch<FetchPromptSetAction>(fetchPromptSet());
+        console.log(promptSetData)
     }, []);
 
-    const promptSetTree = promptSetData?.states?.map((item, index) => {
+
+    function handleSavePromptSet() {
+        setIsSaving(!isSaving);
+    }
+
+
+    const promptSetTree = promptSetData?.states?.map((item:any, index:number) => {
         return (
             <div key={index} className="state-item">
                 <Accordion alwaysOpen>
@@ -27,7 +44,7 @@ export default function PromptTree(props) {
                                 <div className="status-icon">
                                     <i className="fas fa-shield-alt"></i>
                                 </div>
-                                <div onClick={()=>dispatch(fetchPromptSet())} className="middle-text-status">
+                                <div onClick={()=>dispatch<FetchPromptSetAction>(fetchPromptSet())} className="middle-text-status">
                                     {item.code.toUpperCase()}
                                 </div>
                             </div>
@@ -38,7 +55,7 @@ export default function PromptTree(props) {
                         </Accordion.Header>
                         <Accordion.Body>
                             {
-                                item.assignments.map((child, index) => {
+                                item.assignments.map((child:any, index:number) => {
                                     return (
                                         <div key={index} className="inner-accordion">
                                             <InnerStates child={child} index={index} />
@@ -53,18 +70,24 @@ export default function PromptTree(props) {
         )
     })
 
-
-
-
     return (
         <div className="left-container">
             <div className="ics-prompt-tree-container">
                 <div className="ics-prompt-set-heading">
                     <input className="prompt-heading-input" type="text" value={"njbh"}/>
                 </div>
-
                 <div className="ics-prompt-builder-state">
                     {promptSetTree}
+                </div>
+                <div className="prompt-tree-footer">
+                    <button className="btn btn-primary text-uppercase"  onClick={handleSavePromptSet}>
+                        {isSaving && <i className="fa fa-spinner fa-pulse fa-fw ics-packages-loader"></i> }
+                        Save
+                    </button>
+                    <button className="btn btn-secondary text-uppercase">
+                        New Prompt
+                        <i className="fas fa-plus"></i>
+                    </button>
                 </div>
 
 

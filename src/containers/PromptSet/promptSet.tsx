@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
 import './promptSet.scss'
 import PromptTree from "../../components/PromptBuilder/Tree/promptTree";
 import {promptSetContext} from "../../hooks/promptsetContext";
 import {useLocation} from "react-router-dom";
+import {useEffect, useState} from "react";
 
-export default function PromptSet() {
+export function PromptSet() {
     const [activeList, setActiveList] = useState({element: null, type: ''});
 
     // const dispatch = useDispatch();

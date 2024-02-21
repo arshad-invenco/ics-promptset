@@ -1,10 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchPromptSet} from "../thunks/promptSetThunk";
 
+
+
 const initialState = {
     data : {},
     isLoading : true,
-    error: null
+    error: false
 }
 
 export const promptsetSlice = createSlice({
@@ -12,7 +14,7 @@ export const promptsetSlice = createSlice({
     initialState,
     reducers: {
         setPromptSetData: (state, action) => {
-            state.data.push(action.payload);
+            state.data = action.payload
             state.isLoading = false;
             state.error = false;
         }
@@ -29,7 +31,7 @@ export const promptsetSlice = createSlice({
         })
         builder.addCase(fetchPromptSet.rejected, (state, action) => {
             state.isLoading = false;
-            state.error = action.payload;
+            state.error = true;
         })
     }
 })

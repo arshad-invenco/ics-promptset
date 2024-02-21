@@ -1,12 +1,10 @@
-import React from 'react'
 import CropSquareRoundedIcon from '@mui/icons-material/CropSquareRounded';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
 import {capitalizeFirstLetter} from "../../../../hooks/common";
 
-export default function TreeElements(props) {
+export default function TreeElements(props:any) {
 
     const {element} = props;
-    console.log(element, "ELEMENTS")
     // parent class    ->   inner-element
     return (
         <>

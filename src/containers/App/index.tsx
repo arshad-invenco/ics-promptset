@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import PromptSet from "../PromptSet/promptSet";
+import {PromptSet} from "../PromptSet/promptSet";
 
 
 function App() {

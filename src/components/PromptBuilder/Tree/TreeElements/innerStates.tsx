@@ -1,11 +1,13 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {Accordion} from "react-bootstrap";
-import {capitalizeFirstLetter} from "../../../../hooks/common";
+import {capitalizeFirstLetter, openDayPartModal, showAssetsDropdown} from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded";
 import TreeElements from "./treeElements";
+import IndeterminateCheckBoxRoundedIcon from '@mui/icons-material/IndeterminateCheckBoxRounded';
+import AssetsDropdown from "../../modals/assetsDropdown";
 
-export default function InnerStates(props) {
+export default function InnerStates(props:any) {
     const {child, index} = props;
     const [elements, setElements] = useState(child.elements);
 
@@ -21,6 +23,21 @@ export default function InnerStates(props) {
 
     }
 
+    const dropdownRef = useRef(null);
+    useEffect(() => {
+        function handleClickOutside(event:MouseEvent) {
+            if (dropdownRef.current && !(dropdownRef.current as Node).contains(event.target as Node)) {
+                setShowDropdown(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const [showDropdown, setShowDropdown] = useState(false);
+
     return (
         <Accordion alwaysOpen>
             <Accordion.Item eventKey="0">
@@ -34,16 +51,40 @@ export default function InnerStates(props) {
                                 {capitalizeFirstLetter(child.type)}
                             </div>
                         </div>
-                        <div className="child-status-right-icons">
-                            <MoreTimeIcon className="icons-child-status" />
-                            <AddBoxRoundedIcon className="icons-child-status"/>
+                        <div className="child-states-right-icons">
+                            <MoreTimeIcon className="icons-right-child-states" onClick={(e) => {
+                                e.stopPropagation();
+                                openDayPartModal()
+                            }} />
+                            {
+                                showDropdown ?
+                                    <IndeterminateCheckBoxRoundedIcon onClick={(e) => {
+                                        e.stopPropagation();
+                                        setShowDropdown(!showDropdown);
+                                    }} className="icons-right-child-states" />
+                                    :
+                                    <AddBoxRoundedIcon className="icons-right-child-states" onClick={(e) => {
+                                        e.stopPropagation();
+                                        setShowDropdown(!showDropdown);
+                                        showAssetsDropdown();
+                                    }}/>
+
+                            }
+                            {showDropdown &&
+                                <div ref={dropdownRef} onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowDropdown(!showDropdown)
+                                }} className="assets-dropdown">
+                                <AssetsDropdown assignment={child}/>
+                            </div>
+                            }
                         </div>
                     </div>
                 </Accordion.Header>
                 <Accordion.Body>
                         <div key={index} className="elements-list">
                             {
-                                elements.map((element, index) => {
+                                elements.map((element:any, index:number) => {
                                     return (
                                         element.lock !== false ?
                                             <div draggable
