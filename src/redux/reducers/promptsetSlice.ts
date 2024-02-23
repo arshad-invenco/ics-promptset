@@ -1,10 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchPromptSet} from "../thunks/promptSetThunk";
+import {PromptSetInterface} from "../../services/promptset.interface";
 
 
+interface PromptSetState {
+    data : PromptSetInterface,
+    isLoading : boolean,
+    error: boolean
+}
 
-const initialState = {
-    data : {},
+const initialState : PromptSetState = {
+    data : {} as PromptSetInterface,
     isLoading : true,
     error: false
 }

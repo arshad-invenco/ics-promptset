@@ -2,8 +2,11 @@ import {configureStore} from "@reduxjs/toolkit";
 import {promptsetSlice} from "./reducers/promptsetSlice"
 
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         promptset: promptsetSlice.reducer,
     },
 });
+
+export type AppDispatch = typeof store.dispatch;
+export default store;

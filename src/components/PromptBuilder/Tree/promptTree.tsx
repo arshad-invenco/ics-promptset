@@ -1,37 +1,38 @@
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import './promptTree.scss'
 import {Accordion} from "react-bootstrap";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchPromptSet} from "../../../redux/thunks/promptSetThunk";
+import {useSelector} from "react-redux";
 import InnerStates from "./TreeElements/innerStates";
+import {Assignment, PromptSetInterface, State} from "../../../services/promptset.interface";
+import isSequoiaDevice from "../../../services/promptsetService";
+import {promptSetContext} from "../../../hooks/promptsetContext";
 
 interface RootState {
     promptset: {
-        data: any;
+        data: PromptSetInterface;
         isLoading: boolean;
         error: any;
     };
 }
 
-type FetchPromptSetAction = ReturnType<any>;
-
 export default function PromptTree() {
-    const [isSaving, setIsSaving] = useState(false);
+    // STATES
+    const [isSaving, setIsSaving] = useState(false);   //for save button
 
+    // SELECTOR
+    const promptSetData : PromptSetInterface = useSelector((state : RootState) => state.promptset.data);
 
-    const dispatch = useDispatch();
-    const promptSetData = useSelector((state : RootState) => state.promptset.data);
+    // CONTEXT API
+    const {setPromptData} = useContext(promptSetContext);
 
+    // EFFECTS
     useEffect(() => {
-        dispatch<FetchPromptSetAction>(fetchPromptSet());
-        console.log(promptSetData)
+        setPromptData(promptSetData);
     }, []);
-
 
     function handleSavePromptSet() {
         setIsSaving(!isSaving);
     }
-
 
     const promptSetTree = promptSetData?.states?.map((item:any, index:number) => {
         return (
@@ -42,11 +43,18 @@ export default function PromptTree() {
                         <div className="prompt-set-status">
                             <div className="left-status">
                                 <div className="status-icon">
-                                    <i className="fas fa-shield-alt"></i>
+                                    {
+                                        ( item.secure && isSequoiaDevice("G7-100-8") ) &&
+                                        <i className="fas fa-shield-alt"></i>
+                                    }
                                 </div>
-                                <div onClick={()=>dispatch<FetchPromptSetAction>(fetchPromptSet())} className="middle-text-status">
+                                <div onClick={()=>{}} className="middle-text-status">
                                     {item.code.toUpperCase()}
                                 </div>
+                                {
+                                    item.transactionState &&
+                                        <span className="state-label">{item.transactionState}</span>
+                                }
                             </div>
                             <div className="unsaved-status">
                                 <i className="fa fa-floppy-o "></i>
@@ -55,7 +63,7 @@ export default function PromptTree() {
                         </Accordion.Header>
                         <Accordion.Body>
                             {
-                                item.assignments.map((child:any, index:number) => {
+                                item.assignments.map((child:Assignment, index:number) => {
                                     return (
                                         <div key={index} className="inner-accordion">
                                             <InnerStates child={child} index={index} />

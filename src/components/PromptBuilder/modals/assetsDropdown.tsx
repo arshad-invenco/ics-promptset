@@ -1,10 +1,16 @@
 import {useEffect, useState} from "react";
-import {isAssetHaving} from "../../../services/promptsetService";
+import isSequoiaDevice, {find, getAsset, isAssetHaving} from "../../../services/promptsetService";
+import {Assignment, Elements} from "../../../services/promptset.interface";
+import {ICON, TEXT, TOUCH_MASK} from "../../../constants/promptSetConstants";
 
+interface AssetsDropdownProps {
+    childState: Assignment;
+}
 
-export default function AssetsDropdown(props:any) {
+export default function AssetsDropdown(props:AssetsDropdownProps) {
+    const {childState} = props;
     const [assets, setAssets] = useState<string[]>([]);
-    console.log(props)
+    console.log(props, 'AssetsDropdownProps')
 
     useEffect(() => {
         fetchAssets();
@@ -12,22 +18,30 @@ export default function AssetsDropdown(props:any) {
 
     function fetchAssets() {
         setAssets(['text', 'image', 'video', 'input']);
-        if (props.assignments) {
-            console.error('props elements is undefined');
-            return;
-        }
-        const touchMask = isAssetHaving(props.elements, 'text');
-        console.log(touchMask)
+        const touchMask = !!childState.touchmap;
+        const bg = find(childState.elements, 'bg');
+
+        if ( isSequoiaDevice( "G7-100-8" ) && touchMask )
+            setAssets(prevAssets => [...prevAssets, 'area']);
+        else if ( isSequoiaDevice( "G7-100" ) && !touchMask )
+            setAssets(prevAssets => [...prevAssets, 'touchmask']);
+        if ( !bg?.lock )
+            setAssets(prevAssets => ['bg', ...prevAssets]);
     }
 
 
     return (
-        <div className="">
-            lskd
-            efpldo[efl
-            e'rploekorpkierjijerf
-            e;fokriomfkporf
-            Er'fpleofki
-        </div>
+        assets.map((asset:string, index:number) => {
+            return (
+                <div key={index} className="asset-item">
+                    <div className="dropdown-icon">
+                        <i className={getAsset(asset, ICON)}></i>
+                    </div>
+                    <div >
+                        {getAsset(asset, TEXT)}
+                    </div>
+                </div>
+            )
+        })
     );
 }

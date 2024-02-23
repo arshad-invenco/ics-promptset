@@ -1,6 +1,6 @@
 
 .left-container{
-    width: 315px;
+    width: 330px;
     transition: all .25s ease-in-out;
     .ics-prompt-tree-container{
         height: fit-content;
@@ -60,6 +60,7 @@
                                             color: #BDBDD3;
                                             font-size: 18px;
                                         }
+                                            width: 20px;
                                     }
                                     .middle-text-status{
                                         color: #616161;
@@ -67,6 +68,22 @@
                                         font-size: 14px;
                                         padding-top: 2px;
                                         padding-left: 13px;
+                                        max-width: 180px;
+                                        overflow: hidden;
+                                        display: flex;
+                                        align-items: center;
+                                    }
+                                    .state-label{
+                                        padding: 3px 5px 3px 5px;
+                                        letter-spacing: 1px;
+                                        color: #212121;
+                                        background-color: #e0e0e0;
+                                        font-size: 75%;
+                                        line-height: 1;
+                                        border-radius: 0.25em;
+                                        height: fit-content;
+                                        margin-left: 5px;
+                                        font-weight: bold;
                                     }
                                 }
 
@@ -133,9 +150,39 @@
                                         .assets-dropdown{
                                             position: absolute;
                                             top: 34px;
-                                            right: 12px;
-                                            background: white;
-                                            border: 1px solid red;
+                                            right: 8px;
+                                            z-index: 3;
+                                            text-align: left;
+                                            border: 1px solid #e0e0e0;
+                                            border-radius: 3px;
+                                            background-color: #fff;
+                                            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2),
+                                            0 1px 8px 0 rgba(0, 0, 0, .14),
+                                            0 2px 1px -1px rgba(0, 0, 0, .12);
+                                            color: #9e9e9e;
+
+                                            .asset-item{
+                                                line-height: 1.42857143;
+                                                padding: 4px 5px;
+                                                border-bottom: 1px solid #e0e0e0;
+                                                display: flex;
+                                                width: 200px;
+                                                color: #757575;
+                                                &:last-child{
+                                                    border-bottom: none;
+                                                }
+                                                &:hover{
+                                                    background-color: #f5f5f5;
+                                                }
+                                                .dropdown-icon{
+                                                    width: 30px;
+                                                    color: #9e9e9e;
+                                                    font-size: 17px;
+                                                }
+                                                .dropdown-text{
+
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -179,12 +226,16 @@
                                                 }
                                             }
                                         }
+
                                         .text-element-value:hover .grab-icon, .input-element-value:hover .grab-icon{
                                             opacity: 1;
                                         }
                                         .text-element-value{
 
                                         }
+                                    }
+                                    .element-type-area{
+                                        margin-left: 26px;
                                     }
                                 }
                             }

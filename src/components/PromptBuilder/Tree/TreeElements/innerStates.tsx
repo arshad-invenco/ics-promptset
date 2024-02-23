@@ -6,24 +6,28 @@ import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded";
 import TreeElements from "./treeElements";
 import IndeterminateCheckBoxRoundedIcon from '@mui/icons-material/IndeterminateCheckBoxRounded';
 import AssetsDropdown from "../../modals/assetsDropdown";
+import {Assignment, Elements} from "../../../../services/promptset.interface";
+import DragIndicatorRoundedIcon from "@mui/icons-material/DragIndicatorRounded";
+import PanToolAltOutlinedIcon from '@mui/icons-material/PanToolAltOutlined';
 
-export default function InnerStates(props:any) {
+interface InnerStateProps{
+    child: Assignment;
+    index: number;
+}
+
+export default function InnerStates(props:InnerStateProps) {
     const {child, index} = props;
-    const [elements, setElements] = useState(child.elements);
 
+    // STATES
+    const [elements, setElements] = useState(child.elements);
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    // REFS
     const dragElement = useRef(0);
     const draggedOverElement = useRef(0);
-
-    function handleElementSort() {
-        const elementsClone = [...child.elements];
-        const temp = elementsClone[dragElement.current];
-        elementsClone[dragElement.current] = elementsClone[draggedOverElement.current];
-        elementsClone[draggedOverElement.current] = temp;
-        setElements(elementsClone);
-
-    }
-
     const dropdownRef = useRef(null);
+
+    // EFFECTS
     useEffect(() => {
         function handleClickOutside(event:MouseEvent) {
             if (dropdownRef.current && !(dropdownRef.current as Node).contains(event.target as Node)) {
@@ -36,7 +40,15 @@ export default function InnerStates(props:any) {
         };
     }, []);
 
-    const [showDropdown, setShowDropdown] = useState(false);
+
+    function handleElementSort() {
+        const elementsClone = [...child.elements];
+        const temp = elementsClone[dragElement.current];
+        elementsClone[dragElement.current] = elementsClone[draggedOverElement.current];
+        elementsClone[draggedOverElement.current] = temp;
+        setElements(elementsClone);
+
+    }
 
     return (
         <Accordion alwaysOpen>
@@ -48,6 +60,10 @@ export default function InnerStates(props:any) {
                                 <i className="fa fa-clone"></i>
                             </div>
                             <div className="child-status-middle-text">
+                                {
+                                    child.promptSetLanguageId &&
+                                    <span>EN: </span>
+                                }
                                 {capitalizeFirstLetter(child.type)}
                             </div>
                         </div>
@@ -74,8 +90,9 @@ export default function InnerStates(props:any) {
                                 <div ref={dropdownRef} onClick={(e) => {
                                     e.stopPropagation();
                                     setShowDropdown(!showDropdown)
+                                    console.log('clicked', child);
                                 }} className="assets-dropdown">
-                                <AssetsDropdown assignment={child}/>
+                                <AssetsDropdown  childState={child}/>
                             </div>
                             }
                         </div>
@@ -84,9 +101,9 @@ export default function InnerStates(props:any) {
                 <Accordion.Body>
                         <div key={index} className="elements-list">
                             {
-                                elements.map((element:any, index:number) => {
+                                elements.map((element:Elements, index:number) => {
                                     return (
-                                        element.lock !== false ?
+                                        element.lock !== false  ?
                                             <div draggable
                                                  onDragStart={()=>(dragElement.current = index)}
                                                  onDragEnter={()=>(draggedOverElement.current = index)}
@@ -99,6 +116,37 @@ export default function InnerStates(props:any) {
                                         : null
                                     )
                                 })
+                            }
+                            {
+                                child.touchmap &&
+                                <>
+                                    <div className="inner-elements">
+                                        <div className="element">
+                                            <div className="element-left-container">
+                                                <i className="far fa-hand-pointer"></i>
+                                                Touch Mask
+                                            </div>
+                                            <i className="far fa-trash-alt trash-icon"></i>
+                                        </div>
+                                    </div>
+                                    {/*for touch map*/}
+                                    {
+                                        child.touchmap.areas.map((area, index) => {
+                                            return (
+                                                <div className="inner-elements element-type-area">
+                                                    <div className="element">
+                                                        <div className="element-left-container">
+                                                            <i className="fas fa-square"></i>
+                                                            Touch Area
+                                                        </div>
+                                                        <i className="far fa-trash-alt trash-icon"></i>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+
+                                </>
                             }
                         </div>
                 </Accordion.Body>
