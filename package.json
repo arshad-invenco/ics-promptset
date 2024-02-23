@@ -30,7 +30,9 @@
     "redux": "^5.0.1",
     "sass": "^1.70.0",
     "styled-components": "^6.1.8",
-    "web-vitals": "^3.5.2"
+    "web-vitals": "^3.5.2",
+    "@react-buddy/ide-toolbox": "^2.4.0",
+    "@react-buddy/palette-mui": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

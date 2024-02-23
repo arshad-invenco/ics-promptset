@@ -1,4 +1,4 @@
-import {Elements} from "./promptset.interface";
+import {Elements, Lang} from "./promptset.interface";
 import {AssetsDropdownMapping} from "../constants/promptSetConstants";
 
 export default function isSequoiaDevice(deviceType:string) {
@@ -19,5 +19,15 @@ export function getAsset(element:string, type:string){
         return AssetsDropdownMapping[element].text;
     }
     return AssetsDropdownMapping[element].icon;
+}
+
+
+export function getLanguage(languageId:string, lang:Lang) {
+    for (let key in lang) {
+        if (lang[key].languageSupportId === languageId) {
+            return lang[key].isoCode;
+        }
+    }
+    return '';
 }
 

@@ -7,7 +7,7 @@ import {Assignment, PromptSetInterface, State} from "../../../services/promptset
 import isSequoiaDevice from "../../../services/promptsetService";
 import {promptSetContext} from "../../../hooks/promptsetContext";
 
-interface RootState {
+export interface PromptSetRootState {
     promptset: {
         data: PromptSetInterface;
         isLoading: boolean;
@@ -20,27 +20,33 @@ export default function PromptTree() {
     const [isSaving, setIsSaving] = useState(false);   //for save button
 
     // SELECTOR
-    const promptSetData : PromptSetInterface = useSelector((state : RootState) => state.promptset.data);
+    const promptsetData : PromptSetInterface = useSelector((state : PromptSetRootState) => state.promptset.data);
 
     // CONTEXT API
-    const {setPromptData} = useContext(promptSetContext);
+    const {promptSetData, setPromptSetData, setActiveStateId} = useContext(promptSetContext);
 
     // EFFECTS
     useEffect(() => {
-        setPromptData(promptSetData);
+        setPromptSetData(promptSetData);
     }, []);
 
     function handleSavePromptSet() {
         setIsSaving(!isSaving);
     }
 
-    const promptSetTree = promptSetData?.states?.map((item:any, index:number) => {
+    function onClickState(state_id: string) {
+        setActiveStateId(state_id);
+    }
+
+    const promptSetTree = promptsetData?.states?.map((item:State, index:number) => {
         return (
             <div key={index} className="state-item">
                 <Accordion alwaysOpen>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>
-                        <div className="prompt-set-status">
+                        <div className="prompt-set-status" onClick={()=>{
+                            onClickState(item.id)
+                        }}>
                             <div className="left-status">
                                 <div className="status-icon">
                                     {

@@ -30,21 +30,18 @@ interface TouchMapAreas{
     softkeyName: string,
     type: string
 }
-export interface Languages {
-    en: LanguageDetails;
-    fr: LanguageDetails;
-}
-interface LanguageDetails {
-    languageSupportId: string;
-    language: string;
-    isoCode: string;
-    promptSetLanguageSupport: PromptSetLanguageSupport;
-}
-interface PromptSetLanguageSupport {
-    type: string;
-    size: number;
-    default: boolean;
-    deleted: boolean;
+export interface Lang {
+    [key: string]: {
+        languageSupportId: string,
+        language: string,
+        isoCode: string,
+        promptSetLanguageSupport: {
+            type: string,
+            size: number,
+            default: boolean,
+            deleted: boolean
+        }
+    }
 }
 export interface PromptSetInterface {
     id: string;
@@ -73,7 +70,7 @@ export interface PromptSetInterface {
     isApprover: boolean;
     clonedFrom: ClonedFrom;
     root: null | string;   //null data & no doc in swagger
-    lang: Languages;
+    lang: Lang;
     states: State[];
 }
 
@@ -100,7 +97,7 @@ export interface Assignment {
     transactionState: string;  //null data, but string after seeing new data
     contactless: boolean;
     thumbnailUrl: string;    //null data but string in swagger
-    promptSetLanguageId: null | string;    //null data & no doc in swagger
+    promptSetLanguageId: string;    //null data & no doc in swagger
     touchmap: {       //null, but after new data
         id: string,
         areas: TouchMapAreas[],

@@ -7,12 +7,15 @@ import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../redux/store";
 import {fetchPromptSet} from "../../redux/thunks/promptSetThunk";
 import {PromptSetInterface} from "../../services/promptset.interface";
+import {PromptSetEditor} from "../PromptEditor/promptSetEditor";
 
 export function PromptSet() {
     const location = useLocation();
 
     // STATES -> CONTEXT_API
-    const [promptData, setPromptData] = useState<PromptSetInterface>({} as PromptSetInterface);
+    const [promptSetData, setPromptSetData] = useState<PromptSetInterface>({} as PromptSetInterface);
+    const [activeStateId, setActiveStateId] = useState<string>('');
+    const contextValues = {promptSetData, setPromptSetData, activeStateId, setActiveStateId}
 
     // DISPATCH
     const dispatch = useDispatch<AppDispatch>();
@@ -25,9 +28,9 @@ export function PromptSet() {
 
     return (
         <div className="layout">
-            <promptSetContext.Provider value={{promptData, setPromptData}}>
+            <promptSetContext.Provider value={contextValues}>
                 <PromptTree />
-                {/*<PromptSetEditor prompsetValues={activeList} />*/}
+                <PromptSetEditor />
             </promptSetContext.Provider>
         </div>
     )

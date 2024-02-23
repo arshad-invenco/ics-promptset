@@ -1,14 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {Accordion} from "react-bootstrap";
-import {capitalizeFirstLetter, openDayPartModal, showAssetsDropdown} from "../../../../hooks/common";
+import {openDayPartModal, showAssetsDropdown} from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
-import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded";
 import TreeElements from "./treeElements";
-import IndeterminateCheckBoxRoundedIcon from '@mui/icons-material/IndeterminateCheckBoxRounded';
 import AssetsDropdown from "../../modals/assetsDropdown";
-import {Assignment, Elements} from "../../../../services/promptset.interface";
-import DragIndicatorRoundedIcon from "@mui/icons-material/DragIndicatorRounded";
-import PanToolAltOutlinedIcon from '@mui/icons-material/PanToolAltOutlined';
+import {Assignment, Elements, Lang} from "../../../../services/promptset.interface";
+import {getLanguage} from "../../../../services/promptsetService";
+import {useSelector} from "react-redux";
+import {PromptSetRootState} from "../promptTree";
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 
 interface InnerStateProps{
     child: Assignment;
@@ -17,6 +18,10 @@ interface InnerStateProps{
 
 export default function InnerStates(props:InnerStateProps) {
     const {child, index} = props;
+
+    // SELECTOR
+    const lang : Lang = useSelector((state : PromptSetRootState) => state.promptset.data.lang);
+
 
     // STATES
     const [elements, setElements] = useState(child.elements);
@@ -29,6 +34,7 @@ export default function InnerStates(props:InnerStateProps) {
 
     // EFFECTS
     useEffect(() => {
+
         function handleClickOutside(event:MouseEvent) {
             if (dropdownRef.current && !(dropdownRef.current as Node).contains(event.target as Node)) {
                 setShowDropdown(false);
@@ -38,6 +44,8 @@ export default function InnerStates(props:InnerStateProps) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
+
+
     }, []);
 
 
@@ -59,12 +67,12 @@ export default function InnerStates(props:InnerStateProps) {
                             <div className="child-status-icon">
                                 <i className="fa fa-clone"></i>
                             </div>
-                            <div className="child-status-middle-text">
+                            <div className="child-status-middle-text text-capitalize">
                                 {
                                     child.promptSetLanguageId &&
-                                    <span>EN: </span>
+                                    <span className="text-uppercase">{getLanguage(child.promptSetLanguageId, lang)}: </span>
                                 }
-                                {capitalizeFirstLetter(child.type)}
+                                {child.type}
                             </div>
                         </div>
                         <div className="child-states-right-icons">
@@ -74,12 +82,12 @@ export default function InnerStates(props:InnerStateProps) {
                             }} />
                             {
                                 showDropdown ?
-                                    <IndeterminateCheckBoxRoundedIcon onClick={(e) => {
+                                    <IndeterminateCheckBoxOutlinedIcon onClick={(e) => {
                                         e.stopPropagation();
                                         setShowDropdown(!showDropdown);
                                     }} className="icons-right-child-states" />
                                     :
-                                    <AddBoxRoundedIcon className="icons-right-child-states" onClick={(e) => {
+                                    <AddBoxOutlinedIcon className="icons-right-child-states" onClick={(e) => {
                                         e.stopPropagation();
                                         setShowDropdown(!showDropdown);
                                         showAssetsDropdown();
@@ -90,7 +98,6 @@ export default function InnerStates(props:InnerStateProps) {
                                 <div ref={dropdownRef} onClick={(e) => {
                                     e.stopPropagation();
                                     setShowDropdown(!showDropdown)
-                                    console.log('clicked', child);
                                 }} className="assets-dropdown">
                                 <AssetsDropdown  childState={child}/>
                             </div>

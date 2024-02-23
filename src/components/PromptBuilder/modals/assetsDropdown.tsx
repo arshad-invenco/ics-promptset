@@ -30,14 +30,18 @@ export default function AssetsDropdown(props:AssetsDropdownProps) {
     }
 
 
+    function handleAdd(childState: Assignment) {
+        console.log(childState, 'handleAdd')
+    }
+
     return (
         assets.map((asset:string, index:number) => {
             return (
-                <div key={index} className="asset-item">
+                <div key={index} className="asset-item" onClick={()=>handleAdd(childState)}>
                     <div className="dropdown-icon">
                         <i className={getAsset(asset, ICON)}></i>
                     </div>
-                    <div >
+                    <div>
                         {getAsset(asset, TEXT)}
                     </div>
                 </div>

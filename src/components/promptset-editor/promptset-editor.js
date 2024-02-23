@@ -3,7 +3,7 @@ import './prompt-set-editor.css'
 import EditorController from "./editor-controller";
 import EditorBody from "./editor-body";
 
-export default function PromptSetEditor() {
+export default function PromptEditor() {
 
     return (
         <div className='editor'>

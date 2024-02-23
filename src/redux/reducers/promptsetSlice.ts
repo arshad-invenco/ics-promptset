@@ -2,7 +2,6 @@ import {createSlice} from "@reduxjs/toolkit";
 import {fetchPromptSet} from "../thunks/promptSetThunk";
 import {PromptSetInterface} from "../../services/promptset.interface";
 
-
 interface PromptSetState {
     data : PromptSetInterface,
     isLoading : boolean,
@@ -20,7 +19,7 @@ export const promptsetSlice = createSlice({
     initialState,
     reducers: {
         setPromptSetData: (state, action) => {
-            state.data = action.payload
+            state.data = action.payload;
             state.isLoading = false;
             state.error = false;
         }

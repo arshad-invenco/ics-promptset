@@ -2,13 +2,17 @@ import {createContext} from "react";
 import {PromptSetInterface} from "../services/promptset.interface";
 
 interface PromptSetContextInterface {
-    promptData: PromptSetInterface;
-    setPromptData: React.Dispatch<React.SetStateAction<PromptSetInterface>>;
+    promptSetData: PromptSetInterface;
+    setPromptSetData: React.Dispatch<React.SetStateAction<PromptSetInterface>>;
+    activeStateId: string;
+    setActiveStateId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const initialContextValue = {
-    promptData: {} as PromptSetInterface,
-    setPromptData: () => {}
+    promptSetData: {} as PromptSetInterface,
+    setPromptSetData: () => {},
+    activeStateId: '',
+    setActiveStateId: () => {}
 }
 
 export const promptSetContext = createContext<PromptSetContextInterface>(initialContextValue);

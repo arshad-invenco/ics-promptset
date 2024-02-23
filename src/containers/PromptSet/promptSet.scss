@@ -1,7 +1,13 @@
 
 .layout{
   display: flex;
-  gap: 30px;
+  gap: 10px;
   padding: 10px 15px;
-  width: 80%;
+}
+
+.ics-prompt-set-right-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 65%;
 }
