@@ -15,7 +15,18 @@ export function PromptSet() {
     // STATES -> CONTEXT_API
     const [promptSetData, setPromptSetData] = useState<PromptSetInterface>({} as PromptSetInterface);
     const [activeStateId, setActiveStateId] = useState<string>('');
-    const contextValues = {promptSetData, setPromptSetData, activeStateId, setActiveStateId}
+    const [activeControlType, setActiveControlType] = useState<string>('');
+    const [activePromptEditorId, setActivePromptEditorId] = useState<string>('');
+    const [activeElementId, setActiveElementId] = useState<string>('');
+
+    // CONTEXT_API
+    const contextValues = {
+        promptSetData, setPromptSetData,
+        activeStateId, setActiveStateId,
+        activeControlType, setActiveControlType,
+        activePromptEditorId, setActivePromptEditorId,
+        activeElementId, setActiveElementId
+    }
 
     // DISPATCH
     const dispatch = useDispatch<AppDispatch>();

@@ -43,6 +43,10 @@ export interface Lang {
         }
     }
 }
+export interface TouchMap {
+    id: string,
+    areas: TouchMapAreas[]
+}
 export interface PromptSetInterface {
     id: string;
     name: string;
@@ -98,10 +102,7 @@ export interface Assignment {
     contactless: boolean;
     thumbnailUrl: string;    //null data but string in swagger
     promptSetLanguageId: string;    //null data & no doc in swagger
-    touchmap: {       //null, but after new data
-        id: string,
-        areas: TouchMapAreas[],
-    };
+    touchmap: TouchMap;
     softkeys: SoftKeys[];   //[] data but doc in swagger
     type: string;
     parentId: string;

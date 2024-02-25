@@ -30,5 +30,14 @@ export const AssetsDropdownMapping : {[key:string] : {icon:string, text:string}}
 }
 
 export const TEXT = 'text';
-export const ICON = 'icon';
+export const INPUT = 'input';
+export const BG = 'bg';
+export const IMAGE = 'image';
 export const TOUCH_MASK = 'touchmask';
+export const AREA = 'area';
+export const VIDEO = 'video';
+
+export const ICON = 'icon';
+export const STATE = 'state';
+export const CHILD_STATE = 'child_state';
+// export const ELEMENT = 'element';

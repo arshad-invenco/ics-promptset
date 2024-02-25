@@ -6,6 +6,7 @@ import InnerStates from "./TreeElements/innerStates";
 import {Assignment, PromptSetInterface, State} from "../../../services/promptset.interface";
 import isSequoiaDevice from "../../../services/promptsetService";
 import {promptSetContext} from "../../../hooks/promptsetContext";
+import {STATE} from "../../../constants/promptSetConstants";
 
 export interface PromptSetRootState {
     promptset: {
@@ -23,7 +24,7 @@ export default function PromptTree() {
     const promptsetData : PromptSetInterface = useSelector((state : PromptSetRootState) => state.promptset.data);
 
     // CONTEXT API
-    const {promptSetData, setPromptSetData, setActiveStateId} = useContext(promptSetContext);
+    const {promptSetData, setPromptSetData, setActiveStateId, setActiveControlType, setActivePromptEditorId} = useContext(promptSetContext);
 
     // EFFECTS
     useEffect(() => {
@@ -34,8 +35,10 @@ export default function PromptTree() {
         setIsSaving(!isSaving);
     }
 
-    function onClickState(state_id: string) {
+    function onClickState(state_id: string, child_id:string) {
         setActiveStateId(state_id);
+        setActiveControlType(STATE);
+        setActivePromptEditorId(child_id);
     }
 
     const promptSetTree = promptsetData?.states?.map((item:State, index:number) => {
@@ -43,10 +46,10 @@ export default function PromptTree() {
             <div key={index} className="state-item">
                 <Accordion alwaysOpen>
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header>
-                        <div className="prompt-set-status" onClick={()=>{
-                            onClickState(item.id)
+                        <Accordion.Header onClick={()=>{
+                            onClickState(item.id, item.assignments[0].id)
                         }}>
+                        <div className="prompt-set-status" >
                             <div className="left-status">
                                 <div className="status-icon">
                                     {

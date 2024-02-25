@@ -6,7 +6,7 @@ import {promptSetContext} from "../../../hooks/promptsetContext";
 
 export default function Controllers(){
     // Context API
-    const {activeStateId} = useContext(promptSetContext);
+    const {activeStateId, activeControlType, activePromptEditorId} = useContext(promptSetContext);
 
     // SELECTORS
     const data = useSelector((state) => selectPromptSetStateById(state, activeStateId));
@@ -17,6 +17,9 @@ export default function Controllers(){
     return(
         <div className="ics-prompt-set-controls-container">
             <p>Controllers</p>
+            {activeStateId} <br/>
+            {activeControlType} <br/>
+            {activePromptEditorId}
         </div>
     )
 }

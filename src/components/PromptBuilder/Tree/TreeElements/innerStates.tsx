@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import {Accordion} from "react-bootstrap";
 import {openDayPartModal, showAssetsDropdown} from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
@@ -10,6 +10,8 @@ import {useSelector} from "react-redux";
 import {PromptSetRootState} from "../promptTree";
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
+import {promptSetContext} from "../../../../hooks/promptsetContext";
+import {AREA, BG, CHILD_STATE, TOUCH_MASK, VIDEO} from "../../../../constants/promptSetConstants";
 
 interface InnerStateProps{
     child: Assignment;
@@ -26,6 +28,9 @@ export default function InnerStates(props:InnerStateProps) {
     // STATES
     const [elements, setElements] = useState(child.elements);
     const [showDropdown, setShowDropdown] = useState(false);
+
+    // Context API
+    const {setActiveControlType, setActivePromptEditorId, setActiveStateId, setActiveElementId} = useContext(promptSetContext);
 
     // REFS
     const dragElement = useRef(0);
@@ -44,8 +49,6 @@ export default function InnerStates(props:InnerStateProps) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-
-
     }, []);
 
 
@@ -58,10 +61,26 @@ export default function InnerStates(props:InnerStateProps) {
 
     }
 
+    function onClickChildState(child_state_id:string, state_id:string) {
+        setActiveControlType(CHILD_STATE);
+        setActivePromptEditorId(child.id);
+        setActiveStateId(child.parentId);
+
+    }
+
+    function onClickElement(touch_mask_id:string, type:string) {
+        setActiveControlType(type);
+        setActivePromptEditorId(child.id);
+        setActiveStateId(child.parentId);
+        setActiveElementId(touch_mask_id);
+    }
+
     return (
         <Accordion alwaysOpen>
             <Accordion.Item eventKey="0">
-                <Accordion.Header>
+                <Accordion.Header onClick={()=>{
+                    onClickChildState(child.id, child.parentId);
+                }}>
                     <div className="prompt-set-child-status">
                         <div className="child-status-left-container">
                             <div className="child-status-icon">
@@ -110,7 +129,7 @@ export default function InnerStates(props:InnerStateProps) {
                             {
                                 elements.map((element:Elements, index:number) => {
                                     return (
-                                        element.lock !== false  ?
+                                        element.lock !== false && [BG, TOUCH_MASK, AREA, VIDEO].indexOf(element.type) < 0  ?
                                             <div draggable
                                                  onDragStart={()=>(dragElement.current = index)}
                                                  onDragEnter={()=>(draggedOverElement.current = index)}
@@ -118,16 +137,21 @@ export default function InnerStates(props:InnerStateProps) {
                                                  onDragOver={(e)=>e.preventDefault()}
                                                  key={index}
                                                  className="inner-elements">
-                                                <TreeElements element={element}/>
+                                                <TreeElements element={element} childStateId={child.id} stateId={child.parentId}/>
                                             </div>
-                                        : null
+                                        :
+                                            <div className="inner-elements">
+                                                <TreeElements element={element} childStateId={child.id} stateId={child.parentId}/>
+                                            </div>
                                     )
                                 })
                             }
                             {
                                 child.touchmap &&
                                 <>
-                                    <div className="inner-elements">
+                                    <div onClick={()=>{
+                                        onClickElement(child.touchmap.id, TOUCH_MASK);
+                                    }} className="inner-elements">
                                         <div className="element">
                                             <div className="element-left-container">
                                                 <i className="far fa-hand-pointer"></i>
@@ -140,7 +164,9 @@ export default function InnerStates(props:InnerStateProps) {
                                     {
                                         child.touchmap.areas.map((area, index) => {
                                             return (
-                                                <div className="inner-elements element-type-area">
+                                                <div onClick={()=>{
+                                                    onClickElement(area.id, AREA);
+                                                }} className="inner-elements element-type-area">
                                                     <div className="element">
                                                         <div className="element-left-container">
                                                             <i className="fas fa-square"></i>
