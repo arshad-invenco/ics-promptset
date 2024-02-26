@@ -9,7 +9,21 @@ export const selectPromptSetStateById = createSelector(
 );
 
 export const selectPromptSetAssignmentById = createSelector(
-    (state : PromptSetRootState) => state.promptset.data.states,
-    (_:State[], id:string) => id,
-    (data:State[], id:string) => data ? data.some((item: { assignments: any; }) => item.assignments.find((item: { id: string; }) => item.id === id)) : null
+    (state: PromptSetRootState) => state.promptset.data.states,
+    (_: State[], id: string) => id,
+    (states: State[], id: string) => {
+        if (!Array.isArray(states)) {
+            return null;
+        }
+
+        for (let state of states) {
+            if (state.assignments) {
+                const assignment = state.assignments.find((assignment) => assignment.id === id);
+                if (assignment) {
+                    return assignment;
+                }
+            }
+        }
+        return null;
+    }
 );

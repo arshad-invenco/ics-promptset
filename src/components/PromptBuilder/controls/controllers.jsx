@@ -3,8 +3,10 @@ import {useSelector} from "react-redux";
 import {selectPromptSetAssignmentById, selectPromptSetStateById} from "../../../redux/selectors/promptSetSelectors";
 import {useContext} from "react";
 import {promptSetContext} from "../../../hooks/promptsetContext";
-import {CHILD_STATE, STATE} from "../../../constants/promptSetConstants";
+import {CHILD_STATE, ELEMENTS_LIST, EXCEPTION, STATE} from "../../../constants/promptSetConstants";
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
+import '../../../style.scss'
+import {formatTime} from "../../../hooks/common";
 
 export default function Controllers(){
     // Context API
@@ -14,6 +16,7 @@ export default function Controllers(){
     const state = useSelector((state) => selectPromptSetStateById(state, activeStateId));
     const childState = useSelector((state) => selectPromptSetAssignmentById(state, activePromptEditorId));
     console.log(state, 'data');
+    console.log(activePromptEditorId, 'activeControlType')
     console.log(childState, 'childState');
 
     function handleTransactionStateChange() {
@@ -28,7 +31,7 @@ export default function Controllers(){
                         <p className="code">{state.code}</p>
                         <p className="description">{state.description}</p>
                         <div className="horizontal-border"/>
-                        <select className="transaction-state-dropdown"
+                        <select className="ics-input transaction-state-dropdown"
                                 value={state.transactionState}
                                 onChange={handleTransactionStateChange}>
                             <option value="null" selected>Select transaction state</option>
@@ -38,10 +41,23 @@ export default function Controllers(){
                     </div>
                 : activeControlType === CHILD_STATE ?
                     <div className="child-state-controller">
-                        {state.assignments[0].type === 'default' && <AccessTimeRoundedIcon /> }
-                        <p className="code">{state.code}</p>
+                        <p className="title">
+                            {childState.type === EXCEPTION && <AccessTimeRoundedIcon className="clock-icon" /> }
+                            <p className="code text-capitalize">
+                                {childState.dayPart ? childState.dayPart.name : childState.type}
+                            </p>
+                        </p>
+                        {childState.type === EXCEPTION &&
+                            <span className="exception-time text-lowercase">
+                                ({formatTime(childState.dayPart.start)} - {formatTime(childState.dayPart.end)})
+                            </span>
+                        }
                     </div>
-                    : null
+                : ELEMENTS_LIST.indexOf(activeControlType) > -1 ?
+                        <div>
+                            HII
+                        </div>
+                : null
             }
         </div>
     )

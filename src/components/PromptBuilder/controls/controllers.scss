@@ -33,6 +33,27 @@
     }
   }
   .child-state-controller{
+    color: #616161;
+    display: flex;
+    align-items: center;
+    .title{
+      margin-top: 5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .clock-icon{
+        font-size: 20px;
+        margin-right: 5px;
+      }
+      .code{
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+      }
+    }
+    .exception-time{
+      margin: 5px 0 10px 10px;
+    }
 
   }
 

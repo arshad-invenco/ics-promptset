@@ -91,14 +91,17 @@ export default function InnerStates(props:InnerStateProps) {
                                     child.promptSetLanguageId &&
                                     <span className="text-uppercase">{getLanguage(child.promptSetLanguageId, lang)}: </span>
                                 }
-                                {child.type}
+                                {child.dayPart ? child.dayPart.name : child.type}
                             </div>
                         </div>
                         <div className="child-states-right-icons">
-                            <MoreTimeIcon className="icons-right-child-states" onClick={(e) => {
-                                e.stopPropagation();
-                                openDayPartModal()
-                            }} />
+                            {child.dayPart ?
+                                <i className="far fa-trash-alt child-state-trash-icon"></i>
+                                :
+                                <MoreTimeIcon className="icons-right-child-states" onClick={(e) => {
+                                    e.stopPropagation();
+                                    openDayPartModal()}}/>
+                            }
                             {
                                 showDropdown ?
                                     <IndeterminateCheckBoxOutlinedIcon onClick={(e) => {
@@ -142,12 +145,13 @@ export default function InnerStates(props:InnerStateProps) {
                                                  className="inner-elements">
                                                 <TreeElements element={element} />
                                             </div>
-                                        :
+                                        : element.lock !== false ?
                                             <div onClick={()=>{
                                                 onClickElement(element.id, element.type);
                                             }} className="inner-elements">
                                                 <TreeElements element={element}/>
                                             </div>
+                                        : null
                                     )
                                 })
                             }
