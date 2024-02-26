@@ -134,14 +134,19 @@ export default function InnerStates(props:InnerStateProps) {
                                                  onDragStart={()=>(dragElement.current = index)}
                                                  onDragEnter={()=>(draggedOverElement.current = index)}
                                                  onDragEnd={handleElementSort}
+                                                 onClick={()=>{
+                                                    onClickElement(element.id, element.type);
+                                                 }}
                                                  onDragOver={(e)=>e.preventDefault()}
                                                  key={index}
                                                  className="inner-elements">
-                                                <TreeElements element={element} childStateId={child.id} stateId={child.parentId}/>
+                                                <TreeElements element={element} />
                                             </div>
                                         :
-                                            <div className="inner-elements">
-                                                <TreeElements element={element} childStateId={child.id} stateId={child.parentId}/>
+                                            <div onClick={()=>{
+                                                onClickElement(element.id, element.type);
+                                            }} className="inner-elements">
+                                                <TreeElements element={element}/>
                                             </div>
                                     )
                                 })

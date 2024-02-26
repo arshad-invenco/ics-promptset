@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import isSequoiaDevice, {find, getAsset, isAssetHaving} from "../../../services/promptsetService";
-import {Assignment, Elements} from "../../../services/promptset.interface";
-import {ICON, TEXT, TOUCH_MASK} from "../../../constants/promptSetConstants";
+import isSequoiaDevice, {find, getAsset} from "../../../services/promptsetService";
+import {Assignment} from "../../../services/promptset.interface";
+import {ICON, TEXT} from "../../../constants/promptSetConstants";
 
 interface AssetsDropdownProps {
     childState: Assignment;
@@ -35,17 +35,20 @@ export default function AssetsDropdown(props:AssetsDropdownProps) {
     }
 
     return (
-        assets.map((asset:string, index:number) => {
-            return (
-                <div key={index} className="asset-item" onClick={()=>handleAdd(childState)}>
-                    <div className="dropdown-icon">
-                        <i className={getAsset(asset, ICON)}></i>
+        <>
+            {assets.map((asset: string, index: number) => {
+                return (
+                    <div key={index} className="asset-item" onClick={() => handleAdd(childState)}>
+                        <div className="dropdown-icon">
+                            <i className={getAsset(asset, ICON)}></i>
+                        </div>
+                        <div>
+                            {getAsset(asset, TEXT)}
+                        </div>
                     </div>
-                    <div>
-                        {getAsset(asset, TEXT)}
-                    </div>
-                </div>
-            )
-        })
+                )
+            })}
+        </>
+
     );
 }

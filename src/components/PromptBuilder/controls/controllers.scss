@@ -1,7 +1,39 @@
-.ics-prompt-set-controls-container{
+.ics-prompt-builder-controls{
   width: 100%;
   min-height: 75px;
+  height: fit-content;
   padding: 5px 10px;
   border-bottom: 1px solid #e0e0e0;
   background-color: #fff;
+
+  .state-controller{
+    display: flex;
+    flex-direction: column;
+    .code{
+      color: #616161;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .description{
+      margin-bottom: 3px;
+      line-height: 16px;
+      color: #616161;
+      font-size: 15px;
+    }
+    .horizontal-border{
+      margin: 10px -10px;
+      border-bottom: 1px solid #d6d6d6;
+    }
+    .transaction-state-dropdown{
+      width: 188px;
+      margin: 5px 0;
+      padding-right: 5px;
+      float: left;
+    }
+  }
+  .child-state-controller{
+
+  }
+
 }
