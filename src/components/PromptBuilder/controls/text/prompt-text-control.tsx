@@ -79,6 +79,11 @@ export function TextControl() {
                 </div>
             </div>
 
+            <div className="ics-inline-200-block">
+                <label>Classes</label>
+                <input type="text" className="ics-input"/>
+            </div>
+
 
         </div>
     )

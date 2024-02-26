@@ -2,6 +2,7 @@
 .ics-prompt-builder-text-controls {
   display: flex;
   font-size: 1.4rem;
+  flex-wrap: wrap;
 
   .ics-inline-250-block {
     width: 250px;
@@ -23,6 +24,12 @@
   }
   .ics-inline-150-block{
     width: 150px;
+    min-height: 1px;
+    padding: 0 10px;
+  }
+
+  .ics-inline-200-block{
+    width: 200px;
     min-height: 1px;
     padding: 0 10px;
   }
