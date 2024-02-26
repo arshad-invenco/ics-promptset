@@ -2,11 +2,11 @@
   width: 100%;
   min-height: 75px;
   height: fit-content;
-  padding: 5px 10px;
   border-bottom: 1px solid #e0e0e0;
   background-color: #fff;
 
   .state-controller{
+    padding: 5px 10px;
     display: flex;
     flex-direction: column;
     .code{
@@ -36,6 +36,7 @@
     color: #616161;
     display: flex;
     align-items: center;
+    padding: 5px 10px;
     .title{
       margin-top: 5px;
       margin-bottom: 10px;
@@ -54,7 +55,5 @@
     .exception-time{
       margin: 5px 0 10px 10px;
     }
-
   }
-
 }

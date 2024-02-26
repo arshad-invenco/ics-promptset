@@ -3,10 +3,25 @@ import {useSelector} from "react-redux";
 import {selectPromptSetAssignmentById, selectPromptSetStateById} from "../../../redux/selectors/promptSetSelectors";
 import {useContext} from "react";
 import {promptSetContext} from "../../../hooks/promptsetContext";
-import {CHILD_STATE, ELEMENTS_LIST, EXCEPTION, STATE} from "../../../constants/promptSetConstants";
+import {
+    AREA,
+    BG,
+    CHILD_STATE,
+    ELEMENTS_LIST,
+    EXCEPTION,
+    IMAGE,
+    INPUT,
+    STATE,
+    TEXT, VIDEO
+} from "../../../constants/promptSetConstants";
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import '../../../style.scss'
 import {formatTime} from "../../../hooks/common";
+import {TextControl} from "./text/prompt-text-control";
+import {BackgroundControl} from "./background/prompt-bg-control";
+import {ImageControl} from "./image/prompt-image-control";
+import {VideoControl} from "./video/prompt-video-control";
+import {AreaControl} from "./area/prompt-area-control";
 
 export default function Controllers(){
     // Context API
@@ -15,12 +30,32 @@ export default function Controllers(){
     // SELECTORS
     const state = useSelector((state) => selectPromptSetStateById(state, activeStateId));
     const childState = useSelector((state) => selectPromptSetAssignmentById(state, activePromptEditorId));
+
+    // LOGS
     console.log(state, 'data');
-    console.log(activePromptEditorId, 'activeControlType')
+    console.log(activePromptEditorId, 'activeControlType');
     console.log(childState, 'childState');
 
     function handleTransactionStateChange() {
 
+    }
+
+    function renderActiveControl() {
+        switch (activeControlType){
+            case BG:
+                return <BackgroundControl/>;
+            case TEXT:
+            case INPUT:
+                return <TextControl/>;
+            case IMAGE:
+                return <ImageControl/>;
+            case VIDEO:
+                return <VideoControl/>;
+            case AREA:
+                return <AreaControl/>;
+            default :
+                return <div>DEFAULT</div>;
+        }
     }
 
     return(
@@ -54,9 +89,7 @@ export default function Controllers(){
                         }
                     </div>
                 : ELEMENTS_LIST.indexOf(activeControlType) > -1 ?
-                        <div>
-                            HII
-                        </div>
+                    renderActiveControl()
                 : null
             }
         </div>

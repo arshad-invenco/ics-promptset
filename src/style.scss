@@ -1,10 +1,45 @@
-.btn{
-  font-weight: 500;
-  font-size: 14px;
-  padding: 6px 12px;
+//@import "./assets/color.scss";
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+*{
+  font-size: 1.4rem;
 }
 
-.btn-wide-xl{
+html,
+body {
+  font-size: 10px !important;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e9eaed;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
+}
+
+label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.button-white {
+  transition: all ease-in .1s;
+  padding: 6px 12px;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+  background-color: #f6f6f6;
+}
+
+.btn-wide-xl {
   padding-right: 3em;
   padding-left: 3em;
 }
@@ -34,4 +69,24 @@
     outline: 0;
   }
 }
+
+.color-picker-button{
+  background-color: white;
+  height: 32px;
+  width: 62px;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
+
+.d-flex-row{
+  display: flex;
+  align-items: center;
+}
+
+.d-flex-col{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
 
