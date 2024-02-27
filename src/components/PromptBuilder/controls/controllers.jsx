@@ -54,7 +54,7 @@ export default function Controllers(){
             case AREA:
                 return <AreaControl/>;
             default :
-                return <div>DEFAULT</div>;
+                return <div style={{padding:".5rem 1rem"}}></div>;
         }
     }
 
