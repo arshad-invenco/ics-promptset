@@ -130,4 +130,5 @@ export interface Elements {
     height?: number;
     textAlign?: string;
     lock?: boolean;
+    userclass?:string
 }
