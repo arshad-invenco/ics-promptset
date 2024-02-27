@@ -42,7 +42,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
                         <div className="dropdown-icon">
                             <i className={getAsset(asset, ICON)}></i>
                         </div>
-                        <div>
+                        <div className="dropdown-text">
                             {getAsset(asset, TEXT)}
                         </div>
                     </div>

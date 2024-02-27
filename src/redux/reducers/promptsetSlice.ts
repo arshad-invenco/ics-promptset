@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchPromptSet } from "../thunks/promptSetThunk";
 import { PromptSetInterface } from "../../models/promptset.modal";
 
-interface PromptSetState {
+export interface PromptSetState {
   data: PromptSetInterface;
   isLoading: boolean;
   error: boolean;

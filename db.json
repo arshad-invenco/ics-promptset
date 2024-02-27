@@ -84,7 +84,7 @@
                 "left": 515,
                 "size": 48,
                 "type": "text",
-                "color": "ffffff",
+                "color": "000000",
                 "value": "Enter 5 digit ZIP code",
                 "width": 250,
                 "textAlign": "center"
