@@ -1,15 +1,32 @@
 import './prompt-area-control.scss'
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
+import {TouchMapAreas} from "../../../../models/promptset.modal";
+import {useState} from "react";
 
-export function AreaControl(){
+interface TouchMapAreaProp{
+    areaData: TouchMapAreas
+}
+
+export function AreaControl(props:TouchMapAreaProp){
+    const {areaData} = props;
+
+    // STATES
+    const [element, setElement] = useState(areaData);
+    console.log(element, 'AREA');
+
+
     return(
         <div className="ics-prompt-builder-area-controls d-flex-row">
             <div className="ics-inline-115-block">
                 <label>Type</label>
                 <div className="area-controls d-flex-row">
-                    <div className="shape rectangle selected">
+                    <div
+                        onClick={() => setElement({...element, shape: 'rect'})}
+                        className={`shape rectangle ${element.shape === 'rect' ? 'selected' : ''} `}>
                     </div>
-                    <div className="shape circle">
+                    <div
+                        onClick={() => setElement({...element, shape: 'circle'})}
+                        className={`shape circle ${element.shape === 'circle' ? 'selected' : ''}`}>
                     </div>
                 </div>
             </div>
@@ -20,7 +37,9 @@ export function AreaControl(){
                 <div className="co-ordinates d-flex-row">
                     <div className="d-flex-row dimension-control">
                         <label>X</label>
-                        <input type="number" min={0} className="ics-input dimension-input"/>
+                        <input type="number"
+
+                               min={0} className="ics-input dimension-input"/>
                     </div>
 
                     <div className="d-flex-row dimension-control">

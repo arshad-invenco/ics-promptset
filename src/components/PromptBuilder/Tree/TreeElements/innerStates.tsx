@@ -1,25 +1,18 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { Accordion, Modal } from "react-bootstrap";
-import { showAssetsDropdown } from "../../../../hooks/common";
+import React, {useContext, useEffect, useRef, useState} from "react";
+import {Accordion, Modal} from "react-bootstrap";
+import {showAssetsDropdown} from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import TreeElements from "./treeElements";
 import AssetsDropdown from "../../modals/assetsDropdown";
-import { Assignment, Elements, Lang } from "../../../../models/promptset.modal";
-import { getLanguage } from "../../../../services/promptsetService";
-import { useDispatch, useSelector } from "react-redux";
-import { PromptSetRootState } from "../promptTree";
+import {Assignment, Elements, Lang} from "../../../../models/promptset.modal";
+import {getLanguage} from "../../../../services/promptsetService";
+import {useSelector} from "react-redux";
+import {PromptSetRootState} from "../promptTree";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
-import { promptSetContext } from "../../../../hooks/promptsetContext";
-import {
-  AREA,
-  BG,
-  CHILD_STATE,
-  TOUCH_MASK,
-  VIDEO,
-} from "../../../../constants/promptSetConstants";
+import {promptSetContext} from "../../../../hooks/promptsetContext";
+import {AREA, BG, CHILD_STATE, TOUCH_MASK, VIDEO,} from "../../../../constants/promptSetConstants";
 import DayPartModal from "../../modals/dayPart";
-import { fetchDayPart } from "../../../../redux/thunks/daypartThunk";
 
 interface InnerStateProps {
   child: Assignment;
@@ -49,6 +42,7 @@ export default function InnerStates(props: InnerStateProps) {
     setActivePromptEditorId,
     setActiveStateId,
     setActiveElementId,
+    activeElementId
   } = useContext(promptSetContext);
 
   // REFS
@@ -199,6 +193,7 @@ export default function InnerStates(props: InnerStateProps) {
                     onClickElement(element.id, element.type);
                   }}
                   className="inner-elements"
+                  key={index}
                 >
                   <TreeElements element={element} />
                 </div>
