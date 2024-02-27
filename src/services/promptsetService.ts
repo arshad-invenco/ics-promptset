@@ -1,4 +1,4 @@
-import {Elements, Lang} from "./promptset.interface";
+import {Elements, Lang} from "../models/promptset.modal";
 import {AssetsDropdownMapping} from "../constants/promptSetConstants";
 
 export default function isSequoiaDevice(deviceType:string) {

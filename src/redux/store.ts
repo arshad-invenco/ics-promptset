@@ -1,11 +1,12 @@
-import {configureStore} from "@reduxjs/toolkit";
-import {promptsetSlice} from "./reducers/promptsetSlice"
-
+import { configureStore } from "@reduxjs/toolkit";
+import { promptsetSlice } from "./reducers/promptsetSlice";
+import { daypartSlice } from "./reducers/daypartSlice";
 
 const store = configureStore({
-    reducer: {
-        promptset: promptsetSlice.reducer,
-    },
+  reducer: {
+    promptset: promptsetSlice.reducer,
+    daypart: daypartSlice.reducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

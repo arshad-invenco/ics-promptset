@@ -3,7 +3,7 @@ import './promptTree.scss'
 import {Accordion} from "react-bootstrap";
 import {useSelector} from "react-redux";
 import InnerStates from "./TreeElements/innerStates";
-import {Assignment, PromptSetInterface, State} from "../../../services/promptset.interface";
+import {Assignment, PromptSetInterface, State} from "../../../models/promptset.modal";
 import isSequoiaDevice from "../../../services/promptsetService";
 import {promptSetContext} from "../../../hooks/promptsetContext";
 import {STATE} from "../../../constants/promptSetConstants";
