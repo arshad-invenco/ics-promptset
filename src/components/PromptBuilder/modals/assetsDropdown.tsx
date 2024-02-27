@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import isSequoiaDevice, {find, getAsset} from "../../../services/promptsetService";
-import {Assignment} from "../../../services/promptset.interface";
+import {Assignment} from "../../../models/promptset.modal";
 import {ICON, TEXT} from "../../../constants/promptSetConstants";
 
 interface AssetsDropdownProps {

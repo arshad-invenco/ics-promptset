@@ -9407,5 +9407,140 @@
         ]
       }
     ]
-  }
+  },
+  "dayparts":[
+    {
+        "id": "56c18ed1-f8b1-4dd5-981a-a9815fcff1a4",
+        "name": "sadfj",
+        "start": 0,
+        "end": 9000000,
+        "active": true
+    },
+    {
+        "id": "1a80f087-cced-4657-8863-c287db73e612",
+        "name": "test day1",
+        "start": 0,
+        "end": 1800000,
+        "active": false
+    },
+    {
+        "id": "0deb226c-ca9f-4812-b4f4-2620d8871b29",
+        "name": "testing",
+        "start": 0,
+        "end": 7200000,
+        "active": false
+    },
+    {
+        "id": "7dfb0d77-8016-4bdd-80fb-e15216bbc720",
+        "name": "ddd",
+        "start": 0,
+        "end": 5400000,
+        "active": false
+    },
+    {
+        "id": "2ef65443-c1cf-4323-ac95-8fa2e61a2e7c",
+        "name": "bbbww",
+        "start": 0,
+        "end": 3600000,
+        "active": true
+    },
+    {
+        "id": "80dbcabb-8c47-4e75-a724-cdb092dd704e",
+        "name": "asfd",
+        "start": 0,
+        "end": 9000000,
+        "active": true
+    },
+    {
+        "id": "9d6e4932-343a-4533-9608-1252ed886b3b",
+        "name": "d",
+        "start": 1800000,
+        "end": 5400000,
+        "active": false
+    },
+    {
+        "id": "3967081f-1779-495f-97bd-57ed4bac58a3",
+        "name": "dd",
+        "start": 1800000,
+        "end": 3600000,
+        "active": false
+    },
+    {
+        "id": "e17ff13f-0acd-4a43-8fa2-a5e5e16daae0",
+        "name": "c",
+        "start": 1800000,
+        "end": 5400000,
+        "active": false
+    },
+    {
+        "id": "d9c68224-20ff-4f17-b3ee-ceeb187325bb",
+        "name": "sdaf",
+        "start": 1800000,
+        "end": 9000000,
+        "active": false
+    },
+    {
+        "id": "7792aaf4-5a8c-4d7e-8134-83020d4f04ee",
+        "name": "sfdkjjww",
+        "start": 1800000,
+        "end": 10800000,
+        "active": true
+    },
+    {
+        "id": "c42f5f24-d8fe-4d72-8adb-27f06b446982",
+        "name": "sdf",
+        "start": 1800000,
+        "end": 10800000,
+        "active": false
+    },
+    {
+        "id": "64629252-abf4-4278-8917-3661f36b99d3",
+        "name": "zcvsdfd sdfsadfw",
+        "start": 1800000,
+        "end": 5400000,
+        "active": true
+    },
+    {
+        "id": "39e3c6fc-5fcf-42d6-b3e0-14678330d03c",
+        "name": "test1",
+        "start": 1800000,
+        "end": 7200000,
+        "active": false
+    },
+    {
+        "id": "666d108f-43e1-4bb1-909d-55a07800d8cc",
+        "name": "sdf",
+        "start": 1800000,
+        "end": 3600000,
+        "active": false
+    },
+    {
+        "id": "ad06b8e6-51fa-463d-9b11-f316dbd70c84",
+        "name": "we  ddf",
+        "start": 1800000,
+        "end": 9000000,
+        "active": true
+    },
+    {
+        "id": "98cb2dfc-4f90-48eb-a91b-41fff9e9d7f5",
+        "name": "a",
+        "start": 3600000,
+        "end": 12600000,
+        "active": false
+    },
+    {
+        "id": "70b1e026-3e1a-4758-8444-63742d6d4ef6",
+        "name": "test",
+        "start": 5400000,
+        "end": 81000000,
+        "active": false
+    },
+    {
+        "id": "64e64eec-4cea-4476-b1a8-51e6719c2e48",
+        "name": "test 2 wjeflskjdf",
+        "start": 12600000,
+        "end": 82800000,
+        "active": false
+    }
+]
 }

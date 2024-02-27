@@ -1,5 +1,5 @@
 import {createContext} from "react";
-import {PromptSetInterface} from "../services/promptset.interface";
+import {PromptSetInterface} from "../models/promptset.modal";
 
 interface PromptSetContextInterface {
     promptSetData: PromptSetInterface;
