@@ -37,6 +37,34 @@ label {
   padding: 0.6rem 1.2rem;
 }
 
+.ics-btn-primary{
+  transition: all ease-in .1s;
+  color: #fff;
+  border: 1px solid #3849a2;
+  background-color: #3f51b5;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.42857143;
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-radius: 3px;
+  background-image: none;
+  box-shadow: none;
+  &:hover{
+    border-color: #293475;
+    background-color: #32408f;
+  }
+  &:focus{
+    border-color: #171e44;
+    background-color: #32408f;
+  }
+}
+
 .button-white {
   transition: all ease-in 0.1s;
   padding: 6px 12px;
@@ -87,10 +115,54 @@ label {
 .d-flex-row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .d-flex-col {
   display: flex;
   flex-direction: column;
   width: fit-content;
+}
+
+.ics-inline-75-block {
+  width: 75px;
+  min-height: 1px;
+  padding: 0 10px;
+}
+.ics-inline-85-block{
+  width: 85px;
+  min-height: 1px;
+  padding: 0 10px;
+}
+
+.ics-inline-90-block {
+  width: 90px;
+  min-height: 1px;
+  padding: 0 10px;
+}
+
+.ics-inline-115-block{
+  width: 115px;
+  min-height: 1px;
+  padding: 0 10px;
+}
+
+
+.ics-inline-150-block{
+  width: 150px;
+  min-height: 1px;
+  padding: 0 10px;
+}
+
+.ics-inline-200-block{
+  width: 200px;
+  min-height: 1px;
+  padding: 0 10px;
+}
+
+.ics-inline-250-block {
+  width: 250px;
+  min-height: 1px;
+  padding: 0 10px;
+  float: left;
 }

@@ -47,22 +47,22 @@ export function TextControl() {
                 <div className="co-ordinates d-flex-row">
                     <div className="d-flex-row dimension-control">
                         <label>X</label>
-                        <input type="number" className="ics-input dimension-input"/>
+                        <input type="number" min={0} className="ics-input dimension-input"/>
                     </div>
 
                     <div className="d-flex-row dimension-control">
                         <label>Y</label>
-                        <input type="number" className="ics-input dimension-input"/>
+                        <input type="number" min={0} className="ics-input dimension-input"/>
                     </div>
 
                     <div className="d-flex-row dimension-control">
                         <label>W</label>
-                        <input type="number" className="ics-input dimension-input"/>
+                        <input type="number" min={0} className="ics-input dimension-input"/>
                     </div>
 
-                    <div className="d-flex-row dimension-control disabled-dimension-control">
+                    <div className="d-flex-row dimension-control disabled-control">
                         <label>H</label>
-                        <input type="number" value={45} className="ics-input dimension-input"/>
+                        <input type="number" min={0} value={45} className="ics-input dimension-input"/>
                     </div>
                 </div>
             </div>
@@ -79,6 +79,7 @@ export function TextControl() {
                 </div>
             </div>
 
+            {/*TODO: add if condition left */}
             <div className="ics-inline-200-block">
                 <label>Classes</label>
                 <input type="text" className="ics-input"/>

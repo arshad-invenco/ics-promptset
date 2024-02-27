@@ -57,3 +57,53 @@
     }
   }
 }
+
+//Common
+
+//DIMENSIONS
+.dimensions {
+  padding: 0 10px;
+  .co-ordinates {
+    gap: 5px;
+    .dimension-control {
+      gap: 5px;
+      justify-content: center;
+      .dimension-input {
+        width: 75px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+//CENTER SHIFT
+.center-shift{
+  gap: 2px;
+  .shift-btn{
+    padding: 6px 12px;
+    cursor: pointer;
+    .icon{
+      font-size: 24px;
+    }
+    .shift-icon-transform-horizontal{
+      transform: rotate(90deg);
+    }
+  }
+}
+
+//DISABLED CONTROL
+.disabled-control {
+  color: rgba(0, 0, 0, 0.137);
+  border: none;
+  cursor: text;
+  pointer-events: none;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  input {
+    border: none;
+    background-color: #fafafa;
+    color: rgba(0, 0, 0, .137);
+  }
+}
