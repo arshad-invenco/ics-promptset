@@ -9,5 +9,6 @@ const store = configureStore({
   },
 });
 
+export type PromptRootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export default store;

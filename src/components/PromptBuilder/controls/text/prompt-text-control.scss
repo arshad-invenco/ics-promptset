@@ -3,11 +3,17 @@
   display: flex;
   font-size: 1.4rem;
   flex-wrap: wrap;
+  padding: 5px 10px 10px 5px;
 
   .alignment-control{
     gap: 3px;
     .align{
       width: 40px;
+    }
+    .align-btn-active{
+      color: #fff;
+      border-color: #293475;
+      background-color: #32408f;
     }
   }
 }

@@ -22,7 +22,7 @@ interface SoftKeys {
     label: string,
     softkey: 0
 }
-interface TouchMapAreas{
+export interface TouchMapAreas{
     coords: string,
     id: string,
     shape: string | 'circle',
@@ -97,7 +97,7 @@ export interface State {
     softKeys: boolean;
     dynamicText: boolean;
     promptType: string;
-    transactionState: null;   //null data & null in swagger
+    transactionState: string;   //null data & null in swagger
     assignments : Assignment[];
 }
 
