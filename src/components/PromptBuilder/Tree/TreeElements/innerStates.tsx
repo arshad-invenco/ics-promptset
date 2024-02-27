@@ -18,7 +18,7 @@ import {
   TOUCH_MASK,
   VIDEO,
 } from "../../../../constants/promptSetConstants";
-import DayPartModal from "../../modals/dayPart";
+import DayPartModal from "../../modals/daypart-dropdown/dayPart";
 import { fetchDayPart } from "../../../../redux/thunks/daypartThunk";
 
 interface InnerStateProps {
@@ -98,6 +98,10 @@ export default function InnerStates(props: InnerStateProps) {
     setShow(true);
   }
 
+  function handleDaypart(item: string) {
+    setShow(false);
+  }
+
   return (
     <Accordion alwaysOpen>
       <Accordion.Item eventKey="0">
@@ -137,7 +141,10 @@ export default function InnerStates(props: InnerStateProps) {
                     onHide={handleClose}
                     className="daypart-modal"
                   >
-                    <DayPartModal hide={handleClose}></DayPartModal>
+                    <DayPartModal
+                      hide={handleClose}
+                      daypart={handleDaypart}
+                    ></DayPartModal>
                   </Modal>
                 </>
               )}
