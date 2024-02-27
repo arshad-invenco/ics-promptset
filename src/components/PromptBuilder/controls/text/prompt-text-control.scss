@@ -1,0 +1,87 @@
+
+.ics-prompt-builder-text-controls {
+  display: flex;
+  font-size: 1.4rem;
+  flex-wrap: wrap;
+
+  .ics-inline-250-block {
+    width: 250px;
+    min-height: 1px;
+    padding: 0 10px;
+    float: left;
+  }
+
+  .ics-inline-75-block {
+    width: 75px;
+    min-height: 1px;
+    padding: 0 10px;
+  }
+
+  .ics-inline-90-block {
+    width: 90px;
+    min-height: 1px;
+    padding: 0 10px;
+  }
+  .ics-inline-150-block{
+    width: 150px;
+    min-height: 1px;
+    padding: 0 10px;
+  }
+
+  .ics-inline-200-block{
+    width: 200px;
+    min-height: 1px;
+    padding: 0 10px;
+  }
+
+  .alignment-control{
+    gap: 3px;
+    .align{
+      width: 40px;
+    }
+  }
+  .dimensions {
+    padding: 0 10px;
+    .co-ordinates {
+      gap: 5px;
+      .dimension-control {
+        gap: 5px;
+        justify-content: center;
+        .dimension-input {
+          width: 75px;
+          margin: 0;
+        }
+      }
+      .disabled-dimension-control{
+        color:  rgba(0, 0, 0, 0.137);
+        border: none;
+        cursor: text;
+        pointer-events: none;
+        &:focus{
+          outline: none;
+          box-shadow: none;
+        }
+        input{
+          border: none;
+          background-color: #fafafa;
+          color: rgba(0, 0, 0, .137);
+        }
+      }
+
+    }
+  }
+
+  .center-shift{
+    gap: 2px;
+    .shift-btn{
+      padding: 6px 12px;
+      cursor: pointer;
+      .icon{
+      font-size: 24px;
+      }
+      .shift-icon-transform-horizontal{
+        transform: rotate(90deg);
+      }
+    }
+  }
+}

@@ -117,20 +117,30 @@ export default function InnerStates(props: InnerStateProps) {
                     {getLanguage(child.promptSetLanguageId, lang)}:{" "}
                   </span>
                 )}
-                {child.type}
+                {child.dayPart ? child.dayPart.name : child.type}
               </div>
             </div>
             <div className="child-states-right-icons">
-              <MoreTimeIcon
-                className="icons-right-child-states"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleShow();
-                }}
-              />
-              <Modal show={show} onHide={handleClose} className="daypart-modal">
-                <DayPartModal hide={handleClose}></DayPartModal>
-              </Modal>
+              {child.dayPart ? (
+                <i className="far fa-trash-alt child-state-trash-icon"></i>
+              ) : (
+                <>
+                  <MoreTimeIcon
+                    className="icons-right-child-states"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShow();
+                    }}
+                  />
+                  <Modal
+                    show={show}
+                    onHide={handleClose}
+                    className="daypart-modal"
+                  >
+                    <DayPartModal hide={handleClose}></DayPartModal>
+                  </Modal>
+                </>
+              )}
               {showDropdown ? (
                 <IndeterminateCheckBoxOutlinedIcon
                   onClick={(e) => {
@@ -183,7 +193,7 @@ export default function InnerStates(props: InnerStateProps) {
                 >
                   <TreeElements element={element} />
                 </div>
-              ) : (
+              ) : element.lock !== false ? (
                 <div
                   onClick={() => {
                     onClickElement(element.id, element.type);
@@ -192,7 +202,7 @@ export default function InnerStates(props: InnerStateProps) {
                 >
                   <TreeElements element={element} />
                 </div>
-              );
+              ) : null;
             })}
             {child.touchmap && (
               <>

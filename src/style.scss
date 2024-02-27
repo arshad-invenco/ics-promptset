@@ -1,7 +1,7 @@
 @import "./assets/color.scss";
 @import "bootstrap/dist/css/bootstrap.min.css";
 
-* {
+*{
   font-size: 1.4rem;
 }
 
@@ -13,8 +13,8 @@ body {
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e9eaed;
@@ -22,7 +22,7 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  monospace;
 }
 
 label {
@@ -31,13 +31,62 @@ label {
   margin-bottom: 0.5rem;
 }
 
-.btn {
-  font-weight: 500;
-  font-size: 14px;
+.button-white {
+  transition: all ease-in .1s;
   padding: 6px 12px;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+  background-color: #f6f6f6;
 }
 
 .btn-wide-xl {
   padding-right: 3em;
   padding-left: 3em;
 }
+
+.ics-input {
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  border-radius: 3px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d6d6d6;
+  margin-bottom: 15px;
+  font-size: 14px;
+  &:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 624.938rem white !important;
+    border-radius: 3px !important;
+    height: 34px;
+  }
+  &::placeholder {
+    opacity: 1;
+    color: #9e9e9e;
+  }
+  &:focus {
+    border: 2px solid rgba(68, 138, 255, .75) !important;
+    outline: 0;
+  }
+}
+
+.color-picker-button{
+  background-color: white;
+  height: 32px;
+  width: 62px;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
+
+.d-flex-row{
+  display: flex;
+  align-items: center;
+}
+
+.d-flex-col{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+

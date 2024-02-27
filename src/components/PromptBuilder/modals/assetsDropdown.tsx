@@ -7,7 +7,7 @@ interface AssetsDropdownProps {
     childState: Assignment;
 }
 
-export default function AssetsDropdown(props:AssetsDropdownProps) {
+export default function AssetsDropdown(props: AssetsDropdownProps) {
     const {childState} = props;
     const [assets, setAssets] = useState<string[]>([]);
     console.log(props, 'AssetsDropdownProps')
@@ -21,11 +21,11 @@ export default function AssetsDropdown(props:AssetsDropdownProps) {
         const touchMask = !!childState.touchmap;
         const bg = find(childState.elements, 'bg');
 
-        if ( isSequoiaDevice( "G7-100-8" ) && touchMask )
+        if (isSequoiaDevice("G7-100-8") && touchMask)
             setAssets(prevAssets => [...prevAssets, 'area']);
-        else if ( isSequoiaDevice( "G7-100" ) && !touchMask )
+        else if (isSequoiaDevice("G7-100") && !touchMask)
             setAssets(prevAssets => [...prevAssets, 'touchmask']);
-        if ( !bg?.lock )
+        if (!bg?.lock)
             setAssets(prevAssets => ['bg', ...prevAssets]);
     }
 

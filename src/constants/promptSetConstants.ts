@@ -40,4 +40,6 @@ export const VIDEO = 'video';
 export const ICON = 'icon';
 export const STATE = 'state';
 export const CHILD_STATE = 'child_state';
-// export const ELEMENT = 'element';
+export const EXCEPTION = 'exception';
+
+export const ELEMENTS_LIST = [BG, TEXT, IMAGE, VIDEO, INPUT, TOUCH_MASK, AREA ]

@@ -47,6 +47,14 @@ export interface TouchMap {
     id: string,
     areas: TouchMapAreas[]
 }
+export interface DayPart {
+    id: string;
+    end: number;
+    name: string;
+    start: number;
+    active: boolean;
+    company: string;
+}
 export interface PromptSetInterface {
     id: string;
     name: string;
@@ -97,6 +105,7 @@ export interface Assignment {
     id: string;
     code: string;
     elements: Elements[];
+    dayPart : DayPart;
     promptState: string;
     transactionState: string;  //null data, but string after seeing new data
     contactless: boolean;
@@ -121,4 +130,5 @@ export interface Elements {
     height?: number;
     textAlign?: string;
     lock?: boolean;
+    userclass?:string
 }
