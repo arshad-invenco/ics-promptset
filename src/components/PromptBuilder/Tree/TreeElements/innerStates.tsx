@@ -1,18 +1,25 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
-import {Accordion, Modal} from "react-bootstrap";
-import {showAssetsDropdown} from "../../../../hooks/common";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Accordion, Modal } from "react-bootstrap";
+import { showAssetsDropdown } from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import TreeElements from "./treeElements";
 import AssetsDropdown from "../../modals/assetsDropdown";
-import {Assignment, Elements, Lang} from "../../../../models/promptset.modal";
-import {getLanguage} from "../../../../services/promptsetService";
-import {useSelector} from "react-redux";
-import {PromptSetRootState} from "../promptTree";
+import { Assignment, Elements, Lang } from "../../../../models/promptset.modal";
+import { getLanguage } from "../../../../services/promptsetService";
+import { useSelector } from "react-redux";
+import { PromptSetRootState } from "../promptTree";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
-import {promptSetContext} from "../../../../hooks/promptsetContext";
-import {AREA, BG, CHILD_STATE, TOUCH_MASK, VIDEO,} from "../../../../constants/promptSetConstants";
-import DayPartModal from "../../modals/dayPart";
+import { promptSetContext } from "../../../../hooks/promptsetContext";
+import {
+  AREA,
+  BG,
+  CHILD_STATE,
+  TOUCH_MASK,
+  VIDEO,
+} from "../../../../constants/promptSetConstants";
+import DayPartModal from "../../modals/daypart-dropdown/dayPart";
+import { fetchDayPart } from "../../../../redux/thunks/daypartThunk";
 
 interface InnerStateProps {
   child: Assignment;
@@ -42,7 +49,7 @@ export default function InnerStates(props: InnerStateProps) {
     setActivePromptEditorId,
     setActiveStateId,
     setActiveElementId,
-    activeElementId
+    activeElementId,
   } = useContext(promptSetContext);
 
   // REFS
@@ -92,6 +99,10 @@ export default function InnerStates(props: InnerStateProps) {
     setShow(true);
   }
 
+  function handleDaypart(item: string) {
+    setShow(false);
+  }
+
   return (
     <Accordion alwaysOpen>
       <Accordion.Item eventKey="0">
@@ -131,7 +142,10 @@ export default function InnerStates(props: InnerStateProps) {
                     onHide={handleClose}
                     className="daypart-modal"
                   >
-                    <DayPartModal hide={handleClose}></DayPartModal>
+                    <DayPartModal
+                      hide={handleClose}
+                      daypart={handleDaypart}
+                    ></DayPartModal>
                   </Modal>
                 </>
               )}

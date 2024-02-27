@@ -13,3 +13,9 @@ export interface DayPartRootState {
     error: any;
   };
 }
+
+export interface DaypartItem {
+  id: string;
+  name: string;
+  time: string;
+}
