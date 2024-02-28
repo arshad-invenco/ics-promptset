@@ -1,0 +1,37 @@
+.daypart {
+  .modal-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 0.1rem solid #d6d6d6;
+    .modal-title {
+      font-size: 1.8rem;
+      font-weight: 500;
+    }
+  }
+  .modal-body {
+    padding: 1rem 1.5rem;
+  }
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    .btn-link {
+      border: none;
+      color: var(--md-indigo-500);
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus,
+      &:focus-visible {
+        background-color: transparent;
+        color: var(--btn-primary-bg);
+        border: none;
+        box-shadow: none;
+      }
+    }
+    .add-daypart {
+      cursor: not-allowed;
+    }
+  }
+}
