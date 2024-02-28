@@ -55,7 +55,10 @@ function DayPartModal({ hide, daypart }: ModalProps) {
           itemRenderer={(daypart: DaypartItem) => (
             <>
               <div className="fw-bold mb5">{daypart.name}</div>
-              <div className="mb5">{daypart.time}</div>
+              <div className="time mb5">
+                <i className="fa-regular fa-clock"></i>
+                {daypart.time}
+              </div>
             </>
           )}
           onSelect={handleSelect}
