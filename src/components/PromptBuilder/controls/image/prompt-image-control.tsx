@@ -2,6 +2,10 @@ import './prompt-image-control.scss'
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import {Elements} from "../../../../models/promptset.modal";
 import {useState} from "react";
+import {debounce} from "@mui/material";
+import {AppDispatch} from "../../../../redux/store";
+import {useDispatch} from "react-redux";
+import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";
 
 interface ElementsProp {
     elementData: Elements
@@ -10,12 +14,18 @@ interface ElementsProp {
 export function ImageControl(props: ElementsProp) {
     const {elementData} = props;
 
+    // REDUX
+    const dispatch = useDispatch<AppDispatch>();
+
     // STATES
     const [element, setElement] = useState(elementData);
 
-    function onChangeInput(value: string, type: string) {
-
+    function onChangeInput(element: Elements) {
+        dispatch(updateInputElement(element));
     }
+
+    // DEBOUNCE
+    const debouncedOnChangeInput = debounce(onChangeInput, 1000);
 
     return (
         <div className="ics-prompt-builder-image-controls d-flex-row">
@@ -33,8 +43,9 @@ export function ImageControl(props: ElementsProp) {
                         <input type="number"
                                value={element.left}
                                onChange={(e) => {
-                                   setElement({...element, left: (Number)(e.target.value)});
-                                   onChangeInput(e.target.value, 'left');
+                                   const updatedElement = {...element, left: (Number)(e.target.value)};
+                                   setElement(updatedElement);
+                                   debouncedOnChangeInput(updatedElement);
                                }}
                                min={0} className="ics-input dimension-input"/>
                     </div>
@@ -44,8 +55,9 @@ export function ImageControl(props: ElementsProp) {
                         <input type="number"
                                value={element.top}
                                onChange={(e) => {
-                                   setElement({...element, top: (Number)(e.target.value)});
-                                   onChangeInput(e.target.value, 'top');
+                                   const updatedElement = {...element, top: (Number)(e.target.value)};
+                                   setElement(updatedElement);
+                                   onChangeInput(updatedElement);
                                }}
                                min={0} className="ics-input dimension-input"/>
                     </div>
@@ -55,8 +67,9 @@ export function ImageControl(props: ElementsProp) {
                         <input type="number"
                                value={element.width}
                                onChange={(e) => {
-                                   setElement({...element, width: (Number)(e.target.value)});
-                                   onChangeInput(e.target.value, 'width');
+                                   const updatedElement = {...element, width: (Number)(e.target.value)};
+                                   setElement(updatedElement);
+                                   onChangeInput(updatedElement);
                                }}
                                min={0} className="ics-input dimension-input"/>
                     </div>
@@ -66,8 +79,9 @@ export function ImageControl(props: ElementsProp) {
                         <input type="number"
                                value={element.height}
                                onChange={(e) => {
-                                   setElement({...element, height: (Number)(e.target.value)});
-                                   onChangeInput(e.target.value, 'height');
+                                   const updatedElement = {...element, height: (Number)(e.target.value)};
+                                   setElement(updatedElement);
+                                   onChangeInput(updatedElement);
                                }}
                                min={0} className="ics-input dimension-input"/>
                     </div>

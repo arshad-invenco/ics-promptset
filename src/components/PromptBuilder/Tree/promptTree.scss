@@ -212,6 +212,20 @@
                 }
 
                 .elements-list {
+                  .active-inner-element{
+                    background-color: #eee;
+                    .element .element-left-container {
+                      i{
+                        color: #616161 !important;
+                      }
+                    }
+                    .element {
+                      .trash-icon {
+                        font-weight: normal;
+                        color: #e96a63 !important;
+                      }
+                    }
+                  }
                   .inner-elements {
                     //ELEMENTS
                     padding: 8px 10px 8px 20px;

@@ -47,7 +47,8 @@ export default function InnerStates(props: InnerStateProps) {
     setActiveControlType,
     setActivePromptEditorId,
     setActiveStateId,
-    setActiveElementId
+    setActiveElementId,
+    activeElementId,
   } = useContext(promptSetContext);
 
   // REFS
@@ -195,7 +196,7 @@ export default function InnerStates(props: InnerStateProps) {
                   }}
                   onDragOver={(e) => e.preventDefault()}
                   key={index}
-                  className="inner-elements"
+                  className={`inner-elements ${activeElementId === element.id ? 'active-inner-element' : ''} `}
                 >
                   <TreeElements element={element} />
                 </div>
@@ -204,7 +205,7 @@ export default function InnerStates(props: InnerStateProps) {
                   onClick={() => {
                     onClickElement(element.id, element.type);
                   }}
-                  className="inner-elements"
+                  className={`inner-elements ${activeElementId === element.id ? 'active-inner-element' : ''} `}
                   key={index}
                 >
                   <TreeElements element={element} />
@@ -234,7 +235,7 @@ export default function InnerStates(props: InnerStateProps) {
                       onClick={() => {
                         onClickElement(area.id, AREA);
                       }}
-                      className="inner-elements element-type-area"
+                      className={`inner-elements element-type-area ${activeElementId === area.id ? 'active-inner-element' : ''} `}
                     >
                       <div className="element">
                         <div className="element-left-container">
