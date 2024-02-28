@@ -228,7 +228,7 @@ export default function InnerStates(props: InnerStateProps) {
                   </div>
                 </div>
                 {/*for touch map*/}
-                { child.touchmap.areas && child.touchmap.areas.map((area, index) => {
+                { child.touchmap && child.touchmap.areas && child.touchmap.areas.map((area, index) => {
                   return (
                     <div
                       onClick={() => {
