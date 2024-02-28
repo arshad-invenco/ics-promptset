@@ -3,7 +3,7 @@ import { Accordion, Modal } from "react-bootstrap";
 import { showAssetsDropdown } from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import TreeElements from "./treeElements";
-import AssetsDropdown from "../../../common/asset-dropdown/assetsDropdown";
+import AssetsDropdown from "../asset-dropdown/assetsDropdown";
 import { Assignment, Elements, Lang } from "../../../../models/promptset.modal";
 import { getLanguage } from "../../../../services/promptsetService";
 import { useSelector } from "react-redux";
@@ -228,7 +228,7 @@ export default function InnerStates(props: InnerStateProps) {
                   </div>
                 </div>
                 {/*for touch map*/}
-                {child.touchmap.areas.map((area, index) => {
+                { child.touchmap.areas && child.touchmap.areas.map((area, index) => {
                   return (
                     <div
                       onClick={() => {
