@@ -17,8 +17,10 @@ export function find(elements:Elements[], type:string) {
 export function getAsset(element:string, type:string){
     if(type === 'text'){
         return AssetsDropdownMapping[element].text;
+    } else if(type === 'icon'){
+        return AssetsDropdownMapping[element].icon;
     }
-    return AssetsDropdownMapping[element].icon;
+    return AssetsDropdownMapping[element].type;
 }
 
 
@@ -29,5 +31,14 @@ export function getLanguage(languageId:string, lang:Lang) {
         }
     }
     return '';
+}
+
+export function generateRandomString(length: number) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result.toString();
 }
 

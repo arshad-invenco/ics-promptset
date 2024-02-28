@@ -150,10 +150,10 @@ function SearchableDropdown({
             aria-label="Select box"
             className="ics-input"
             onChange={(e) => setInputValue(e.target.value)}
-            // onBlur={(e) => {
-            //   e.stopPropagation();
-            //   toggleDropdown();
-            // }}
+            onBlur={(e) => {
+              e.stopPropagation();
+              toggleDropdown();
+            }}
             onKeyDown={handleKeyDown}
             autoFocus
           />

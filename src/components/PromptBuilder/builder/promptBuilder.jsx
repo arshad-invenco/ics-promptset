@@ -3,7 +3,7 @@
 export default function PromptBuilder(){
     return(
         <div>
-            HI
+            Builder
         </div>
     )
 }

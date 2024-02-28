@@ -69,7 +69,7 @@ export const selectAreaInTouchMap = createSelector(
 
         for (const state of data.states) {
             for (const assignment of state.assignments) {
-                if (assignment.id === assignmentId) {
+                if (assignment.id === assignmentId && assignment.touchmap && assignment.touchmap.areas) {
                     const area = assignment.touchmap.areas.find(
                         (area: TouchMapAreas) => area.id === areaId
                     );
