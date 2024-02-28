@@ -1,15 +1,19 @@
 import {useEffect, useState} from "react";
-import isSequoiaDevice, {find, getAsset} from "../../../../services/promptsetService";
-import {Assignment} from "../../../../models/promptset.modal";
+import isSequoiaDevice, {find, generateRandomString, getAsset} from "../../../../services/promptsetService";
+import {Assignment, State} from "../../../../models/promptset.modal";
 import {ICON, TEXT, TYPE} from "../../../../constants/promptSetConstants";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {PromptSetRootState} from "../promptTree";
+import {selectPromptSetAssignmentById} from "../../../../redux/selectors/promptSetSelectors";
+import {AppDispatch} from "../../../../redux/store";
+import {addElementToAssignment} from "../../../../redux/reducers/promptsetSlice";
 
 interface AssetsDropdownProps {
     childState: Assignment;
 }
 
 interface NewElement {
+    id:string;
     type: string;
     value: string;
     top: number;
@@ -37,6 +41,9 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         fetchAssets();
     }, []);
 
+    // REDUX
+    const dispatch = useDispatch<AppDispatch>();
+
 
 
     function fetchAssets() {
@@ -59,6 +66,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
         if (type === TEXT) {
             let textElement: NewElement = {
+                id: generateRandomString(9),
                 type: 'text',
                 value: 'Your text goes here',
                 top: 100,
@@ -83,8 +91,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
                 textElement.size = 48
                 textElement.face = 'Liberation Sans'
             }
-
-
+            dispatch(addElementToAssignment({assignmentId: childState.id, newElement:textElement}))
         }
         console.log(childState, 'handleAdd', type)
     }
