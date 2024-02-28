@@ -54,17 +54,17 @@ export default function Controllers(){
     function renderActiveControl() {
         switch (activeControlType){
             case BG:
-                return <BackgroundControl elementData={elementData}/>;
+                return <BackgroundControl key={activeElementId} elementData={elementData}/>;
             case TEXT:
-                return <TextControl key="text" elementData={elementData}/>;
+                return <TextControl key={activeElementId} elementData={elementData}/>;
             case INPUT:
-                return <TextControl key="input" elementData={elementData}/>;
+                return <TextControl key={activeElementId} elementData={elementData}/>;
             case IMAGE:
-                return <ImageControl elementData={elementData}/>;
+                return <ImageControl key={activeElementId} elementData={elementData}/>;
             case VIDEO:
-                return <VideoControl elementData={elementData}/>;
+                return <VideoControl key={activeElementId} elementData={elementData}/>;
             case AREA:
-                return <AreaControl areaData={areaData}/>;
+                return <AreaControl key={activeElementId} areaData={areaData}/>;
             default :
                 return <div style={{padding:".5rem 1rem"}}></div>;
         }

@@ -17,8 +17,10 @@ export function find(elements:Elements[], type:string) {
 export function getAsset(element:string, type:string){
     if(type === 'text'){
         return AssetsDropdownMapping[element].text;
+    } else if(type === 'icon'){
+        return AssetsDropdownMapping[element].icon;
     }
-    return AssetsDropdownMapping[element].icon;
+    return AssetsDropdownMapping[element].type;
 }
 
 
