@@ -1,18 +1,58 @@
 import "./prompt-area-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import { TouchMapAreas } from "../../../../models/promptset.modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { Keycode, KeycodeRootState } from "../../../../models/keycode";
+import { SoftkeyRootState } from "../../../../models/softkey";
+import { fetchSoftKeys } from "../../../../redux/thunks/softkeyThunk";
+import {
+  selectKeycodeError,
+  selectKeycodes,
+} from "../../../../redux/selectors/keycodeSelectors";
+import { selectSoftKeys } from "../../../../redux/selectors/softkeySelectors";
 
 interface TouchMapAreaProp {
   areaData: TouchMapAreas;
 }
 
+interface GroupedCodeItems {
+  label: string;
+  options: Keycode[];
+}
+
 export function AreaControl(props: TouchMapAreaProp) {
   const { areaData } = props;
+  const [selectedCode, setSelectedkey] = useState("Daypart");
+  const [error, setError] = useState("");
 
+  const keycodes = useSelector(selectKeycodes);
+  const softkeys = useSelector(selectSoftKeys);
+
+  const formattedKeycodes =
+    keycodes && keycodes.length > 0
+      ? keycodes.map(({ code, name }) => ({ id: code, code, name }))
+      : [];
+  const formattedSoftkeys =
+    softkeys && softkeys.length > 0
+      ? softkeys.map(({ physicalCode: code, name }) => ({
+          id: code,
+          code,
+          name,
+        }))
+      : [];
+
+  const groupedCodeItems: GroupedCodeItems[] = [
+    { label: "Soft Keys", options: formattedSoftkeys },
+    { label: "Key Codes", options: formattedKeycodes },
+  ];
+
+  const handleSelect = (item: Keycode) => {
+    setSelectedkey(item.name);
+  };
   // STATES
   const [element, setElement] = useState(areaData);
-  console.log(element, "AREA");
 
   return (
     <div className="ics-prompt-builder-area-controls d-flex-row">
@@ -89,8 +129,22 @@ export function AreaControl(props: TouchMapAreaProp) {
       </div>
 
       <div className="ics-inline-200-block">
-        <label>Key or Code</label>
-        <input type="text" className="ics-input" />
+        {groupedCodeItems.every(
+          (group) => group && group.options.every((option) => option)
+        ) && (
+          <SearchableDropdown
+            label="Key or Code"
+            items={groupedCodeItems}
+            itemRenderer={(codeItem: Keycode) => (
+              <>
+                <div>{codeItem.name}</div>
+              </>
+            )}
+            onSelect={handleSelect}
+            isGroup={true}
+            placeholder="Soft Key or Key Code"
+          ></SearchableDropdown>
+        )}
       </div>
     </div>
   );

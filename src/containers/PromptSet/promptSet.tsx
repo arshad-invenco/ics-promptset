@@ -9,6 +9,8 @@ import { fetchPromptSet } from "../../redux/thunks/promptSetThunk";
 import { PromptSetInterface } from "../../models/promptset.modal";
 import { PromptSetEditor } from "../PromptEditor/promptSetEditor";
 import { fetchDayPart } from "../../redux/thunks/daypartThunk";
+import { fetchKeyCodes } from "../../redux/thunks/keycodeThunk";
+import { fetchSoftKeys } from "../../redux/thunks/softkeyThunk";
 
 export function PromptSet() {
   const location = useLocation();
@@ -43,6 +45,8 @@ export function PromptSet() {
   useEffect(() => {
     dispatch(fetchPromptSet());
     dispatch(fetchDayPart());
+    dispatch(fetchKeyCodes());
+
   }, []);
 
   return (

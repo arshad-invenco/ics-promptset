@@ -9542,5 +9542,201 @@
         "end": 82800000,
         "active": false
     }
-]
+  ],
+  "keycodes":[
+    {
+        "code": "101",
+        "name": "EBT Cash Benefit"
+    },
+    {
+        "code": "105",
+        "name": "Clear"
+    },
+    {
+        "code": "106",
+        "name": "Fill Tank"
+    },
+    {
+        "code": "107",
+        "name": "Pay Inside"
+    },
+    {
+        "code": "108",
+        "name": "Pay Outside Debit"
+    },
+    {
+        "code": "109",
+        "name": "Pay Inside Cash"
+    },
+    {
+        "code": "110",
+        "name": "Backspace"
+    },
+    {
+        "code": "111",
+        "name": "Pay Outside Credit"
+    },
+    {
+        "code": "112",
+        "name": "Pay Inside Credit"
+    },
+    {
+        "code": "113",
+        "name": "Pay Check"
+    },
+    {
+        "code": "120",
+        "name": "Preset Amount"
+    },
+    {
+        "code": "121",
+        "name": "Change PIN"
+    },
+    {
+        "code": "122",
+        "name": "SVC Balance"
+    },
+    {
+        "code": "13",
+        "name": "Enter"
+    },
+    {
+        "code": "19",
+        "name": "Pay Outside Cash"
+    },
+    {
+        "code": "20",
+        "name": "Switch Language"
+    },
+    {
+        "code": "21",
+        "name": "Manual Amount Entry"
+    },
+    {
+        "code": "27",
+        "name": "Cancel"
+    },
+    {
+        "code": "48",
+        "name": "0"
+    },
+    {
+        "code": "49",
+        "name": "1"
+    },
+    {
+        "code": "50",
+        "name": "2"
+    },
+    {
+        "code": "51",
+        "name": "3"
+    },
+    {
+        "code": "52",
+        "name": "4"
+    },
+    {
+        "code": "53",
+        "name": "5"
+    },
+    {
+        "code": "54",
+        "name": "6"
+    },
+    {
+        "code": "55",
+        "name": "7"
+    },
+    {
+        "code": "56",
+        "name": "8"
+    },
+    {
+        "code": "57",
+        "name": "9"
+    },
+    {
+        "code": "72",
+        "name": "Help"
+    },
+    {
+        "code": "73",
+        "name": "Skip"
+    },
+    {
+        "code": "78",
+        "name": "No"
+    },
+    {
+        "code": "89",
+        "name": "Yes"
+    }
+  ],
+  "softkeys":[
+    {
+        "id": 5,
+        "name": "F1",
+        "deviceType": "G7-100",
+        "side": "LEFT",
+        "offset": 228,
+        "physicalCode": "144"
+    },
+    {
+        "id": 6,
+        "name": "F2",
+        "deviceType": "G7-100",
+        "side": "LEFT",
+        "offset": 402,
+        "physicalCode": "145"
+    },
+    {
+        "id": 7,
+        "name": "F3",
+        "deviceType": "G7-100",
+        "side": "LEFT",
+        "offset": 576,
+        "physicalCode": "146"
+    },
+    {
+        "id": 8,
+        "name": "F4",
+        "deviceType": "G7-100",
+        "side": "LEFT",
+        "offset": 750,
+        "physicalCode": "147"
+    },
+    {
+        "id": 9,
+        "name": "F5",
+        "deviceType": "G7-100",
+        "side": "RIGHT",
+        "offset": 228,
+        "physicalCode": "160"
+    },
+    {
+        "id": 10,
+        "name": "F6",
+        "deviceType": "G7-100",
+        "side": "RIGHT",
+        "offset": 402,
+        "physicalCode": "161"
+    },
+    {
+        "id": 11,
+        "name": "F7",
+        "deviceType": "G7-100",
+        "side": "RIGHT",
+        "offset": 576,
+        "physicalCode": "162"
+    },
+    {
+        "id": 12,
+        "name": "F8",
+        "deviceType": "G7-100",
+        "side": "RIGHT",
+        "offset": 750,
+        "physicalCode": "163"
+    }
+  ]
 }

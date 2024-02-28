@@ -43,3 +43,4 @@ export const CHILD_STATE = 'child_state';
 export const EXCEPTION = 'exception';
 
 export const ELEMENTS_LIST = [BG, TEXT, IMAGE, VIDEO, INPUT, TOUCH_MASK, AREA ]
+

@@ -10,12 +10,12 @@ interface ElementsProp {
 export function BackgroundControl(props: ElementsProp) {
   const { elementData } = props;
   const [open, setDropdownStatus] = useState(false);
+  const [value, setValue] = useState(elementData.value);
 
   function handleDropdown() {
     setDropdownStatus(!open);
   }
 
-  console.log(elementData, "props BG");
   return (
     <div className="ics-prompt-builder-bg-control">
       <div className="ics-inline-85-block">
@@ -23,7 +23,7 @@ export function BackgroundControl(props: ElementsProp) {
         <button className="btn btn-primary" onClick={handleDropdown}>
           Update
         </button>
-        {open && <BackgroundPicker />}
+        {open && <BackgroundPicker value={value} setValue={setValue} />}
       </div>
     </div>
   );

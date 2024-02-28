@@ -52,6 +52,7 @@ function DayPartModal({ hide, daypart }: ModalProps) {
         <SearchableDropdown
           label="Daypart"
           items={dayParts}
+          placeholder="Daypart"
           itemRenderer={(daypart: DaypartItem) => (
             <>
               <div className="fw-bold mb5">{daypart.name}</div>

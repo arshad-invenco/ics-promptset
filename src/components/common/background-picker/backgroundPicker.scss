@@ -1,12 +1,13 @@
 .ics-bg-picker {
   position: absolute;
   z-index: 3;
+  top: 8rem;
   overflow: hidden;
-  width: 112px;
-  height: 100px;
-  border-radius: 3px;
+  width: 11.2rem;
+  height: 10rem;
+  border-radius: 0.3rem;
   background-color: var(--white);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.5);
   .selected-bg {
     height: 60%;
     .color,
@@ -33,7 +34,7 @@
       transition: all 0.25s ease-in-out;
       i {
         color: var(--md-grey-500);
-        font-size: 22px;
+        font-size: 2.2rem;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -55,12 +56,12 @@
         height: 100%;
         width: 100%;
         border-radius: 0;
-        margin-top: -3px;
+        margin-top: -0.3rem;
         opacity: 0;
       }
       #promptBackgroundColor {
         opacity: 0;
-        margin-left: 25px;
+        margin-left: 2.5rem;
       }
     }
   }
