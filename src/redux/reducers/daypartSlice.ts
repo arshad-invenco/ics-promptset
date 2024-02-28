@@ -5,13 +5,13 @@ import { fetchDayPart } from "../thunks/daypartThunk";
 interface DayPartState {
   data: DayPart[];
   isLoading: boolean;
-  error: boolean;
+  error: string;
 }
 
 const initialState: DayPartState = {
   data: [],
   isLoading: true,
-  error: false,
+  error: "",
 };
 
 export const daypartSlice = createSlice({
@@ -21,22 +21,22 @@ export const daypartSlice = createSlice({
     setDayPartData: (state, action) => {
       state.data = action.payload;
       state.isLoading = false;
-      state.error = false;
+      state.error = "";
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchDayPart.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
-      state.error = false;
+      state.error = "";
     });
     builder.addCase(fetchDayPart.pending, (state) => {
       state.isLoading = true;
-      state.error = false;
+      state.error = "";
     });
     builder.addCase(fetchDayPart.rejected, (state) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = "Failed to fetch daypart";
     });
   },
 });

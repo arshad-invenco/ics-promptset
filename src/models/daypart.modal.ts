@@ -10,7 +10,7 @@ export interface DayPartRootState {
   daypart: {
     data: DayPart[];
     isLoading: boolean;
-    error: any;
+    error: string;
   };
 }
 
