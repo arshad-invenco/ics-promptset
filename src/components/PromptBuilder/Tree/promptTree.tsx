@@ -41,52 +41,6 @@ export default function PromptTree() {
         setActivePromptEditorId(child_id);
     }
 
-    const promptSetTree = promptsetData?.states?.map((item:State, index:number) => {
-        return (
-            <div key={index} className="state-item">
-                <Accordion alwaysOpen>
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header onClick={()=>{
-                            onClickState(item.id, item.assignments[0].id)
-                        }}>
-                        <div className="prompt-set-status" >
-                            <div className="left-status">
-                                <div className="status-icon">
-                                    {
-                                        ( item.secure && isSequoiaDevice("G7-100-8") ) &&
-                                        <i className="fas fa-shield-alt"></i>
-                                    }
-                                </div>
-                                <div onClick={()=>{}} className="middle-text-status">
-                                    {item.code.toUpperCase()}
-                                </div>
-                                {
-                                    item.transactionState &&
-                                        <span className="state-label">{item.transactionState}</span>
-                                }
-                            </div>
-                            <div className="unsaved-status">
-                                <i className="fa fa-floppy-o "></i>
-                            </div>
-                        </div>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                            {
-                                item.assignments.map((child:Assignment, index:number) => {
-                                    return (
-                                        <div key={index} className="inner-accordion">
-                                            <InnerStates child={child} index={index} />
-                                        </div>
-                                    )
-                                })
-                            }
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-            </div>
-        )
-    })
-
     return (
         <div className="left-container">
             <div className="ics-prompt-tree-container">
@@ -94,7 +48,51 @@ export default function PromptTree() {
                     <input className="prompt-heading-input" type="text" value={"njbh"}/>
                 </div>
                 <div className="ics-prompt-builder-state">
-                    {promptSetTree}
+                    {promptsetData?.states?.map((item:State, index:number) => {
+                        return (
+                            <div key={index} className="state-item">
+                                <Accordion alwaysOpen>
+                                    <Accordion.Item eventKey="0">
+                                        <Accordion.Header onClick={()=>{
+                                            onClickState(item.id, item.assignments[0].id)
+                                        }}>
+                                            <div className="prompt-set-status" >
+                                                <div className="left-status">
+                                                    <div className="status-icon">
+                                                        {
+                                                            ( item.secure && isSequoiaDevice("G7-100-8") ) &&
+                                                            <i className="fas fa-shield-alt"></i>
+                                                        }
+                                                    </div>
+                                                    <div onClick={()=>{}} className="middle-text-status">
+                                                        {item.code.toUpperCase()}
+                                                    </div>
+                                                    {
+                                                        item.transactionState &&
+                                                        <span className="state-label">{item.transactionState}</span>
+                                                    }
+                                                </div>
+                                                <div className="unsaved-status">
+                                                    <i className="fa fa-floppy-o "></i>
+                                                </div>
+                                            </div>
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                            {
+                                                item.assignments.map((child:Assignment, index:number) => {
+                                                    return (
+                                                        <div key={index} className="inner-accordion">
+                                                            <InnerStates child={child} index={index} />
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </div>
+                        )
+                    })}
                 </div>
                 <div className="prompt-tree-footer">
                     <button className="btn btn-primary text-uppercase"  onClick={handleSavePromptSet}>
