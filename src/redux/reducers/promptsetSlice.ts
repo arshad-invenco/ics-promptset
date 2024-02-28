@@ -53,6 +53,18 @@ export const promptsetSlice = createSlice({
                 return state;
             });
         },
+        addElementToAssignment: (state, action) => {
+            const { assignmentId, newElement } = action.payload;
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    if (assignment.id === assignmentId) {
+                        assignment.elements.push(newElement);
+                    }
+                    return assignment;
+                });
+                return state;
+            });
+        },
 
     },
     extraReducers: (builder) => {
