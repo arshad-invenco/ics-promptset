@@ -28,8 +28,6 @@ import {ImageControl} from "./image/prompt-image-control";
 import {VideoControl} from "./video/prompt-video-control";
 import {AreaControl} from "./area/prompt-area-control";
 import TextControl from "./text/prompt-text-control";
-import {PromptRootState} from "../../../redux/store";
-import {PromptSetState} from "../../../redux/reducers/promptsetSlice";
 import {Elements, State, TouchMapAreas} from "../../../models/promptset.modal";
 import {PromptSetRootState} from "../Tree/promptTree";
 

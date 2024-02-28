@@ -1,0 +1,67 @@
+.ics-bg-picker {
+  position: absolute;
+  z-index: 3;
+  overflow: hidden;
+  width: 112px;
+  height: 100px;
+  border-radius: 3px;
+  background-color: var(--white);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+  .selected-bg {
+    height: 60%;
+    .color,
+    .image {
+      height: 100%;
+    }
+    .image {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  .select-bg {
+    height: 40%;
+    .image,
+    .color {
+      width: 50%;
+      height: 100%;
+      float: left;
+      background-color: var(--md-grey-100);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+      i {
+        color: var(--md-grey-500);
+        font-size: 22px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.25s ease-in-out;
+      }
+      &:first-child {
+        border-right: 0.1rem solid var(--md-grey-300);
+      }
+      &:hover {
+        background-color: var(--md-grey-700);
+        i {
+          color: var(--md-grey-400);
+        }
+      }
+    }
+    .color {
+      button {
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+        margin-top: -3px;
+        opacity: 0;
+      }
+      #promptBackgroundColor {
+        opacity: 0;
+        margin-left: 25px;
+      }
+    }
+  }
+}
