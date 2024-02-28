@@ -18,8 +18,7 @@ import {
   TOUCH_MASK,
   VIDEO,
 } from "../../../../constants/promptSetConstants";
-import DayPartModal from "../../modals/daypart-dropdown/dayPart";
-import { fetchDayPart } from "../../../../redux/thunks/daypartThunk";
+import DayPartModal from "../../modals/daypart-modal/dayPart";
 
 interface InnerStateProps {
   child: Assignment;

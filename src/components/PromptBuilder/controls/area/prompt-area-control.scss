@@ -1,29 +1,28 @@
-.ics-prompt-builder-area-controls{
+.ics-prompt-builder-area-controls {
   padding: 5px 10px;
 
-  .area-controls{
+  .area-controls {
     gap: 10px;
-    .shape{
+    .shape {
       height: 34px;
       cursor: pointer;
-      transition: all .25s ease-in-out;
+      transition: all 0.25s ease-in-out;
       outline: none;
       background-color: #9e9e9e;
       touch-action: manipulation;
-      &:hover{
+      &:hover {
         background-color: #757575;
       }
     }
-    .rectangle{
+    .rectangle {
       width: 40px;
     }
-    .circle{
-      border-radius: 100%;
+    .circle {
+      border-radius: 50%;
       width: 34px;
     }
     .selected {
       border: 3px solid #757575;
     }
   }
-
 }

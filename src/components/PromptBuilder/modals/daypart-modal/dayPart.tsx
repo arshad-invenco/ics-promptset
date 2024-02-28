@@ -6,7 +6,7 @@ import {
   DayPartRootState,
   DaypartItem,
 } from "../../../../models/daypart.modal";
-import SearchableDropdown from "../searchable-dropdown/searchableDropdown";
+import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
 
 interface ModalProps {
   hide: () => void;

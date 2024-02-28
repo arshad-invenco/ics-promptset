@@ -36,6 +36,7 @@ label {
   font-size: 1.4rem;
   padding: 0.6rem 1.2rem;
   transition: all ease-in 0.1s;
+  line-height: 1.42857143;
   &:disabled {
     cursor: not-allowed;
     opacity: 0.65;
@@ -62,34 +63,6 @@ label {
   &:disabled {
     border-color: var(--btn-primary-bg-hover);
     background-color: var(--md-indigo-500);
-  }
-}
-
-.ics-btn-primary {
-  transition: all ease-in 0.1s;
-  color: #fff;
-  border: 1px solid #3849a2;
-  background-color: #3f51b5;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.42857143;
-  display: inline-block;
-  margin-bottom: 0;
-  padding: 6px 12px;
-  cursor: pointer;
-  text-align: center;
-  vertical-align: middle;
-  white-space: nowrap;
-  border-radius: 3px;
-  background-image: none;
-  box-shadow: none;
-  &:hover {
-    border-color: #293475;
-    background-color: #32408f;
-  }
-  &:focus {
-    border-color: #171e44;
-    background-color: #32408f;
   }
 }
 
