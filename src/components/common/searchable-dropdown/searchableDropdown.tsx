@@ -108,10 +108,7 @@ function SearchableDropdown({
               e.stopPropagation();
               toggleDropdown();
             }}
-            onKeyDown={(e) => {
-              e.stopPropagation();
-              handleKeyDown(e);
-            }}
+            onKeyDown={handleKeyDown}
             autoFocus
           />
         )}

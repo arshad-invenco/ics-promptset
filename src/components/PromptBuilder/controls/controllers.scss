@@ -1,58 +1,58 @@
-.ics-prompt-builder-controls{
+.ics-prompt-builder-controls {
   width: 100%;
   min-height: 75px;
   height: fit-content;
   border-bottom: 1px solid #e0e0e0;
   background-color: #fff;
 
-  .state-controller{
+  .state-controller {
     padding: 5px 10px;
     display: flex;
     flex-direction: column;
-    .code{
+    .code {
       color: #616161;
       font-size: 18px;
       font-weight: bold;
       margin: 0;
     }
-    .description{
+    .description {
       margin-bottom: 3px;
       line-height: 16px;
       color: #616161;
       font-size: 15px;
     }
-    .horizontal-border{
+    .horizontal-border {
       margin: 10px -10px;
-      border-bottom: 1px solid #d6d6d6;
+      border-bottom: 1px solid var(--border-default);
     }
-    .transaction-state-dropdown{
+    .transaction-state-dropdown {
       width: 188px;
       margin: 5px 0;
       padding-right: 5px;
       float: left;
     }
   }
-  .child-state-controller{
+  .child-state-controller {
     color: #616161;
     display: flex;
     align-items: center;
     padding: 5px 10px;
-    .title{
+    .title {
       margin-top: 5px;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
-      .clock-icon{
+      .clock-icon {
         font-size: 20px;
         margin-right: 5px;
       }
-      .code{
+      .code {
         font-size: 18px;
         font-weight: bold;
         margin: 0;
       }
     }
-    .exception-time{
+    .exception-time {
       margin: 5px 0 10px 10px;
     }
   }
@@ -77,15 +77,15 @@
 }
 
 //CENTER SHIFT
-.center-shift{
+.center-shift {
   gap: 2px;
-  .shift-btn{
+  .shift-btn {
     padding: 6px 12px;
     cursor: pointer;
-    .icon{
+    .icon {
       font-size: 24px;
     }
-    .shift-icon-transform-horizontal{
+    .shift-icon-transform-horizontal {
       transform: rotate(90deg);
     }
   }
@@ -104,6 +104,6 @@
   input {
     border: none;
     background-color: #fafafa;
-    color: rgba(0, 0, 0, .137);
+    color: rgba(0, 0, 0, 0.137);
   }
 }
