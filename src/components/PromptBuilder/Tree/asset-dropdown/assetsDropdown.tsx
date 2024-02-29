@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import isSequoiaDevice, {find, generateRandomString, getAsset} from "../../../../services/promptsetService";
-import {Assignment, State} from "../../../../models/promptset.modal";
-import {ICON, TEXT, TYPE} from "../../../../constants/promptSetConstants";
+import {Assignment} from "../../../../models/promptset.modal";
+import {BG, ICON, IMAGE, INPUT, TEXT, TYPE} from "../../../../constants/promptSetConstants";
 import {useDispatch, useSelector} from "react-redux";
 import {PromptSetRootState} from "../promptTree";
-import {selectPromptSetAssignmentById} from "../../../../redux/selectors/promptSetSelectors";
 import {AppDispatch} from "../../../../redux/store";
-import {addElementToAssignment} from "../../../../redux/reducers/promptsetSlice";
+import {addElementToAssignment, updateInputElement} from "../../../../redux/reducers/promptsetSlice";
+import {promptSetContext} from "../../../../hooks/promptsetContext";
 
 interface AssetsDropdownProps {
     childState: Assignment;
@@ -24,7 +24,6 @@ interface NewElement {
     italic: boolean;
     width: number;
     textAlign: string;
-    // if condition
     size?: number;
 }
 
@@ -35,6 +34,9 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
     // SELECTORS
     const {deviceType, screenWidth, fontColor} = useSelector((state: PromptSetRootState) => state.promptset.data);
+
+    // CONTEXT API
+    const {setActiveElementId, setActiveControlType} = useContext(promptSetContext);
 
     // EFFECTS
     useEffect(() => {
@@ -64,9 +66,19 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         // const isNoMultiLanguagePromptSet = companyLanguages.length === 0;
         const isMultiLanguagePromptSet = true;
 
+        if(type === BG){
+            let element = childState.elements.find((element) => element.type === BG);
+            if (element) {
+                element = {...element, lock: true};
+                console.log(element, 'BG ELEMENT')
+                dispatch(updateInputElement(element));
+                setActiveElementId(element.id);
+                setActiveControlType(BG);
+            }
+        }
         if (type === TEXT) {
             let textElement: NewElement = {
-                id: generateRandomString(9),
+                id: generateRandomString(10),
                 type: 'text',
                 value: 'Your text goes here',
                 top: 100,
@@ -92,8 +104,42 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
                 textElement.face = 'Liberation Sans'
             }
             dispatch(addElementToAssignment({assignmentId: childState.id, newElement:textElement}))
+            setActiveElementId(textElement.id);
+            setActiveControlType(TEXT);
         }
-        console.log(childState, 'handleAdd', type)
+        if(type === INPUT){
+            let inputElement : NewElement = {
+                id : generateRandomString(10),
+                type: 'input',
+                value: '????',
+                top: 100,
+                left: screenWidth / 2,
+                color: fontColor,
+                face: '',
+                bold: false,
+                italic: false,
+                width: 200,
+                textAlign: isSequoiaDevice(deviceType) ? 'center' : ''
+            };
+            if (isMultiLanguagePromptSet){
+                if (isSequoiaDevice(deviceType)){
+                    inputElement.size = 48;
+                    inputElement.face = 'Liberation Sans'
+                } else if (deviceType === 'G6-200'){
+                    inputElement.size = 24
+                    inputElement.face = 'FreeSans'
+                }
+            } else if(!isMultiLanguagePromptSet){
+                inputElement.size = 48;
+                inputElement.face = 'Liberation Sans'
+            }
+            dispatch(addElementToAssignment({assignmentId: childState.id, newElement:inputElement}))
+            setActiveElementId(inputElement.id);
+            setActiveControlType(INPUT);
+        }
+        else if (type === IMAGE) {
+
+        }
     }
 
     return (
