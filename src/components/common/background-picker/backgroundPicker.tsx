@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./backgroundPicker.scss";
 import ColorPicker from "../../PromptBuilder/modals/color-picker/colorPicker";
 import { getBaseUrl } from "../../../constants/app";
+import { Modal } from "react-bootstrap";
+import MediaModal from "../../PromptBuilder/modals/media-modal/mediaModal";
 
 interface BackgroundPickerProps {
   value: string;
@@ -10,13 +12,18 @@ interface BackgroundPickerProps {
 
 function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
   const [bgColor, setBgColor] = useState("000000");
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
 
   const generateImgURL = () => {
     return `url(${getBaseUrl()}/v1/media/assets/${value}/source)`;
-  };
-
-  const openAssetModal = () => {
-    // Implement your logic to open asset modal
   };
 
   const updateColor = (color: string) => {
@@ -39,10 +46,13 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
         <div
           className="image"
           onClick={(e) => {
-            openAssetModal();
+            handleShow();
             e.stopPropagation();
           }}
         >
+          <Modal show={show} onHide={handleClose} className="media-modal" size="lg">
+            <MediaModal hide={handleClose}></MediaModal>
+          </Modal>
           <i className="fa fa-picture-o" aria-hidden="true"></i>
         </div>
         <div className="color" onClick={(e) => e.stopPropagation()}>

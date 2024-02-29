@@ -1,0 +1,39 @@
+.media {
+  .modal-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 1rem;
+    border-bottom: none;
+    .navbar-header {
+      margin-right: auto;
+      .name {
+        font-size: 2rem;
+      }
+      .total {
+        font-size: 1.3rem;
+        color: var(--md-grey-700);
+      }
+    }
+    .navbar-body {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 7rem;
+      border-bottom: 0.2rem solid var(--divider-color) !important;
+      width: 100%;
+      .btn {
+        color: #616161;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 0 8px;
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -16,18 +16,22 @@ interface ModalProps {
 function DayPartModal({ hide, daypart }: ModalProps) {
   const [selectedDayPart, setSelectedDayPart] = useState("Daypart");
 
-  const dayParts = useSelector(
+  const dayPartData = useSelector(
     (state: DayPartRootState) => state.daypart.data
-  ).map((daypart) => {
-    let startTime = convertTime(daypart.start);
-    let endTime = convertTime(daypart.end);
+  );
 
-    return {
-      id: daypart.id,
-      name: daypart.name,
-      time: `${startTime} - ${endTime}`,
-    };
-  });
+  const dayParts = Array.isArray(dayPartData)
+    ? dayPartData.map((daypart) => {
+        let startTime = convertTime(daypart.start);
+        let endTime = convertTime(daypart.end);
+
+        return {
+          id: daypart.id,
+          name: daypart.name,
+          time: `${startTime} - ${endTime}`,
+        };
+      })
+    : [];
 
   function convertTime(timeInMilliseconds: number) {
     let hour = Math.floor(timeInMilliseconds / 3600000);
