@@ -6,6 +6,8 @@ interface SearchableDropdownProps {
   items: Array<any>;
   itemRenderer: any;
   onSelect: (item: any) => void;
+  isGroup?: boolean;
+  placeholder: string;
 }
 
 function SearchableDropdown({
@@ -13,11 +15,15 @@ function SearchableDropdown({
   items,
   itemRenderer,
   onSelect,
+  placeholder,
+  isGroup = false,
 }: SearchableDropdownProps) {
   const refs = useRef<RefObject<HTMLLIElement>[]>([]);
   const [open, setOpenStatus] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(label);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(placeholder);
+  const [activeIndex, setActiveIndex] = useState(
+    isGroup ? items?.[0]?.options?.[0]?.id ?? null : items?.[0]?.id ?? null
+  );
   const [inputValue, setInputValue] = useState("");
   const [filteredItems, setFilteredItems] = useState(items);
 
@@ -25,53 +31,91 @@ function SearchableDropdown({
     setOpenStatus(!open);
     setInputValue("");
     setFilteredItems(items);
-    if (selectedOption === label) setActiveIndex(0);
+    if (selectedOption === placeholder) {
+      setActiveIndex(
+        isGroup ? items?.[0]?.options?.[0]?.id ?? null : items?.[0]?.id ?? null
+      );
+    }
   };
 
   const handleSelection = (item: any) => {
     onSelect(item);
     const formattedItem = `${item.name} (${item.time})`;
     if (label === "Daypart") setSelectedOption(formattedItem);
-    setActiveIndex(filteredItems.indexOf(item));
+    else setSelectedOption(item.name);
+    setActiveIndex(item.id);
     toggleDropdown();
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      handleSelection(items[activeIndex]);
+      const flatOptions = isGroup
+        ? items.flatMap((group) => group.options)
+        : items;
+      const selectedItem = flatOptions.find((item) => item.id === activeIndex);
+      if (selectedItem) {
+        handleSelection(selectedItem);
+      }
     }
   };
 
   useEffect(() => {
     const trimmedInput = inputValue.trim().toLowerCase();
-    const newFilteredItems = items.filter((item) =>
-      item.name.toLowerCase().includes(trimmedInput)
-    );
-    setFilteredItems(newFilteredItems);
+    if (isGroup) {
+      const newFilteredItems = items
+        .map((group) => ({
+          ...group,
+          options: group.options.filter((option: any) =>
+            option.name.toLowerCase().includes(trimmedInput)
+          ),
+        }))
+        .filter((group) => group.options.length > 0);
+      setFilteredItems(newFilteredItems);
+    } else {
+      const newFilteredItems = items.filter((item) =>
+        item.name.toLowerCase().includes(trimmedInput)
+      );
+
+      setFilteredItems(newFilteredItems);
+    }
   }, [inputValue, items]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      const flatOptions = isGroup
+        ? filteredItems.flatMap((group) => group.options)
+        : filteredItems;
+
       switch (event.key) {
         case "ArrowDown":
-          setActiveIndex((prevIndex) => (prevIndex + 1) % items.length);
+          setActiveIndex((prevActiveIndex: string) => {
+            const prevIndex = flatOptions.findIndex(
+              (item) => item.id === prevActiveIndex
+            );
+            const nextIndex = (prevIndex + 1) % flatOptions.length;
+            return flatOptions[nextIndex].id;
+          });
           break;
         case "ArrowUp":
-          setActiveIndex(
-            (prevIndex) => (prevIndex - 1 + items.length) % items.length
-          );
+          setActiveIndex((prevActiveIndex: string) => {
+            const prevIndex = flatOptions.findIndex(
+              (item) => item.id === prevActiveIndex
+            );
+            const newIndex =
+              (prevIndex - 1 + flatOptions.length) % flatOptions.length;
+            return flatOptions[newIndex].id;
+          });
           break;
         default:
           break;
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [items, activeIndex]);
 
   useEffect(() => {
     refs.current[activeIndex]?.current?.scrollIntoView({
@@ -92,15 +136,17 @@ function SearchableDropdown({
               toggleDropdown();
             }}
           >
-            <span className={selectedOption !== label ? "selected-item" : ""}>
+            <span
+              className={selectedOption !== placeholder ? "selected-item" : ""}
+            >
               {selectedOption}
-              <span className="caret"></span>
             </span>
+            <span className="caret"></span>
           </div>
         )}
         {open && (
           <input
-            placeholder={label}
+            placeholder={placeholder}
             aria-label="Select box"
             className="ics-input"
             onChange={(e) => setInputValue(e.target.value)}
@@ -113,20 +159,47 @@ function SearchableDropdown({
           />
         )}
         {open && filteredItems.length > 0 && (
-          <ul className="list-items" onKeyDown={handleKeyDown}>
-            {filteredItems.map((item, index) => (
-              <li
-                key={item.id}
-                ref={(el) => (refs.current[index] = { current: el })}
-                className={index === activeIndex ? "active" : ""}
-                onMouseDown={(e) => {
-                  e.stopPropagation();
-                  handleSelection(item);
-                }}
-              >
-                {itemRenderer(item)}
-              </li>
-            ))}
+          <ul
+            className={isGroup ? "list-items group-items" : "list-items"}
+            onKeyDown={handleKeyDown}
+          >
+            {!isGroup &&
+              filteredItems.map((item) => {
+                return (
+                  <li
+                    key={item.id}
+                    ref={(el) => (refs.current[item.id] = { current: el })}
+                    className={item.id === activeIndex ? "active" : ""}
+                    onMouseDown={(e) => {
+                      e.stopPropagation();
+                      handleSelection(item);
+                    }}
+                  >
+                    {itemRenderer(item)}
+                  </li>
+                );
+              })}
+            {isGroup &&
+              filteredItems.map((group, groupIndex) => (
+                <div className="group-container" key={groupIndex}>
+                  {group.options.length > 0 && (
+                    <div className="group-label">{group.label}</div>
+                  )}
+                  {group.options.map((option: any) => (
+                    <li
+                      key={option.id}
+                      ref={(el) => (refs.current[option.id] = { current: el })}
+                      className={option.id === activeIndex ? "active" : ""}
+                      onMouseDown={(e) => {
+                        e.stopPropagation();
+                        handleSelection(option);
+                      }}
+                    >
+                      {itemRenderer(option)}
+                    </li>
+                  ))}
+                </div>
+              ))}
           </ul>
         )}
       </div>

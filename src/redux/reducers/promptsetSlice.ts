@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchPromptSet} from "../thunks/promptSetThunk";
-import {PromptSetInterface} from "../../models/promptset.modal";
+import {PromptSetInterface, TouchMap} from "../../models/promptset.modal";
 
 export interface PromptSetState {
     data: PromptSetInterface;
@@ -41,7 +41,7 @@ export const promptsetSlice = createSlice({
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
                     if (assignment.touchmap) {
-                        assignment.touchmap.areas = assignment.touchmap.areas.map((area) => {
+                        assignment.touchmap.areas = assignment.touchmap?.areas?.map((area) => {
                             if (area.id === action.payload.id) {
                                 return action.payload;
                             }
@@ -68,7 +68,37 @@ export const promptsetSlice = createSlice({
                 })
             }
         },
+        deleteElementByID: (state, action) => {
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    assignment.elements = assignment.elements.filter((element) => {
+                        return element.id !== action.payload;
+                    });
+                    return assignment;
+                });
+                return state;
+            });
+        },
+        deleteTouchMapOrAreaById: (state, action) => {
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    assignment.elements = assignment.elements.filter((element) => {
+                        return element.id !== action.payload;
+                    });
 
+                    if (assignment.touchmap && assignment.touchmap.id === action.payload) {
+                        assignment.touchmap = null;
+                    } else if (assignment.touchmap) {
+                        assignment.touchmap.areas = assignment.touchmap?.areas?.filter((area) => {
+                            return area.id !== action.payload;
+                        });
+                    }
+
+                    return assignment;
+                });
+                return state;
+            });
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchPromptSet.fulfilled, (state, action) => {
@@ -87,4 +117,4 @@ export const promptsetSlice = createSlice({
     },
 });
 
-export const {setPromptSetData, updateInputElement, updateTouchMap, addElementToAssignment} = promptsetSlice.actions;
+export const {setPromptSetData, updateInputElement, updateTouchMap, addElementToAssignment, deleteElementByID, deleteTouchMapOrAreaById} = promptsetSlice.actions;

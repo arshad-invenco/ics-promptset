@@ -52,3 +52,4 @@ export const TYPE = 'type';
 
 
 export const ELEMENTS_LIST = [BG, TEXT, IMAGE, VIDEO, INPUT, TOUCH_MASK, AREA ]
+

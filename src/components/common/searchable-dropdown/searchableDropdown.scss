@@ -12,6 +12,7 @@
     .dropdown-btn {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       height: 3.4rem;
       width: 100%;
       border: 0.1rem solid var(--btn-default-border);
@@ -39,10 +40,7 @@
       }
 
       .caret {
-        position: absolute;
         color: var(--md-grey-900);
-        right: 2.5rem;
-        top: 5.1rem;
         border-top: 0.4rem dashed;
         border-right: 0.4rem solid transparent;
         border-left: 0.4rem solid transparent;
@@ -76,9 +74,24 @@
         padding: 0.5rem 2rem;
         white-space: nowrap;
         color: var(--md-grey-900);
+        text-wrap: wrap;
         cursor: pointer;
         &:not(.active):hover {
           background-color: var(--bg-default);
+        }
+      }
+      .group-container {
+        &:not(:first-child) {
+          border-top: 0.1rem solid var(--divider-color);
+          margin-top: 0.9rem;
+        }
+        .group-label {
+          font-size: 1.2rem;
+          line-height: 1.42857143;
+          display: block;
+          padding: 0.3rem 2rem;
+          white-space: nowrap;
+          color: var(--md-grey-600);
         }
       }
 
@@ -86,6 +99,9 @@
         background-color: var(--md-indigo-500);
         color: var(--white);
       }
+    }
+    .group-items {
+      width: 10%;
     }
   }
 }

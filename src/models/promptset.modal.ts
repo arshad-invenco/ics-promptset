@@ -45,7 +45,7 @@ export interface Lang {
 }
 export interface TouchMap {
     id: string,
-    areas: TouchMapAreas[]
+    areas?: TouchMapAreas[]
 }
 export interface DayPart {
     id: string;
@@ -111,7 +111,7 @@ export interface Assignment {
     contactless: boolean;
     thumbnailUrl: string;    //null data but string in swagger
     promptSetLanguageId: string;    //null data & no doc in swagger
-    touchmap: TouchMap;
+    touchmap: TouchMap | null;
     softkeys: SoftKeys[];   //[] data but doc in swagger
     type: string;
     parentId: string;
