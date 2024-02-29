@@ -9738,5 +9738,2894 @@
         "offset": 750,
         "physicalCode": "163"
     }
-  ]
+  ],
+"assets":{
+    "resultsMetadata": {
+        "totalResults": 90,
+        "pageIndex": 0,
+        "pageSize": 10000
+    },
+    "results": [
+        {
+            "id": "b5586097-07bb-46cd-b7ea-a6a6ce617c53",
+            "name": "Harabara_300.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 44288,
+            "type": "FONT",
+            "uploaded": "2024-01-19T02:08:56.459Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b5586097-07bb-46cd-b7ea-a6a6ce617c53/source",
+            "uploader": {
+                "id": "9de7b73f-26fe-4a7e-9abc-c75da610574b",
+                "fullName": "PavithraB- Admin",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Harabara",
+                "version": null,
+                "fullName": "Harabara",
+                "mimeType": "font/ttf",
+                "copyright": null,
+                "familyName": "Harabara",
+                "subfamilyName": "Regular",
+                "postscriptName": "Harabara"
+            },
+            "active": true
+        },
+        {
+            "id": "783ba7d0-369b-4565-837a-11ad732f4daf",
+            "name": "edosz.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 48820,
+            "type": "FONT",
+            "uploaded": "2024-01-15T00:52:59.345Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/783ba7d0-369b-4565-837a-11ad732f4daf/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Edo SZ",
+                "version": "updated January 2008",
+                "fullName": "Edo SZ",
+                "mimeType": "font/ttf",
+                "copyright": "2008 Vic Fieger",
+                "familyName": "Edo SZ",
+                "subfamilyName": "Regular",
+                "postscriptName": "EdoSZ"
+            },
+            "active": true
+        },
+        {
+            "id": "6e12075e-de7b-4346-ac28-c0da6c2c5b7c",
+            "name": "dwsample1-ttf.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 33072,
+            "type": "FONT",
+            "uploaded": "2023-12-11T10:35:03.980Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/6e12075e-de7b-4346-ac28-c0da6c2c5b7c/source",
+            "uploader": {
+                "id": "20fd7d8d-b474-44b9-834b-ec409963c39e",
+                "fullName": "Santosh",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Yaahowu Bold",
+                "version": "Version 1.00 October 20, 2013, initial release",
+                "fullName": "Yaahowu Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Yaahowu © Situjuh Nazara. 2013. All Rights Reserved",
+                "familyName": "Yaahowu Bold",
+                "subfamilyName": "Regular",
+                "postscriptName": "YaahowuBold"
+            },
+            "active": true
+        },
+        {
+            "id": "c6828cf5-c02a-4faf-b928-68d88550cc4e",
+            "name": "aAsianNinja.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 16120,
+            "type": "FONT",
+            "uploaded": "2023-12-04T01:00:48.213Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/c6828cf5-c02a-4faf-b928-68d88550cc4e/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Asian Ninja",
+                "version": "Version 001.000 ",
+                "fullName": "Asian Ninja",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2020, wep",
+                "familyName": "a Asian Ninja",
+                "subfamilyName": "Regular",
+                "postscriptName": "aAsianNinja"
+            },
+            "active": true
+        },
+        {
+            "id": "c1e32535-a978-4679-b9c1-f7d40ad52a37",
+            "name": "DejaVuSansCondensed-Bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 653336,
+            "type": "FONT",
+            "uploaded": "2023-10-24T00:35:28.317Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/c1e32535-a978-4679-b9c1-f7d40ad52a37/source",
+            "uploader": {
+                "id": "4e550119-fc3c-421f-9b3b-019c95fb48b9",
+                "fullName": "Jason Kaminer",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "DejaVu Sans Condensed Bold",
+                "version": "Version 2.34",
+                "fullName": "DejaVu Sans Condensed Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved.\nCopyright (c) 2006 by Tavmjong Bah. All Rights Reserved.\nDejaVu changes are in public domain\n",
+                "familyName": "DejaVu Sans Condensed",
+                "subfamilyName": "Bold",
+                "postscriptName": "DejaVuSansCondensed-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "f99d9005-b101-4c8a-a70e-f177a58e7a0b",
+            "name": "DejaVuSans-Bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 693876,
+            "type": "FONT",
+            "uploaded": "2023-10-24T00:35:28.317Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/f99d9005-b101-4c8a-a70e-f177a58e7a0b/source",
+            "uploader": {
+                "id": "4e550119-fc3c-421f-9b3b-019c95fb48b9",
+                "fullName": "Jason Kaminer",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "DejaVu Sans Bold",
+                "version": "Version 2.34",
+                "fullName": "DejaVu Sans Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved.\nCopyright (c) 2006 by Tavmjong Bah. All Rights Reserved.\nDejaVu changes are in public domain\n",
+                "familyName": "DejaVu Sans",
+                "subfamilyName": "Bold",
+                "postscriptName": "DejaVuSans-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "6e747e5c-af7e-4d02-90a4-26c29b2af80f",
+            "name": "RigSans-Regular.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 63636,
+            "type": "FONT",
+            "uploaded": "2023-08-11T02:56:34.890Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/6e747e5c-af7e-4d02-90a4-26c29b2af80f/source",
+            "uploader": {
+                "id": "c20c7c70-d28f-4ba4-8014-2156b97189d3",
+                "fullName": "Ben Passman",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Rig Sans Regular",
+                "version": "Version 1.000;FEAKit 1.0",
+                "fullName": "Rig Sans Regular",
+                "mimeType": "font/otf",
+                "copyright": "Copyright © 2021 by Jamie Clarke. All rights reserved.",
+                "familyName": "Rig Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "RigSans-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "b5fffded-0074-448b-ae17-89ccaeb1f933",
+            "name": "RigSans-Light.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 62992,
+            "type": "FONT",
+            "uploaded": "2023-08-11T02:56:34.868Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b5fffded-0074-448b-ae17-89ccaeb1f933/source",
+            "uploader": {
+                "id": "c20c7c70-d28f-4ba4-8014-2156b97189d3",
+                "fullName": "Ben Passman",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Rig Sans Light",
+                "version": "Version 1.000;FEAKit 1.0",
+                "fullName": "Rig Sans Light",
+                "mimeType": "font/otf",
+                "copyright": "Copyright © 2021 by Jamie Clarke. All rights reserved.",
+                "familyName": "Rig Sans Light",
+                "subfamilyName": "Regular",
+                "postscriptName": "RigSans-Light"
+            },
+            "active": true
+        },
+        {
+            "id": "7b8d2973-576f-445a-bbf0-7b6cdb203fc7",
+            "name": "RigSans-Thin.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 62080,
+            "type": "FONT",
+            "uploaded": "2023-08-11T02:56:34.814Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/7b8d2973-576f-445a-bbf0-7b6cdb203fc7/source",
+            "uploader": {
+                "id": "c20c7c70-d28f-4ba4-8014-2156b97189d3",
+                "fullName": "Ben Passman",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Rig Sans Thin",
+                "version": "Version 1.000;FEAKit 1.0",
+                "fullName": "Rig Sans Thin",
+                "mimeType": "font/otf",
+                "copyright": "Copyright © 2021 by Jamie Clarke. All rights reserved.",
+                "familyName": "Rig Sans Thin",
+                "subfamilyName": "Regular",
+                "postscriptName": "RigSans-Thin"
+            },
+            "active": true
+        },
+        {
+            "id": "726bd3aa-6305-4aa2-a500-f08c21fa213b",
+            "name": "RigSans-Bold.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 65512,
+            "type": "FONT",
+            "uploaded": "2023-08-11T02:56:34.717Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/726bd3aa-6305-4aa2-a500-f08c21fa213b/source",
+            "uploader": {
+                "id": "c20c7c70-d28f-4ba4-8014-2156b97189d3",
+                "fullName": "Ben Passman",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Rig Sans Bold",
+                "version": "Version 1.000;FEAKit 1.0",
+                "fullName": "Rig Sans Bold",
+                "mimeType": "font/otf",
+                "copyright": "Copyright © 2021 by Jamie Clarke. All rights reserved.",
+                "familyName": "Rig Sans",
+                "subfamilyName": "Bold",
+                "postscriptName": "RigSans-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "72abbe4c-53ea-405c-acdf-f8c771c2cf1f",
+            "name": "SourceHanSansSC-Regular.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 3606580,
+            "type": "FONT",
+            "uploaded": "2022-11-10T23:06:15.796Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/72abbe4c-53ea-405c-acdf-f8c771c2cf1f/source",
+            "uploader": {
+                "id": "70b03803-c0e8-4a90-bd8a-1574b725ecbc",
+                "fullName": "Neeraj kumar",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Source Han Sans SC",
+                "version": "Version 2.000;hotconv 1.0.107;makeotfexe 2.5.65593",
+                "fullName": "Source Han Sans SC",
+                "mimeType": "font/otf",
+                "copyright": "© 2014, 2015, 2018 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.",
+                "familyName": "Source Han Sans SC",
+                "subfamilyName": "Regular",
+                "postscriptName": "SourceHanSansSC-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "b116bda7-6108-49f4-b146-7815e0f4dcb2",
+            "name": "Futura Bold.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 17268,
+            "type": "FONT",
+            "uploaded": "2022-11-10T23:06:15.796Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b116bda7-6108-49f4-b146-7815e0f4dcb2/source",
+            "uploader": {
+                "id": "70b03803-c0e8-4a90-bd8a-1574b725ecbc",
+                "fullName": "Neeraj kumar",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Futura-Bold",
+                "version": "OTF 1.0;PS 001.003;Core 1.0.22",
+                "fullName": "Futura-Bold",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 1987, 1991, 1993 Adobe Systems Incorporated.  All Rights Reserved.Futura is a registered trademark of Fundicion Tipografica Neufville S. A.",
+                "familyName": "Futura Book",
+                "subfamilyName": "Bold",
+                "postscriptName": "Futura-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "f80ba89b-d090-4adf-a1f8-7c777e4db768",
+            "name": "Futura Medium.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 23672,
+            "type": "FONT",
+            "uploaded": "2022-11-10T23:06:15.796Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/f80ba89b-d090-4adf-a1f8-7c777e4db768/source",
+            "uploader": {
+                "id": "70b03803-c0e8-4a90-bd8a-1574b725ecbc",
+                "fullName": "Neeraj kumar",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Futura",
+                "version": "001.002",
+                "fullName": "Futura",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 1987, 1991, 1993 Adobe Systems Incorporated.  All Rights Reserved.Futura is a registered trademark of Fundicion Tipografica Neufville S. A.",
+                "familyName": "Futura",
+                "subfamilyName": "Medium",
+                "postscriptName": "Futura"
+            },
+            "active": true
+        },
+        {
+            "id": "fe249097-79f5-40d7-8711-7d9f79fd031b",
+            "name": "Zack and Sarah.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 15888,
+            "type": "FONT",
+            "uploaded": "2022-08-15T03:32:13.969Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/fe249097-79f5-40d7-8711-7d9f79fd031b/source",
+            "uploader": {
+                "id": "7da1a0e0-b74b-4d6c-829b-7a123834f696",
+                "fullName": "NikhitaNJ_r2int",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Zack and Sarah",
+                "version": "Version 1.00 June 15, 2013, initial release",
+                "fullName": "Zack and Sarah",
+                "mimeType": "font/ttf",
+                "copyright": "Made with Scanahand. Copyright © FontPanda.com 2013. All Rights Reserved.",
+                "familyName": "Zack and Sarah",
+                "subfamilyName": "Regular",
+                "postscriptName": "ZackandSarah"
+            },
+            "active": true
+        },
+        {
+            "id": "57476a10-f9f6-47a2-a537-a512ee632a60",
+            "name": "ShellHeavy.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 80768,
+            "type": "FONT",
+            "uploaded": "2022-06-29T18:14:02.922Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/57476a10-f9f6-47a2-a537-a512ee632a60/source",
+            "uploader": {
+                "id": "d158a3f0-c820-44e3-be17-80888fee3d7c",
+                "fullName": "Gabe Turoczi",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "ShellHeavy",
+                "version": "Version 1.007",
+                "fullName": "ShellHeavy",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (URW), Copyright 2018 by URW Type Foundry GmbH. All rights reserved.",
+                "familyName": "ShellHeavy",
+                "subfamilyName": "Regular",
+                "postscriptName": "ShellHeavy"
+            },
+            "active": true
+        },
+        {
+            "id": "f8b9adba-cecd-4307-abc7-288bbf2e5895",
+            "name": "ShellBook.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 79340,
+            "type": "FONT",
+            "uploaded": "2022-06-29T18:14:02.922Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/f8b9adba-cecd-4307-abc7-288bbf2e5895/source",
+            "uploader": {
+                "id": "d158a3f0-c820-44e3-be17-80888fee3d7c",
+                "fullName": "Gabe Turoczi",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "ShellBook",
+                "version": "Version 1.007",
+                "fullName": "ShellBook",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (URW), Copyright 2018 by URW Type Foundry GmbH. All rights reserved.",
+                "familyName": "ShellBook",
+                "subfamilyName": "Regular",
+                "postscriptName": "ShellBook"
+            },
+            "active": true
+        },
+        {
+            "id": "413e16ed-9f56-4b19-a7ff-56147dbbd7c9",
+            "name": "ShellBold.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 82928,
+            "type": "FONT",
+            "uploaded": "2022-06-16T17:31:13.388Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/413e16ed-9f56-4b19-a7ff-56147dbbd7c9/source",
+            "uploader": {
+                "id": "d158a3f0-c820-44e3-be17-80888fee3d7c",
+                "fullName": "Gabe Turoczi",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "ShellBold",
+                "version": "Version 1.007",
+                "fullName": "ShellBold",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (URW), Copyright 2018 by URW Type Foundry GmbH. All rights reserved.",
+                "familyName": "ShellBold",
+                "subfamilyName": "Regular",
+                "postscriptName": "ShellBold"
+            },
+            "active": true
+        },
+        {
+            "id": "3da83656-43c0-49b2-a9d5-8a881f408f0b",
+            "name": "Austein.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 49308,
+            "type": "FONT",
+            "uploaded": "2022-05-25T23:18:35.552Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/3da83656-43c0-49b2-a9d5-8a881f408f0b/source",
+            "uploader": {
+                "id": "bebb2f49-7f56-40b0-8475-48a4e70b993e",
+                "fullName": "Lance r2-internal",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Austein Script",
+                "version": "Version 1.000",
+                "fullName": "Austein Script",
+                "mimeType": "font/ttf",
+                "copyright": null,
+                "familyName": "Austein Script",
+                "subfamilyName": "Regular",
+                "postscriptName": "Austein-Script"
+            },
+            "active": false
+        },
+        {
+            "id": "b10d782a-7a54-46bc-acb2-e742b325bd75",
+            "name": "0650.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 62404,
+            "type": "FONT",
+            "uploaded": "2022-04-26T04:03:08.177Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b10d782a-7a54-46bc-acb2-e742b325bd75/source",
+            "uploader": {
+                "id": "9de7b73f-26fe-4a7e-9abc-c75da610574b",
+                "fullName": "PavithraB- Admin",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Calibre-Bold",
+                "version": "Version 1.002;PS 001.001;hotconv 1.0.57;makeotf.lib2.0.21895",
+                "fullName": "Calibre-Bold",
+                "mimeType": "font/ttf",
+                "copyright": "© 2011 Klim Type Foundry. All rights reserved.",
+                "familyName": "Calibre Bold",
+                "subfamilyName": "Regular",
+                "postscriptName": "Calibre-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "1b32bd11-b62b-4aed-9066-dee1ed81c2aa",
+            "name": "Heebo-Regular.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 33040,
+            "type": "FONT",
+            "uploaded": "2022-03-16T03:30:38.589Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/1b32bd11-b62b-4aed-9066-dee1ed81c2aa/source",
+            "uploader": {
+                "id": "f0228fec-f48e-461d-a2f6-30f293229990",
+                "fullName": "Logan.McKenzie",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Heebo Regular",
+                "version": "Version 3.001",
+                "fullName": "Heebo Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2014 The Heebo Project Authors (https://github.com/OdedEzer/heebo)",
+                "familyName": "Heebo",
+                "subfamilyName": "Regular",
+                "postscriptName": "Heebo-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "ea368f9e-9ed8-4708-94d8-21b5b081d6e7",
+            "name": "Countryside-YdKj.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 254828,
+            "type": "FONT",
+            "uploaded": "2022-02-17T23:19:56.949Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/ea368f9e-9ed8-4708-94d8-21b5b081d6e7/source",
+            "uploader": {
+                "id": "e2ed6565-e388-4663-a469-c544810c0deb",
+                "fullName": "Nikhita.NJ@invenco.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Countryside",
+                "version": "Version 1.000",
+                "fullName": "Countryside",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2018 by Billy Argel. All rights reserved.",
+                "familyName": "Countryside",
+                "subfamilyName": "Regular",
+                "postscriptName": "Countryside"
+            },
+            "active": true
+        },
+        {
+            "id": "c82d458f-d067-4c43-930a-ec79487e17ed",
+            "name": "MeathFLF.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 43148,
+            "type": "FONT",
+            "uploaded": "2022-02-17T22:27:33.437Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/c82d458f-d067-4c43-930a-ec79487e17ed/source",
+            "uploader": {
+                "id": "e2ed6565-e388-4663-a469-c544810c0deb",
+                "fullName": "Nikhita.NJ@invenco.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "MeathFLF",
+                "version": "1.0",
+                "fullName": "MeathFLF",
+                "mimeType": "font/ttf",
+                "copyright": "Meath FLF, 4.1 Copyright Casady & Greene, Inc. 1988-92 All rights reserved.",
+                "familyName": "MeathFLF",
+                "subfamilyName": "Regular",
+                "postscriptName": "MeathFLF"
+            },
+            "active": true
+        },
+        {
+            "id": "9a01f7da-7964-4f28-9474-7d4db85723fb",
+            "name": "Secuela-Regular.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 245276,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.820Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/9a01f7da-7964-4f28-9474-7d4db85723fb/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Secuela Regular",
+                "version": "Version 1.787",
+                "fullName": "Secuela Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2018 by deFharo. All rights reserved.",
+                "familyName": "Secuela",
+                "subfamilyName": "Regular",
+                "postscriptName": "Secuela-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "aee66082-a0ac-49ce-b0bd-19052a76cdc8",
+            "name": "Secuela-BoldItalic.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 167732,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.609Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/aee66082-a0ac-49ce-b0bd-19052a76cdc8/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Secuela Bold Italic",
+                "version": "Version 1.708;rv103",
+                "fullName": "Secuela Bold Italic",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2018 by deFharo. All rights reserved.",
+                "familyName": "Secuela",
+                "subfamilyName": "Bold Italic",
+                "postscriptName": "Secuela-BoldItalic"
+            },
+            "active": true
+        },
+        {
+            "id": "119412b6-5183-47b7-8c01-6e50621bd6f1",
+            "name": "Secuela-Bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 245252,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.556Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/119412b6-5183-47b7-8c01-6e50621bd6f1/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Secuela Bold",
+                "version": "Version 1.787",
+                "fullName": "Secuela Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2018 by deFharo. All rights reserved.",
+                "familyName": "Secuela",
+                "subfamilyName": "Bold",
+                "postscriptName": "Secuela-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "b3776ab6-72a8-41ef-a55a-63feb873da98",
+            "name": "Secuela-Italic.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 167616,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.554Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b3776ab6-72a8-41ef-a55a-63feb873da98/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Secuela Italic",
+                "version": "Version 1.708;rv103",
+                "fullName": "Secuela Italic",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2018 by deFharo. All rights reserved.",
+                "familyName": "Secuela",
+                "subfamilyName": "Italic",
+                "postscriptName": "Secuela-Italic"
+            },
+            "active": true
+        },
+        {
+            "id": "48e0f4b8-5ee3-488b-9a17-26c7f07e4ef6",
+            "name": "LSANSI.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 65412,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.509Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/48e0f4b8-5ee3-488b-9a17-26c7f07e4ef6/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Lucida Sans Italic",
+                "version": "Version 1.67",
+                "fullName": "Lucida Sans Italic",
+                "mimeType": "font/ttf",
+                "copyright": "© 1991 Bigelow & Holmes Inc. All Rights Reserved. © 1990-1991 Type Solutions, Inc. All Rights Reserved.",
+                "familyName": "Lucida Sans",
+                "subfamilyName": "Italic",
+                "postscriptName": "LucidaSans-Italic"
+            },
+            "active": true
+        },
+        {
+            "id": "948f581a-c546-4b7f-bb8e-beda3577b0b1",
+            "name": "LSANSD.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 59976,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.408Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/948f581a-c546-4b7f-bb8e-beda3577b0b1/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Lucida Sans Demibold Roman",
+                "version": "Version 1.67",
+                "fullName": "Lucida Sans Demibold Roman",
+                "mimeType": "font/ttf",
+                "copyright": "© 1991 Bigelow & Holmes Inc. All Rights Reserved. © 1990-1991 Type Solutions, Inc. All Rights Reserved.",
+                "familyName": "Lucida Sans",
+                "subfamilyName": "Demibold Roman",
+                "postscriptName": "LucidaSans-Demi"
+            },
+            "active": true
+        },
+        {
+            "id": "2bc82506-11d5-4f01-8458-6ff2b3a9fe71",
+            "name": "LSANSDI.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 66320,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.403Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/2bc82506-11d5-4f01-8458-6ff2b3a9fe71/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Lucida Sans Demibold Italic",
+                "version": "Version 1.67",
+                "fullName": "Lucida Sans Demibold Italic",
+                "mimeType": "font/ttf",
+                "copyright": "© 1991 by Bigelow & Holmes Inc. All Rights Reserved. © 1990-1991 Type Solutions, Inc. All Rights Reserved.",
+                "familyName": "Lucida Sans",
+                "subfamilyName": "Demibold Italic",
+                "postscriptName": "LucidaSans-DemiItalic"
+            },
+            "active": true
+        },
+        {
+            "id": "268daf34-2eb9-4287-8179-c132d21a27c6",
+            "name": "LSANS.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 64608,
+            "type": "FONT",
+            "uploaded": "2022-02-14T22:52:04.087Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/268daf34-2eb9-4287-8179-c132d21a27c6/source",
+            "uploader": {
+                "id": "9c6b4101-5efb-4d60-9911-c079bfbb8ff1",
+                "fullName": "Stephen Dodson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Lucida Sans Regular",
+                "version": "Version 1.67",
+                "fullName": "Lucida Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "© 1991 Bigelow & Holmes Inc. Pat. Des. 289,420. All Rights Reserved. © 1990-1991 Type Solutions, Inc. All Rights Reserved.",
+                "familyName": "Lucida Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "LucidaSans"
+            },
+            "active": true
+        },
+        {
+            "id": "7961b065-477d-4305-af42-ed49c7dcc1df",
+            "name": "OpenSans-Regular.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 111540,
+            "type": "FONT",
+            "uploaded": "2021-12-16T23:23:49.153Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/7961b065-477d-4305-af42-ed49c7dcc1df/source",
+            "uploader": {
+                "id": "4539e447-90e8-457a-8a52-24b53faabe39",
+                "fullName": "Jinusha Joseph",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Open Sans Regular",
+                "version": "Version 1.10",
+                "fullName": "Open Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Digitized data copyright © 2010-2011, Google Corporation.",
+                "familyName": "Open Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "OpenSans-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "9fe83e9a-40a9-4e9a-999b-f1f4cf59a636",
+            "name": "Saira-Bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 97336,
+            "type": "FONT",
+            "uploaded": "2021-12-16T07:28:18.470Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/9fe83e9a-40a9-4e9a-999b-f1f4cf59a636/source",
+            "uploader": {
+                "id": "356dab09-1af9-485b-a767-39161aebcf2a",
+                "fullName": "Cory",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Saira Bold",
+                "version": "Version 0.072",
+                "fullName": "Saira Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2016 The Saira Project Authors (omnibus.type@gmail.com), with reserved font name \"Saira\".",
+                "familyName": "Saira",
+                "subfamilyName": "Bold",
+                "postscriptName": "Saira-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "437036c5-fce0-49b3-9bd7-33106f018687",
+            "name": "0580.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 137460,
+            "type": "FONT",
+            "uploaded": "2021-11-02T10:50:39.021Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/437036c5-fce0-49b3-9bd7-33106f018687/source",
+            "uploader": {
+                "id": "24ed54b6-2fa9-4977-b7a5-8855a53ec9d2",
+                "fullName": "Jitender Kumar",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Ronnia-SemiBoldItalic",
+                "version": "Version 001.000",
+                "fullName": "Ronnia-SemiBoldItalic",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2006 by type-together. All rights reserved.",
+                "familyName": "Ronnia SB",
+                "subfamilyName": "SemiBold Italic",
+                "postscriptName": "Ronnia-SemiBoldItalic"
+            },
+            "active": true
+        },
+        {
+            "id": "f69f4b92-5167-42aa-a517-4286556d89c8",
+            "name": "0561.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 145616,
+            "type": "FONT",
+            "uploaded": "2021-11-02T10:50:39.021Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/f69f4b92-5167-42aa-a517-4286556d89c8/source",
+            "uploader": {
+                "id": "24ed54b6-2fa9-4977-b7a5-8855a53ec9d2",
+                "fullName": "Jitender Kumar",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Ronnia-SemiBold",
+                "version": "Version 001.000",
+                "fullName": "Ronnia-SemiBold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2006 by TypeTogether. All rights reserved.",
+                "familyName": "Ronnia SB",
+                "subfamilyName": "SemiBold",
+                "postscriptName": "Ronnia-SemiBold"
+            },
+            "active": true
+        },
+        {
+            "id": "261be264-4f74-433f-9489-6275ea14aeb8",
+            "name": "OpenSans-SemiBold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 129684,
+            "type": "FONT",
+            "uploaded": "2021-09-26T23:56:18.139Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/261be264-4f74-433f-9489-6275ea14aeb8/source",
+            "uploader": {
+                "id": "0844e41e-d5fe-4ee5-b7f0-191a610b2006",
+                "fullName": "Ragavi Ashok",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Open Sans SemiBold",
+                "version": "Version 3.000",
+                "fullName": "Open Sans SemiBold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2020 The Open Sans Project Authors (https://github.com/googlefonts/opensans)",
+                "familyName": "Open Sans SemiBold",
+                "subfamilyName": "Regular",
+                "postscriptName": "OpenSans-SemiBold"
+            },
+            "active": true
+        },
+        {
+            "id": "d488c397-db86-4327-ae06-f2ae37a5011f",
+            "name": "Optima_BoldOblique.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 43664,
+            "type": "FONT",
+            "uploaded": "2021-09-26T23:50:12.805Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/d488c397-db86-4327-ae06-f2ae37a5011f/source",
+            "uploader": {
+                "id": "0844e41e-d5fe-4ee5-b7f0-191a610b2006",
+                "fullName": "Ragavi Ashok",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Optima BoldOblique",
+                "version": "Macromedia Fontographer 4.1 05/05/99",
+                "fullName": "Optima BoldOblique",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 1985, 1987, 1988, 1989, 1991, 1995 Adobe Systems Incorporated.  All Rights Reserved.Optima is a trademark of Linotype-Hell AG and/or its subsidiaries.",
+                "familyName": "Optima",
+                "subfamilyName": "BoldOblique",
+                "postscriptName": "OptimaBoldOblique"
+            },
+            "active": true
+        },
+        {
+            "id": "430eca70-706b-4b4d-b361-8cf9bbb98047",
+            "name": "Mary_Ann-Medium.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 91400,
+            "type": "FONT",
+            "uploaded": "2021-09-08T04:10:31.664Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/430eca70-706b-4b4d-b361-8cf9bbb98047/source",
+            "uploader": {
+                "id": "57318e44-f5a1-4e1e-b105-7ad031d61670",
+                "fullName": "Chris Clarkson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "MaryAnn-Medium",
+                "version": "Version 1.000",
+                "fullName": "MaryAnn-Medium",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 2013 by Fontsmith Ltd. All rights reserved.",
+                "familyName": "Mary Ann Medium",
+                "subfamilyName": "Regular",
+                "postscriptName": "MaryAnn-Medium"
+            },
+            "active": true
+        },
+        {
+            "id": "686a5b3a-247d-4b6c-b091-606cad0c7db8",
+            "name": "GreatVibes-Regular.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 52928,
+            "type": "FONT",
+            "uploaded": "2021-06-23T04:30:36.394Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/686a5b3a-247d-4b6c-b091-606cad0c7db8/source",
+            "uploader": {
+                "id": "b2a62465-23bf-4fad-bd2e-896dd5fec6c3",
+                "fullName": "Joy",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Great Vibes",
+                "version": "Version 1.001",
+                "fullName": "Great Vibes",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 2012 TypeSETit, LLC (typesetit@att.net),\rwith Reserved Font Name \"Great Vibes\"",
+                "familyName": "Great Vibes",
+                "subfamilyName": "Regular",
+                "postscriptName": "GreatVibes-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "414e5fa9-0bb9-4d9c-bf7e-1ab93b5ff785",
+            "name": "TitilliumWeb-Regular.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 57392,
+            "type": "FONT",
+            "uploaded": "2021-06-08T03:04:16.924Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/414e5fa9-0bb9-4d9c-bf7e-1ab93b5ff785/source",
+            "uploader": {
+                "id": "57318e44-f5a1-4e1e-b105-7ad031d61670",
+                "fullName": "Chris Clarkson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Titillium Web Regular",
+                "version": "Version 1.002;PS 57.000;hotconv 1.0.70;makeotf.lib2.5.55311",
+                "fullName": "Titillium Web Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2009-2011 by Accademia di Belle Arti di Urbino and students of MA course of Visual design. Some rights reserved.",
+                "familyName": "Titillium Web",
+                "subfamilyName": "Regular",
+                "postscriptName": "TitilliumWeb-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "80926e9c-379f-4acb-8816-a6ac62dece78",
+            "name": "Saira-SemiBold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 82412,
+            "type": "FONT",
+            "uploaded": "2021-06-08T03:04:16.924Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/80926e9c-379f-4acb-8816-a6ac62dece78/source",
+            "uploader": {
+                "id": "57318e44-f5a1-4e1e-b105-7ad031d61670",
+                "fullName": "Chris Clarkson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Saira SemiBold",
+                "version": "Version 1.100",
+                "fullName": "Saira SemiBold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2020 The Saira Project Authors (https://github.com/Omnibus-Type/Saira)",
+                "familyName": "Saira SemiBold",
+                "subfamilyName": "Regular",
+                "postscriptName": "Saira-SemiBold"
+            },
+            "active": true
+        },
+        {
+            "id": "fed74997-41d4-4ae9-a99c-39996f90c20d",
+            "name": "Saira_Condensed-Bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 82500,
+            "type": "FONT",
+            "uploaded": "2021-06-08T03:04:16.924Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/fed74997-41d4-4ae9-a99c-39996f90c20d/source",
+            "uploader": {
+                "id": "57318e44-f5a1-4e1e-b105-7ad031d61670",
+                "fullName": "Chris Clarkson",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Saira Condensed Bold",
+                "version": "Version 1.100",
+                "fullName": "Saira Condensed Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2020 The Saira Project Authors (https://github.com/Omnibus-Type/Saira)",
+                "familyName": "Saira Condensed",
+                "subfamilyName": "Bold",
+                "postscriptName": "SairaCondensed-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "853f5e4d-85c4-45a7-b8e2-3f9185b7d7b8",
+            "name": "Roboto-Light.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 170012,
+            "type": "FONT",
+            "uploaded": "2021-05-30T22:29:44.018Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/853f5e4d-85c4-45a7-b8e2-3f9185b7d7b8/source",
+            "uploader": {
+                "id": "3d412649-a3e1-46e8-a54a-af53d8fb2a65",
+                "fullName": "Melissab",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Roboto Light",
+                "version": "Version 2.137; 2017",
+                "fullName": "Roboto Light",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2011 Google Inc. All Rights Reserved.",
+                "familyName": "Roboto Light",
+                "subfamilyName": "Regular",
+                "postscriptName": "Roboto-Light"
+            },
+            "active": true
+        },
+        {
+            "id": "b587f6b1-d643-4450-8dde-0227bf0132e6",
+            "name": "Roboto-Medium.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 171656,
+            "type": "FONT",
+            "uploaded": "2021-05-30T22:29:44.018Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b587f6b1-d643-4450-8dde-0227bf0132e6/source",
+            "uploader": {
+                "id": "3d412649-a3e1-46e8-a54a-af53d8fb2a65",
+                "fullName": "Melissab",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Roboto Medium",
+                "version": "Version 2.137; 2017",
+                "fullName": "Roboto Medium",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2011 Google Inc. All Rights Reserved.",
+                "familyName": "Roboto Medium",
+                "subfamilyName": "Regular",
+                "postscriptName": "Roboto-Medium"
+            },
+            "active": false
+        },
+        {
+            "id": "d2cf4246-4baa-4051-979a-54069e337080",
+            "name": "OTF_Handwriting_Standard.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 22888,
+            "type": "FONT",
+            "uploaded": "2021-05-30T22:29:44.018Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/d2cf4246-4baa-4051-979a-54069e337080/source",
+            "uploader": {
+                "id": "3d412649-a3e1-46e8-a54a-af53d8fb2a65",
+                "fullName": "Melissab",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "OTF Handwriting Standard Regular",
+                "version": "Version 2 ",
+                "fullName": "OTF Handwriting Standard Regular",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 2016, root",
+                "familyName": "OTF Handwriting Standard",
+                "subfamilyName": "Standard",
+                "postscriptName": "OTF Handwriting Standard"
+            },
+            "active": true
+        },
+        {
+            "id": "e4e40e53-0ffd-4f7b-bf75-c47d375b1475",
+            "name": "AkzidenzGroteskStdconverted-XBd.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 41216,
+            "type": "FONT",
+            "uploaded": "2021-05-25T04:04:24.675Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/e4e40e53-0ffd-4f7b-bf75-c47d375b1475/source",
+            "uploader": {
+                "id": "0844e41e-d5fe-4ee5-b7f0-191a610b2006",
+                "fullName": "Ragavi Ashok",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "AkzidenzGroteskStd-XBd",
+                "version": "Version 001.000;Core 1.0.01;otf.5.02.2291;15.06W",
+                "fullName": "AkzidenzGroteskStd-XBd",
+                "mimeType": "font/ttf",
+                "copyright": "© Copyright 2006 Berthold LLC. All Rights Reserved. This font software computer program is the property of Berthold. You may not reproduce, modify, adapt, translate, alter nor create derivative works of the font software. You may not reverse engineer, decompile, decrypt, disassemble, nor seek to discover the source code of the font software.",
+                "familyName": "Akzidenz-Grotesk Std ExtraBold",
+                "subfamilyName": "Regular",
+                "postscriptName": "AkzidenzGroteskStd-XBd"
+            },
+            "active": true
+        },
+        {
+            "id": "88964643-9dc9-4221-913f-2b204f415617",
+            "name": "AkzidenzGroteskStdconverted-XBdCn.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 36200,
+            "type": "FONT",
+            "uploaded": "2021-05-25T04:00:53.372Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/88964643-9dc9-4221-913f-2b204f415617/source",
+            "uploader": {
+                "id": "0844e41e-d5fe-4ee5-b7f0-191a610b2006",
+                "fullName": "Ragavi Ashok",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "AkzidenzGroteskStd-XBdCn",
+                "version": "Version 001.000;Core 1.0.01;otf.5.02.2291;15.06W",
+                "fullName": "AkzidenzGroteskStd-XBdCn",
+                "mimeType": "font/ttf",
+                "copyright": "© Copyright 2006 Berthold LLC. All Rights Reserved.",
+                "familyName": "Akzidenz-Grotesk Std XBd Cnd",
+                "subfamilyName": "Regular",
+                "postscriptName": "AkzidenzGroteskStd-XBdCn"
+            },
+            "active": true
+        },
+        {
+            "id": "45990030-7e0b-4b0a-818a-3744b24710c6",
+            "name": "AkzidenzGroteskStd-XBd.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 50736,
+            "type": "FONT",
+            "uploaded": "2021-05-25T02:57:08.266Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/45990030-7e0b-4b0a-818a-3744b24710c6/source",
+            "uploader": {
+                "id": "0844e41e-d5fe-4ee5-b7f0-191a610b2006",
+                "fullName": "Ragavi Ashok",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "AkzidenzGroteskStd-XBd",
+                "version": "Version 001.000;Core 1.0.01;otf.5.02.2291;15.06W",
+                "fullName": "AkzidenzGroteskStd-XBd",
+                "mimeType": "font/otf",
+                "copyright": "© Copyright 2006 Berthold LLC. All Rights Reserved. This font software computer program is the property of Berthold. You may not reproduce, modify, adapt, translate, alter nor create derivative works of the font software. You may not reverse engineer, decompile, decrypt, disassemble, nor seek to discover the source code of the font software.",
+                "familyName": "Akzidenz-Grotesk Std ExtraBold",
+                "subfamilyName": "Regular",
+                "postscriptName": "AkzidenzGroteskStd-XBd"
+            },
+            "active": true
+        },
+        {
+            "id": "b05e2d25-0ac0-494b-8286-7ad2f3d880a0",
+            "name": "AkzidenzGroteskStd-XBdCn.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 43536,
+            "type": "FONT",
+            "uploaded": "2021-05-25T02:56:45.400Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b05e2d25-0ac0-494b-8286-7ad2f3d880a0/source",
+            "uploader": {
+                "id": "0844e41e-d5fe-4ee5-b7f0-191a610b2006",
+                "fullName": "Ragavi Ashok",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "AkzidenzGroteskStd-XBdCn",
+                "version": "Version 001.000;Core 1.0.01;otf.5.02.2291;15.06W",
+                "fullName": "AkzidenzGroteskStd-XBdCn",
+                "mimeType": "font/otf",
+                "copyright": "© Copyright 2006 Berthold LLC. All Rights Reserved.",
+                "familyName": "Akzidenz-Grotesk Std XBd Cnd",
+                "subfamilyName": "Regular",
+                "postscriptName": "AkzidenzGroteskStd-XBdCn"
+            },
+            "active": true
+        },
+        {
+            "id": "64580137-61fc-4c8d-95ac-4fe178e13204",
+            "name": "AkzidenzGroteskBE-XBdCn.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 24784,
+            "type": "FONT",
+            "uploaded": "2021-05-24T23:57:42.819Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/64580137-61fc-4c8d-95ac-4fe178e13204/source",
+            "uploader": {
+                "id": "0844e41e-d5fe-4ee5-b7f0-191a610b2006",
+                "fullName": "Ragavi Ashok",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "AkzidenzGroteskBE-XBdCn",
+                "version": "OTF 1.0;PS 001.001;Core 1.0.22",
+                "fullName": "AkzidenzGroteskBE-XBdCn",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 1991, 1998 Adobe Systems Incorporated.  All Rights Reserved.Berthold Akzidenz-Grotesk is either a registered trademark or trademark of Berthold Types Limited in the United States and/or other countries.",
+                "familyName": "Akzidenz Grotesk BE XBdCn",
+                "subfamilyName": "Regular",
+                "postscriptName": "AkzidenzGroteskBE-XBdCn"
+            },
+            "active": false
+        },
+        {
+            "id": "b9fcbf68-61c1-4373-afc3-24f6683eae1c",
+            "name": "Garlando.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 81056,
+            "type": "FONT",
+            "uploaded": "2021-05-06T12:53:07.207Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b9fcbf68-61c1-4373-afc3-24f6683eae1c/source",
+            "uploader": {
+                "id": "4539e447-90e8-457a-8a52-24b53faabe39",
+                "fullName": "Jinusha Joseph",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Garlando",
+                "version": "Version 1.000; Arendxstd",
+                "fullName": "Garlando",
+                "mimeType": "font/ttf",
+                "copyright": null,
+                "familyName": "Garlando",
+                "subfamilyName": "Regular",
+                "postscriptName": "Garlando"
+            },
+            "active": true
+        },
+        {
+            "id": "f323a434-7229-4eae-b767-52f136f5bcd4",
+            "name": "Guadalupe Italic.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 36176,
+            "type": "FONT",
+            "uploaded": "2021-05-06T12:53:07.207Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/f323a434-7229-4eae-b767-52f136f5bcd4/source",
+            "uploader": {
+                "id": "4539e447-90e8-457a-8a52-24b53faabe39",
+                "fullName": "Jinusha Joseph",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Guadalupe Italic",
+                "version": "Version 1.00;January 9, 2021;FontCreator 12.0.0.2563 64-bit",
+                "fullName": "Guadalupe Italic",
+                "mimeType": "font/ttf",
+                "copyright": "Typeface © (Kong Font). 2020. All Rights Reserved (kongvector@gmail.com).",
+                "familyName": "Guadalupe Italic",
+                "subfamilyName": "Regular",
+                "postscriptName": "Guadalupe-Italic"
+            },
+            "active": true
+        },
+        {
+            "id": "b6f89874-219d-4da5-92c0-48da9639f341",
+            "name": "NunitoSans-Regular.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 91460,
+            "type": "FONT",
+            "uploaded": "2021-04-08T04:40:18.451Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b6f89874-219d-4da5-92c0-48da9639f341/source",
+            "uploader": {
+                "id": "24ed54b6-2fa9-4977-b7a5-8855a53ec9d2",
+                "fullName": "Jitender Kumar",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Nunito Sans Regular",
+                "version": "Version 2.001",
+                "fullName": "Nunito Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2016 The Nunito Project Authors (contact@sansoxygen.com)",
+                "familyName": "Nunito Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "NunitoSans-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "18e35df1-5704-404f-bdb2-f78d02f192b0",
+            "name": "NunitoSans-Regular",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": null,
+            "type": "FONT",
+            "uploaded": "2021-04-08T02:48:50.416Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/18e35df1-5704-404f-bdb2-f78d02f192b0/source",
+            "uploader": {
+                "id": "0efb0f64-a6df-4184-9fc9-cb43dc16c834",
+                "fullName": "Courtesy Invenco",
+                "company": {
+                    "id": null,
+                    "name": null
+                }
+            },
+            "properties": {
+                "face": "Nunito Sans Regular",
+                "version": "Version 2.001",
+                "fullName": "Nunito Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2016 The Nunito Project Authors (contact@sansoxygen.com)",
+                "familyName": "Nunito Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "NunitoSans-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "980f00aa-a880-40f2-bb4d-e532fec1aae9",
+            "name": "NunitoSans-Regular.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 91460,
+            "type": "FONT",
+            "uploaded": "2021-04-08T01:39:34.910Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/980f00aa-a880-40f2-bb4d-e532fec1aae9/source",
+            "uploader": {
+                "id": "24ed54b6-2fa9-4977-b7a5-8855a53ec9d2",
+                "fullName": "Jitender Kumar",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Nunito Sans Regular",
+                "version": "Version 2.001",
+                "fullName": "Nunito Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright 2016 The Nunito Project Authors (contact@sansoxygen.com)",
+                "familyName": "Nunito Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "NunitoSans-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "62a58f86-6389-4c94-b831-a63a734c9c5d",
+            "name": "1001_converted.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 111540,
+            "type": "FONT",
+            "uploaded": "2021-02-18T01:38:33.597Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/62a58f86-6389-4c94-b831-a63a734c9c5d/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Open Sans Regular",
+                "version": "Version 1.10",
+                "fullName": "Open Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Digitized data copyright © 2010-2011, Google Corporation.",
+                "familyName": "Open Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "OpenSans-Regular"
+            },
+            "active": false
+        },
+        {
+            "id": "0fe314c7-b0ef-4a1e-8e60-fe5e9e1b964e",
+            "name": "OpenSans_Regular_converted.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 111540,
+            "type": "FONT",
+            "uploaded": "2021-02-17T04:02:46.254Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/0fe314c7-b0ef-4a1e-8e60-fe5e9e1b964e/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Open Sans Regular",
+                "version": "Version 1.10",
+                "fullName": "Open Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Digitized data copyright © 2010-2011, Google Corporation.",
+                "familyName": "Open Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "OpenSans-Regular"
+            },
+            "active": false
+        },
+        {
+            "id": "81e429cf-3205-499b-b385-e08cee3f6546",
+            "name": "JOYTTF Philippine Bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 26148,
+            "type": "FONT",
+            "uploaded": "2021-02-05T02:46:32.504Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/81e429cf-3205-499b-b385-e08cee3f6546/source",
+            "uploader": {
+                "id": "99953477-71fe-4fc1-ae12-452840045aa2",
+                "fullName": "Joy Querido",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Philippine Bold",
+                "version": "Version 001.000 ",
+                "fullName": "Philippine Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2016, Valentin FRANCOIS (www.valentinfrancois.fr)\nFree for personal and commercial use.\nCredits are of course appreciated.",
+                "familyName": "Philippine",
+                "subfamilyName": "Bold",
+                "postscriptName": "Philippine-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "21c9d554-2bb6-4575-97b8-7fc6e1b13658",
+            "name": "JOYOTF GreatVibes-Regular.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 52928,
+            "type": "FONT",
+            "uploaded": "2021-02-05T02:46:11.455Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/21c9d554-2bb6-4575-97b8-7fc6e1b13658/source",
+            "uploader": {
+                "id": "99953477-71fe-4fc1-ae12-452840045aa2",
+                "fullName": "Joy Querido",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Great Vibes",
+                "version": "Version 1.001",
+                "fullName": "Great Vibes",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 2012 TypeSETit, LLC (typesetit@att.net),\rwith Reserved Font Name \"Great Vibes\"",
+                "familyName": "Great Vibes",
+                "subfamilyName": "Regular",
+                "postscriptName": "GreatVibes-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "41e20ea7-ea43-435c-95cd-15b86e6efc18",
+            "name": "adamwarrenpro-bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 35968,
+            "type": "FONT",
+            "uploaded": "2021-02-04T01:08:14.733Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/41e20ea7-ea43-435c-95cd-15b86e6efc18/source",
+            "uploader": {
+                "id": "8d1ab4a4-d056-421d-9d25-b1e2d7587b50",
+                "fullName": "Linta b",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Adam Warren pro Bold",
+                "version": "Version 1.00 February 12, 2011, initial release",
+                "fullName": "Adam Warren pro Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Typeface © Teabeer Studios. 2011. All Rights Reserved",
+                "familyName": "Adam Warren pro",
+                "subfamilyName": "Bold",
+                "postscriptName": "AdamWarrenpro-Bold"
+            },
+            "active": true
+        },
+        {
+            "id": "90a4bdba-a2d8-4fa6-97ae-8dcf69c06706",
+            "name": "CHERL_converted.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 21496,
+            "type": "FONT",
+            "uploaded": "2021-02-02T21:51:35.758Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/90a4bdba-a2d8-4fa6-97ae-8dcf69c06706/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Cheri Liney",
+                "version": "Macromedia Fontographer 4.1.3 1/18/01",
+                "fullName": "Cheri Liney",
+                "mimeType": "font/ttf",
+                "copyright": "Cheri ©2001, Font•a•licious Fonts.",
+                "familyName": "Cheri Liney",
+                "subfamilyName": "Regular",
+                "postscriptName": "CheriLiney"
+            },
+            "active": true
+        },
+        {
+            "id": "eac51c96-edee-4beb-9324-cd0257b85a59",
+            "name": "CHERL_origin.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 15844,
+            "type": "FONT",
+            "uploaded": "2021-02-02T21:51:35.629Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/eac51c96-edee-4beb-9324-cd0257b85a59/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Cheri Liney",
+                "version": "Macromedia Fontographer 4.1.3 1/18/01",
+                "fullName": "Cheri Liney",
+                "mimeType": "font/ttf",
+                "copyright": "Cheri ©2001, Font•a•licious Fonts.",
+                "familyName": "Cheri Liney",
+                "subfamilyName": "Regular",
+                "postscriptName": "CheriLiney"
+            },
+            "active": true
+        },
+        {
+            "id": "569bf3ff-c9ce-4d69-add4-3538cc101a12",
+            "name": "CHERI_origin.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 9152,
+            "type": "FONT",
+            "uploaded": "2021-02-02T21:51:35.619Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/569bf3ff-c9ce-4d69-add4-3538cc101a12/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Cheri",
+                "version": "Macromedia Fontographer 4.1.3 1/18/01",
+                "fullName": "Cheri",
+                "mimeType": "font/ttf",
+                "copyright": "Cheri ©2001, Font•a•licious Fonts.",
+                "familyName": "Cheri",
+                "subfamilyName": "Regular",
+                "postscriptName": "Cheri"
+            },
+            "active": true
+        },
+        {
+            "id": "bc73b5d5-021a-4c8f-bd3d-c0b71071e291",
+            "name": "CHERI_converted.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 14220,
+            "type": "FONT",
+            "uploaded": "2021-02-02T21:51:35.613Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/bc73b5d5-021a-4c8f-bd3d-c0b71071e291/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Cheri",
+                "version": "Macromedia Fontographer 4.1.3 1/18/01",
+                "fullName": "Cheri",
+                "mimeType": "font/ttf",
+                "copyright": "Cheri ©2001, Font•a•licious Fonts.",
+                "familyName": "Cheri",
+                "subfamilyName": "Regular",
+                "postscriptName": "Cheri"
+            },
+            "active": true
+        },
+        {
+            "id": "ce4b3f0a-60f6-44c9-aed0-147b980f1cf7",
+            "name": "Pumpkin-Stor_converted.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 46196,
+            "type": "FONT",
+            "uploaded": "2021-02-02T21:15:02.955Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/ce4b3f0a-60f6-44c9-aed0-147b980f1cf7/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Pumpkin Story",
+                "version": "Version 1.00;October 1, 2020;FontCreator 11.5.0.2430 32-bit",
+                "fullName": "Pumpkin Story",
+                "mimeType": "font/ttf",
+                "copyright": "Pumpkin Story©(Sronstudio). 2020. All Rights Reserved",
+                "familyName": "Pumpkin Story",
+                "subfamilyName": "Regular",
+                "postscriptName": "PumpkinStory"
+            },
+            "active": true
+        },
+        {
+            "id": "eac7d93b-223c-47ff-a697-65d8aa3517f7",
+            "name": "Easter_here_convert.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 118948,
+            "type": "FONT",
+            "uploaded": "2021-01-29T00:10:52.140Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/eac7d93b-223c-47ff-a697-65d8aa3517f7/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Easters_Here",
+                "version": "Version 001.000 ",
+                "fullName": "Easters_Here",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2019, www.freesvgdesigns.com",
+                "familyName": "Easters_Here",
+                "subfamilyName": "Regular",
+                "postscriptName": "Easters_Here"
+            },
+            "active": true
+        },
+        {
+            "id": "a771a343-a248-4253-8d42-c23b72a85148",
+            "name": "College_squad_convert.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 81568,
+            "type": "FONT",
+            "uploaded": "2021-01-29T00:10:52.130Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/a771a343-a248-4253-8d42-c23b72a85148/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "College Squad",
+                "version": "Version 1.00",
+                "fullName": "College Squad",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2020 by Fontsera",
+                "familyName": "College Squad",
+                "subfamilyName": "Regular",
+                "postscriptName": "CollegeSquadRegular"
+            },
+            "active": true
+        },
+        {
+            "id": "d1be3fe0-a9ad-4a07-beee-699ad39bc41a",
+            "name": "!CRASS ROOTS OFL.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 65824,
+            "type": "FONT",
+            "uploaded": "2021-01-27T21:50:34.136Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/d1be3fe0-a9ad-4a07-beee-699ad39bc41a/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "!CRASSROOTSOFL",
+                "version": "Version 1.000 2007 initial release",
+                "fullName": "!CRASSROOTSOFL",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2007 by !Exclamachine Type Foundry. All rights reserved.",
+                "familyName": "!CRASS ROOTS OFL",
+                "subfamilyName": "Regular",
+                "postscriptName": "!CRASSROOTSOFL"
+            },
+            "active": true
+        },
+        {
+            "id": "93a1cc05-c447-45d7-b406-827fa274dee7",
+            "name": "TAKOYAKI_invalid_format.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 56172,
+            "type": "FONT",
+            "uploaded": "2021-01-27T02:00:50.240Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/93a1cc05-c447-45d7-b406-827fa274dee7/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "TAKOYAKI",
+                "version": "Version 1.00;August 24, 2020;FontCreator 13.0.0.2672 64-bit",
+                "fullName": "TAKOYAKI",
+                "mimeType": "font/ttf",
+                "copyright": "Typeface © (hadjar creative). 2020. All Rights Reserved",
+                "familyName": "TAKOYAKI",
+                "subfamilyName": "Regular",
+                "postscriptName": "TAKOYAKI"
+            },
+            "active": true
+        },
+        {
+            "id": "bf60b81a-1551-4274-9887-f280a7293a3c",
+            "name": "OpenSans-Regular",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": null,
+            "type": "FONT",
+            "uploaded": "2021-01-22T00:39:14.244Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/bf60b81a-1551-4274-9887-f280a7293a3c/source",
+            "uploader": {
+                "id": "0efb0f64-a6df-4184-9fc9-cb43dc16c834",
+                "fullName": "Courtesy Invenco",
+                "company": {
+                    "id": null,
+                    "name": null
+                }
+            },
+            "properties": {
+                "face": "Open Sans Regular",
+                "version": "Version 1.10",
+                "fullName": "Open Sans Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Digitized data copyright © 2010-2011, Google Corporation.",
+                "familyName": "Open Sans",
+                "subfamilyName": "Regular",
+                "postscriptName": "OpenSans-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "53094a1b-4459-4078-b2eb-cbb5dee9b8ab",
+            "name": "Kashima Demo.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 231152,
+            "type": "FONT",
+            "uploaded": "2021-01-21T22:15:59.845Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/53094a1b-4459-4078-b2eb-cbb5dee9b8ab/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Kashima Brush Demo",
+                "version": "Version 1.00;April 28, 2019;FontCreator 11.5.0.2427 64-bit",
+                "fullName": "Kashima Brush Demo",
+                "mimeType": "font/otf",
+                "copyright": "Typeface © Abo daniel 2019. All Rights Reserved",
+                "familyName": "Kashima Brush Demo",
+                "subfamilyName": "Regular",
+                "postscriptName": "KashimaBrushDemo"
+            },
+            "active": true
+        },
+        {
+            "id": "c21d4424-5303-4820-8a95-08b2081f2c94",
+            "name": "SnowtopCaps.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 99948,
+            "type": "FONT",
+            "uploaded": "2021-01-21T20:23:45.419Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/c21d4424-5303-4820-8a95-08b2081f2c94/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "SnowtopCaps",
+                "version": "OTF 1.000;PS 002.001;Core 1.0.29",
+                "fullName": "SnowtopCaps",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) Typographer Mediengestaltung, 2002. All rights reserved.",
+                "familyName": "Snowtop Caps",
+                "subfamilyName": "Regular",
+                "postscriptName": "SnowtopCaps"
+            },
+            "active": false
+        },
+        {
+            "id": "dd718798-3000-4326-bfb6-a2d93804f3a0",
+            "name": "College Squad Regular.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 85084,
+            "type": "FONT",
+            "uploaded": "2021-01-20T20:30:48.476Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/dd718798-3000-4326-bfb6-a2d93804f3a0/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "College Squad",
+                "version": "Version 1.00",
+                "fullName": "College Squad",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2020 by Fontsera",
+                "familyName": "College Squad",
+                "subfamilyName": "Regular",
+                "postscriptName": "CollegeSquadRegular"
+            },
+            "active": true
+        },
+        {
+            "id": "fa733afe-2296-4add-8f04-210aeb90144c",
+            "name": "College Squad Regular.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 85084,
+            "type": "FONT",
+            "uploaded": "2021-01-20T20:30:48.097Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/fa733afe-2296-4add-8f04-210aeb90144c/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "College Squad",
+                "version": "Version 1.00",
+                "fullName": "College Squad",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 2020 by Fontsera",
+                "familyName": "College Squad",
+                "subfamilyName": "Regular",
+                "postscriptName": "CollegeSquadRegular"
+            },
+            "active": true
+        },
+        {
+            "id": "f049e8e6-127d-4581-b132-5c0b44fb8abc",
+            "name": "Easters_Here.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 304704,
+            "type": "FONT",
+            "uploaded": "2021-01-20T09:53:00.045Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/f049e8e6-127d-4581-b132-5c0b44fb8abc/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Easters_Here",
+                "version": "Version 001.000 ",
+                "fullName": "Easters_Here",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 2019, www.freesvgdesigns.com",
+                "familyName": "Easters_Here",
+                "subfamilyName": "Regular",
+                "postscriptName": "Easters_Here"
+            },
+            "active": true
+        },
+        {
+            "id": "406a6e19-72ac-4a7f-a643-691ddd9fe06b",
+            "name": "Easters_Here.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 117584,
+            "type": "FONT",
+            "uploaded": "2021-01-20T01:28:08.003Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/406a6e19-72ac-4a7f-a643-691ddd9fe06b/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Easters_Here",
+                "version": "Version 001.000 ",
+                "fullName": "Easters_Here",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2019, www.freesvgdesigns.com",
+                "familyName": "Easters_Here",
+                "subfamilyName": "Regular",
+                "postscriptName": "Easters_Here"
+            },
+            "active": true
+        },
+        {
+            "id": "da418962-8121-434b-a465-5ae026498467",
+            "name": "Easters_Here.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 304704,
+            "type": "FONT",
+            "uploaded": "2021-01-20T01:28:07.869Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/da418962-8121-434b-a465-5ae026498467/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Easters_Here",
+                "version": "Version 001.000 ",
+                "fullName": "Easters_Here",
+                "mimeType": "font/otf",
+                "copyright": "Copyright (c) 2019, www.freesvgdesigns.com",
+                "familyName": "Easters_Here",
+                "subfamilyName": "Regular",
+                "postscriptName": "Easters_Here"
+            },
+            "active": false
+        },
+        {
+            "id": "39530504-66c4-4c50-8685-444ecade1085",
+            "name": "Bunny Ear.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 58292,
+            "type": "FONT",
+            "uploaded": "2021-01-20T01:20:47.931Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/39530504-66c4-4c50-8685-444ecade1085/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Bunny Hopper Ear",
+                "version": "Version 1.002;Fontself Maker 3.1.2",
+                "fullName": "Bunny Hopper Ear",
+                "mimeType": "font/ttf",
+                "copyright": "Attype Studio",
+                "familyName": "Bunny Hopper Ear",
+                "subfamilyName": "Regular",
+                "postscriptName": "BunnyHopperEarRegular"
+            },
+            "active": false
+        },
+        {
+            "id": "0b1cd89f-45fe-465f-b3c0-16702354f2a9",
+            "name": "MexicanTequila-Italic.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 40088,
+            "type": "FONT",
+            "uploaded": "2021-01-18T21:05:49.696Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/0b1cd89f-45fe-465f-b3c0-16702354f2a9/source",
+            "uploader": {
+                "id": "1e95e8c4-8b8c-4eac-96ad-eae4f990854a",
+                "fullName": "dqiang@hotmail.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Mexican Tequila Italic",
+                "version": "Version 1.000",
+                "fullName": "Mexican Tequila Italic",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2019 by Vladimir Nikolic. All rights reserved.",
+                "familyName": "Mexican Tequila",
+                "subfamilyName": "Italic",
+                "postscriptName": "MexicanTequila-Italic"
+            },
+            "active": true
+        },
+        {
+            "id": "72717edf-bcbd-4118-842f-0bcdbf1c3b59",
+            "name": "MexicanTequila.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 48956,
+            "type": "FONT",
+            "uploaded": "2021-01-18T21:05:49.538Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/72717edf-bcbd-4118-842f-0bcdbf1c3b59/source",
+            "uploader": {
+                "id": "1e95e8c4-8b8c-4eac-96ad-eae4f990854a",
+                "fullName": "dqiang@hotmail.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Mexican Tequila Regular",
+                "version": "Version 1.000",
+                "fullName": "Mexican Tequila Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2019 by Vladimir Nikolic. All rights reserved.",
+                "familyName": "Mexican Tequila",
+                "subfamilyName": "Regular",
+                "postscriptName": "MexicanTequila-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "be50da34-d78d-447c-89b5-7c8021a6583a",
+            "name": "MexicanTequila-Italic.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 40088,
+            "type": "FONT",
+            "uploaded": "2021-01-18T21:04:44.078Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/be50da34-d78d-447c-89b5-7c8021a6583a/source",
+            "uploader": {
+                "id": "1e95e8c4-8b8c-4eac-96ad-eae4f990854a",
+                "fullName": "dqiang@hotmail.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Mexican Tequila Italic",
+                "version": "Version 1.000",
+                "fullName": "Mexican Tequila Italic",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2019 by Vladimir Nikolic. All rights reserved.",
+                "familyName": "Mexican Tequila",
+                "subfamilyName": "Italic",
+                "postscriptName": "MexicanTequila-Italic"
+            },
+            "active": true
+        },
+        {
+            "id": "416ef4ce-73c0-4c7f-ac25-d45597b79f71",
+            "name": "MexicanTequila.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 48956,
+            "type": "FONT",
+            "uploaded": "2021-01-18T21:04:43.936Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/416ef4ce-73c0-4c7f-ac25-d45597b79f71/source",
+            "uploader": {
+                "id": "1e95e8c4-8b8c-4eac-96ad-eae4f990854a",
+                "fullName": "dqiang@hotmail.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Mexican Tequila Regular",
+                "version": "Version 1.000",
+                "fullName": "Mexican Tequila Regular",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2019 by Vladimir Nikolic. All rights reserved.",
+                "familyName": "Mexican Tequila",
+                "subfamilyName": "Regular",
+                "postscriptName": "MexicanTequila-Regular"
+            },
+            "active": true
+        },
+        {
+            "id": "9efc701b-f4f4-4762-be6e-4e9271dc80fc",
+            "name": "CHERI___.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 9152,
+            "type": "FONT",
+            "uploaded": "2021-01-18T07:36:18.392Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/9efc701b-f4f4-4762-be6e-4e9271dc80fc/source",
+            "uploader": {
+                "id": "2b98b572-fb1e-4af4-a99c-92f6171188c9",
+                "fullName": "qdspecialist@gmail.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Cheri",
+                "version": "Macromedia Fontographer 4.1.3 1/18/01",
+                "fullName": "Cheri",
+                "mimeType": "font/ttf",
+                "copyright": "Cheri ©2001, Font•a•licious Fonts.",
+                "familyName": "Cheri",
+                "subfamilyName": "Regular",
+                "postscriptName": "Cheri"
+            },
+            "active": true
+        },
+        {
+            "id": "ffd214e2-2dd1-4f7c-9aee-603c78bc16e2",
+            "name": "Barbarian.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 126452,
+            "type": "FONT",
+            "uploaded": "2021-01-18T07:25:02.521Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/ffd214e2-2dd1-4f7c-9aee-603c78bc16e2/source",
+            "uploader": {
+                "id": "2b98b572-fb1e-4af4-a99c-92f6171188c9",
+                "fullName": "qdspecialist@gmail.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Barbarian",
+                "version": "Version 1.00 March 27, 2013, initial release",
+                "fullName": "Barbarian",
+                "mimeType": "font/ttf",
+                "copyright": "Anfa 2013",
+                "familyName": "Barbarian",
+                "subfamilyName": "Regular",
+                "postscriptName": "Barbarian"
+            },
+            "active": true
+        },
+        {
+            "id": "43f42b1a-b69a-4c16-bd2d-fd5c8199091b",
+            "name": "TAKOYAKI_1.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 56172,
+            "type": "FONT",
+            "uploaded": "2021-01-18T07:21:10.283Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/43f42b1a-b69a-4c16-bd2d-fd5c8199091b/source",
+            "uploader": {
+                "id": "2b98b572-fb1e-4af4-a99c-92f6171188c9",
+                "fullName": "qdspecialist@gmail.com",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "TAKOYAKI",
+                "version": "Version 1.00;August 24, 2020;FontCreator 13.0.0.2672 64-bit",
+                "fullName": "TAKOYAKI",
+                "mimeType": "font/ttf",
+                "copyright": "Typeface © (hadjar creative). 2020. All Rights Reserved",
+                "familyName": "TAKOYAKI",
+                "subfamilyName": "Regular",
+                "postscriptName": "TAKOYAKI"
+            },
+            "active": true
+        },
+        {
+            "id": "02b4e3a9-5f58-427b-8bc9-2c46c045121e",
+            "name": "Paskowy.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 26404,
+            "type": "FONT",
+            "uploaded": "2021-01-18T03:02:35.268Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/02b4e3a9-5f58-427b-8bc9-2c46c045121e/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Paskowy",
+                "version": "1.0",
+                "fullName": "Paskowy",
+                "mimeType": "font/ttf",
+                "copyright": "www.nowak.tv/fontoholic -  freeware [for non-commercial use]",
+                "familyName": "Paskowy",
+                "subfamilyName": "Regular",
+                "postscriptName": "Paskowy"
+            },
+            "active": true
+        },
+        {
+            "id": "b9b1493b-9271-465b-903e-1ba96ffc217f",
+            "name": "Kashima Demo.otf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 231152,
+            "type": "FONT",
+            "uploaded": "2021-01-18T02:50:17.409Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/b9b1493b-9271-465b-903e-1ba96ffc217f/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Kashima Brush Demo",
+                "version": "Version 1.00;April 28, 2019;FontCreator 11.5.0.2427 64-bit",
+                "fullName": "Kashima Brush Demo",
+                "mimeType": "font/otf",
+                "copyright": "Typeface © Abo daniel 2019. All Rights Reserved",
+                "familyName": "Kashima Brush Demo",
+                "subfamilyName": "Regular",
+                "postscriptName": "KashimaBrushDemo"
+            },
+            "active": false
+        },
+        {
+            "id": "2acee9a7-73a9-4287-addc-a190341d4c3f",
+            "name": "CHERL___.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 15844,
+            "type": "FONT",
+            "uploaded": "2021-01-18T02:47:50.527Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/2acee9a7-73a9-4287-addc-a190341d4c3f/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Cheri Liney",
+                "version": "Macromedia Fontographer 4.1.3 1/18/01",
+                "fullName": "Cheri Liney",
+                "mimeType": "font/ttf",
+                "copyright": "Cheri ©2001, Font•a•licious Fonts.",
+                "familyName": "Cheri Liney",
+                "subfamilyName": "Regular",
+                "postscriptName": "CheriLiney"
+            },
+            "active": true
+        },
+        {
+            "id": "c6bbfb00-4453-4bf8-90a4-e39325bc0ff3",
+            "name": "CHERI___.TTF",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 9152,
+            "type": "FONT",
+            "uploaded": "2021-01-18T02:47:50.396Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/c6bbfb00-4453-4bf8-90a4-e39325bc0ff3/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Cheri",
+                "version": "Macromedia Fontographer 4.1.3 1/18/01",
+                "fullName": "Cheri",
+                "mimeType": "font/ttf",
+                "copyright": "Cheri ©2001, Font•a•licious Fonts.",
+                "familyName": "Cheri",
+                "subfamilyName": "Regular",
+                "postscriptName": "Cheri"
+            },
+            "active": false
+        },
+        {
+            "id": "12a03f9a-f43e-4f91-b26b-ef4d87e9c437",
+            "name": "Pumpkin Story.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 45860,
+            "type": "FONT",
+            "uploaded": "2021-01-18T01:10:04.632Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/12a03f9a-f43e-4f91-b26b-ef4d87e9c437/source",
+            "uploader": {
+                "id": "46794c80-b2ab-4e1e-bbad-160be012bff2",
+                "fullName": "Qiang Dong",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Pumpkin Story",
+                "version": "Version 1.00;October 1, 2020;FontCreator 11.5.0.2430 32-bit",
+                "fullName": "Pumpkin Story",
+                "mimeType": "font/ttf",
+                "copyright": "Pumpkin Story©(Sronstudio). 2020. All Rights Reserved",
+                "familyName": "Pumpkin Story",
+                "subfamilyName": "Regular",
+                "postscriptName": "PumpkinStory"
+            },
+            "active": true
+        },
+        {
+            "id": "2bbafe67-c912-4879-be08-8f1b16c0cabd",
+            "name": "QA Philippine Bold.ttf",
+            "width": null,
+            "height": null,
+            "status": "NEW",
+            "size": 26148,
+            "type": "FONT",
+            "uploaded": "2021-01-18T00:31:17.365Z",
+            "company": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+            "thumbnailUrl": null,
+            "sourceUrl": "https://api-r2-internal-1.invencocloud.com/rest/v1/media/assets/2bbafe67-c912-4879-be08-8f1b16c0cabd/source",
+            "uploader": {
+                "id": "99953477-71fe-4fc1-ae12-452840045aa2",
+                "fullName": "Joy Querido",
+                "company": {
+                    "id": "a72f85c2-6d99-11e7-bfe0-9b60e4eb9794",
+                    "name": "SIT-Company-http"
+                }
+            },
+            "properties": {
+                "face": "Philippine Bold",
+                "version": "Version 001.000 ",
+                "fullName": "Philippine Bold",
+                "mimeType": "font/ttf",
+                "copyright": "Copyright (c) 2016, Valentin FRANCOIS (www.valentinfrancois.fr)\nFree for personal and commercial use.\nCredits are of course appreciated.",
+                "familyName": "Philippine",
+                "subfamilyName": "Bold",
+                "postscriptName": "Philippine-Bold"
+            },
+            "active": false
+        }
+    ]
+}
 }
