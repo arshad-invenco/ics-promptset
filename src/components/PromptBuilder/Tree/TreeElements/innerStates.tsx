@@ -15,6 +15,7 @@ import {AREA, BG, CHILD_STATE, TOUCH_MASK, VIDEO,} from "../../../../constants/p
 import DayPartModal from "../../modals/daypart-modal/dayPart";
 import {AppDispatch} from "../../../../redux/store";
 import {deleteTouchMapOrAreaById} from "../../../../redux/reducers/promptsetSlice";
+import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
 
 interface InnerStateProps {
     child: Assignment;
@@ -131,6 +132,9 @@ export default function InnerStates(props: InnerStateProps) {
                             </div>
                         </div>
                         <div className="child-states-right-icons">
+                            { child.isAssignmentChanged &&
+                                <ErrorRoundedIcon onClick={(e)=>e.stopPropagation()} className="icons-right-child-states"/>
+                            }
                             {child.dayPart ? (
                                 <i className="far fa-trash-alt child-state-trash-icon"></i>
                             ) : (
@@ -233,11 +237,18 @@ export default function InnerStates(props: InnerStateProps) {
                                             <i className="far fa-hand-pointer"></i>
                                             Touch Mask
                                         </div>
-                                        <i onClick={() => {
-                                            if (child?.touchmap?.id){
-                                                deleteTouchMapOrArea(child.touchmap.id);
+                                        <div>
+                                            {child.touchmap.isTouchMaskChanged &&
+                                                <i className="fa fa-floppy-o touchmask-save-icon"></i>
                                             }
-                                        }} className="far fa-trash-alt trash-icon"></i>
+                                            <i onClick={() => {
+                                                if (child?.touchmap?.id) {
+                                                    deleteTouchMapOrArea(child.touchmap.id);
+                                                }
+                                            }} className={`far fa-trash-alt trash-icon ${child.touchmap.isTouchMaskChanged ? 'margin-right-0' : ''}`}>
+
+                                            </i>
+                                        </div>
                                     </div>
                                 </div>
                                 {/*for touch map*/}
@@ -254,7 +265,7 @@ export default function InnerStates(props: InnerStateProps) {
                                                     <i className="fas fa-square"></i>
                                                     Touch Area
                                                 </div>
-                                                <i onClick={()=>{
+                                                <i onClick={() => {
                                                     deleteTouchMapOrArea(area.id);
                                                 }} className="far fa-trash-alt trash-icon"></i>
                                             </div>

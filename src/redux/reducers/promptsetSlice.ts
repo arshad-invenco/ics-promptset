@@ -28,6 +28,7 @@ export const promptsetSlice = createSlice({
                 state.assignments = state.assignments.map((assignment) => {
                     assignment.elements = assignment.elements.map((element) => {
                         if (element.id === action.payload.id) {
+                            state.isStateChanged = true;
                             return action.payload;
                         }
                         return element;
@@ -41,12 +42,15 @@ export const promptsetSlice = createSlice({
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
                     if (assignment.touchmap) {
+                        assignment.touchmap.isTouchMaskChanged = true;
                         assignment.touchmap.areas = assignment.touchmap?.areas?.map((area) => {
                             if (area.id === action.payload.id) {
+                                assignment.isAssignmentChanged = true;
                                 return action.payload;
                             }
                             return area;
                         });
+                        state.isStateChanged = true;
                     }
                     return assignment;
                 });
@@ -61,6 +65,7 @@ export const promptsetSlice = createSlice({
                     state.assignments = state.assignments.map((assignment) => {
                         if (assignment.id === assignmentId) {
                             assignment.elements.push(newElement);
+                            state.isStateChanged = true;
                         }
                         return assignment;
                     });
@@ -69,11 +74,16 @@ export const promptsetSlice = createSlice({
             }
         },
         deleteElementByID: (state, action) => {
+            const elementId = action.payload;
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
+                    const initialLength = assignment.elements.length;
                     assignment.elements = assignment.elements.filter((element) => {
-                        return element.id !== action.payload;
+                        return element.id !== elementId;
                     });
+                    if (initialLength > assignment.elements.length) {
+                        state.isStateChanged = true; // Set isStateChanged to true
+                    }
                     return assignment;
                 });
                 return state;
@@ -87,15 +97,19 @@ export const promptsetSlice = createSlice({
                     });
 
                     if (assignment.touchmap && assignment.touchmap.id === action.payload) {
+                        assignment.isAssignmentChanged = true;
                         assignment.touchmap = null;
                     } else if (assignment.touchmap) {
                         assignment.touchmap.areas = assignment.touchmap?.areas?.filter((area) => {
+                            assignment.isAssignmentChanged = true;
                             return area.id !== action.payload;
                         });
+                        assignment.touchmap.isTouchMaskChanged = true;
                     }
 
                     return assignment;
                 });
+                state.isStateChanged = true;
                 return state;
             });
         },
