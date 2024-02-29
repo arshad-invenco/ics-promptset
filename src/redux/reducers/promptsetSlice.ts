@@ -97,6 +97,7 @@ export const promptsetSlice = createSlice({
                     });
 
                     if (assignment.touchmap && assignment.touchmap.id === action.payload) {
+                        state.isStateChanged = true;
                         assignment.isAssignmentChanged = true;
                         assignment.touchmap = null;
                     } else if (assignment.touchmap) {
@@ -104,12 +105,12 @@ export const promptsetSlice = createSlice({
                             assignment.isAssignmentChanged = true;
                             return area.id !== action.payload;
                         });
+                        state.isStateChanged = true;
                         assignment.touchmap.isTouchMaskChanged = true;
                     }
 
                     return assignment;
                 });
-                state.isStateChanged = true;
                 return state;
             });
         },
