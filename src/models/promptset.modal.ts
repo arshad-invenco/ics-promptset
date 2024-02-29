@@ -3,18 +3,22 @@ interface User {
     name: string;
     email: string;
 }
+
 interface ClonedFrom {
     id: string;
     name: string;
 }
+
 interface Attribs {
     "cless-msg-draw": boolean;
     "cless-event-msg": boolean;
 }
+
 interface Template {
     id: string;
     name: string;
 }
+
 interface SoftKeys {
     fontColor: string,
     fontSize: 0,
@@ -22,7 +26,8 @@ interface SoftKeys {
     label: string,
     softkey: 0
 }
-export interface TouchMapAreas{
+
+export interface TouchMapAreas {
     coords: string,
     id: string,
     shape: string | 'circle',
@@ -32,6 +37,7 @@ export interface TouchMapAreas{
     keyCode?: string,
     keyCodeName?: string,
 }
+
 export interface Lang {
     [key: string]: {
         languageSupportId: string,
@@ -45,10 +51,13 @@ export interface Lang {
         }
     }
 }
+
 export interface TouchMap {
-    id: string,
-    areas?: TouchMapAreas[]
+    id: string;
+    areas?: TouchMapAreas[];
+    isTouchMaskChanged?: boolean
 }
+
 export interface DayPart {
     id: string;
     end: number;
@@ -57,6 +66,7 @@ export interface DayPart {
     active: boolean;
     company: string;
 }
+
 export interface PromptSetInterface {
     id: string;
     name: string;
@@ -100,14 +110,15 @@ export interface State {
     dynamicText: boolean;
     promptType: string;
     transactionState: string;   //null data & null in swagger
-    assignments : Assignment[];
+    assignments: Assignment[];
+    isStateChanged?: boolean;
 }
 
 export interface Assignment {
     id: string;
     code: string;
     elements: Elements[];
-    dayPart : DayPart;
+    dayPart: DayPart;
     promptState: string;
     transactionState: string;  //null data, but string after seeing new data
     contactless: boolean;
@@ -117,6 +128,7 @@ export interface Assignment {
     softkeys: SoftKeys[];   //[] data but doc in swagger
     type: string;
     parentId: string;
+    isAssignmentChanged?: boolean;
 }
 
 export interface Elements {
@@ -132,7 +144,7 @@ export interface Elements {
     height?: number;
     textAlign?: string;
     lock?: boolean;
-    userclass?:string;
+    userclass?: string;
     bold?: boolean;
     italic?: boolean;
 }

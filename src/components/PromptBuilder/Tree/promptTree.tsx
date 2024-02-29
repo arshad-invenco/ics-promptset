@@ -67,6 +67,10 @@ export default function PromptTree() {
     setActivePromptEditorId(child_id);
   }
 
+  function saveState() {
+    console.log("state saved");
+  }
+
   return (
     <div className="left-container">
       <div className="ics-prompt-tree-container">
@@ -103,9 +107,13 @@ export default function PromptTree() {
                             </span>
                           )}
                         </div>
-                        <div className="unsaved-status">
-                          <i className="fa fa-floppy-o "></i>
-                        </div>
+                        { item.isStateChanged &&
+                          <div className="unsaved-status">
+                          <i onClick={(e)=>{
+                            e.stopPropagation()
+                            saveState()
+                          }} className="fa fa-floppy-o "></i>
+                        </div>}
                       </div>
                     </Accordion.Header>
                     <Accordion.Body>
