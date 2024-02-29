@@ -26,9 +26,11 @@ export interface TouchMapAreas{
     coords: string,
     id: string,
     shape: string | 'circle',
-    softkeyId: string,
-    softkeyName: string,
-    type: string
+    softkeyId?: string,
+    softkeyName?: string,
+    type: string,
+    keyCode?: string,
+    keyCodeName?: string,
 }
 export interface Lang {
     [key: string]: {

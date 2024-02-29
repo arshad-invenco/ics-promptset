@@ -3,6 +3,7 @@ import { promptsetSlice } from "./reducers/promptsetSlice";
 import { daypartSlice } from "./reducers/daypartSlice";
 import { keycodeSlice } from "./reducers/keycodeSlice";
 import { softkeySlice } from "./reducers/softkeySlice";
+import { fontSlice } from "./reducers/fontSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     daypart: daypartSlice.reducer,
     keycode: keycodeSlice.reducer,
     softkey: softkeySlice.reducer,
+    font: fontSlice.reducer,
   },
 });
 

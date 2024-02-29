@@ -6,7 +6,3 @@ export const selectKeycodes = createSelector(
   (data) => data
 );
 
-export const selectKeycodeError = createSelector(
-  (state: KeycodeRootState) => state.keycode.error,
-  (error) => error
-);

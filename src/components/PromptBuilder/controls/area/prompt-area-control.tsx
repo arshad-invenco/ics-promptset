@@ -1,7 +1,7 @@
 import "./prompt-area-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import { TouchMapAreas } from "../../../../models/promptset.modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Keycode } from "../../../../models/keycode";
@@ -15,7 +15,6 @@ import { debounce } from "@mui/material";
 interface TouchMapAreaProp {
   areaData: TouchMapAreas;
 }
-
 interface GroupedCodeItems {
   label: string;
   options: Keycode[];
@@ -25,31 +24,62 @@ export function AreaControl(props: TouchMapAreaProp) {
   const { areaData } = props;
   // STATES
   const [area, setArea] = useState(areaData);
-  const [selectedCode, setSelectedkey] = useState("Daypart");
+  const [selectedCode, setSelectedCode] = useState(
+    area?.softkeyName || area?.keyCodeName
+  );
 
-  const keycodes = useSelector(selectKeycodes);
-  const softkeys = useSelector(selectSoftKeys);
-
-  const formattedKeycodes =
-    keycodes && keycodes.length > 0
-      ? keycodes.map(({ code, name }) => ({ id: code, code, name }))
-      : [];
-  const formattedSoftkeys =
-    softkeys && softkeys.length > 0
-      ? softkeys.map(({ physicalCode: code, name }) => ({
-          id: code,
-          code,
-          name,
-        }))
-      : [];
+  const keycodes = useSelector(selectKeycodes).map(({ code, name }) => ({
+    id: code,
+    code,
+    name,
+  }));
+  const softkeys = useSelector(selectSoftKeys).map(
+    ({ physicalCode: code, name }) => ({
+      id: code,
+      code,
+      name,
+    })
+  );
 
   const groupedCodeItems: GroupedCodeItems[] = [
-    { label: "Soft Keys", options: formattedSoftkeys },
-    { label: "Key Codes", options: formattedKeycodes },
+    { label: "Soft Keys", options: softkeys },
+    { label: "Key Codes", options: keycodes },
   ];
 
   const handleSelect = (item: Keycode) => {
-    setSelectedkey(item.name);
+    setSelectedCode(item.name);
+    const selectedKeyCode = keycodes.find(
+      (keycode) => keycode.name === item.name
+    );
+    const selectedSoftKey = softkeys.find(
+      (softkey) => softkey.name === item.name
+    );
+    if (selectedKeyCode) {
+      const { softkeyId, softkeyName, ...rest } = area;
+      setArea({
+        ...rest,
+        keyCode: selectedKeyCode.code,
+        keyCodeName: selectedKeyCode.name,
+      });
+      debouncedOnChangeInputArea({
+        ...rest,
+        keyCode: selectedKeyCode.code,
+        keyCodeName: selectedKeyCode.name,
+      });
+    }
+    if (selectedSoftKey) {
+      const { keyCode, keyCodeName, ...rest } = area;
+      setArea({
+        ...rest,
+        softkeyId: selectedSoftKey.id,
+        softkeyName: selectedSoftKey.name,
+      });
+      debouncedOnChangeInputArea({
+        ...rest,
+        softkeyId: selectedSoftKey.id,
+        softkeyName: selectedSoftKey.name,
+      });
+    }
   };
 
   // REDUX
@@ -60,6 +90,7 @@ export function AreaControl(props: TouchMapAreaProp) {
   }
 
   // DEBOUNCE
+
   const debouncedOnChangeInputArea = debounce(onChangeInputArea, 1000);
 
   return (
@@ -197,6 +228,7 @@ export function AreaControl(props: TouchMapAreaProp) {
           )}
           onSelect={handleSelect}
           isGroup={true}
+          selectedCode={selectedCode}
           placeholder="Soft Key or Key Code"
         ></SearchableDropdown>
       </div>

@@ -10,11 +10,9 @@ import { PromptSetInterface } from "../../models/promptset.modal";
 import { PromptSetEditor } from "../PromptEditor/promptSetEditor";
 import { fetchDayPart } from "../../redux/thunks/daypartThunk";
 import { fetchKeyCodes } from "../../redux/thunks/keycodeThunk";
-import { fetchSoftKeys } from "../../redux/thunks/softkeyThunk";
+import { fetchFonts } from "../../redux/thunks/fontThunk";
 
 export function PromptSet() {
-  const location = useLocation();
-
   // STATES -> CONTEXT_API
   const [promptSetData, setPromptSetData] = useState<PromptSetInterface>(
     {} as PromptSetInterface
@@ -46,7 +44,7 @@ export function PromptSet() {
     dispatch(fetchPromptSet());
     dispatch(fetchDayPart());
     dispatch(fetchKeyCodes());
-
+    dispatch(fetchFonts());
   }, []);
 
   return (
