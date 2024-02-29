@@ -127,7 +127,7 @@ export function AreaControl(props: TouchMapAreaProp) {
             <input
               type="number"
               min={0}
-              value={area.coords.split(",")[0]}
+              value={(area.coords?.split(",") ?? [""])[0]}
               onChange={(e) => {
                 const updatedArea = {
                   ...area,
@@ -148,7 +148,7 @@ export function AreaControl(props: TouchMapAreaProp) {
             <input
               type="number"
               min={0}
-              value={area.coords.split(",")[1]}
+              value={(area.coords?.split(",") ?? [""])[1]}
               onChange={(e) => {
                 const updatedArea = {
                   ...area,
@@ -168,7 +168,7 @@ export function AreaControl(props: TouchMapAreaProp) {
             <input
               type="number"
               min={0}
-              value={area.coords.split(",")[2]}
+              value={(area.coords?.split(",") ?? [""])[2]}
               onChange={(e) => {
                 const updatedArea = {
                   ...area,
@@ -188,7 +188,7 @@ export function AreaControl(props: TouchMapAreaProp) {
             <input
               type="number"
               min={0}
-              value={area.coords.split(",")[3]}
+              value={(area.coords?.split(",") ?? [""])[3]}
               onChange={(e) => {
                 const updatedArea = {
                   ...area,

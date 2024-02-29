@@ -6,13 +6,15 @@ import TreeElements from "./treeElements";
 import AssetsDropdown from "../asset-dropdown/assetsDropdown";
 import {Assignment, Elements, Lang} from "../../../../models/promptset.modal";
 import {getLanguage} from "../../../../services/promptsetService";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {PromptSetRootState} from "../promptTree";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
 import {promptSetContext} from "../../../../hooks/promptsetContext";
 import {AREA, BG, CHILD_STATE, TOUCH_MASK, VIDEO,} from "../../../../constants/promptSetConstants";
 import DayPartModal from "../../modals/daypart-modal/dayPart";
+import {AppDispatch} from "../../../../redux/store";
+import {deleteTouchMapOrAreaById} from "../../../../redux/reducers/promptsetSlice";
 
 interface InnerStateProps {
     child: Assignment;
@@ -36,6 +38,9 @@ export default function InnerStates(props: InnerStateProps) {
     const [elements, setElements] = useState(child.elements);
     const [showDropdown, setShowDropdown] = useState(false);
 
+    // REDUX
+    const dispatch = useDispatch<AppDispatch>();
+
     // Context API
     const {
         setActiveControlType,
@@ -53,6 +58,7 @@ export default function InnerStates(props: InnerStateProps) {
     // EFFECTS
     useEffect(() => {
         setElements(child.elements)
+
         function handleClickOutside(event: MouseEvent) {
             if (
                 dropdownRef.current &&
@@ -61,6 +67,7 @@ export default function InnerStates(props: InnerStateProps) {
                 setShowDropdown(false);
             }
         }
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -95,6 +102,10 @@ export default function InnerStates(props: InnerStateProps) {
 
     function handleDaypart(item: string) {
         setShow(false);
+    }
+
+    function deleteTouchMapOrArea(touchMapId: string) {
+        dispatch(deleteTouchMapOrAreaById(touchMapId));
     }
 
     return (
@@ -207,11 +218,13 @@ export default function InnerStates(props: InnerStateProps) {
                                 </div>
                             ) : null;
                         })}
-                        {child.touchmap && (
+                        {child?.touchmap && (
                             <>
                                 <div
                                     onClick={() => {
-                                        onClickElement(child.touchmap.id, TOUCH_MASK);
+                                        if (child?.touchmap?.id) {
+                                            onClickElement(child.touchmap.id, TOUCH_MASK);
+                                        }
                                     }}
                                     className="inner-elements"
                                 >
@@ -220,11 +233,15 @@ export default function InnerStates(props: InnerStateProps) {
                                             <i className="far fa-hand-pointer"></i>
                                             Touch Mask
                                         </div>
-                                        <i className="far fa-trash-alt trash-icon"></i>
+                                        <i onClick={() => {
+                                            if (child?.touchmap?.id){
+                                                deleteTouchMapOrArea(child.touchmap.id);
+                                            }
+                                        }} className="far fa-trash-alt trash-icon"></i>
                                     </div>
                                 </div>
                                 {/*for touch map*/}
-                                {child.touchmap && child.touchmap.areas && child.touchmap.areas.map((area, index) => {
+                                {child?.touchmap && child.touchmap.areas && child.touchmap.areas.map((area, index) => {
                                     return (
                                         <div
                                             onClick={() => {
@@ -237,7 +254,9 @@ export default function InnerStates(props: InnerStateProps) {
                                                     <i className="fas fa-square"></i>
                                                     Touch Area
                                                 </div>
-                                                <i className="far fa-trash-alt trash-icon"></i>
+                                                <i onClick={()=>{
+                                                    deleteTouchMapOrArea(area.id);
+                                                }} className="far fa-trash-alt trash-icon"></i>
                                             </div>
                                         </div>
                                     );
