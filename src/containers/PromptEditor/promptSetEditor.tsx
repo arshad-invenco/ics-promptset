@@ -1,5 +1,5 @@
 import Controllers from "../../components/PromptBuilder/controls/controllers";
-import PromptBuilder from "../../components/PromptBuilder/builder/promptBuilder";
+import PromptPreviewArea from "../../components/PromptBuilder/builder/promptPreviewArea";
 import PromptSetMetaData from "../../components/PromptBuilder/meta-data/promptSetMetaData";
 import {getDeviceType} from "../../constants/deviceType";
 
@@ -11,7 +11,7 @@ export function PromptSetEditor() {
         <div className={`right-container ${deviceType}`}>
             <Controllers />
             <div className="prompt-set-preview-area">
-                <PromptBuilder />
+                <PromptPreviewArea />
                 <PromptSetMetaData/>
             </div>
         </div>
