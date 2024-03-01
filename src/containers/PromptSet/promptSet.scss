@@ -1,13 +1,50 @@
 
-.layout{
+.layout {
   display: flex;
   gap: 10px;
   padding: 10px 15px;
 }
 
-.ics-prompt-set-right-container{
+.right-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 80%;
+  overflow-x: hidden;
+  position: relative;
+  width: 90%;
 }
+
+.G7-100-8, .G7-100-15, .G7-100, .G6-200, .G7-100, .G6-300 {
+  .prompt-set-preview-area {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    -webkit-height: calc(100vh - 50px);
+
+    .ics-prompt-builder-preview-wrapper {
+      width: calc(100% - 270px);
+      -webkit-width: calc(100% - 270px);
+
+      &.expended {
+        position: absolute;
+        -webkit-width: calc(100% - 75px);
+        width: calc(100% - 75px);
+      }
+    }
+
+    .ics-prompt-builder-metadata {
+      //.translate: (0, 0);
+      //border: 1px solid green;
+      width: 270px;
+
+      //&.contracted {
+      ////.translate(205 px, 0);
+      //}
+    }
+  }
+}
+
+
+
+
+
