@@ -42,3 +42,17 @@ export function generateRandomString(length: number) {
     return result.toString();
 }
 
+export function getDateAndTime(time:string){
+    const date = new Date(time);
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+    };
+    let formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+    formattedDate = formattedDate.replace(/AM|PM/g, match => match.toLowerCase());
+    return formattedDate + " (UTC+05:30)";
+}
+
