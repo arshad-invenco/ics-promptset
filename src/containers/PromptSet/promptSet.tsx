@@ -48,7 +48,7 @@ export function PromptSet() {
   }, []);
 
   return (
-    <div className="layout">
+    <div className={"layout"}>
       <promptSetContext.Provider value={contextValues}>
         <PromptTree />
         <PromptSetEditor />
