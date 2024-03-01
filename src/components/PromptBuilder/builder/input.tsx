@@ -5,7 +5,7 @@ import {PromptSetRootState} from "../Tree/promptTree";
 import {Elements, State} from "../../../models/promptset.modal";
 import {selectPromptSetAssignmentById} from "../../../redux/selectors/promptSetSelectors";
 import {AppDispatch} from "../../../redux/store";
-import {updateInputElement} from "../../../redux/reducers/promptsetSlice";
+import {BBox} from "snapsvg";
 
 interface PromptBuilderProps {
     color: string;
@@ -60,14 +60,7 @@ export default function InputSVG(props: PromptBuilderProps) {
                     let textSvg = g.text(x, y, newElement.value).attr({fill: `#${newElement.color}`, id: newElement.id, fontSize: newElement.size, cursor: "pointer !important", dy:'1em'});
                     let bbox = textSvg.getBBox();
                     if (activeElementId === newElement.id) {
-                        svgElement = g.group(
-                            s.rect(bbox.x, bbox.y, bbox.width, bbox.height).attr({fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0}),
-                            g.group(
-                                s.rect(0, 0, 20, 10).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,-5)', fillOpacity: 0.9}),
-                                s.rect(0, 0, 10, 20).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,5)', fillOpacity: 0.9})
-                            ).attr({id: 'control', cursor: 'se-resize', transform: `matrix(1,0,0,1,${bbox.x2},${bbox.y2})`}),
-                            textSvg
-                        );
+                        svgElement = createWrapperController(bbox, newElement, textSvg);
                     } else {
                         svgElement = textSvg;
                     }
@@ -78,14 +71,7 @@ export default function InputSVG(props: PromptBuilderProps) {
                     let inputSvg = g.text(x, y, newElement.value).attr({fill: `#${newElement.color}`, id: newElement.id, fontSize: newElement.size, textAnchor: 'center', textDecoration: 'underline'});
                     let bboxInput = inputSvg.getBBox();
                     if (activeElementId === newElement.id) {
-                        svgElement = g.group(
-                            s.rect(bboxInput.x, bboxInput.y, element.width || bboxInput.width, element.height || bboxInput.height).attr({fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0}),
-                            g.group(
-                                s.rect(0, 0, 20, 10).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,-5)', fillOpacity: 0.9}),
-                                s.rect(0, 0, 10, 20).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,5)', fillOpacity: 0.9})
-                            ).attr({id: 'control', cursor: 'se-resize', transform: `matrix(1,0,0,1,${bboxInput.x2},${bboxInput.y2})`}),
-                            inputSvg
-                        );
+                        svgElement = createWrapperController(bboxInput, newElement, inputSvg);
                     } else {
                         svgElement = inputSvg;
                     }
@@ -128,6 +114,19 @@ export default function InputSVG(props: PromptBuilderProps) {
                 g.add(svgElement);
             }
         });
+    }
+
+    function createWrapperController(bboxInput:BBox, element:Elements, ElementSvg:Snap.Element) {
+        let controller = s.rect(bboxInput.x, bboxInput.y, element.width, element.height).attr({fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0});
+        let controllerBBox = controller.getBBox();
+        return g.group(
+            controller,
+            g.group(
+                s.rect(0, 0, 20, 10).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,-5)', fillOpacity: 0.9}),
+                s.rect(0, 0, 10, 20).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,5)', fillOpacity: 0.9})
+            ).attr({id: 'control', cursor: 'se-resize', transform: `matrix(1,0,0,1,${controllerBBox.x2},${controllerBBox.y2})`}),
+            g.group().add(ElementSvg)
+        );
     }
 
     useEffect(() => {
