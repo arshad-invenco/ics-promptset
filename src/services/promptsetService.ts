@@ -1,30 +1,30 @@
 import {Elements, Lang} from "../models/promptset.modal";
 import {AssetsDropdownMapping} from "../constants/promptSetConstants";
 
-export default function isSequoiaDevice(deviceType:string) {
+export default function isSequoiaDevice(deviceType: string) {
     return deviceType.includes('G7-100') || deviceType === 'G6-300' || deviceType === 'G6-400';
 }
 
-export function isAssetHaving(elements:Elements[], type:string) {
+export function isAssetHaving(elements: Elements[], type: string) {
     return elements.some((element) => element.type === type);
 }
 
-export function find(elements:Elements[], type:string) {
+export function find(elements: Elements[], type: string) {
     return elements.find((element) => element.type === type);
 }
 
 
-export function getAsset(element:string, type:string){
-    if(type === 'text'){
+export function getAsset(element: string, type: string) {
+    if (type === 'text') {
         return AssetsDropdownMapping[element].text;
-    } else if(type === 'icon'){
+    } else if (type === 'icon') {
         return AssetsDropdownMapping[element].icon;
     }
     return AssetsDropdownMapping[element].type;
 }
 
 
-export function getLanguage(languageId:string, lang:Lang) {
+export function getLanguage(languageId: string, lang: Lang) {
     for (let key in lang) {
         if (lang[key].languageSupportId === languageId) {
             return lang[key].isoCode;
@@ -42,14 +42,11 @@ export function generateRandomString(length: number) {
     return result.toString();
 }
 
-export function getDateAndTime(time:string){
+export function getDateAndTime(time: string) {
+    if (!time) return new Date().toLocaleString();
     const date = new Date(time);
     const options: Intl.DateTimeFormatOptions = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
+        year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric',
     };
     let formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
     formattedDate = formattedDate.replace(/AM|PM/g, match => match.toLowerCase());

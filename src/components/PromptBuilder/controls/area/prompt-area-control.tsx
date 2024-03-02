@@ -61,7 +61,7 @@ export function AreaControl(props: TouchMapAreaProp) {
         keyCode: selectedKeyCode.code,
         keyCodeName: selectedKeyCode.name,
       });
-      debouncedOnChangeInputArea({
+        onChangeInputArea({
         ...rest,
         keyCode: selectedKeyCode.code,
         keyCodeName: selectedKeyCode.name,
@@ -74,7 +74,7 @@ export function AreaControl(props: TouchMapAreaProp) {
         softkeyId: selectedSoftKey.id,
         softkeyName: selectedSoftKey.name,
       });
-      debouncedOnChangeInputArea({
+        onChangeInputArea({
         ...rest,
         softkeyId: selectedSoftKey.id,
         softkeyName: selectedSoftKey.name,
@@ -91,7 +91,7 @@ export function AreaControl(props: TouchMapAreaProp) {
 
   // DEBOUNCE
 
-  const debouncedOnChangeInputArea = debounce(onChangeInputArea, 1000);
+
 
   return (
     <div className="ics-prompt-builder-area-controls d-flex-row">
@@ -101,7 +101,7 @@ export function AreaControl(props: TouchMapAreaProp) {
           <div
             onClick={() => {
               setArea({ ...area, shape: "rect" });
-              debouncedOnChangeInputArea({ ...area, shape: "rect" });
+                onChangeInputArea({ ...area, shape: "rect" });
             }}
             className={`shape rectangle ${
               area.shape === "rect" ? "selected" : ""
@@ -110,7 +110,7 @@ export function AreaControl(props: TouchMapAreaProp) {
           <div
             onClick={() => {
               setArea({ ...area, shape: "circle" });
-              debouncedOnChangeInputArea({ ...area, shape: "circle" });
+                onChangeInputArea({ ...area, shape: "circle" });
             }}
             className={`shape circle ${
               area.shape === "circle" ? "selected" : ""
@@ -137,7 +137,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                     .join(",")}`,
                 };
                 setArea(updatedArea);
-                debouncedOnChangeInputArea(updatedArea);
+                  onChangeInputArea(updatedArea);
               }}
               className="ics-input dimension-input"
             />
@@ -157,7 +157,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                   },${area.coords.split(",").slice(2).join(",")}`,
                 };
                 setArea(updatedArea);
-                debouncedOnChangeInputArea(updatedArea);
+                  onChangeInputArea(updatedArea);
               }}
               className="ics-input dimension-input"
             />
@@ -177,7 +177,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                   },${area.coords.split(",")[3]}`,
                 };
                 setArea(updatedArea);
-                debouncedOnChangeInputArea(updatedArea);
+                  onChangeInputArea(updatedArea);
               }}
               className="ics-input dimension-input"
             />
@@ -197,7 +197,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                   }`,
                 };
                 setArea(updatedArea);
-                debouncedOnChangeInputArea(updatedArea);
+                  onChangeInputArea(updatedArea);
               }}
               className="ics-input dimension-input"
             />

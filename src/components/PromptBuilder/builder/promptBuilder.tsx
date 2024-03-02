@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {promptSetContext} from "../../../hooks/promptsetContext";
 import {useDispatch, useSelector} from "react-redux";
 import {PromptSetRootState} from "../Tree/promptTree";
-import {Elements, State} from "../../../models/promptset.modal";
+import {Elements, State, TouchMapAreas} from "../../../models/promptset.modal";
 import {selectPromptSetAssignmentById} from "../../../redux/selectors/promptSetSelectors";
 import {AppDispatch} from "../../../redux/store";
 import {BBox} from "snapsvg";
@@ -36,11 +36,15 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         setActiveControlType(type);
     }
 
+    useEffect(() => {
+        console.log(activeElementId)
+    }, [activeElementId]);
+
     function updateElement(newElement: Elements, x: number, y: number, width: number, height: number) {
         // dispatch(updateInputElement({...newElement, left:Math.ceil(x), top:Math.ceil(y)}));
     }
 
-    function initElements(elements: Elements[]) {
+    function initElements(elements: Elements[], areas: TouchMapAreas[]) {
         s = window.Snap("#svg");
         s.clear();
         g = s.group();
@@ -59,6 +63,8 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 case 'text':
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
                     newElement.left = newElement.left === undefined ? 0 : newElement.left;
+
+
                     let textSvg = g.text(x, y, newElement.value).attr({
                         fill: `#${newElement.color}`,
                         id: newElement.id,
@@ -127,18 +133,88 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 g.add(svgElement);
             }
         });
+        areas.forEach(area => {
+            let areaElement;
+            let coords = area.coords.split(',');
+            switch (area.shape) {
+                case 'circle':
+                    let circleGroup = g.group(s.circle(coords[0], coords[1], coords[3]).attr({
+                        id: area.id, fill: '#006400', fillOpacity: 0.5
+                    }), s.text(coords[0], coords[1], area.softkeyName).attr({
+                        fill: `white`,
+                        id: area.id,
+                        fontStyle: 'italic',
+                        fontSize: 20,
+                        opacity: 0.8,
+                        textAnchor: 'middle',
+                        dy: '.5em'
+                    }));
+                    let circleBBox = circleGroup.getBBox();
+                    if (activeElementId === area.id) {
+                        areaElement = createWrapperController(circleBBox, undefined, circleGroup, area.type, area);
+                    } else {
+                        areaElement = circleGroup;
+                    }
+                    break;
+                case 'rect':
+                    let rectGroup = g.group(s.rect(coords[0], coords[1], coords[2], coords[3]).attr({
+                        id: area.id, fill: '#006400', fillOpacity: 0.5
+                    }), s.text(coords[0], coords[1], area.softkeyName || area.keyCodeName).attr({
+                        fill: `white`,
+                        id: area.id,
+                        fontStyle: 'italic',
+                        fontSize: 20,
+                        opacity: 0.8,
+                        textAnchor: 'start',
+                        dy: '1em',
+                    }));
+                    let rectBBox = rectGroup.getBBox();
+                    if (activeElementId === area.id) {
+                        areaElement = createWrapperController(rectBBox, undefined, rectGroup, area.type, area);
+                    } else {
+                        areaElement = rectGroup;
+                    }
+                    break;
+            }
+            areaElement.click(() => {
+                onClickSVGElement(area.id, area.type);
+            });
+            g.add(areaElement);
+        });
     }
 
-    function createWrapperController(bboxInput: BBox, element: Elements, ElementSvg: Snap.Element) {
-        let controller = s.rect(bboxInput.x, bboxInput.y, element.width, element.height).attr({
-            fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0
-        });
+    function createWrapperController(bboxInput: BBox, element?: Elements, ElementSvg?: Snap.Element, type?: string, area?: TouchMapAreas) {
+        let elementBBox = ElementSvg?.getBBox();
+        console.log(elementBBox, 'elementBBox', type);
+        let coords: number[] = area?.coords.split(',').map(Number) || [0, 0, 0, 0];
+        let controller;
+        if (type === 'area') {
+            if (area?.shape === 'circle') {
+                controller = s.rect(bboxInput.x, bboxInput.y, coords[3] * 2, coords[3] * 2).attr({
+                    fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0
+                });
+            } else {
+                controller = s.rect(bboxInput.x, bboxInput.y, coords[2], coords[3]).attr({
+                    fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0
+                });
+            }
+        }
+        else {
+            controller = s.rect(bboxInput.x, bboxInput.y, element?.width || bboxInput.width, element?.height || bboxInput.height).attr({
+                fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0
+            });
+        }
         let controllerBBox = controller.getBBox();
-        return g.group(controller, g.group(s.rect(0, 0, 20, 10).attr({
+        let controllerRect = g.group(controller, g.group(s.rect(0, 0, 20, 10).attr({
             fill: '#32b447', transform: 'matrix(0,1,-1,0,15,-5)', fillOpacity: 0.9
         }), s.rect(0, 0, 10, 20).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,5)', fillOpacity: 0.9})).attr({
             id: 'control', cursor: 'se-resize', transform: `matrix(1,0,0,1,${controllerBBox.x2},${controllerBBox.y2})`
-        }), g.group().add(ElementSvg));
+        }));
+
+        if (type === 'area') {
+
+        }
+        return g.group(ElementSvg, controllerRect);
     }
 
     useEffect(() => {
@@ -146,9 +222,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             setElements(childState.elements);
         }
         console.log("CALLED")
-        initElements(elements);
-
-
+        initElements(elements, childState?.touchmap?.areas || []);
     }, [elements, childState, activeElementId]);
 
 
