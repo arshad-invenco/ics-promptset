@@ -1,10 +1,10 @@
 import "./prompt-area-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import { TouchMapAreas } from "../../../../models/promptset.modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { Keycode } from "../../../../models/keycode";
+import { Keycode } from "../../../../models/keycode.modal";
 
 import { selectKeycodes } from "../../../../redux/selectors/keycodeSelectors";
 import { selectSoftKeys } from "../../../../redux/selectors/softkeySelectors";

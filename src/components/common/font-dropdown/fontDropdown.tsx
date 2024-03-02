@@ -1,5 +1,5 @@
 import Dropdown from "react-bootstrap/Dropdown";
-import { Font } from "../../../models/fonts";
+import { Font } from "../../../models/fonts.modal";
 import "./fontDropdown.scss";
 
 interface FontDropdownProps {
