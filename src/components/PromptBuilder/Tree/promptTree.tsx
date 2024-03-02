@@ -1,75 +1,63 @@
-import { useContext, useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import "./promptTree.scss";
-import { Accordion } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import {Accordion} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
 import InnerStates from "./TreeElements/innerStates";
-import {
-  Assignment,
-  PromptSetInterface,
-  State,
-} from "../../../models/promptset.modal";
+import {Assignment, PromptSetInterface, State,} from "../../../models/promptset.modal";
 import isSequoiaDevice from "../../../services/promptsetService";
-import { promptSetContext } from "../../../hooks/promptsetContext";
-import { STATE } from "../../../constants/promptSetConstants";
-import { getDeviceType, setDeviceType } from "../../../constants/deviceType";
-import { AppDispatch } from "../../../redux/store";
-import { fetchSoftKeys } from "../../../redux/thunks/softkeyThunk";
+import {promptSetContext} from "../../../hooks/promptsetContext";
+import {STATE} from "../../../constants/promptSetConstants";
+import {getDeviceType, setDeviceType} from "../../../constants/deviceType";
+import {AppDispatch} from "../../../redux/store";
+import {fetchSoftKeys} from "../../../redux/thunks/softkeyThunk";
 
 export interface PromptSetRootState {
-  promptset: {
-    data: PromptSetInterface;
-    isLoading: boolean;
-    error: any;
-  };
+    promptset: {
+        data: PromptSetInterface; isLoading: boolean; error: any;
+    };
 }
 
 export default function PromptTree() {
-  const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch<AppDispatch>();
 
-  // STATES
-  const [isSaving, setIsSaving] = useState(false); //for save button
+    // STATES
+    const [isSaving, setIsSaving] = useState(false); //for save button
 
-  // SELECTOR
-  const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
-  );
+    // SELECTOR
+    const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
 
-  // CONTEXT API
-  const {
-    promptSetData,
-    setPromptSetData,
-    setActiveStateId,
-    setActiveControlType,
-    setActivePromptEditorId,
-  } = useContext(promptSetContext);
+    // CONTEXT API
+    const {
+        promptSetData, setPromptSetData, setActiveStateId, setActiveControlType, setActivePromptEditorId,
+    } = useContext(promptSetContext);
 
-  // EFFECTS
-  useEffect(() => {
-    setPromptSetData(promptSetData);
-  }, []);
+    // EFFECTS
+    useEffect(() => {
+        setPromptSetData(promptSetData);
+    }, []);
 
-  useEffect(() => {
-    if (promptsetData) {
-      setDeviceType(promptsetData.deviceType);
-      if (getDeviceType()) {
-        dispatch(fetchSoftKeys());
-      }
+    useEffect(() => {
+        if (promptsetData) {
+            setDeviceType(promptsetData.deviceType);
+            if (getDeviceType()) {
+                dispatch(fetchSoftKeys());
+            }
+        }
+    }, [promptsetData]);
+
+    function handleSavePromptSet() {
+        setIsSaving(!isSaving);
     }
-  }, [promptsetData]);
 
-  function handleSavePromptSet() {
-    setIsSaving(!isSaving);
-  }
+    function onClickState(state_id: string, child_id: string) {
+        setActiveStateId(state_id);
+        setActiveControlType(STATE);
+        setActivePromptEditorId(child_id);
+    }
 
-  function onClickState(state_id: string, child_id: string) {
-    setActiveStateId(state_id);
-    setActiveControlType(STATE);
-    setActivePromptEditorId(child_id);
-  }
-
-  function saveState() {
-    console.log("state saved");
-  }
+    function saveState() {
+        console.log("state saved");
+    }
 
   return (
     <div className="left-container">

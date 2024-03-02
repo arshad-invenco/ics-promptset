@@ -26,6 +26,7 @@ import { promptSetContext } from "../../../../hooks/promptsetContext";
 import { Modal } from "react-bootstrap";
 import MediaModal from "../../modals/media-modal/mediaModal";
 import { Asset } from "../../../../models/media.modal";
+import { setClickOutside } from "../../../../constants/clickOutside";
 
 interface AssetsDropdownProps {
   childState: Assignment;
@@ -71,10 +72,12 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleShow = () => {
+    setClickOutside(true);
     setShow(true);
   };
 
   const handleClose = () => {
+    setClickOutside(false);
     setShow(false);
   };
 

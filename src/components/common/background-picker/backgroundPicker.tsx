@@ -6,6 +6,7 @@ import { Modal } from "react-bootstrap";
 import MediaModal from "../../PromptBuilder/modals/media-modal/mediaModal";
 import { Asset } from "../../../models/media.modal";
 import { IMAGE } from "../../../constants/promptSetConstants";
+import { setClickOutside } from "../../../constants/clickOutside";
 
 interface BackgroundPickerProps {
   value: string;
@@ -18,10 +19,12 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
 
   const handleShow = () => {
     setShow(true);
+    setClickOutside(true);
   };
 
   const handleClose = () => {
     setShow(false);
+    setClickOutside(false);
   };
 
   const generateImgURL = () => {
@@ -36,6 +39,10 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
   const handleAsset = (asset: Asset) => {
     setValue(asset.id);
     setShow(false);
+  };
+
+  const handleModalClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
   };
 
   return (
@@ -59,6 +66,7 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
           onHide={handleClose}
           className="media-modal"
           size="lg"
+          onClick={handleModalClick}
         >
           <MediaModal
             hide={handleClose}

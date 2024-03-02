@@ -1,0 +1,40 @@
+
+
+
+.ics-prompt-builder-preview-wrapper{
+  display: flex;
+  &.prompt-builder-size{
+    transition: all .15s linear;
+    overflow-x: hidden;
+    padding-right: 10px;
+  }
+
+  .soft-keys{
+    &.soft-keys-left{
+        color: blue;
+    }
+    &.soft-keys-right{
+        color: yellow;
+    }
+  }
+
+  .ics-prompt-builder-preview-container{
+    background-color: #424242;
+    width: 100%;
+    height: fit-content;
+    &.G6-200 {
+      padding: 30px 32px 5px;
+    }
+    &.G7-100 {
+      padding: 48px 57px 38px;
+    }
+    &.G7-100-15, &.G6-300, &.G7-100-8 {
+      padding: 30px 32px 20px;
+    }
+
+    .ics-prompt-builder{
+      height: fit-content;
+    }
+  }
+
+}
