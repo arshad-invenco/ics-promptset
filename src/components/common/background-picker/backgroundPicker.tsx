@@ -2,6 +2,11 @@ import { useState } from "react";
 import "./backgroundPicker.scss";
 import ColorPicker from "../../PromptBuilder/modals/color-picker/colorPicker";
 import { getBaseUrl } from "../../../constants/app";
+import { Modal } from "react-bootstrap";
+import MediaModal from "../../PromptBuilder/modals/media-modal/mediaModal";
+import { Asset } from "../../../models/media.modal";
+import { IMAGE } from "../../../constants/promptSetConstants";
+import { setClickOutside } from "../../../constants/clickOutside";
 
 interface BackgroundPickerProps {
   value: string;
@@ -10,22 +15,39 @@ interface BackgroundPickerProps {
 
 function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
   const [bgColor, setBgColor] = useState("000000");
+  const [show, setShow] = useState(false);
 
-  const generateImgURL = () => {
-    return `url(${getBaseUrl()}/v1/media/assets/${value}/source)`;
+  const handleShow = () => {
+    setShow(true);
+    setClickOutside(true);
   };
 
-  const openAssetModal = () => {
-    // Implement your logic to open asset modal
+  const handleClose = () => {
+    setShow(false);
+    setClickOutside(false);
+  };
+
+  const generateImgURL = () => {
+    return `url(${getBaseUrl()}/media/assets/${value}/source)`;
   };
 
   const updateColor = (color: string) => {
     if (color === bgColor && value === color) return;
     setValue(color);
   };
+
+  const handleAsset = (asset: Asset) => {
+    setValue(asset.id);
+    setShow(false);
+  };
+
+  const handleModalClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+
   return (
     <div className="ics-bg-picker">
-      <div className="selected-bg" onClick={(e) => e.stopPropagation()}>
+      <div className="selected-bg">
         {value.length > 6 ? (
           <div
             className="image"
@@ -36,16 +58,23 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
         )}
       </div>
       <div className="select-bg">
-        <div
-          className="image"
-          onClick={(e) => {
-            openAssetModal();
-            e.stopPropagation();
-          }}
-        >
+        <div className="image" onClick={handleShow}>
           <i className="fa fa-picture-o" aria-hidden="true"></i>
         </div>
-        <div className="color" onClick={(e) => e.stopPropagation()}>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          className="media-modal"
+          size="lg"
+          onClick={handleModalClick}
+        >
+          <MediaModal
+            hide={handleClose}
+            onAssetSelection={handleAsset}
+            type={IMAGE}
+          ></MediaModal>
+        </Modal>
+        <div className="color">
           <i className="fa fa-paint-brush" aria-hidden="true"></i>
           <ColorPicker value={bgColor} onChange={updateColor} />
         </div>

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Font } from "../../models/fonts";
+import { Font } from "../../models/fonts.modal";
 import { fetchFonts } from "../thunks/fontThunk";
 
 interface FontState {

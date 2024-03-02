@@ -1,4 +1,4 @@
-import { Font } from "../models/fonts";
+import { Font } from "../models/fonts.modal";
 
 export const AssetsDropdownMapping: {
   [key: string]: { icon: string; text: string; type: string };

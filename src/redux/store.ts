@@ -4,6 +4,7 @@ import { daypartSlice } from "./reducers/daypartSlice";
 import { keycodeSlice } from "./reducers/keycodeSlice";
 import { softkeySlice } from "./reducers/softkeySlice";
 import { fontSlice } from "./reducers/fontSlice";
+import { assetSlice } from "./reducers/mediaSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     keycode: keycodeSlice.reducer,
     softkey: softkeySlice.reducer,
     font: fontSlice.reducer,
+    asset: assetSlice.reducer,
   },
 });
 

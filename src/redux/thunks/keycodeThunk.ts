@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getBaseUrl } from "../../constants/app";
-import { Keycode } from "../../models/keycode";
+import { Keycode } from "../../models/keycode.modal";
 
 export const fetchKeyCodes = createAsyncThunk<Keycode[]>(
   "[keycode]/fetchKeyCodes",
