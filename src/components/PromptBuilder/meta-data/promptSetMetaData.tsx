@@ -1,18 +1,47 @@
 import "./promptSetMetaData.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PromptSetInterface } from "../../../models/promptset.modal";
 import { useSelector } from "react-redux";
 import { PromptSetRootState } from "../Tree/promptTree";
 import { getDateAndTime } from "../../../services/promptsetService";
+import {
+  getClickOutside,
+  setClickOutside,
+} from "../../../constants/clickOutside";
+import BackgroundPicker from "../../common/background-picker/backgroundPicker";
 
 export default function PromptSetMetaData() {
-  const [acticeIcon, setActiceIcon] = useState(true);
+  const [open, setDropdownStatus] = useState(false);
+  const [value, setValue] = useState("#000000");
+  const bgPickerRef = useRef<HTMLDivElement>(null);
 
   const promptsetData: PromptSetInterface = useSelector(
     (state: PromptSetRootState) => state.promptset.data
   );
 
-  useEffect(() => {}, []);
+  function handleDropdown() {
+    setDropdownStatus(!open);
+    if (open) setClickOutside(true);
+    else setClickOutside(false);
+  }
+
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      bgPickerRef.current &&
+      !bgPickerRef.current.contains(event.target as Node) &&
+      !getClickOutside()
+    ) {
+      setDropdownStatus(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={"ics-prompt-builder-metadata"}>
@@ -51,19 +80,20 @@ export default function PromptSetMetaData() {
         <p className="meta-container-title">Default colors</p>
         <div className="d-flex-row meta-buttons-container">
           <button className="btn btn-primary meta-button">Font Color</button>
-          <button
-            onClick={() => {
-              setActiceIcon(!acticeIcon);
-            }}
-            className="btn btn-primary meta-button"
-          >
-            Background
-            {acticeIcon ? (
-              <i className="fas fa-chevron-circle-up"></i>
-            ) : (
-              <i className="fas fa-chevron-circle-down"></i>
-            )}
-          </button>
+          <div ref={bgPickerRef}>
+            <button
+              onClick={handleDropdown}
+              className="btn btn-primary meta-button"
+            >
+              Background
+              {open ? (
+                <i className="fas fa-chevron-circle-up"></i>
+              ) : (
+                <i className="fas fa-chevron-circle-down"></i>
+              )}
+            </button>
+            {open && <BackgroundPicker value={value} setValue={setValue} />}
+          </div>
         </div>
       </div>
 

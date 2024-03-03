@@ -26,6 +26,8 @@ import {
   getClickOutside,
   setClickOutside,
 } from "../../../../constants/clickOutside";
+import SaveTouchMask from "../../modals/touch-mask-modal/save-touch-mask/saveTouchMask";
+import { fetchTouchMasks } from "../../../../redux/thunks/touchMaskThunk";
 
 interface InnerStateProps {
   child: Assignment;
@@ -35,6 +37,7 @@ interface InnerStateProps {
 export default function InnerStates(props: InnerStateProps) {
   const { child, index } = props;
   const [show, setShow] = useState(false);
+  const [showSaveTouchMask, setShowSaveTouchMask] = useState(false);
 
   const handleShow = () => {
     setClickOutside(true);
@@ -44,6 +47,14 @@ export default function InnerStates(props: InnerStateProps) {
   const handleClose = () => {
     setClickOutside(false);
     setShow(false);
+  };
+
+  const handleSaveTouchClose = () => {
+    setShowSaveTouchMask(false);
+  };
+
+  const handleNewTouchMask = (maskName: string) => {
+    //Send Post request to create new touch mask
   };
 
   // SELECTOR
@@ -162,11 +173,7 @@ export default function InnerStates(props: InnerStateProps) {
                       handleShow();
                     }}
                   />
-                  <Modal
-                    show={show}
-                    onHide={handleClose}
-                    className="daypart-modal"
-                  >
+                  <Modal show={show} onHide={handleClose} size="sm">
                     <DayPartModal
                       hide={handleClose}
                       daypart={handleDaypart}
@@ -273,6 +280,17 @@ export default function InnerStates(props: InnerStateProps) {
                             : ""
                         }`}
                       ></i>
+                      <Modal
+                        show={showSaveTouchMask}
+                        onHide={handleSaveTouchClose}
+                        className="touch-mask-modal"
+                        size="sm"
+                      >
+                        <SaveTouchMask
+                          hide={handleSaveTouchClose}
+                          newTouchMask={handleNewTouchMask}
+                        />
+                      </Modal>
                     </div>
                   </div>
                 </div>

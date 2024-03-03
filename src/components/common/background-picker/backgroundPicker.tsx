@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./backgroundPicker.scss";
-import ColorPicker from "../../PromptBuilder/modals/color-picker/colorPicker";
+import ColorPicker from "../../PromptBuilder/modals/color-picker-modal/colorPicker";
 import { getBaseUrl } from "../../../constants/app";
 import { Modal } from "react-bootstrap";
 import MediaModal from "../../PromptBuilder/modals/media-modal/mediaModal";
 import { Asset } from "../../../models/media.modal";
 import { IMAGE } from "../../../constants/promptSetConstants";
-import { setClickOutside } from "../../../constants/clickOutside";
+import {
+  getClickOutside,
+  setClickOutside,
+} from "../../../constants/clickOutside";
+import ColorPickerModal from "../../PromptBuilder/modals/color-picker-modal/colorPicker";
 
 interface BackgroundPickerProps {
   value: string;
@@ -15,16 +19,27 @@ interface BackgroundPickerProps {
 
 function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
   const [bgColor, setBgColor] = useState("000000");
-  const [show, setShow] = useState(false);
+  const [bgShow, setBgShow] = useState(false);
+  const [colorShow, setColorShow] = useState(false);
 
-  const handleShow = () => {
-    setShow(true);
+  const handleBgShow = () => {
+    setBgShow(true);
     setClickOutside(true);
   };
 
-  const handleClose = () => {
-    setShow(false);
+  const handleBgClose = () => {
+    setBgShow(false);
     setClickOutside(false);
+  };
+
+  const handleColorShow = () => {
+    setClickOutside(true);
+    setColorShow(true);
+  };
+
+  const handleColorClose = () => {
+    setClickOutside(false);
+    setColorShow(false);
   };
 
   const generateImgURL = () => {
@@ -38,11 +53,7 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
 
   const handleAsset = (asset: Asset) => {
     setValue(asset.id);
-    setShow(false);
-  };
-
-  const handleModalClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
+    setBgShow(false);
   };
 
   return (
@@ -58,26 +69,37 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
         )}
       </div>
       <div className="select-bg">
-        <div className="image" onClick={handleShow}>
+        <div className="image" onClick={handleBgShow}>
           <i className="fa fa-picture-o" aria-hidden="true"></i>
         </div>
         <Modal
-          show={show}
-          onHide={handleClose}
+          show={bgShow}
+          onHide={handleBgClose}
           className="media-modal"
           size="lg"
-          onClick={handleModalClick}
         >
           <MediaModal
-            hide={handleClose}
+            hide={handleBgClose}
             onAssetSelection={handleAsset}
             type={IMAGE}
           ></MediaModal>
         </Modal>
-        <div className="color">
+        <div className="color" onClick={handleColorShow}>
           <i className="fa fa-paint-brush" aria-hidden="true"></i>
-          <ColorPicker value={bgColor} onChange={updateColor} />
         </div>
+        <Modal
+          show={colorShow}
+          onHide={handleColorClose}
+          className="color-modal"
+          size="sm"
+          centered
+        >
+          <ColorPickerModal
+            value={bgColor}
+            onChange={updateColor}
+            hide={handleColorClose}
+          />
+        </Modal>
       </div>
     </div>
   );
