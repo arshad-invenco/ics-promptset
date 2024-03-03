@@ -6,7 +6,7 @@ import {
     selectPromptSetAssignmentById,
     selectPromptSetStateById
 } from "../../../redux/selectors/promptSetSelectors";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {promptSetContext} from "../../../hooks/promptsetContext";
 import {
     AREA,
@@ -50,6 +50,10 @@ export default function Controllers() {
     function handleTransactionStateChange() {
 
     }
+
+    useEffect(() => {
+
+    }, [elementData, areaData]);
 
     function renderActiveControl() {
         switch (activeControlType) {
