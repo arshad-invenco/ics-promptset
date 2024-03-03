@@ -7,9 +7,9 @@ import {AppDispatch} from "../../../../redux/store";
 import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";
 import {debounce} from "@mui/material";
 import FontDropdown from "../../../common/font-dropdown/fontDropdown";
-import {selectFonts} from "../../../../redux/selectors/fontSelectors";
-import {Font} from "../../../../models/fonts";
-import {filterFonts} from "../../../../constants/fontConstant";
+import { selectFonts } from "../../../../redux/selectors/fontSelectors";
+import { Font } from "../../../../models/fonts.modal";
+import { filterFonts } from "../../../../constants/fontConstant";
 
 interface ElementsProp {
     elementData: Elements;

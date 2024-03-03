@@ -213,10 +213,10 @@
                 }
 
                 .elements-list {
-                  .active-inner-element{
+                  .active-inner-element {
                     background-color: #eee;
                     .element .element-left-container {
-                      i{
+                      i {
                         color: #616161 !important;
                       }
                     }
@@ -265,7 +265,7 @@
                         }
                       }
 
-                      .touchmask-save-icon{
+                      .touchmask-save-icon {
                         font-size: 18px;
                         margin-right: 10px;
                       }
@@ -279,7 +279,7 @@
                           color: #616161;
                         }
                       }
-                      .margin-right-0{
+                      .margin-right-0 {
                         margin-right: 1.2rem;
                       }
                     }
@@ -334,8 +334,4 @@
   }
 }
 
-.daypart-modal {
-  .modal-dialog {
-    width: 40rem;
-  }
-}
+

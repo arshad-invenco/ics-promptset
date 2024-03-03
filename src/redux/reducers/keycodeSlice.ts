@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Keycode } from "../../models/keycode";
+import { Keycode } from "../../models/keycode.modal";
 import { fetchKeyCodes } from "../thunks/keycodeThunk";
 
 interface KeycodeState {

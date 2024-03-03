@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Softkey } from "../../models/softkey";
+import { Softkey } from "../../models/softkey.modal";
 import { fetchSoftKeys } from "../thunks/softkeyThunk";
 
 interface SoftkeyState {

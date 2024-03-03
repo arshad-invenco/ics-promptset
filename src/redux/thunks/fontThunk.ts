@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getBaseUrl } from "../../constants/app";
-import { Font } from "../../models/fonts";
+import { Font } from "../../models/fonts.modal";
 import { DEFAULT_FONTS } from "../../constants/fontConstant";
 
 export const fetchFonts = createAsyncThunk<Font[]>(

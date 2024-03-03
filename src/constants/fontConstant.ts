@@ -1,4 +1,4 @@
-import { Font } from "../models/fonts";
+import { Font } from "../models/fonts.modal";
 import { Elements } from "../models/promptset.modal";
 import { getDeviceType } from "./deviceType";
 
