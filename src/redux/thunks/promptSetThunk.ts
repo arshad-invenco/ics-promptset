@@ -6,7 +6,7 @@ export const fetchPromptSet = createAsyncThunk<PromptSetInterface>(
   "[prompt set]/fetchPromptSet",
   async () => {
     const response = await fetch(
-      `${getBaseUrl()}/media/promptsets/0c414d75-657c-431f-955d-950b3eef0d4f`,
+      `${getBaseUrl()}/media/promptsets/7b6b43c8-080c-4548-8618-362db74e77dd`,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
