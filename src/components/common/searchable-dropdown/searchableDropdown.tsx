@@ -78,7 +78,10 @@ function SearchableDropdown({
 
     const filterItems = (item: any) => {
       const itemName = item.name.toLowerCase();
-      const itemCode = item.code?.toLowerCase();
+      let itemCode;
+      if (isGroup) {
+        itemCode = item.code?.toLowerCase();
+      }
 
       return (
         itemName.includes(trimmedInput) || itemCode?.includes(trimmedInput)

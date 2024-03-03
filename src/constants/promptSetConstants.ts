@@ -1,4 +1,5 @@
 import { Font } from "../models/fonts.modal";
+import { PromptType } from "../models/promptset.modal";
 
 export const AssetsDropdownMapping: {
   [key: string]: { icon: string; text: string; type: string };
@@ -56,3 +57,8 @@ export const TYPE = "type";
 
 export const ELEMENTS_LIST = [BG, TEXT, IMAGE, VIDEO, INPUT, TOUCH_MASK, AREA];
 
+export const PROMPT_TYPES: PromptType[] = [
+  { id: "1", name: "Standard" },
+  { id: "2", name: "PIN" },
+  { id: "3", name: "Data" },
+];

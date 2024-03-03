@@ -5,6 +5,7 @@ import { keycodeSlice } from "./reducers/keycodeSlice";
 import { softkeySlice } from "./reducers/softkeySlice";
 import { fontSlice } from "./reducers/fontSlice";
 import { assetSlice } from "./reducers/mediaSlice";
+import { touchMaskSlice } from "./reducers/touchMaskSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     softkey: softkeySlice.reducer,
     font: fontSlice.reducer,
     asset: assetSlice.reducer,
+    touchmask: touchMaskSlice.reducer,
   },
 });
 

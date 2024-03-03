@@ -79,7 +79,7 @@ function DayPartModal({ hide, daypart }: ModalProps) {
         >
           CANCEL
         </button>
-        <div className={selectedDayPart === "Daypart" ? "add-daypart" : ""}>
+        <div className={selectedDayPart === "Daypart" ? "no-selection" : ""}>
           <button
             disabled={selectedDayPart === "Daypart"}
             className="btn btn-primary"

@@ -11,6 +11,7 @@ import { PromptSetEditor } from "../PromptEditor/promptSetEditor";
 import { fetchDayPart } from "../../redux/thunks/daypartThunk";
 import { fetchKeyCodes } from "../../redux/thunks/keycodeThunk";
 import { fetchFonts } from "../../redux/thunks/fontThunk";
+import { fetchTouchMasks } from "../../redux/thunks/touchMaskThunk";
 
 export function PromptSet() {
   // STATES -> CONTEXT_API
@@ -45,6 +46,7 @@ export function PromptSet() {
     dispatch(fetchDayPart());
     dispatch(fetchKeyCodes());
     dispatch(fetchFonts());
+    dispatch(fetchTouchMasks());
   }, []);
 
   return (

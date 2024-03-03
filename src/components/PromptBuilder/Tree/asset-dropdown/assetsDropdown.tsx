@@ -27,6 +27,8 @@ import { Modal } from "react-bootstrap";
 import MediaModal from "../../modals/media-modal/mediaModal";
 import { Asset } from "../../../../models/media.modal";
 import { setClickOutside } from "../../../../constants/clickOutside";
+import SelectTouchMask from "../../modals/touch-mask-modal/selectTouchMask";
+import { TouchMask } from "../../../../models/touchMask.modal";
 
 interface AssetsDropdownProps {
   childState: Assignment;
@@ -53,6 +55,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   const [assets, setAssets] = useState<string[]>([]);
   const [show, setShow] = useState(false);
   const [selectedAssetType, setSelectedAssetType] = useState("");
+  const [showTouchMask, setShowTouchMask] = useState(false);
 
   // SELECTORS
   const { deviceType, screenWidth, fontColor } = useSelector(
@@ -83,6 +86,23 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
   const handleAsset = (asset: Asset) => {
     setShow(false);
+  };
+
+  const handleShowTouchMask = () => {
+    setShowTouchMask(true);
+  };
+
+  const handleCloseTouchMask = () => {
+    setShowTouchMask(false);
+  };
+
+  const handleTouchMask = (touchMask: TouchMask | null) => {
+    setShowTouchMask(false);
+    if (touchMask) {
+      //Add touch mask to the assignment of the promptset
+    } else {
+      //Create new touch mask
+    }
   };
 
   function fetchAssets() {
@@ -183,6 +203,8 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
     } else if (type === IMAGE || type === VIDEO) {
       handleShow();
       setSelectedAssetType(type);
+    } else if (type === TOUCH_MASK) {
+      handleShowTouchMask();
     }
   }
 
@@ -211,6 +233,17 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
           onAssetSelection={handleAsset}
           type={selectedAssetType}
         ></MediaModal>
+      </Modal>
+      <Modal
+        show={showTouchMask}
+        onHide={handleCloseTouchMask}
+        className="touch-mask-modal"
+        size="sm"
+      >
+        <SelectTouchMask
+          hide={handleCloseTouchMask}
+          onTouchMaskSelection={handleTouchMask}
+        ></SelectTouchMask>
       </Modal>
     </>
   );
