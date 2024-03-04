@@ -20,7 +20,6 @@ import { fetchPromptSet } from "../../../redux/thunks/promptSetThunk";
 import { getBaseUrl } from "../../../constants/app";
 import { getCompanyId, setCompanyId } from "../../../constants/language";
 import { fetchLanguages } from "../../../redux/thunks/languageThunk";
-import { get } from "http";
 
 export interface PromptSetRootState {
   promptset: {
@@ -31,10 +30,11 @@ export interface PromptSetRootState {
 }
 
 export default function PromptTree() {
+  // REDUX
   const dispatch = useDispatch<AppDispatch>();
 
   // STATES
-  const [isSaving, setIsSaving] = useState(false); //for save button
+  const [isSaving, setIsSaving] = useState(false);
   const [showNewPromptModal, setShowNewPromptModal] = useState(false);
 
   // SELECTOR
@@ -49,6 +49,7 @@ export default function PromptTree() {
     setActiveStateId,
     setActiveControlType,
     setActivePromptEditorId,
+    setActiveElementId,
   } = useContext(promptSetContext);
 
   // EFFECTS
@@ -65,6 +66,16 @@ export default function PromptTree() {
       }
       if (getCompanyId()) {
         dispatch(fetchLanguages());
+      }
+      if (
+        promptsetData &&
+        promptsetData.states &&
+        promptsetData.states.length > 0
+      ) {
+        setActiveStateId(promptsetData.states[0].id);
+        if (promptsetData.states[0].assignments.length > 0) {
+          setActivePromptEditorId(promptsetData.states[0].assignments[0].id);
+        }
       }
     }
   }, [promptsetData]);
