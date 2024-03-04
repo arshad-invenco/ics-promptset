@@ -296,34 +296,37 @@ export default function InnerStates(props: InnerStateProps) {
                 </div>
                 {/*for touch map*/}
                 {child?.touchmap &&
-                  child.touchmap.areas &&
-                  child.touchmap.areas.map((area, index) => {
-                    return (
-                      <div
-                        onClick={() => {
-                          onClickElement(area.id, AREA);
-                        }}
-                        className={`inner-elements element-type-area ${
-                          activeElementId === area.id
-                            ? "active-inner-element"
-                            : ""
-                        } `}
-                      >
-                        <div className="element">
-                          <div className="element-left-container">
-                            <i className="fas fa-square"></i>
-                            Touch Area
-                          </div>
-                          <i
-                            onClick={() => {
-                              deleteTouchMapOrArea(area.id);
-                            }}
-                            className="far fa-trash-alt trash-icon"
-                          ></i>
-                        </div>
-                      </div>
-                    );
-                  })}
+                    child.touchmap.areas &&
+                    child.touchmap.areas.map((area, index) => {
+                      if (area) {
+                        return (
+                            <div
+                                onClick={() => {
+                                  onClickElement(area.id, AREA);
+                                }}
+                                className={`inner-elements element-type-area ${
+                                    activeElementId === area.id
+                                        ? "active-inner-element"
+                                        : ""
+                                } `}
+                            >
+                              <div className="element">
+                                <div className="element-left-container">
+                                  <i className="fas fa-square"></i>
+                                  Touch Area
+                                </div>
+                                <i
+                                    onClick={() => {
+                                      deleteTouchMapOrArea(area.id);
+                                    }}
+                                    className="far fa-trash-alt trash-icon"
+                                ></i>
+                              </div>
+                            </div>
+                        );
+                      }
+                      return null;
+                    })}
               </>
             )}
           </div>

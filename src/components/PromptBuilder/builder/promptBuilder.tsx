@@ -82,9 +82,9 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     }
                     break;
                 case "bg":
-                    svgElement = g.group(s.rect(0, 0, screenWidth, screenHeight).attr({
+                    svgElement = s.rect(0, 0, screenWidth, screenHeight).attr({
                         fill: `#${newElement.value}`, id: newElement.id
-                    }));
+                    });
                     break;
                 case "input":
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
@@ -155,7 +155,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 }
                 let stop = function (this: Snap.Element) {
                     const ele = this.getBBox();
-                    console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
                     updateElement(newElement, ele.x, ele.y, ele.width, ele.height);
                 }
                 svgElement.click(() => {
@@ -238,7 +237,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 }
                 let stop = function (this: Snap.Element) {
                     const ele = this.getBBox();
-                    console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
                 }
                 areaElement.drag(move, start, stop);
 

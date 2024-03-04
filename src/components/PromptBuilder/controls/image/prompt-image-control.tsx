@@ -6,6 +6,7 @@ import {debounce} from "@mui/material";
 import {AppDispatch} from "../../../../redux/store";
 import {useDispatch} from "react-redux";
 import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";
+import {getBaseUrl} from "../../../../constants/app";
 
 interface ElementsProp {
     elementData: Elements
@@ -24,6 +25,10 @@ export function ImageControl(props: ElementsProp) {
         dispatch(updateInputElement(element));
     }
 
+    const generateImgURL = (value:string) => {
+        return `url(${getBaseUrl()}/media/assets/${value}/source)`;
+    };
+
     // DEBOUNCE
     const debouncedOnChangeInput = debounce(onChangeInput, 1000);
 
@@ -31,7 +36,12 @@ export function ImageControl(props: ElementsProp) {
         <div className="ics-prompt-builder-image-controls d-flex-row">
             <div className="col-md-1">
                 <label>Image</label>
-                <div className="image-preview">
+                <div className="image-preview"
+                     style={{backgroundImage: generateImgURL(element.value),
+                         backgroundPosition: 'center',
+                         backgroundRepeat: 'no-repeat',
+                         backgroundSize: 'contain'}}
+                >
                 </div>
             </div>
 
