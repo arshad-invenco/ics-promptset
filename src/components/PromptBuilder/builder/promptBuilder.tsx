@@ -47,27 +47,26 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         dispatch(updateInputElement({...newElement, left: Math.ceil(x), top: Math.ceil(y)}));
     }
 
+    function onclickFunction(id: string, type: string, event: any) {
+        console.log(id, type, 'clicked');
+        event.stopPropagation();
+    }
+
     function initElements(elements: Elements[], areas: TouchMapAreas[]) {
         s = window.Snap("#svg");
         s.clear();
         g = s.group();
-        const k = s.g();
         elements.forEach(element => {
             let svgElement;
             let newElement = {...element};
-            let elementUrl = '';
+            let elementUrl = 'media url';
             let x = Math.min(Math.max(10, newElement.left || 0), screenWidth);
             let y = Math.min(Math.max(10, newElement.top || 0), screenHeight);
             switch (newElement.type) {
-                case 'bg':
-                    svgElement = s.rect(0, 0, screenWidth, screenHeight).attr({
-                        fill: `#${newElement.value}`, id: newElement.id
-                    });
-                    break;
-                case 'text':
+                case "text":
+                    let wrappedText = g.group();
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
                     newElement.left = newElement.left === undefined ? 0 : newElement.left;
-
                     let textSvg = g.text(x, y, newElement.value).attr({
                         fill: `#${newElement.color}`,
                         id: newElement.id,
@@ -75,14 +74,25 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         cursor: "pointer !important",
                         dy: '1em',
                     });
+                    wrappedText.rect(10, 20).attr({
+                        fill: 'red',
+                        id: newElement.id
+                    })
+                    wrappedText.add(textSvg);
+
                     let bbox = textSvg.getBBox();
                     if (activeElementId === newElement.id) {
-                        svgElement = createWrapperController(bbox, newElement, textSvg);
+                        svgElement = createWrapperController(bbox, newElement, wrappedText);
                     } else {
-                        svgElement = textSvg;
+                        svgElement = wrappedText;
                     }
                     break;
-                case 'input':
+                case "bg":
+                    svgElement = g.group(s.rect(0, 0, screenWidth, screenHeight).attr({
+                        fill: `#${newElement.value}`, id: newElement.id
+                    }));
+                    break;
+                case "input":
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
                     newElement.left = newElement.left === undefined ? 0 : newElement.left;
                     let inputSvg = g.text(x, y, newElement.value).attr({
@@ -100,7 +110,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         svgElement = inputSvg;
                     }
                     break;
-                case 'image':
+                case "image":
                     let imageGroup = g.group();
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/source`;
                     imageGroup.transform(`t${x},${y}`);
@@ -110,7 +120,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     imageGroup.add(svgElement);
                     svgElement = imageGroup;
                     break;
-                case 'video':
+                case "video":
                     let videoGroup = g.group();
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/thumbnail`;
                     svgElement = s.image(elementUrl, 0, 0, newElement.width, newElement.height).attr({
@@ -123,11 +133,9 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     console.log('default No Element Present');
                     return;
             }
-            svgElement.click(() => {
-                console.log("INPUTTTTTTTT");
-                onClickSVGElement(newElement.id, newElement.type);
-            })
+
             if (svgElement) {
+                console.log('svgElement', svgElement, newElement.id, newElement.type);
                 let start = function (this: Snap.Element) {
                     this.data('origTransform', this.transform().local);
                     this.data('origBBox', this.getBBox());
@@ -156,9 +164,15 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
                     updateElement(newElement, ele.x, ele.y, ele.width, ele.height);
                 }
-                if (newElement.type !== 'bg' && newElement.type !== 'video') svgElement.drag(move, start, stop);
-                g.add(svgElement);
+                svgElement.click(() => {
+                    // console.log("svgElement clicked");
+                    onClickSVGElement(newElement.id, newElement.type);
+                });
+                if (newElement.type !== 'bg' && newElement.type !== 'video'){
+                    svgElement.drag(move, start, stop);
+                }
 
+                g.add(svgElement);
             }
         });
         areas.forEach(area => {
@@ -247,6 +261,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         console.log(elementBBox, 'elementBBox', type);
         let coords: number[] = area?.coords.split(',').map(Number) || [0, 0, 0, 0];
         let controller: any;
+        let NewElementSVG;
         if (type === 'area') {
             if (area?.shape === 'circle') {
                 controller = s.rect(bboxInput.x, bboxInput.y, coords[3] * 2, coords[3] * 2).attr({
@@ -263,44 +278,71 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             });
         }
         let controllerBBox = controller.getBBox();
-        let controllerRect = g.group(controller, g.group(s.rect(0, 0, 20, 10).attr({
+        let controllerResize = g.group(s.rect(0, 0, 20, 10).attr({
             fill: '#32b447', transform: 'matrix(0,1,-1,0,15,-5)', fillOpacity: 0.9
         }), s.rect(0, 0, 10, 20).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,5)', fillOpacity: 0.9})).attr({
-            id: 'control', cursor: 'se-resize', transform: `matrix(1,0,0,1,${controllerBBox.x2},${controllerBBox.y2})`
-        }));
-        // controllerRect.drag(move, start, stop);
-        //
-        // function start(this: Snap.Element) {
-        //     this.data('origTransform', this.transform().local);
-        //     this.data('origBBox', this.getBBox());
-        // }
-        //
-        // function move(this: Snap.Element, dx: number, dy: number) {
-        //     let origBBox = this.data('origBBox');
-        //
-        //     let newSize = Math.max(origBBox.width + dx, origBBox.height + dy);
-        //     console.log('newSize', newSize, origBBox.width, origBBox.height);
-        //
-        //     // Check if the new size would be outside the boundaries of the SVG container
-        //     if (newSize > screenWidth) newSize = screenWidth;
-        //     if (newSize > screenHeight) newSize = screenHeight;
-        //
-        //     // Apply the new size
-        //     controller.attr({
-        //         width: newSize, height: newSize
-        //     });
-        // }
-        //
-        // function stop(this: Snap.Element) {
-        //     const ele = this.getBBox();
-        //     console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
-        //     // updateElement(newElement, ele.x, ele.y, ele.width, ele.height); // Update the element with the new size
-        // }
+            id: 'controllerResize',
+            cursor: 'se-resize',
+            transform: `matrix(1,0,0,1,${controllerBBox.x2},${controllerBBox.y2})`
+        })
+
+        let controllerRect = g.group(controller, controllerResize);
+
+        // Define the start function
+        let start = function (this: Snap.Element) {
+            this.data('origTransform', this.transform().local);
+            this.data('origBBox', this.getBBox());
+        }
+
+
+        // Define the move function
+        let move = function (this: Snap.Element, dx: number, dy: number) {
+            let origBBox = this.data('origBBox');
+
+            let newSize = Math.max(origBBox.width + dx, origBBox.height + dy);
+            // Check if the new size would be outside the boundaries of the SVG container
+            if (newSize > screenWidth) newSize = screenWidth;
+            if (newSize > screenHeight) newSize = screenHeight;
+
+            // Apply the new size
+            controller.attr({
+                width: controllerBBox.width+ newSize,
+                height: controllerBBox.height+ newSize
+            });
+            controllerResize.attr({
+                transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSize})`
+            });
+            controllerResize.mousedown(() => {
+                console.log('Mouse Down');
+            })
+            let children = ElementSvg?.children();
+            if (children && children.length > 0) {
+                NewElementSVG = children[0];
+                NewElementSVG.attr({
+                    width: controllerBBox.width+ newSize,
+                    height: controllerBBox.height+ newSize,
+                    id: 'NewElementSVG'
+                });
+            }
+        }
+        // Define the stop function
+        let stop = function (this: Snap.Element) {
+            const ele = this.getBBox();
+            console.log('finished dragging', ele);
+
+
+        }
+
+        // Call the drag function on the controllerRectResize
+        controllerResize.drag(move, start, stop);
 
         if (type === 'area') {
 
         }
-        return g.group(ElementSvg, controllerRect);
+        if (NewElementSVG)
+            return g.group(ElementSvg, NewElementSVG);
+        else
+            return g.group(ElementSvg, controllerRect);
     }
 
     useEffect(() => {

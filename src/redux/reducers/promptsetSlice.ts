@@ -39,16 +39,17 @@ export const promptsetSlice = createSlice({
             });
         },
         updateTouchMap: (state, action) => {
+            const {area, activePromptEditorId} = action.payload;
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
-                    if (assignment.touchmap) {
+                    if (assignment.touchmap && assignment.id === activePromptEditorId) {
                         assignment.touchmap.isTouchMaskChanged = true;
-                        assignment.touchmap.areas = assignment.touchmap?.areas?.map((area) => {
-                            if (area.id === action.payload.id) {
+                        assignment.touchmap.areas = assignment.touchmap?.areas?.map((touchMapArea) => {
+                            if (touchMapArea.id === area.id) {
                                 assignment.isAssignmentChanged = true;
-                                return action.payload;
+                                return area;
                             }
-                            return area;
+                            return touchMapArea;
                         });
                         state.isStateChanged = true;
                     }
