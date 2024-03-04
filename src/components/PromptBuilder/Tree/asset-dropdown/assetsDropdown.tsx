@@ -56,6 +56,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   const [show, setShow] = useState(false);
   const [selectedAssetType, setSelectedAssetType] = useState("");
   const [showTouchMask, setShowTouchMask] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState<Asset>({} as Asset);
 
   // SELECTORS
   const { deviceType, screenWidth, fontColor } = useSelector(
@@ -86,6 +87,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
   const handleAsset = (asset: Asset) => {
     setShow(false);
+    setSelectedAsset(asset);
   };
 
   const handleShowTouchMask = () => {
@@ -204,6 +206,8 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
     if (type === IMAGE || type === VIDEO) {
       handleShow();
       setSelectedAssetType(type);
+
+
     }
     if (type === TOUCH_MASK) {
       handleShowTouchMask();
