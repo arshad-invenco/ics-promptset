@@ -2,12 +2,12 @@ import { Modal } from "react-bootstrap";
 import "./updateDefaultFont.scss";
 
 interface UpdateDefaultFontProps {
-  hide: () => void;
+  onHide: () => void;
   onUpdateDefaultFont: () => void;
 }
 
 function UpdateDefaultFont({
-  hide,
+    onHide,
   onUpdateDefaultFont,
 }: UpdateDefaultFontProps) {
   return (
@@ -23,7 +23,7 @@ function UpdateDefaultFont({
         <p>Are you sure you want to continue?</p>
       </Modal.Body>
       <Modal.Footer>
-        <button className="btn btn-link" onClick={hide}>
+        <button className="btn btn-link" onClick={onHide}>
           NO
         </button>
         <button className="btn btn-gray" onClick={onUpdateDefaultFont}>

@@ -1,25 +1,19 @@
 import { Dropdown, Modal } from "react-bootstrap";
 import "./editLanguage.scss";
 import { useSelector } from "react-redux";
-import { selectLanguages } from "../../../../redux/selectors/languageSelectors";
 import { useEffect, useState } from "react";
 import { Language } from "../../../../models/language.modal";
 import { Font } from "../../../../models/fonts.modal";
 import { selectFonts } from "../../../../redux/selectors/fontSelectors";
-import {
-  filterFonts,
-  getFilteredFonts,
-} from "../../../../constants/fontConstant";
+import { getFilteredFonts } from "../../../../constants/fontConstant";
 import FontDropdown from "../../../common/font-dropdown/fontDropdown";
-import { get } from "http";
 import {
-  getDefaultLanguage,
   getLangModalViewItems,
-  langModalViewItems,
+  getPromptsetLanguages,
   onPromptLanguageSave,
-  setNewDefault,
 } from "../../../../constants/language";
 import UpdateDefaultFont from "./update-default-font-modal/updateDefaultFont";
+import { getBaseUrl } from "../../../../constants/app";
 
 interface EditLanguageModalProps {
   hide: () => void;
@@ -27,13 +21,34 @@ interface EditLanguageModalProps {
 
 function EditLanguageModal({ hide }: EditLanguageModalProps) {
   const fonts: Font[] = useSelector(selectFonts);
+  const defaultLanguageId = getPromptsetLanguages().find(
+    (lang) => lang.promptSetLanguageSupport.default
+  )?.languageSupportId;
 
   const filteredFonts = getFilteredFonts();
   const [languages, setLanguages] = useState<Language[]>(
     getLangModalViewItems()
   );
+
+  const defaultLanguage = languages.find(
+    (lang) => lang.languageSupportId === defaultLanguageId
+  );
+
   const [selectedDefaultLanguage, setSelectedDefaultLanguage] =
-    useState<Language>(getDefaultLanguage().value);
+    useState<Language>(defaultLanguage ?? ({} as Language));
+
+  useEffect(() => {
+    if (selectedDefaultLanguage) {
+      const defaultLanguage = languages.find(
+        (lang) =>
+          lang.languageSupportId === selectedDefaultLanguage.languageSupportId
+      );
+      if (defaultLanguage) {
+        defaultLanguage.default = true;
+      }
+    }
+  }, [selectedDefaultLanguage]);
+
   const [modifiedLanguages, setModifiedLanguages] = useState<Language[]>([]);
 
   const [showUpdateFontModal, setShowUpdateFontModal] = useState(false);
@@ -42,7 +57,22 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
     setShowUpdateFontModal(false);
   };
 
-  function handleUpdate() {}
+  function handleUpdate(updatedValue: boolean) {
+    const requestOptions = {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      body: JSON.stringify(updatedValue ? modifiedLanguages : languages),
+    };
+
+    fetch(
+      `${getBaseUrl()}/media/promptsets/7b6b43c8-080c-4548-8618-362db74e77dd/languages`,
+      requestOptions
+    )
+      .then(() => {
+        hide();
+      })
+      .catch(() => {});
+  }
 
   function handleFontSelection(item: Font, language: Language) {
     const index = languages.findIndex(
@@ -68,17 +98,42 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
   }
 
   function handlePromptLanguageSave() {
-    setModifiedLanguages(
-      onPromptLanguageSave(languages, selectedDefaultLanguage)
+    const newModifiedLanguages = onPromptLanguageSave(
+      languages,
+      selectedDefaultLanguage
     );
-    if (modifiedLanguages.length > 0) {
+    if (newModifiedLanguages.length > 0) {
       confirmAndPutPromptLanguages();
+    } else {
+      handleUpdate(false);
     }
+    setModifiedLanguages(newModifiedLanguages);
   }
 
   function confirmAndPutPromptLanguages() {
     setShowUpdateFontModal(true);
   }
+
+  useEffect(() => {
+   
+  }, []);
+
+  useEffect(() => {
+    if (selectedDefaultLanguage) {
+      setLanguages(
+        languages.map((lang) => {
+          if (
+            lang.languageSupportId === selectedDefaultLanguage.languageSupportId
+          ) {
+            lang.default = true;
+          } else {
+            lang.default = false;
+          }
+          return lang;
+        })
+      );
+    }
+  }, [selectedDefaultLanguage]);
 
   return (
     <div className="edit-language">
@@ -208,8 +263,8 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
         size="sm"
       >
         <UpdateDefaultFont
-          hide={handleUpdateFontModalClose}
-          onUpdateDefaultFont={handleUpdate}
+          onHide={handleUpdateFontModalClose}
+          onUpdateDefaultFont={() => handleUpdate(true)}
         />
       </Modal>
     </div>

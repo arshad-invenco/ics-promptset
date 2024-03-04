@@ -37,7 +37,7 @@ export function getPromptSet() {
 
 let isDefaultFontSettingsAvail: boolean = false;
 
-export let languageKeysSet: any = [];
+export let languageKeysSet: string[] = [];
 
 let defaultFontSettings: any = [];
 
@@ -249,21 +249,21 @@ export const getFontTypeByName = (type: string) => {
   }
 };
 
-export const handleLanguageCheck = (langModalViewItem: any, value: boolean) => {
+export const handleLanguageCheck = (langModalViewItem:Language, value: boolean) => {
   langModalViewItem.isAvailableInPromptSet = value;
   createDefaultLanguageList();
   languageValidation();
 };
 
 export const createDefaultLanguageList = () => {
-  defaultLanguageList = languageKeysSet.filter((item: any) => {
+  defaultLanguageList = languageKeysSet.filter((item:string) => {
     return promptSet.lang[item].promptSetLanguageSupport.default;
   });
   console.log(defaultLanguageList);
 };
 
 export const languageValidation = () => {
-  const invalidLangs = langModalViewItems.filter((item: any) => {
+  const invalidLangs = langModalViewItems.filter((item: Language) => {
     if (item.isAvailableInPromptSet) {
       return (
         item.type === null ||
@@ -279,7 +279,7 @@ export const languageValidation = () => {
 
   if (defaultLanguage !== undefined && modalState.error === false) {
     const defaultChecked = selectedLanguages.filter(
-      (item: any) => item?.language === defaultLanguage?.value?.language
+      (item: Language) => item?.language === defaultLanguage?.value?.language
     );
     modalState.error = defaultChecked.length === 0;
   }
@@ -287,7 +287,7 @@ export const languageValidation = () => {
 
 export const getSelectedLanguages = () => {
   return langModalViewItems.filter(
-    (item: any) => item.isAvailableInPromptSet === true
+    (item: Language) => item.isAvailableInPromptSet === true
   );
 };
 
@@ -300,6 +300,7 @@ export const getDefaultLanguage = () => {
       key: existingDefaultIndex,
       value: langModalViewItems[existingDefaultIndex],
     };
+    console.log(defaultLanguage)
   }
   return defaultLanguage;
 };
@@ -323,6 +324,7 @@ export const onPromptLanguageSave = (
   }));
 
   const languagesModified = isLanguagesModified(languages);
+  console.log(languagesModified, "languagesModified")
 
   if (languagesModified) {
     return languages;
@@ -335,13 +337,17 @@ const isLanguagesModified = (newLanguages: Language[]) => {
   const existingLang = getPromptsetLanguages()
     .sort((a, b) => a.languageSupportId.localeCompare(b.languageSupportId))
     .map((item) => item.languageSupportId);
-
   const updatedLang = newLanguages
     .filter((item) => item.promptSetLanguageSupport?.deleted === false)
     .sort((a, b) => a.languageSupportId.localeCompare(b.languageSupportId))
     .map((item) => item.languageSupportId);
-
-  return JSON.stringify(existingLang) !== JSON.stringify(updatedLang);
+  if(existingLang.length !== updatedLang.length) return true;
+  for (let i = 0; i < existingLang.length; i++) {
+    if (existingLang[i] !== updatedLang[i]) {
+      return true; 
+    }
+  }
+  return false;
 };
 
 export const setNewDefault = (newDefaultLanguage: Language) => {

@@ -1,7 +1,7 @@
 import "./prompt-area-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import { TouchMapAreas } from "../../../../models/promptset.modal";
-import { useState } from "react";
+import {useContext, useState} from "react";
 import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Keycode } from "../../../../models/keycode.modal";
@@ -11,6 +11,7 @@ import { selectSoftKeys } from "../../../../redux/selectors/softkeySelectors";
 import { AppDispatch } from "../../../../redux/store";
 import { updateTouchMap } from "../../../../redux/reducers/promptsetSlice";
 import { debounce } from "@mui/material";
+import {promptSetContext} from "../../../../hooks/promptsetContext";
 
 interface TouchMapAreaProp {
   areaData: TouchMapAreas;
@@ -27,6 +28,9 @@ export function AreaControl(props: TouchMapAreaProp) {
   const [selectedCode, setSelectedCode] = useState(
     area?.softkeyName || area?.keyCodeName
   );
+
+  // CONTEXT API
+    const { activePromptEditorId } = useContext(promptSetContext);
 
   const keycodes = useSelector(selectKeycodes).map(({ code, name }) => ({
     id: code,
@@ -86,10 +90,8 @@ export function AreaControl(props: TouchMapAreaProp) {
   const dispatch = useDispatch<AppDispatch>();
 
   function onChangeInputArea(area: TouchMapAreas) {
-    dispatch(updateTouchMap(area));
+    dispatch(updateTouchMap({area, activePromptEditorId}));
   }
-
-  // DEBOUNCE
 
 
 
