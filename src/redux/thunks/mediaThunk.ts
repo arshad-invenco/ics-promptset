@@ -7,7 +7,7 @@ export const fetchAssets = createAsyncThunk<
   { queryParams: AssetParams; replace: boolean }
 >("[assets]/fetchAssets", async ({ queryParams, replace }) => {
   const queryString = new URLSearchParams(queryParams).toString();
-  const response = await fetch(`${getBaseUrl()}/media/assets?${queryString}`, {
+  const response = await fetch(`${getBaseUrl()}media/assets?${queryString}`, {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   });
   const data = await response.json();

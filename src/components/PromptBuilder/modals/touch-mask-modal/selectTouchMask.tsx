@@ -15,7 +15,7 @@ function SelectTouchMask({ hide, onTouchMaskSelection }: SelectTouchMaskProps) {
   const [selectedTouchMask, setSelectedTouchMask] =
     useState<TouchMask | null>();
   return (
-    <div className="touch-mask">
+    <div className="touch-mask" onClick={(e)=>e.stopPropagation()}>
       <Modal.Header>
         <h4>Select a touch mask</h4>
       </Modal.Header>

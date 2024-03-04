@@ -47,7 +47,7 @@ function MediaModal({ hide, onAssetSelection, type }: ModalProps) {
     order: "uploaded",
     pageIndex: 0,
     pageSize: 20,
-    ...(type === "video" && { videoExtension: "video" }),
+    ...(type === "video" && { videoExtension: ".webm" }),
   });
   const [sizeQueryParams, setSizeQueryParams] =
     useState<AssetParams>(queryParams);
@@ -263,7 +263,7 @@ function MediaModal({ hide, onAssetSelection, type }: ModalProps) {
   };
 
   return (
-    <div className="media">
+    <div className="media" onClick={(e)=>e.stopPropagation()}>
       <Modal.Header>
         <div className="navbar-header">
           <div className="name">

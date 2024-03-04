@@ -200,10 +200,12 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       );
       setActiveElementId(inputElement.id);
       setActiveControlType(INPUT);
-    } else if (type === IMAGE || type === VIDEO) {
+    }
+    if (type === IMAGE || type === VIDEO) {
       handleShow();
       setSelectedAssetType(type);
-    } else if (type === TOUCH_MASK) {
+    }
+    if (type === TOUCH_MASK) {
       handleShowTouchMask();
     }
   }
