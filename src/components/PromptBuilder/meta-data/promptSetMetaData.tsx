@@ -6,10 +6,14 @@ import {PromptSetRootState} from "../Tree/promptTree";
 import {getDateAndTime} from "../../../services/promptsetService";
 import {getClickOutside, setClickOutside,} from "../../../constants/clickOutside";
 import BackgroundPicker from "../../common/background-picker/backgroundPicker";
+import {Modal} from "react-bootstrap";
+import EditLanguageModal from "../modals/edit-language-modal/editLanguage";
 
 export default function PromptSetMetaData() {
     const [open, setDropdownStatus] = useState(false);
     const [value, setValue] = useState("#000000");
+    const [showEditLanguage, setShowEditLanguage] = useState(false);
+
     const bgPickerRef = useRef<HTMLDivElement>(null);
 
     const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
@@ -19,6 +23,16 @@ export default function PromptSetMetaData() {
         if (open) setClickOutside(true); else setClickOutside(false);
     }
 
+    const handleEditLanguageShow = () => {
+        setShowEditLanguage(true);
+    };
+
+    const handleEditLanguageClose = () => {
+        setShowEditLanguage(false);
+    };
+
+    const handleEditLanguageSave = () => {
+    };
 
     const handleClickOutside = (event: MouseEvent) => {
         if (bgPickerRef.current && !bgPickerRef.current.contains(event.target as Node) && !getClickOutside()) {
@@ -85,7 +99,19 @@ export default function PromptSetMetaData() {
 
             <div className="ics-prompt-builder-meta-container">
                 <p className="meta-container-title">Languages and default fonts</p>
-                <button className="btn btn-primary meta-button">Edit</button>
+                <button
+                    className="btn btn-primary meta-button"
+                    onClick={handleEditLanguageShow}
+                >
+                    Edit
+                </button>
+                <Modal
+                    show={showEditLanguage}
+                    onHide={handleEditLanguageClose}
+                    size="lg"
+                >
+                    <EditLanguageModal hide={handleEditLanguageClose}/>
+                </Modal>
             </div>
 
             <div className="ics-prompt-builder-meta-container">

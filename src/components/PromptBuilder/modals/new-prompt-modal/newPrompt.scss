@@ -15,20 +15,5 @@
     align-items: center;
     font-weight: 500;
     padding: 1rem 1.5rem;
-    .btn-link {
-      border: none;
-      color: var(--md-indigo-500);
-      text-decoration: none;
-
-      &:hover,
-      &:active,
-      &:focus,
-      &:focus-visible {
-        background-color: transparent;
-        color: var(--btn-primary-bg);
-        border: none;
-        box-shadow: none;
-      }
-    }
   }
 }

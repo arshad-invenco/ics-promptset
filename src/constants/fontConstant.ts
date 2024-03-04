@@ -77,7 +77,9 @@ export const DEFAULT_FONTS: Font[] = [
   },
 ];
 
-export const uuidV4Regex =
+let filteredFonts: Font[] = [];
+
+const uuidV4Regex =
   /^[A-F\d]{8}-[A-F\d]{4}-4[A-F\d]{3}-[89AB][A-F\d]{3}-[A-F\d]{12}$/i;
 
 export function filterFonts(fonts: Font[], elementData: Elements): Font[] {
@@ -117,6 +119,10 @@ export function filterFonts(fonts: Font[], elementData: Elements): Font[] {
       return true;
     });
   }
-
+  filteredFonts = updatedFonts;
   return updatedFonts;
+}
+
+export function getFilteredFonts(): Font[] {
+  return filteredFonts;
 }
