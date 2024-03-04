@@ -6,20 +6,25 @@
     }
   }
   .modal-body {
+    padding: 1rem 1.5rem;
+
     label {
       margin-bottom: 1rem;
     }
     .fonts {
-      .checkbox-wrap {
-        flex: 1 0;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        justify-content: flex-end;
+      .row {
+        margin-bottom: 1.5rem;
+        .checkbox-wrap {
+          flex: 1 0;
+          display: flex;
+          align-items: center;
+          width: 100%;
+          justify-content: flex-end;
 
-        .check-input {
-          margin: 0;
-          transform: scale(1.35);
+          .check-input {
+            margin: 0;
+            transform: scale(1.35);
+          }
         }
       }
 

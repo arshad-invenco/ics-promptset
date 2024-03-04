@@ -44,8 +44,8 @@ export interface Lang {
     language: string;
     isoCode: string;
     promptSetLanguageSupport: {
-      type: string;
-      size: number;
+      type?: string;
+      size?: number;
       default: boolean;
       deleted: boolean;
     };
