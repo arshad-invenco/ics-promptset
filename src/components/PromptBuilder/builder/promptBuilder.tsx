@@ -267,7 +267,8 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 width: newSize,
                 height: newSize
             });
-        }        function stop(this: Snap.Element) {
+        }
+        function stop(this: Snap.Element) {
             const ele = this.getBBox();
             console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
             // updateElement(newElement, ele.x, ele.y, ele.width, ele.height); // Update the element with the new size
