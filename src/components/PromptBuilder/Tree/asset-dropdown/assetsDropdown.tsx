@@ -99,7 +99,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   const handleTouchMask = (touchMask: TouchMask | null) => {
     setShowTouchMask(false);
     if (touchMask) {
-      //Add touch mask to the assignment of the promptset
+      console.log(touchMask)
     } else {
       //Create new touch mask
     }
