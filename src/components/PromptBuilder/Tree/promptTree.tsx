@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import "./promptTree.scss";
 import { Accordion, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,6 +36,7 @@ export default function PromptTree() {
   // STATES
   const [isSaving, setIsSaving] = useState(false);
   const [showNewPromptModal, setShowNewPromptModal] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // SELECTOR
   const promptsetData: PromptSetInterface = useSelector(
@@ -58,7 +59,8 @@ export default function PromptTree() {
   }, []);
 
   useEffect(() => {
-    if (promptsetData) {
+    if (promptsetData && !isLoaded) {
+      console.log(promptsetData,"kkkk");
       setDeviceType(promptsetData.deviceType);
       setCompanyId(promptsetData.company);
       if (getDeviceType()) {
@@ -67,15 +69,19 @@ export default function PromptTree() {
       if (getCompanyId()) {
         dispatch(fetchLanguages());
       }
-      if (
+    }
+  }, [promptsetData]);
+
+  useEffect(() => {
+    if (
         promptsetData &&
         promptsetData.states &&
-        promptsetData.states.length > 0
-      ) {
-        setActiveStateId(promptsetData.states[0].id);
-        if (promptsetData.states[0].assignments.length > 0) {
-          setActivePromptEditorId(promptsetData.states[0].assignments[0].id);
-        }
+        promptsetData.states.length > 0 && !isLoaded
+    ) {
+      setActiveStateId(promptsetData.states[0].id);
+      setIsLoaded(true);
+      if (promptsetData.states[0].assignments.length > 0) {
+        setActivePromptEditorId(promptsetData.states[0].assignments[0].id);
       }
     }
   }, [promptsetData]);
