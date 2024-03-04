@@ -9,10 +9,14 @@ import {
   setClickOutside,
 } from "../../../constants/clickOutside";
 import BackgroundPicker from "../../common/background-picker/backgroundPicker";
+import { Modal } from "react-bootstrap";
+import EditLanguageModal from "../modals/edit-language-modal/editLanguage";
 
 export default function PromptSetMetaData() {
   const [open, setDropdownStatus] = useState(false);
   const [value, setValue] = useState("#000000");
+  const [showEditLanguage, setShowEditLanguage] = useState(false);
+
   const bgPickerRef = useRef<HTMLDivElement>(null);
 
   const promptsetData: PromptSetInterface = useSelector(
@@ -25,6 +29,15 @@ export default function PromptSetMetaData() {
     else setClickOutside(false);
   }
 
+  const handleEditLanguageShow = () => {
+    setShowEditLanguage(true);
+  };
+
+  const handleEditLanguageClose = () => {
+    setShowEditLanguage(false);
+  };
+
+  const handleEditLanguageSave = () => {};
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -99,7 +112,19 @@ export default function PromptSetMetaData() {
 
       <div className="ics-prompt-builder-meta-container">
         <p className="meta-container-title">Languages and default fonts</p>
-        <button className="btn btn-primary meta-button">Edit</button>
+        <button
+          className="btn btn-primary meta-button"
+          onClick={handleEditLanguageShow}
+        >
+          Edit
+        </button>
+        <Modal
+          show={showEditLanguage}
+          onHide={handleEditLanguageClose}
+          size="lg"
+        >
+          <EditLanguageModal hide={handleEditLanguageClose} />
+        </Modal>
       </div>
 
       <div className="ics-prompt-builder-meta-container">

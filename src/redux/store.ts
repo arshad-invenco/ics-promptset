@@ -6,6 +6,7 @@ import { softkeySlice } from "./reducers/softkeySlice";
 import { fontSlice } from "./reducers/fontSlice";
 import { assetSlice } from "./reducers/mediaSlice";
 import { touchMaskSlice } from "./reducers/touchMaskSlice";
+import { languageSlice } from "./reducers/languageSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     font: fontSlice.reducer,
     asset: assetSlice.reducer,
     touchmask: touchMaskSlice.reducer,
+    language: languageSlice.reducer,
   },
 });
 

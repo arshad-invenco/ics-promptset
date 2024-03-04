@@ -18,6 +18,9 @@ import { fetchSoftKeys } from "../../../redux/thunks/softkeyThunk";
 import NewPrompt from "../modals/new-prompt-modal/newPrompt";
 import { fetchPromptSet } from "../../../redux/thunks/promptSetThunk";
 import { getBaseUrl } from "../../../constants/app";
+import { getCompanyId, setCompanyId } from "../../../constants/language";
+import { fetchLanguages } from "../../../redux/thunks/languageThunk";
+import { get } from "http";
 
 export interface PromptSetRootState {
   promptset: {
@@ -56,8 +59,12 @@ export default function PromptTree() {
   useEffect(() => {
     if (promptsetData) {
       setDeviceType(promptsetData.deviceType);
+      setCompanyId(promptsetData.company);
       if (getDeviceType()) {
         dispatch(fetchSoftKeys());
+      }
+      if (getCompanyId()) {
+        dispatch(fetchLanguages());
       }
     }
   }, [promptsetData]);
