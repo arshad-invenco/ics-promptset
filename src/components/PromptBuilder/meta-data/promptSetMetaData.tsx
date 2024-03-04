@@ -8,6 +8,12 @@ import {getClickOutside, setClickOutside,} from "../../../constants/clickOutside
 import BackgroundPicker from "../../common/background-picker/backgroundPicker";
 import {Modal} from "react-bootstrap";
 import EditLanguageModal from "../modals/edit-language-modal/editLanguage";
+import {
+  createModalInfo,
+  langModalViewItems,
+  languageKeysSet,
+  setLangModalViewItems,
+} from "../../../constants/language";
 
 export default function PromptSetMetaData() {
     const [open, setDropdownStatus] = useState(false);
@@ -23,9 +29,11 @@ export default function PromptSetMetaData() {
         if (open) setClickOutside(true); else setClickOutside(false);
     }
 
-    const handleEditLanguageShow = () => {
-        setShowEditLanguage(true);
-    };
+  const handleEditLanguageShow = () => {
+    setLangModalViewItems([]);
+    createModalInfo();
+    setShowEditLanguage(true);
+  };
 
     const handleEditLanguageClose = () => {
         setShowEditLanguage(false);
@@ -97,22 +105,45 @@ export default function PromptSetMetaData() {
                 </div>
             </div>
 
-            <div className="ics-prompt-builder-meta-container">
-                <p className="meta-container-title">Languages and default fonts</p>
-                <button
-                    className="btn btn-primary meta-button"
-                    onClick={handleEditLanguageShow}
-                >
-                    Edit
-                </button>
-                <Modal
-                    show={showEditLanguage}
-                    onHide={handleEditLanguageClose}
-                    size="lg"
-                >
-                    <EditLanguageModal hide={handleEditLanguageClose}/>
-                </Modal>
+      <div className="ics-prompt-builder-meta-container">
+        <p className="meta-container-title">Languages and default fonts</p>
+
+        {languageKeysSet.map((isoCode: any, index: number) => {
+          return (
+            <div key={index} className="row small">
+              <div className="col-md-4">
+                {promptsetData?.lang[isoCode].language}
+                <span>
+                  {promptsetData?.lang[isoCode].promptSetLanguageSupport.default
+                    ? " (default)"
+                    : ""}
+                </span>
+              </div>
+              <div className="col-md-6">
+                {promptsetData.lang[isoCode].promptSetLanguageSupport.type ||
+                  ""}
+              </div>
+              <div className="col-md-2">
+                {promptsetData.lang[isoCode].promptSetLanguageSupport.size ||
+                  ""}
+              </div>
             </div>
+          );
+        })}
+        <button
+          className="btn btn-primary meta-button"
+          onClick={handleEditLanguageShow}
+        >
+          Edit
+        </button>
+        <Modal
+          show={showEditLanguage}
+          onHide={handleEditLanguageClose}
+          size="lg"
+        >
+          <EditLanguageModal hide={handleEditLanguageClose} />
+        </Modal>
+      </div>
 
             <div className="ics-prompt-builder-meta-container">
                 <div className="d-flex-row meta-buttons-container">
