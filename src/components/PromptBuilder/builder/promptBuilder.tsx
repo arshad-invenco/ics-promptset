@@ -64,7 +64,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             let y = Math.min(Math.max(10, newElement.top || 0), screenHeight);
             switch (newElement.type) {
                 case "text":
-                    let wrappedText = g.group();
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
                     newElement.left = newElement.left === undefined ? 0 : newElement.left;
                     let textSvg = g.text(x, y, newElement.value).attr({
@@ -74,17 +73,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         cursor: "pointer !important",
                         dy: '1em',
                     });
-                    wrappedText.rect(10, 20).attr({
-                        fill: 'red',
-                        id: newElement.id
-                    })
-                    wrappedText.add(textSvg);
 
                     let bbox = textSvg.getBBox();
                     if (activeElementId === newElement.id) {
-                        svgElement = createWrapperController(bbox, newElement, wrappedText);
+                        svgElement = createWrapperController(bbox, newElement, textSvg);
                     } else {
-                        svgElement = wrappedText;
+                        svgElement = textSvg;
                     }
                     break;
                 case "bg":
