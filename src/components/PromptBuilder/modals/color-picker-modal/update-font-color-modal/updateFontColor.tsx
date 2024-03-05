@@ -2,6 +2,7 @@ import { Modal } from "react-bootstrap";
 import "./updateFontColor.scss";
 import { getBaseUrl } from "../../../../../constants/app";
 import { getPromptSetId } from "../../../../../constants/promptSetConstants";
+import request from "../../../../../services/interceptor";
 
 interface UpdateFontColorProps {
   value: string;
@@ -9,19 +10,23 @@ interface UpdateFontColorProps {
 }
 
 function UpdateFontColor({ value, onUpdateFontColor }: UpdateFontColorProps) {
-  const handleUpdateFontColor = (update: boolean) => {
-    value = value.replace("#", "");
-    onUpdateFontColor(update);
-    fetch(
-      `${getBaseUrl()}/media/promptsets/${getPromptSetId()}/font?all=${update}&fontColor=${value}`,
-      {
-        method: "PUT",
+  const handleUpdateFontColor = async (update: boolean) => {
+    try {
+      value = value.replace("#", "");
+      onUpdateFontColor(update);
 
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-
-        body: JSON.stringify({}),
-      }
-    );
+      await request().put(
+        `${getBaseUrl()}/media/promptsets/${getPromptSetId()}/font`,
+        {
+          params: {
+            all: update,
+            fontColor: value,
+          },
+        }
+      );
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (

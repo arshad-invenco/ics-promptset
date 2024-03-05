@@ -1,0 +1,56 @@
+.new-touch-mask {
+  .modal-body {
+    .ics-touch-mask-prompt-sets-list {
+      overflow-y: auto;
+      max-height: 20rem;
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        a {
+          display: block;
+          padding: 8px;
+          transition: all 0.25s ease-in-out;
+          text-decoration: none;
+          color: #424242;
+          border-bottom: 1px solid #e0e0e0;
+          &:hover {
+            background-color: #3f51b5;
+            color: var(--white);
+            .version {
+              color: var(--white);
+            }
+          }
+          p {
+            margin-bottom: 0.1rem;
+          }
+
+          .version {
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            color: #757575;
+          }
+          .badge {
+            display: inline;
+            font-size: 75%;
+            align-self: flex-start;
+          }
+        }
+        &:last-child {
+          a {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .right-side {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}

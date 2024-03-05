@@ -79,7 +79,7 @@ function SearchableDropdown({
     const filterItems = (item: any) => {
       const itemName = item.name.toLowerCase();
       let itemCode;
-      if (isGroup) {
+      if (isGroup || label === "Key Code") {
         itemCode = item.code?.toLowerCase();
       }
 
