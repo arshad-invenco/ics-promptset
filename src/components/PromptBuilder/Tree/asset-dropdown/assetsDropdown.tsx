@@ -215,7 +215,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
                 id: generateRandomString(10),
                 type: "area",
                 shape: "rect",
-                coords: "0, 0, 100, 50",
+                coords: "0,0,100,50",
             }
             dispatch(addNewAreaToTouchMap({assignmentId: childState.id, newArea: areaElement}));
             setActiveElementId(areaElement.id);

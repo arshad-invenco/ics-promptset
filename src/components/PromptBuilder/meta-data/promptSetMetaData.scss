@@ -19,6 +19,12 @@
     }
     .meta-buttons-container {
       gap: 6px;
+      .isActive{
+        background-color: #293475;
+        &:hover {
+          background-color: #293475 !important;
+        }
+      }
     }
     .meta-button {
       padding: 2px 10px;
