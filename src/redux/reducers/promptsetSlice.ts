@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchPromptSet} from "../thunks/promptSetThunk";
-import {PromptSetInterface, TouchMap} from "../../models/promptset.modal";
+import {PromptSetInterface} from "../../models/promptset.modal";
 
 export interface PromptSetState {
     data: PromptSetInterface;
@@ -9,15 +9,11 @@ export interface PromptSetState {
 }
 
 const initialState: PromptSetState = {
-    data: {} as PromptSetInterface,
-    isLoading: true,
-    error: false,
+    data: {} as PromptSetInterface, isLoading: true, error: false,
 };
 
 export const promptsetSlice = createSlice({
-    name: "promptSet",
-    initialState,
-    reducers: {
+    name: "promptSet", initialState, reducers: {
         setPromptSetData: (state, action) => {
             state.data = action.payload;
             state.isLoading = false;
@@ -59,10 +55,9 @@ export const promptsetSlice = createSlice({
             });
         },
         addElementToAssignment: (state, action) => {
-            const { assignmentId, newElement } = action.payload;
+            const {assignmentId, newElement} = action.payload;
             state.data = {
-                ...state.data,
-                states : state.data.states = state.data.states.map((state) => {
+                ...state.data, states: state.data.states = state.data.states.map((state) => {
                     state.assignments = state.assignments.map((assignment) => {
                         if (assignment.id === assignmentId) {
                             assignment.elements.push(newElement);
@@ -115,8 +110,38 @@ export const promptsetSlice = createSlice({
                 return state;
             });
         },
-    },
-    extraReducers: (builder) => {
+        addNewTouchMap: (state, action) => {
+            const {assignmentId, newTouchMap} = action.payload;
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    if (assignment.id === assignmentId) {
+                        assignment.touchmap = newTouchMap;
+                        state.isStateChanged = true;
+                    }
+                    return assignment;
+                });
+                return state;
+            });
+        },
+        addNewAreaToTouchMap: (state, action) => {
+            const {assignmentId, newArea} = action.payload;
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    if (assignment.id === assignmentId && assignment.touchmap) {
+                        if (assignment.touchmap.areas){
+                            console.log(newArea, "ADDDIIINNNNGGGGG")
+                            assignment.touchmap.areas.push(newArea);
+                        } else {
+                            assignment.touchmap.areas = [newArea];
+                        }
+                        state.isStateChanged = true;
+                    }
+                    return assignment;
+                });
+                return state;
+            });
+        },
+    }, extraReducers: (builder) => {
         builder.addCase(fetchPromptSet.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
@@ -133,4 +158,13 @@ export const promptsetSlice = createSlice({
     },
 });
 
-export const {setPromptSetData, updateInputElement, updateTouchMap, addElementToAssignment, deleteElementByID, deleteTouchMapOrAreaById} = promptsetSlice.actions;
+export const {
+    setPromptSetData,
+    updateInputElement,
+    updateTouchMap,
+    addElementToAssignment,
+    deleteElementByID,
+    deleteTouchMapOrAreaById,
+    addNewTouchMap,
+    addNewAreaToTouchMap
+} = promptsetSlice.actions;

@@ -21,7 +21,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
     // CONTEXT API
     const {
-        activePromptEditorId, activeElementId, setActiveElementId, setActiveControlType
+        activePromptEditorId,
+        activeElementId,
+        setActiveElementId,
+        setActiveControlType,
+        gridViewState,
+        showPlaylistState
     } = useContext(promptSetContext);
 
     // SELECTORS
@@ -40,16 +45,17 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     }
 
     useEffect(() => {
-        console.log(activeElementId)
-    }, [activeElementId]);
+        console.log(activeElementId);
+        console.log(gridViewState, "GRRIIIDDDD");
+        if (childState?.elements) {
+            setElements(childState.elements);
+        }
+        console.log("CALLED")
+        initElements(elements, childState?.touchmap?.areas || []);
+    }, [activeElementId, gridViewState, elements, childState, showPlaylistState]);
 
-    function updateElement(newElement: Elements, x: number, y: number, width: number, height: number) {
+    function updateElement(newElement: Elements, x: number, y: number) {
         dispatch(updateInputElement({...newElement, left: Math.ceil(x), top: Math.ceil(y)}));
-    }
-
-    function onclickFunction(id: string, type: string, event: any) {
-        console.log(id, type, 'clicked');
-        event.stopPropagation();
     }
 
     function initElements(elements: Elements[], areas: TouchMapAreas[]) {
@@ -105,23 +111,32 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     }
                     break;
                 case "image":
-                    let imageGroup = g.group();
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/source`;
-                    imageGroup.transform(`t${x},${y}`);
-                    svgElement = s.image(elementUrl, 0, 0).attr({
+                    let imageElement = g.group(s.image(elementUrl, 0, 0).attr({
                         id: newElement.id, preserveAspectRatio: 'none'
-                    });
-                    imageGroup.add(svgElement);
-                    svgElement = imageGroup;
+                    })).transform(`t${x},${y}`);
+                    let bboxImage = imageElement.getBBox();
+                    if (activeElementId === newElement.id) {
+                        svgElement = g.group(s.rect(bboxImage.x, bboxImage.y, bboxImage.width, bboxImage.height).attr({
+                            fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0, strokeWidth: 1
+                        }), imageElement);
+                    } else{
+                        svgElement = imageElement;
+                    }
                     break;
                 case "video":
-                    let videoGroup = g.group();
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/thumbnail`;
-                    svgElement = s.image(elementUrl, 0, 0, newElement.width, newElement.height).attr({
+                    let videoElement = s.image(elementUrl, 0, 0, newElement.width, newElement.height).attr({
                         id: newElement.id, preserveAspectRatio: 'none'
                     });
-                    videoGroup.add(svgElement);
-                    svgElement = videoGroup;
+                    let bboxVideo = videoElement.getBBox();
+                    if (activeElementId === newElement.id) {
+                        svgElement = g.group(s.rect(bboxVideo.x, bboxVideo.y, bboxVideo.width, bboxVideo.height).attr({
+                            fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0, strokeWidth: 1
+                        }), videoElement);
+                    } else {
+                        svgElement = videoElement;
+                    }
                     break;
                 default:
                     console.log('default No Element Present');
@@ -152,23 +167,123 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     this.attr({
                         transform: this.data('origTransform') + (this.data('origTransform') ? "T" : "t") + [newX - origBBox.x, newY - origBBox.y]
                     });
+                    updateElement(newElement, newX, newY);
                 }
                 let stop = function (this: Snap.Element) {
                     const ele = this.getBBox();
                     console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
-                    updateElement(newElement, ele.x, ele.y, ele.width, ele.height);
                 }
                 svgElement.click(() => {
                     // console.log("svgElement clicked");
                     onClickSVGElement(newElement.id, newElement.type);
                 });
-                if (newElement.type !== 'bg' && newElement.type !== 'video'){
+                if (newElement.type !== 'bg' && newElement.type !== 'video') {
                     svgElement.drag(move, start, stop);
                 }
 
                 g.add(svgElement);
             }
         });
+
+        if (gridViewState) {
+            const offset = 10;
+            const thickLineIn = 9;
+            for (let i = 0; i <= screenWidth; i += offset) {
+                let line;
+                if (i % thickLineIn === 0) {
+                    line = g.group(s.line(i, 0, i, screenHeight).attr({
+                        stroke: '#616161', strokeWidth: 3
+                    }));
+                } else {
+                    line = g.group(s.line(i, 0, i, screenHeight).attr({
+                        stroke: '#616161', strokeWidth: 1
+                    }));
+                }
+            }
+            for (let i = 0; i <= screenHeight; i += offset) {
+                let line;
+                if (i % thickLineIn === 0) {
+                    line = g.group(s.line(0, i, screenWidth, i).attr({
+                        stroke: '#616161', strokeWidth: 3
+                    }));
+                } else {
+                    line = g.group(s.line(0, i, screenWidth, i).attr({
+                        stroke: '#616161', strokeWidth: 1
+                    }));
+                }
+            }
+        }
+        if (showPlaylistState) {
+            const g = s.g();
+
+            const p = g.path('M10-5-10,15M15,0,0,15M0-5-20,15')
+                .attr({
+                    fill: 'none', stroke: '#00ff00'
+                })
+                .pattern(0, 0, 10, 10);
+            if (screenWidth === 1366) {
+                const area = g.rect(256, 288, 853, 480)
+                    .attr({
+                        fill: p, 'pointer-events': 'none'
+                    });
+
+                const line1 = s.line(256, 0, 256, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line2 = s.line(1110, 0, 1110, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line3 = s.line(0, 288, 1366, 288)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                g.add(area, line1, line2, line3);
+            } else if (screenWidth === 1280) {
+
+                const area = g.rect(213.5, 320, 853, 480)
+                    .attr({
+                        fill: p, 'pointer-events': 'none'
+                    });
+
+                const line1 = s.line(213.5, 0, 213.5, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line2 = s.line(1066.5, 0, 1066.5, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line3 = s.line(0, 320, 1280, 320)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                g.add(area, line1, line2, line3);
+
+            } else if (screenWidth === 640) {
+
+                const area = g.rect(0, 0, 640, 360)
+                    .attr({
+                        fill: p, 'pointer-events': 'none', 'fill-opacity': '0.5'
+                    });
+
+                const line = s.line(0, 360, 640, 360)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2, 'stroke-opacity': '0.5'
+                    });
+
+                g.add(area, line);
+            }
+        }
+
+
         areas.forEach(area => {
             let areaElement;
             let coords = area.coords.split(',');
@@ -238,14 +353,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 }
                 let stop = function (this: Snap.Element) {
                     const ele = this.getBBox();
-                    console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
                 }
                 areaElement.drag(move, start, stop);
 
                 areaElement.click(() => {
                     onClickSVGElement(area.id, area.type);
                 });
-                g.add(areaElement);
             }
         });
     }
@@ -300,8 +413,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
             // Apply the new size
             controller.attr({
-                width: controllerBBox.width+ newSize,
-                height: controllerBBox.height+ newSize
+                width: controllerBBox.width + newSize, height: controllerBBox.height + newSize
             });
             controllerResize.attr({
                 transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSize})`
@@ -313,9 +425,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             if (children && children.length > 0) {
                 NewElementSVG = children[0];
                 NewElementSVG.attr({
-                    width: controllerBBox.width+ newSize,
-                    height: controllerBBox.height+ newSize,
-                    id: 'NewElementSVG'
+                    width: controllerBBox.width + newSize, height: controllerBBox.height + newSize, id: 'NewElementSVG'
                 });
             }
         }
@@ -333,19 +443,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         if (type === 'area') {
 
         }
-        if (NewElementSVG)
-            return g.group(ElementSvg, NewElementSVG);
-        else
-            return g.group(ElementSvg, controllerRect);
+        if (NewElementSVG) return g.group(ElementSvg, NewElementSVG); else return g.group(ElementSvg, controllerRect);
     }
 
-    useEffect(() => {
-        if (childState?.elements) {
-            setElements(childState.elements);
-        }
-        console.log("CALLED")
-        initElements(elements, childState?.touchmap?.areas || []);
-    }, [elements, childState, activeElementId]);
+    // useEffect(() => {
+    //
+    // }, [elements, childState, gridViewState]);
 
 
     return (<svg id="svg" viewBox={`0 0 ${screenWidth} ${screenHeight}`}>
