@@ -259,7 +259,6 @@ export const createDefaultLanguageList = () => {
   defaultLanguageList = languageKeysSet.filter((item:string) => {
     return promptSet.lang[item].promptSetLanguageSupport.default;
   });
-  console.log(defaultLanguageList);
 };
 
 export const languageValidation = () => {
@@ -300,13 +299,11 @@ export const getDefaultLanguage = () => {
       key: existingDefaultIndex,
       value: langModalViewItems[existingDefaultIndex],
     };
-    console.log(defaultLanguage)
   }
   return defaultLanguage;
 };
 
 export const onPromptLanguageSave = (
-  currentLanguages: Language[],
   newDefaultLanguage: Language
 ) => {
   languageValidation();
@@ -324,12 +321,11 @@ export const onPromptLanguageSave = (
   }));
 
   const languagesModified = isLanguagesModified(languages);
-  console.log(languagesModified, "languagesModified")
 
   if (languagesModified) {
-    return languages;
+    return { languages: languages, modified: true };
   } else {
-    return [];
+    return { languages: languages, modified: false };
   }
 };
 

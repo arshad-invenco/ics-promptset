@@ -57,11 +57,11 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
     setShowUpdateFontModal(false);
   };
 
-  function handleUpdate(updatedValue: boolean) {
+  function handleUpdate() {
     const requestOptions = {
       method: "PUT",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      body: JSON.stringify(updatedValue ? modifiedLanguages : languages),
+      body: JSON.stringify(modifiedLanguages),
     };
 
     fetch(
@@ -86,37 +86,48 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
   }
 
   function handleInputSelection(language: Language) {
-    let isChecked = language?.isAvailableInPromptSet || false;
+    const isChecked = language?.isAvailableInPromptSet || false;
     const index = languages.findIndex(
       (lang) => lang.languageSupportId === language.languageSupportId
     );
+
     if (index !== -1) {
       const updatedLanguages = [...languages];
+      const isDefault =
+        language.languageSupportId ===
+        selectedDefaultLanguage.languageSupportId;
+
       updatedLanguages[index].isAvailableInPromptSet = !isChecked;
+      updatedLanguages[index].deleted = isChecked;
+
+      if (isDefault) {
+        setSelectedDefaultLanguage({
+          ...selectedDefaultLanguage,
+          deleted: isChecked,
+        });
+      }
+
       setLanguages(updatedLanguages);
     }
   }
 
   function handlePromptLanguageSave() {
-    const newModifiedLanguages = onPromptLanguageSave(
-      languages,
-      selectedDefaultLanguage
-    );
-    if (newModifiedLanguages.length > 0) {
-      confirmAndPutPromptLanguages();
-    } else {
-      handleUpdate(false);
-    }
+    const { languages: newModifiedLanguages, modified: isModified } =
+      onPromptLanguageSave(selectedDefaultLanguage);
+
+    setTimeout(() => {
+      if (isModified) {
+        confirmAndPutPromptLanguages();
+      } else {
+        handleUpdate();
+      }
+    }, 1000);
     setModifiedLanguages(newModifiedLanguages);
   }
 
   function confirmAndPutPromptLanguages() {
     setShowUpdateFontModal(true);
   }
-
-  useEffect(() => {
-   
-  }, []);
 
   useEffect(() => {
     if (selectedDefaultLanguage) {
@@ -160,21 +171,28 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
                 <div
                   className={
                     language.isAvailableInPromptSet
-                      ? "col-md-3"
+                      ? "col-md-3 "
                       : "text-grey col-md-3"
                   }
                   style={{ paddingTop: "0.7rem" }}
+                  onClick={() => handleInputSelection(language)}
                 >
                   {language.language}
                 </div>
-                <div className="col-md-6">
-                  <FontDropdown
-                    fonts={filteredFonts}
-                    onSelect={(item: Font) =>
-                      handleFontSelection(item, language)
-                    }
-                    selectedFont={language.type || fonts[0]}
-                  ></FontDropdown>
+                <div
+                  className={
+                    language.deleted ? "col-md-6 not-allowed" : "col-md-6"
+                  }
+                >
+                  <div className={language.deleted ? "disabled-option" : ""}>
+                    <FontDropdown
+                      fonts={filteredFonts}
+                      onSelect={(item: Font) =>
+                        handleFontSelection(item, language)
+                      }
+                      selectedFont={language.type || fonts[0]}
+                    ></FontDropdown>
+                  </div>
                 </div>
                 <div className="col-md-2">
                   <input
@@ -191,6 +209,7 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
                     }}
                     min="1"
                     max="380"
+                    disabled={language.deleted}
                   />
                 </div>
               </div>
@@ -248,6 +267,7 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
           Cancel
         </button>
         <button
+          disabled={selectedDefaultLanguage.deleted}
           className="btn btn-primary"
           onClick={(e) => {
             e.stopPropagation();
@@ -264,7 +284,7 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
       >
         <UpdateDefaultFont
           onHide={handleUpdateFontModalClose}
-          onUpdateDefaultFont={() => handleUpdate(true)}
+          onUpdateDefaultFont={() => handleUpdate()}
         />
       </Modal>
     </div>
