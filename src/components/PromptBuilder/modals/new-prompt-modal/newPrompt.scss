@@ -15,5 +15,8 @@
     align-items: center;
     font-weight: 500;
     padding: 1rem 1.5rem;
+    .no-selection {
+      cursor: not-allowed;
+    }
   }
 }

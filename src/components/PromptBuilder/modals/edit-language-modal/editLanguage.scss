@@ -52,12 +52,10 @@
       pointer-events: none;
       opacity: 0.5;
     }
-    .not-allowed {
-      cursor: not-allowed !important;
-    }
+
     input {
       &:disabled {
-        cursor: not-allowed;
+        @extend .no-selection;
       }
     }
   }
@@ -67,5 +65,8 @@
     font-weight: 500;
     padding: 1rem 1.5rem;
     gap: 0.5rem;
+  }
+  .no-selection {
+    cursor: not-allowed;
   }
 }

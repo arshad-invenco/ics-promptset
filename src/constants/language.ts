@@ -249,14 +249,17 @@ export const getFontTypeByName = (type: string) => {
   }
 };
 
-export const handleLanguageCheck = (langModalViewItem:Language, value: boolean) => {
+export const handleLanguageCheck = (
+  langModalViewItem: Language,
+  value: boolean
+) => {
   langModalViewItem.isAvailableInPromptSet = value;
   createDefaultLanguageList();
   languageValidation();
 };
 
 export const createDefaultLanguageList = () => {
-  defaultLanguageList = languageKeysSet.filter((item:string) => {
+  defaultLanguageList = languageKeysSet.filter((item: string) => {
     return promptSet.lang[item].promptSetLanguageSupport.default;
   });
 };
@@ -303,9 +306,7 @@ export const getDefaultLanguage = () => {
   return defaultLanguage;
 };
 
-export const onPromptLanguageSave = (
-  newDefaultLanguage: Language
-) => {
+export const onPromptLanguageSave = (newDefaultLanguage: Language) => {
   languageValidation();
   setNewDefault(newDefaultLanguage);
   const languages: Language[] = langModalViewItems.map((item: Language) => ({
@@ -337,10 +338,10 @@ const isLanguagesModified = (newLanguages: Language[]) => {
     .filter((item) => item.promptSetLanguageSupport?.deleted === false)
     .sort((a, b) => a.languageSupportId.localeCompare(b.languageSupportId))
     .map((item) => item.languageSupportId);
-  if(existingLang.length !== updatedLang.length) return true;
+  if (existingLang.length !== updatedLang.length) return true;
   for (let i = 0; i < existingLang.length; i++) {
     if (existingLang[i] !== updatedLang[i]) {
-      return true; 
+      return true;
     }
   }
   return false;

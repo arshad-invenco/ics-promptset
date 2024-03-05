@@ -263,7 +263,7 @@ function MediaModal({ hide, onAssetSelection, type }: ModalProps) {
   };
 
   return (
-    <div className="media" onClick={(e)=>e.stopPropagation()}>
+    <div className="media" onClick={(e) => e.stopPropagation()}>
       <Modal.Header>
         <div className="navbar-header">
           <div className="name">
@@ -340,15 +340,17 @@ function MediaModal({ hide, onAssetSelection, type }: ModalProps) {
         <button className="btn btn-default" onClick={hide}>
           Cancel
         </button>
-        <button
-          className="btn btn-primary"
-          disabled={!selectedAsset}
-          onClick={() => {
-            if (selectedAsset) onAssetSelection(selectedAsset);
-          }}
-        >
-          Confirm
-        </button>
+        <div className={!selectedAsset ? "no-selection" : ""}>
+          <button
+            className="btn btn-primary"
+            disabled={!selectedAsset}
+            onClick={() => {
+              if (selectedAsset) onAssetSelection(selectedAsset);
+            }}
+          >
+            Confirm
+          </button>
+        </div>
       </Modal.Footer>
     </div>
   );

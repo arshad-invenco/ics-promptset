@@ -181,7 +181,7 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
                 </div>
                 <div
                   className={
-                    language.deleted ? "col-md-6 not-allowed" : "col-md-6"
+                    language.deleted ? "col-md-6 no-selection" : "col-md-6"
                   }
                 >
                   <div className={language.deleted ? "disabled-option" : ""}>
@@ -266,16 +266,18 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
         >
           Cancel
         </button>
-        <button
-          disabled={selectedDefaultLanguage.deleted}
-          className="btn btn-primary"
-          onClick={(e) => {
-            e.stopPropagation();
-            handlePromptLanguageSave();
-          }}
-        >
-          SAVE
-        </button>
+        <div className={selectedDefaultLanguage.deleted ? "no-selection" : ""}>
+          <button
+            disabled={selectedDefaultLanguage.deleted}
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePromptLanguageSave();
+            }}
+          >
+            SAVE
+          </button>
+        </div>
       </Modal.Footer>
       <Modal
         show={showUpdateFontModal}

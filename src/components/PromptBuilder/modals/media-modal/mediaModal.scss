@@ -140,6 +140,7 @@
           background-color: var(--md-grey-300);
           margin-bottom: 1rem;
           position: relative;
+          cursor: pointer;
           img {
             width: 100%;
             height: auto;
@@ -178,7 +179,7 @@
       display: flex;
       justify-content: center;
       padding: 3.5rem 1.2rem;
-  
+
       .scroll-to-top {
         border: none;
         font-weight: 500;
@@ -196,6 +197,9 @@
     justify-content: flex-end;
     .btn {
       font-size: 1.2rem;
+    }
+    .no-selection {
+      cursor: not-allowed;
     }
   }
 }

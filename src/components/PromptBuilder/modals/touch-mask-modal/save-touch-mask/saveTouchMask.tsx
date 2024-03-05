@@ -37,17 +37,19 @@ function SaveTouchMask({ hide, newTouchMask }: SaveTouchMaskProps) {
         >
           CANCEL
         </button>
-        <button
-          disabled={!touchMaskName}
-          className="btn btn-primary"
-          onClick={(e) => {
-            e.stopPropagation();
-            newTouchMask(touchMaskName);
-            hide();
-          }}
-        >
-          SAVE
-        </button>
+        <div className={!touchMaskName ? "no-selection" : ""}>
+          <button
+            disabled={!touchMaskName}
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              newTouchMask(touchMaskName);
+              hide();
+            }}
+          >
+            SAVE
+          </button>
+        </div>
       </Modal.Footer>
     </div>
   );

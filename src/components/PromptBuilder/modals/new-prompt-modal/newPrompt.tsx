@@ -95,17 +95,19 @@ function NewPrompt({ hide, newPrompt }: NewPromptProps) {
         >
           CANCEL
         </button>
-        <button
-          disabled={invalid}
-          className="btn btn-primary"
-          onClick={(e) => {
-            e.stopPropagation();
-            newPrompt(newPromptData);
-            hide();
-          }}
-        >
-          CREATE
-        </button>
+        <div className={invalid ? "no-selection" : ""}>
+          <button
+            disabled={invalid}
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              newPrompt(newPromptData);
+              hide();
+            }}
+          >
+            CREATE
+          </button>
+        </div>
       </Modal.Footer>
     </div>
   );
