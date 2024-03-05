@@ -11,6 +11,8 @@ import { selectFonts } from "../../../../redux/selectors/fontSelectors";
 import { Font } from "../../../../models/fonts.modal";
 import { filterFonts } from "../../../../constants/fontConstant";
 import {PromptSetRootState} from "../../Tree/promptTree";
+import {getDeviceType} from "../../../../constants/deviceType";
+import isSequoiaDevice from "../../../../services/promptsetService";
 
 interface ElementsProp {
   elementData: Elements;
@@ -107,44 +109,48 @@ export default function TextControl(props: ElementsProp) {
         ></FontDropdown>
       </div>
 
-      <div className="ics-inline-150-block">
-        <label>Alignment</label>
-        <div className="d-flex-row alignment-control">
-          <button
-            onClick={() => {
-              setElement({ ...element, textAlign: "left" });
-                onChangeInput({ ...element, textAlign: "left" });
-            }}
-            className={`button-white align ${
-              element.textAlign === "left" ? "align-btn-active" : ""
-            }`}
-          >
-            <i className="fas fa-align-left"></i>
-          </button>
-          <button
-            onClick={() => {
-              setElement({ ...element, textAlign: "center" });
-                onChangeInput({ ...element, textAlign: "center" });
-            }}
-            className={`button-white align ${
-              element.textAlign === "center" ? "align-btn-active" : ""
-            }`}
-          >
-            <i className="fas fa-align-center"></i>
-          </button>
-          <button
-            onClick={() => {
-              setElement({ ...element, textAlign: "right" });
-                onChangeInput({ ...element, textAlign: "right" });
-            }}
-            className={`button-white align ${
-              element.textAlign === "right" ? "align-btn-active" : ""
-            }`}
-          >
-            <i className="fas fa-align-right"></i>
-          </button>
+      {
+        isSequoiaDevice(getDeviceType()) &&
+        <div className="ics-inline-150-block">
+          <label>Alignment</label>
+          <div className="d-flex-row alignment-control">
+            <button
+                onClick={() => {
+                  setElement({...element, textAlign: "left"});
+                  onChangeInput({...element, textAlign: "left"});
+                }}
+                className={`button-white align ${
+                    element.textAlign === "left" ? "align-btn-active" : ""
+                }`}
+            >
+              <i className="fas fa-align-left"></i>
+            </button>
+            <button
+                onClick={() => {
+                  setElement({...element, textAlign: "center"});
+                  onChangeInput({...element, textAlign: "center"});
+                }}
+                className={`button-white align ${
+                    element.textAlign === "center" ? "align-btn-active" : ""
+                }`}
+            >
+              <i className="fas fa-align-center"></i>
+            </button>
+            <button
+                onClick={() => {
+                  setElement({...element, textAlign: "right"});
+                  onChangeInput({...element, textAlign: "right"});
+                }}
+                className={`button-white align ${
+                    element.textAlign === "right" ? "align-btn-active" : ""
+                }`}
+            >
+              <i className="fas fa-align-right"></i>
+            </button>
+          </div>
         </div>
-      </div>
+      }
+
 
       <div className="d-flex-col dimensions">
         <label>Dimensions</label>
@@ -152,43 +158,43 @@ export default function TextControl(props: ElementsProp) {
           <div className="d-flex-row dimension-control">
             <label>X</label>
             <input
-              type="number"
-              value={element.left}
-              onChange={(e) => {
-                setElement({ ...element, left: Number(e.target.value) });
+                type="number"
+                value={element.left}
+                onChange={(e) => {
+                  setElement({...element, left: Number(e.target.value)});
                   onChangeInput({
-                  ...element,
-                  left: Number(e.target.value),
-                });
-              }}
-              min={0}
-              className="ics-input dimension-input"
+                    ...element,
+                    left: Number(e.target.value),
+                  });
+                }}
+                min={0}
+                className="ics-input dimension-input"
             />
           </div>
 
           <div className="d-flex-row dimension-control">
             <label>Y</label>
             <input
-              type="number"
-              value={element.top}
-              onChange={(e) => {
-                setElement({ ...element, top: Number(e.target.value) });
+                type="number"
+                value={element.top}
+                onChange={(e) => {
+                  setElement({...element, top: Number(e.target.value)});
                   onChangeInput({
-                  ...element,
-                  top: Number(e.target.value),
-                });
-              }}
-              min={0}
-              className="ics-input dimension-input"
+                    ...element,
+                    top: Number(e.target.value),
+                  });
+                }}
+                min={0}
+                className="ics-input dimension-input"
             />
           </div>
 
           <div className="d-flex-row dimension-control">
             <label>W</label>
             <input
-              type="number"
-              value={element.width}
-              onChange={(e) => {
+                type="number"
+                value={element.width}
+                onChange={(e) => {
                 setElement({ ...element, width: Number(e.target.value) });
                   onChangeInput({
                   ...element,
