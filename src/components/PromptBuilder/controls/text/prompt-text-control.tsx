@@ -1,6 +1,6 @@
 import "./prompt-text-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
-import { Elements } from "../../../../models/promptset.modal";
+import {Elements, PromptSetInterface} from "../../../../models/promptset.modal";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../../redux/store";
@@ -10,6 +10,7 @@ import FontDropdown from "../../../common/font-dropdown/fontDropdown";
 import { selectFonts } from "../../../../redux/selectors/fontSelectors";
 import { Font } from "../../../../models/fonts.modal";
 import { filterFonts } from "../../../../constants/fontConstant";
+import {PromptSetRootState} from "../../Tree/promptTree";
 
 interface ElementsProp {
   elementData: Elements;
@@ -30,6 +31,13 @@ export default function TextControl(props: ElementsProp) {
   // REDUX
   const dispatch = useDispatch<AppDispatch>();
 
+    // SELECTORS
+    const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
+
+    useEffect(() => {
+        setElement(elementData);
+    }, [promptsetData]);
+
   // FUNCTIONS
   function onChangeInput(element: Elements) {
     dispatch(updateInputElement(element));
@@ -48,9 +56,6 @@ export default function TextControl(props: ElementsProp) {
     setFilteredFonts(updatedFonts);
   }, [fonts, elementData]);
 
-  // DEBOUNCE
-  const debouncedOnChangeInput = debounce(onChangeInput, 1000);
-
   return (
     <div className="ics-prompt-builder-text-controls">
       <div className="ics-inline-250-block">
@@ -61,7 +66,7 @@ export default function TextControl(props: ElementsProp) {
           placeholder="Text"
           onChange={(e) => {
             setElement({ ...element, value: e.target.value });
-            debouncedOnChangeInput({ ...element, value: e.target.value });
+              onChangeInput({ ...element, value: e.target.value });
           }}
           className="ics-input"
         />
@@ -82,7 +87,7 @@ export default function TextControl(props: ElementsProp) {
           value={element.size}
           onChange={(e) => {
             setElement({ ...element, size: Number(e.target.value) });
-            debouncedOnChangeInput({
+              onChangeInput({
               ...element,
               size: Number(e.target.value),
             });
@@ -108,7 +113,7 @@ export default function TextControl(props: ElementsProp) {
           <button
             onClick={() => {
               setElement({ ...element, textAlign: "left" });
-              debouncedOnChangeInput({ ...element, textAlign: "left" });
+                onChangeInput({ ...element, textAlign: "left" });
             }}
             className={`button-white align ${
               element.textAlign === "left" ? "align-btn-active" : ""
@@ -119,7 +124,7 @@ export default function TextControl(props: ElementsProp) {
           <button
             onClick={() => {
               setElement({ ...element, textAlign: "center" });
-              debouncedOnChangeInput({ ...element, textAlign: "center" });
+                onChangeInput({ ...element, textAlign: "center" });
             }}
             className={`button-white align ${
               element.textAlign === "center" ? "align-btn-active" : ""
@@ -130,7 +135,7 @@ export default function TextControl(props: ElementsProp) {
           <button
             onClick={() => {
               setElement({ ...element, textAlign: "right" });
-              debouncedOnChangeInput({ ...element, textAlign: "right" });
+                onChangeInput({ ...element, textAlign: "right" });
             }}
             className={`button-white align ${
               element.textAlign === "right" ? "align-btn-active" : ""
@@ -151,7 +156,7 @@ export default function TextControl(props: ElementsProp) {
               value={element.left}
               onChange={(e) => {
                 setElement({ ...element, left: Number(e.target.value) });
-                debouncedOnChangeInput({
+                  onChangeInput({
                   ...element,
                   left: Number(e.target.value),
                 });
@@ -168,7 +173,7 @@ export default function TextControl(props: ElementsProp) {
               value={element.top}
               onChange={(e) => {
                 setElement({ ...element, top: Number(e.target.value) });
-                debouncedOnChangeInput({
+                  onChangeInput({
                   ...element,
                   top: Number(e.target.value),
                 });
@@ -185,7 +190,7 @@ export default function TextControl(props: ElementsProp) {
               value={element.width}
               onChange={(e) => {
                 setElement({ ...element, width: Number(e.target.value) });
-                debouncedOnChangeInput({
+                  onChangeInput({
                   ...element,
                   width: Number(e.target.value),
                 });
@@ -202,7 +207,7 @@ export default function TextControl(props: ElementsProp) {
               value={element.height}
               onChange={(e) => {
                 setElement({ ...element, height: Number(e.target.value) });
-                debouncedOnChangeInput({
+                  onChangeInput({
                   ...element,
                   height: Number(e.target.value),
                 });
@@ -235,7 +240,7 @@ export default function TextControl(props: ElementsProp) {
             value={element.userclass}
             onChange={(e) => {
               setElement({ ...element, userclass: e.target.value });
-              debouncedOnChangeInput({ ...element, userclass: e.target.value });
+                onChangeInput({ ...element, userclass: e.target.value });
             }}
             className="ics-input"
           />

@@ -21,9 +21,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
     // CONTEXT API
     const {
-        activePromptEditorId, activeElementId,
-        setActiveElementId, setActiveControlType,
-        gridViewState, showPlaylistState
+        activePromptEditorId,
+        activeElementId,
+        setActiveElementId,
+        setActiveControlType,
+        gridViewState,
+        showPlaylistState
     } = useContext(promptSetContext);
 
     // SELECTORS
@@ -108,23 +111,32 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     }
                     break;
                 case "image":
-                    let imageGroup = g.group();
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/source`;
-                    imageGroup.transform(`t${x},${y}`);
-                    svgElement = s.image(elementUrl, 0, 0).attr({
+                    let imageElement = g.group(s.image(elementUrl, 0, 0).attr({
                         id: newElement.id, preserveAspectRatio: 'none'
-                    });
-                    imageGroup.add(svgElement);
-                    svgElement = imageGroup;
+                    })).transform(`t${x},${y}`);
+                    let bboxImage = imageElement.getBBox();
+                    if (activeElementId === newElement.id) {
+                        svgElement = g.group(s.rect(bboxImage.x, bboxImage.y, bboxImage.width, bboxImage.height).attr({
+                            fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0, strokeWidth: 1
+                        }), imageElement);
+                    } else{
+                        svgElement = imageElement;
+                    }
                     break;
                 case "video":
-                    let videoGroup = g.group();
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/thumbnail`;
-                    svgElement = s.image(elementUrl, 0, 0, newElement.width, newElement.height).attr({
+                    let videoElement = s.image(elementUrl, 0, 0, newElement.width, newElement.height).attr({
                         id: newElement.id, preserveAspectRatio: 'none'
                     });
-                    videoGroup.add(svgElement);
-                    svgElement = videoGroup;
+                    let bboxVideo = videoElement.getBBox();
+                    if (activeElementId === newElement.id) {
+                        svgElement = g.group(s.rect(bboxVideo.x, bboxVideo.y, bboxVideo.width, bboxVideo.height).attr({
+                            fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0, strokeWidth: 1
+                        }), videoElement);
+                    } else {
+                        svgElement = videoElement;
+                    }
                     break;
                 default:
                     console.log('default No Element Present');
@@ -165,7 +177,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     // console.log("svgElement clicked");
                     onClickSVGElement(newElement.id, newElement.type);
                 });
-                if (newElement.type !== 'bg' && newElement.type !== 'video'){
+                if (newElement.type !== 'bg' && newElement.type !== 'video') {
                     svgElement.drag(move, start, stop);
                 }
 
@@ -173,44 +185,102 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             }
         });
 
-        if (gridViewState){
-            for (let i = 0; i <= screenWidth; i += 10) {
-                // Perform operations with Snap.svg
-                // For example, draw a line every 10 units
+        if (gridViewState) {
+            const offset = 10;
+            const thickLineIn = 9;
+            for (let i = 0; i <= screenWidth; i += offset) {
                 let line;
-                if (i % 9 === 0) {
+                if (i % thickLineIn === 0) {
                     line = g.group(s.line(i, 0, i, screenHeight).attr({
-                        stroke: '#616161',
-                        strokeWidth: 3
+                        stroke: '#616161', strokeWidth: 3
                     }));
                 } else {
                     line = g.group(s.line(i, 0, i, screenHeight).attr({
-                        stroke: '#616161',
-                        strokeWidth: 1
+                        stroke: '#616161', strokeWidth: 1
                     }));
                 }
             }
-            for (let i = 0; i <= screenHeight; i += 10) {
-                // Perform operations with Snap.svg
-                // For example, draw a line every 10 units
+            for (let i = 0; i <= screenHeight; i += offset) {
                 let line;
-                if (i % 9 === 0) {
+                if (i % thickLineIn === 0) {
                     line = g.group(s.line(0, i, screenWidth, i).attr({
-                        stroke: '#616161',
-                        strokeWidth: 3
+                        stroke: '#616161', strokeWidth: 3
                     }));
                 } else {
                     line = g.group(s.line(0, i, screenWidth, i).attr({
-                        stroke: '#616161',
-                        strokeWidth: 1
+                        stroke: '#616161', strokeWidth: 1
                     }));
                 }
             }
         }
-        if (showPlaylistState){
-            let rectHeight = 480; // Height of the rectangle
-            let interval = 10; // Interval at which lines will be drawn
+        if (showPlaylistState) {
+            const g = s.g();
 
+            const p = g.path('M10-5-10,15M15,0,0,15M0-5-20,15')
+                .attr({
+                    fill: 'none', stroke: '#00ff00'
+                })
+                .pattern(0, 0, 10, 10);
+            if (screenWidth === 1366) {
+                const area = g.rect(256, 288, 853, 480)
+                    .attr({
+                        fill: p, 'pointer-events': 'none'
+                    });
+
+                const line1 = s.line(256, 0, 256, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line2 = s.line(1110, 0, 1110, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line3 = s.line(0, 288, 1366, 288)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                g.add(area, line1, line2, line3);
+            } else if (screenWidth === 1280) {
+
+                const area = g.rect(213.5, 320, 853, 480)
+                    .attr({
+                        fill: p, 'pointer-events': 'none'
+                    });
+
+                const line1 = s.line(213.5, 0, 213.5, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line2 = s.line(1066.5, 0, 1066.5, 800)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                const line3 = s.line(0, 320, 1280, 320)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2
+                    });
+
+                g.add(area, line1, line2, line3);
+
+            } else if (screenWidth === 640) {
+
+                const area = g.rect(0, 0, 640, 360)
+                    .attr({
+                        fill: p, 'pointer-events': 'none', 'fill-opacity': '0.5'
+                    });
+
+                const line = s.line(0, 360, 640, 360)
+                    .attr({
+                        stroke: '#00ff00', strokeWidth: 2, 'stroke-opacity': '0.5'
+                    });
+
+                g.add(area, line);
+            }
         }
 
 
