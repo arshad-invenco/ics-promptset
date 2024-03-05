@@ -22,7 +22,7 @@
     -webkit-height: calc(100vh - 50px);
 
     .ics-prompt-builder-preview-wrapper {
-      width: calc(100% - 270px);
+      width: calc(100% - 280px);
       -webkit-width: calc(100% - 270px);
 
       &.expended {
@@ -33,16 +33,11 @@
     }
 
     .ics-prompt-builder-metadata {
-      //.translate: (0, 0);
-      //border: 1px solid green;
-      width: 270px;
 
-      //&.contracted {
-      ////.translate(205 px, 0);
-      //}
     }
   }
 }
+
 
 
 

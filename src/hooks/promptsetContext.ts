@@ -1,5 +1,6 @@
 import {createContext} from "react";
 import {PromptSetInterface} from "../models/promptset.modal";
+import {LastModifiedInterface} from "../models/lastModified.modal";
 
 interface PromptSetContextInterface {
     promptSetData: PromptSetInterface;
@@ -16,6 +17,9 @@ interface PromptSetContextInterface {
     setGridViewState: React.Dispatch<React.SetStateAction<boolean>>;
     showPlaylistState:boolean,
     setShowPlaylistState: React.Dispatch<React.SetStateAction<boolean>>;
+    lastModified : LastModifiedInterface;
+    setLastModified: React.Dispatch<React.SetStateAction<LastModifiedInterface>>;
+
 }
 
 const initialContextValue = {
@@ -36,7 +40,9 @@ const initialContextValue = {
     gridViewState: false,
     setGridViewState: ()=>{},
     showPlaylistState:false,
-    setShowPlaylistState:() =>{}
+    setShowPlaylistState:() =>{},
+    lastModified: {} as LastModifiedInterface,
+    setLastModified : () =>{}
 }
 
 export const promptSetContext = createContext<PromptSetContextInterface>(initialContextValue);

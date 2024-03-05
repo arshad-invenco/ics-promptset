@@ -37,13 +37,10 @@ export default function PromptSetMetaData() {
     (state: PromptSetRootState) => state.promptset.data
   );
 
-  // CONTEXT_API
-  const {
-    setGridViewState,
-    gridViewState,
-    setShowPlaylistState,
-    showPlaylistState,
-  } = useContext(promptSetContext);
+    // CONTEXT_API
+    const {
+        setGridViewState, gridViewState, setShowPlaylistState, showPlaylistState, lastModified
+    } = useContext(promptSetContext);
 
   function handleDropdown() {
     setDropdownStatus(!open);
@@ -95,12 +92,12 @@ export default function PromptSetMetaData() {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [lastModified]);
 
   return (
     <div className={"ics-prompt-builder-metadata"}>
@@ -117,13 +114,22 @@ export default function PromptSetMetaData() {
         <p className="margin-0">{getDateAndTime(promptsetData?.created)}</p>
       </div>
 
-      <div className="ics-prompt-builder-meta-container">
-        <p className="meta-container-title">Last modified by</p>
-        <p className="margin-0">{promptsetData?.modifiedBy?.name}</p>
-        <p className="meta-container-small-text margin-0">
-          {promptsetData?.modifiedBy?.email}
-        </p>
-      </div>
+        <div className="ics-prompt-builder-meta-container">
+            <p className="meta-container-title">Last modified by</p>
+            <p className="margin-0">
+                {lastModified?.modifiedBy?.name ? lastModified.modifiedBy.name : promptsetData?.modifiedBy?.name}
+            </p>
+            <p className="meta-container-small-text margin-0">
+                {lastModified?.modifiedBy?.email ? lastModified.modifiedBy.email : promptsetData?.modifiedBy?.email}
+            </p>
+        </div>
+
+        <div className="ics-prompt-builder-meta-container">
+            <p className="meta-container-title">Modified at</p>
+            <p className="margin-0">{
+                lastModified?.modified ? getDateAndTime(lastModified.modified) : getDateAndTime(promptsetData?.modified)
+            }</p>
+        </div>
 
       <div className="ics-prompt-builder-meta-container">
         <p className="meta-container-title">Template</p>
@@ -186,71 +192,60 @@ export default function PromptSetMetaData() {
       <div className="ics-prompt-builder-meta-container">
         <p className="meta-container-title">Languages and default fonts</p>
 
-        {languageKeysSet.map((isoCode: any, index: number) => {
-          return (
-            <div key={index} className="row small">
-              <div className="col-md-4">
-                {promptsetData?.lang[isoCode].language}
-                <span>
-                  {promptsetData?.lang[isoCode].promptSetLanguageSupport.default
-                    ? " (default)"
-                    : ""}
+            {languageKeysSet.map((isoCode: any, index: number) => {
+                return (<div key={index} className="row small">
+                    <div className="col-md-4">
+                        {promptsetData?.lang[isoCode].language}
+                        <span>
+                  {promptsetData?.lang[isoCode].promptSetLanguageSupport.default ? " (default)" : ""}
                 </span>
-              </div>
-              <div className="col-md-6">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.type ||
-                  ""}
-              </div>
-              <div className="col-md-2">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.size ||
-                  ""}
-              </div>
-            </div>
-          );
-        })}
-        <button
-          className="btn btn-primary meta-button"
-          onClick={handleEditLanguageShow}
-        >
-          Edit
-        </button>
-        <Modal
-          show={showEditLanguage}
-          onHide={handleEditLanguageClose}
-          size="lg"
-        >
-          <EditLanguageModal hide={handleEditLanguageClose} />
-        </Modal>
-      </div>
-      <div className="ics-prompt-builder-meta-container">
-        <div className="d-flex-row meta-buttons-container">
-          <button className="btn btn-primary">
-            <i className="fas fa-angle-double-right"></i>
-          </button>
-          <button className="btn btn-primary">
-            <i className="fas fa-expand-arrows-alt"></i>
-          </button>
-          <button className="btn btn-primary">
-            <i className="fas fa-code"></i>
-          </button>
-          <button
-            onClick={() => {
-              setGridViewState(!gridViewState);
-            }}
-            className={`btn btn-primary ${gridViewState ? "isActive" : ""}`}
-          >
-            <i className="fas fa-th"></i>
-          </button>
-          <button
-            onClick={() => {
-              setShowPlaylistState(!showPlaylistState);
-            }}
-            className={`btn btn-primary ${showPlaylistState ? "isActive" : ""}`}
-          >
-            <i className="fas fa-play-circle"></i>
-          </button>
+                    </div>
+                    <div className="col-md-6">
+                        {promptsetData.lang[isoCode].promptSetLanguageSupport.type || ""}
+                    </div>
+                    <div className="col-md-2">
+                        {promptsetData.lang[isoCode].promptSetLanguageSupport.size || ""}
+                    </div>
+                </div>);
+            })}
+            <button
+                className="btn btn-primary meta-button"
+                onClick={handleEditLanguageShow}
+            >
+                Edit
+            </button>
+            <Modal
+                show={showEditLanguage}
+                onHide={handleEditLanguageClose}
+                size="lg"
+            >
+                <EditLanguageModal hide={handleEditLanguageClose}/>
+            </Modal>
         </div>
-      </div>
-    </div>
-  );
+        <div className="ics-prompt-builder-meta-container">
+            <div className="d-flex-row meta-buttons-container">
+                <button className="btn btn-primary">
+                    <i className="fas fa-angle-double-right"></i>
+                </button>
+                <button className="btn btn-primary">
+                    <i className="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button className="btn btn-primary">
+                    <i className="fas fa-code"></i>
+                </button>
+                <button onClick={() => {
+                    setGridViewState(!gridViewState);
+                }} className={`btn btn-primary ${gridViewState ? 'isActive' : ''}`}>
+                    <i className="fas fa-th"></i>
+                </button>
+                <button
+                    onClick={() => {
+                        setShowPlaylistState(!showPlaylistState);
+                    }}
+                    className={`btn btn-primary ${showPlaylistState ? 'isActive' : ''}`}>
+                    <i className="fas fa-play-circle"></i>
+                </button>
+            </div>
+        </div>
+    </div>);
 }

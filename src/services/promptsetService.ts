@@ -52,3 +52,11 @@ export function getDateAndTime(time: string) {
     return formattedDate + " (UTC+05:30)";
 }
 
+export function enableSoftKey(deviceType: string) {
+    return deviceType === "G7-100";
+}
+
+export function enableSoftKeysBottom(deviceType:string){
+    return deviceType === "G6-200";
+}
+
