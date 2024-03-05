@@ -267,3 +267,16 @@ $md-grey-300: #e0e0e0;
 .text-grey {
   color: var(--md-grey-600);
 }
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 1rem 1.5rem;
+}
+
+.modal-header {
+  h4 {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+}

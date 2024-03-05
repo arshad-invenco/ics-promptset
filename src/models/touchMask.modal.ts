@@ -34,3 +34,11 @@ export interface JsonBuildObject {
   id: string;
   fullName: string;
 }
+
+export interface TouchMaskPromptSets {
+  id: string;
+  name: string;
+  status: string;
+  version: string;
+  code: string;
+}

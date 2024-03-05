@@ -1,6 +1,6 @@
 import { Dropdown, Modal } from "react-bootstrap";
 import "./editLanguage.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Language } from "../../../../models/language.modal";
 import { Font } from "../../../../models/fonts.modal";
@@ -14,6 +14,11 @@ import {
 } from "../../../../constants/language";
 import UpdateDefaultFont from "./update-default-font-modal/updateDefaultFont";
 import { getBaseUrl } from "../../../../constants/app";
+import { getPromptSetId } from "../../../../constants/promptSetConstants";
+import request from "../../../../services/interceptor";
+import { AppDispatch } from "../../../../redux/store";
+import { fetchPromptSet } from "../../../../redux/thunks/promptSetThunk";
+import { fetchSoftKeys } from "../../../../redux/thunks/softkeyThunk";
 
 interface EditLanguageModalProps {
   hide: () => void;
@@ -29,6 +34,8 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
   const [languages, setLanguages] = useState<Language[]>(
     getLangModalViewItems()
   );
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const defaultLanguage = languages.find(
     (lang) => lang.languageSupportId === defaultLanguageId
@@ -57,22 +64,21 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
     setShowUpdateFontModal(false);
   };
 
-  function handleUpdate() {
-    const requestOptions = {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      body: JSON.stringify(modifiedLanguages),
-    };
-
-    fetch(
-      `${getBaseUrl()}/media/promptsets/7b6b43c8-080c-4548-8618-362db74e77dd/languages`,
-      requestOptions
-    )
-      .then(() => {
-        hide();
-      })
-      .catch(() => {});
-  }
+  const handleUpdate = async () => {
+    try {
+      const response = await request().put(
+        `${getBaseUrl()}/media/promptsets/${getPromptSetId()}/languages`,
+        modifiedLanguages
+      );
+      if (response) {
+        dispatch(fetchPromptSet());
+        dispatch(fetchSoftKeys());
+      }
+      hide();
+    } catch (error) {
+      throw error;
+    }
+  };
 
   function handleFontSelection(item: Font, language: Language) {
     const index = languages.findIndex(

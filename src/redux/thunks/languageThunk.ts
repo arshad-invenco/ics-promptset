@@ -1,18 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getBaseUrl } from "../../constants/app";
 import { Language } from "../../models/language.modal";
+import { getBaseUrl } from "../../constants/app";
 import { getCompanyId } from "../../constants/language";
+import request from "../../services/interceptor";
 
 export const fetchLanguages = createAsyncThunk<Language[]>(
   "[language]/fetchLanguages",
   async () => {
-    const response = await fetch(
-      `${getBaseUrl()}/companies/${getCompanyId()}/languages`,
-      {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      }
-    );
-    const data = await response.json();
-    return data as Language[];
+    try {
+      const response = await request().get(`${getBaseUrl()}/companies/${getCompanyId()}/languages`);
+      const data = response.data;
+      return data as Language[];
+    } catch (error) {
+      throw error;
+    }
   }
 );
