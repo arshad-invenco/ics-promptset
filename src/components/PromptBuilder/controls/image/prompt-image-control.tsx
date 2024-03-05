@@ -1,11 +1,13 @@
 import './prompt-image-control.scss'
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
-import {Elements} from "../../../../models/promptset.modal";
-import {useState} from "react";
+import {Elements, PromptSetInterface} from "../../../../models/promptset.modal";
+import {useEffect, useState} from "react";
 import {debounce} from "@mui/material";
 import {AppDispatch} from "../../../../redux/store";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";
+import {getBaseUrl} from "../../../../constants/app";
+import {PromptSetRootState} from "../../Tree/promptTree";
 
 interface ElementsProp {
     elementData: Elements
@@ -20,18 +22,32 @@ export function ImageControl(props: ElementsProp) {
     // STATES
     const [element, setElement] = useState(elementData);
 
+    // SELECTORS
+    const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
+
+    useEffect(() => {
+        setElement(elementData);
+    }, [promptsetData]);
+
     function onChangeInput(element: Elements) {
         dispatch(updateInputElement(element));
     }
 
-    // DEBOUNCE
-    const debouncedOnChangeInput = debounce(onChangeInput, 1000);
+    const generateImgURL = (value:string) => {
+        return `url(${getBaseUrl()}/media/assets/${value}/source)`;
+    };
+
 
     return (
         <div className="ics-prompt-builder-image-controls d-flex-row">
             <div className="col-md-1">
                 <label>Image</label>
-                <div className="image-preview">
+                <div className="image-preview"
+                     style={{backgroundImage: generateImgURL(element.value),
+                         backgroundPosition: 'center',
+                         backgroundRepeat: 'no-repeat',
+                         backgroundSize: 'contain'}}
+                >
                 </div>
             </div>
 
@@ -45,7 +61,7 @@ export function ImageControl(props: ElementsProp) {
                                onChange={(e) => {
                                    const updatedElement = {...element, left: (Number)(e.target.value)};
                                    setElement(updatedElement);
-                                   debouncedOnChangeInput(updatedElement);
+                                   onChangeInput(updatedElement);
                                }}
                                min={0} className="ics-input dimension-input"/>
                     </div>
@@ -59,7 +75,9 @@ export function ImageControl(props: ElementsProp) {
                                    setElement(updatedElement);
                                    onChangeInput(updatedElement);
                                }}
-                               min={0} className="ics-input dimension-input"/>
+                               min={0}
+                               max={promptsetData.screenHeight - (element?.height || 0)}
+                               className="ics-input dimension-input"/>
                     </div>
 
                     <div className="d-flex-row dimension-control disabled-control">

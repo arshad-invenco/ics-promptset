@@ -12,6 +12,10 @@ interface PromptSetContextInterface {
     setActivePromptEditorId: React.Dispatch<React.SetStateAction<string>>;
     activeElementId: string;
     setActiveElementId: React.Dispatch<React.SetStateAction<string>>;
+    gridViewState:boolean;
+    setGridViewState: React.Dispatch<React.SetStateAction<boolean>>;
+    showPlaylistState:boolean,
+    setShowPlaylistState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const initialContextValue = {
@@ -28,7 +32,11 @@ const initialContextValue = {
     setActivePromptEditorId: () => {},
     // Active Element Id
     activeElementId: '',
-    setActiveElementId: () => {}
+    setActiveElementId: () => {},
+    gridViewState: false,
+    setGridViewState: ()=>{},
+    showPlaylistState:false,
+    setShowPlaylistState:() =>{}
 }
 
 export const promptSetContext = createContext<PromptSetContextInterface>(initialContextValue);

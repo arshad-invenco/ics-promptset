@@ -6,6 +6,10 @@ import {getDeviceType} from "../../constants/deviceType";
 
 export function PromptSetEditor() {
     const deviceType=getDeviceType();
+
+
+
+
     return (
         // Width ACC to DeviceType
         <div className={`right-container ${deviceType}`}>

@@ -147,6 +147,7 @@ export interface Elements {
   userclass?: string;
   bold?: boolean;
   italic?: boolean;
+  name?:string;
 }
 
 export interface PromptType {
