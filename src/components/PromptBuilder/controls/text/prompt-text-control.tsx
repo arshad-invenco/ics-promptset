@@ -19,13 +19,13 @@ interface ElementsProp {
 export default function TextControl(props: ElementsProp) {
   const { elementData } = props;
   const fonts: Font[] = useSelector(selectFonts);
-  const initialFont = fonts.find(
-    (font) => font.fontId === elementData.face
-  )?.name;
+  const initialFont = fonts.find((font) => font.fontId === elementData.face);
 
   // STATES
   const [element, setElement] = useState(elementData);
-  const [selectedFont, setSelectedFont] = useState(initialFont || "Font");
+  const [selectedFont, setSelectedFont] = useState<Font>(
+    initialFont ?? ({} as Font)
+  );
   const [filteredFonts, setFilteredFonts] = useState<Font[]>([]);
 
   // REDUX
@@ -43,10 +43,10 @@ export default function TextControl(props: ElementsProp) {
     dispatch(updateInputElement(element));
   }
 
-  function handleFontSelection(item: string) {
-    if (item !== "Font") {
-      setSelectedFont(fonts.find((font) => font.fontId === item)?.name || "");
-      setElement({ ...element, face: item });
+  function handleFontSelection(item: Font) {
+    if (initialFont) {
+      setSelectedFont(item);
+      setElement({ ...element, face: item.fontId });
     }
   }
 

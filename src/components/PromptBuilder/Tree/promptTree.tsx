@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InnerStates from "./TreeElements/innerStates";
 import {
   Assignment,
+  Elements,
   NewPromptPayload,
   PromptSetInterface,
   State,
@@ -18,8 +19,20 @@ import { fetchSoftKeys } from "../../../redux/thunks/softkeyThunk";
 import NewPrompt from "../modals/new-prompt-modal/newPrompt";
 import { fetchPromptSet } from "../../../redux/thunks/promptSetThunk";
 import { getBaseUrl } from "../../../constants/app";
-import { getCompanyId, setCompanyId } from "../../../constants/language";
+import {
+  getCompanyId,
+  getPromptsetLanguages,
+  setCompanyId,
+  setCompanyLanguages,
+  setPromptSet,
+} from "../../../constants/language";
 import { fetchLanguages } from "../../../redux/thunks/languageThunk";
+import { Font } from "../../../models/fonts.modal";
+import { selectFonts } from "../../../redux/selectors/fontSelectors";
+import { filterFonts } from "../../../constants/fontConstant";
+import { selectElementByIdInAssignment } from "../../../redux/selectors/promptSetSelectors";
+import { select, set } from "snapsvg";
+import { selectLanguages } from "../../../redux/selectors/languageSelectors";
 
 export interface PromptSetRootState {
   promptset: {
@@ -32,6 +45,9 @@ export interface PromptSetRootState {
 export default function PromptTree() {
   // REDUX
   const dispatch = useDispatch<AppDispatch>();
+  const languages = useSelector(selectLanguages);
+  const { activePromptEditorId, activeElementId } =
+    useContext(promptSetContext);
 
   // STATES
   const [isSaving, setIsSaving] = useState(false);
@@ -42,6 +58,15 @@ export default function PromptTree() {
   const promptsetData: PromptSetInterface = useSelector(
     (state: PromptSetRootState) => state.promptset.data
   );
+  const fonts: Font[] = useSelector(selectFonts);
+  const elementData: Elements =
+    useSelector((state: PromptSetRootState & State[]) =>
+      selectElementByIdInAssignment(
+        state,
+        activePromptEditorId,
+        activeElementId
+      )
+    ) || ({} as Elements);
 
   // CONTEXT API
   const {
@@ -50,7 +75,6 @@ export default function PromptTree() {
     setActiveStateId,
     setActiveControlType,
     setActivePromptEditorId,
-    setActiveElementId,
   } = useContext(promptSetContext);
 
   // EFFECTS
@@ -63,11 +87,16 @@ export default function PromptTree() {
       console.log(promptsetData,"kkkk");
       setDeviceType(promptsetData.deviceType);
       setCompanyId(promptsetData.company);
+      setPromptSet(promptsetData);
+      if (elementData) {
+        filterFonts(fonts, elementData);
+      }
       if (getDeviceType()) {
         dispatch(fetchSoftKeys());
       }
       if (getCompanyId()) {
         dispatch(fetchLanguages());
+        getPromptsetLanguages();
       }
     }
   }, [promptsetData]);
@@ -84,7 +113,11 @@ export default function PromptTree() {
         setActivePromptEditorId(promptsetData.states[0].assignments[0].id);
       }
     }
-  }, [promptsetData]);
+  }, [promptsetData, fonts, elementData]);
+
+  useEffect(() => {
+    setCompanyLanguages(languages);
+  }, [languages]);
 
   const handleNewPromptShow = () => {
     setShowNewPromptModal(true);

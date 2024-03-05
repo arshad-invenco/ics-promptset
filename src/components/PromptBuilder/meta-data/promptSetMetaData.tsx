@@ -9,6 +9,7 @@ import BackgroundPicker from "../../common/background-picker/backgroundPicker";
 import {Modal} from "react-bootstrap";
 import EditLanguageModal from "../modals/edit-language-modal/editLanguage";
 import {promptSetContext} from "../../../hooks/promptsetContext";
+import {createModalInfo, languageKeysSet, setLangModalViewItems,} from "../../../constants/language";
 
 export default function PromptSetMetaData() {
     // STATES
@@ -31,6 +32,8 @@ export default function PromptSetMetaData() {
     }
 
     const handleEditLanguageShow = () => {
+        setLangModalViewItems([]);
+        createModalInfo();
         setShowEditLanguage(true);
     };
 
@@ -106,6 +109,23 @@ export default function PromptSetMetaData() {
 
         <div className="ics-prompt-builder-meta-container">
             <p className="meta-container-title">Languages and default fonts</p>
+
+            {languageKeysSet.map((isoCode: any, index: number) => {
+                return (<div key={index} className="row small">
+                        <div className="col-md-4">
+                            {promptsetData?.lang[isoCode].language}
+                            <span>
+                  {promptsetData?.lang[isoCode].promptSetLanguageSupport.default ? " (default)" : ""}
+                </span>
+                        </div>
+                        <div className="col-md-6">
+                            {promptsetData.lang[isoCode].promptSetLanguageSupport.type || ""}
+                        </div>
+                        <div className="col-md-2">
+                            {promptsetData.lang[isoCode].promptSetLanguageSupport.size || ""}
+                        </div>
+                    </div>);
+            })}
             <button
                 className="btn btn-primary meta-button"
                 onClick={handleEditLanguageShow}
@@ -120,7 +140,6 @@ export default function PromptSetMetaData() {
                 <EditLanguageModal hide={handleEditLanguageClose}/>
             </Modal>
         </div>
-
         <div className="ics-prompt-builder-meta-container">
             <div className="d-flex-row meta-buttons-container">
                 <button className="btn btn-primary">

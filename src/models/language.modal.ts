@@ -1,8 +1,15 @@
+import { Font } from "./fonts.modal";
+
 export interface Language {
   languageSupportId: string;
   language: string;
   isoCode: string;
-  default: boolean;
+  default?: boolean;
+  deleted?: boolean;
+  promptSetLanguageSupport?: promptSetLanguageSupport;
+  type?: Font;
+  size?: number;
+  isAvailableInPromptSet?: boolean;
 }
 
 export interface LanguageRootState {
@@ -11,4 +18,11 @@ export interface LanguageRootState {
     isLoading: boolean;
     error: string;
   };
+}
+
+export interface promptSetLanguageSupport {
+  type: string;
+  size: number;
+  default?: boolean;
+  deleted?: boolean;
 }

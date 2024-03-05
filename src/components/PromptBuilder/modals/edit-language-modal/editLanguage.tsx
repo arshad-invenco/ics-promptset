@@ -1,45 +1,139 @@
 import { Dropdown, Modal } from "react-bootstrap";
 import "./editLanguage.scss";
 import { useSelector } from "react-redux";
-import { selectLanguages } from "../../../../redux/selectors/languageSelectors";
 import { useEffect, useState } from "react";
 import { Language } from "../../../../models/language.modal";
 import { Font } from "../../../../models/fonts.modal";
 import { selectFonts } from "../../../../redux/selectors/fontSelectors";
-import {
-  filterFonts,
-  getFilteredFonts,
-} from "../../../../constants/fontConstant";
+import { getFilteredFonts } from "../../../../constants/fontConstant";
 import FontDropdown from "../../../common/font-dropdown/fontDropdown";
-import { get } from "http";
+import {
+  getLangModalViewItems,
+  getPromptsetLanguages,
+  onPromptLanguageSave,
+} from "../../../../constants/language";
+import UpdateDefaultFont from "./update-default-font-modal/updateDefaultFont";
+import { getBaseUrl } from "../../../../constants/app";
 
 interface EditLanguageModalProps {
   hide: () => void;
 }
 
 function EditLanguageModal({ hide }: EditLanguageModalProps) {
-  const languages = useSelector(selectLanguages);
   const fonts: Font[] = useSelector(selectFonts);
+  const defaultLanguageId = getPromptsetLanguages().find(
+    (lang) => lang.promptSetLanguageSupport.default
+  )?.languageSupportId;
 
   const filteredFonts = getFilteredFonts();
-  const [selectedLanguages, setSelectedLanguages] = useState<Language[]>([]);
-  const [selectedFont, setSelectedFont] = useState("Font");
-  const [fontSizes, setFontSizes] = useState<number[]>([47]);
-  const [selectedDefaultLanguage, setSelectedDefaultLanguage] =
-    useState<Language>();
+  const [languages, setLanguages] = useState<Language[]>(
+    getLangModalViewItems()
+  );
 
-  function handleFontSelection(item: string) {
-    if (item !== "Font") {
-      setSelectedFont(item);
+  const defaultLanguage = languages.find(
+    (lang) => lang.languageSupportId === defaultLanguageId
+  );
+
+  const [selectedDefaultLanguage, setSelectedDefaultLanguage] =
+    useState<Language>(defaultLanguage ?? ({} as Language));
+
+  useEffect(() => {
+    if (selectedDefaultLanguage) {
+      const defaultLanguage = languages.find(
+        (lang) =>
+          lang.languageSupportId === selectedDefaultLanguage.languageSupportId
+      );
+      if (defaultLanguage) {
+        defaultLanguage.default = true;
+      }
+    }
+  }, [selectedDefaultLanguage]);
+
+  const [modifiedLanguages, setModifiedLanguages] = useState<Language[]>([]);
+
+  const [showUpdateFontModal, setShowUpdateFontModal] = useState(false);
+
+  const handleUpdateFontModalClose = () => {
+    setShowUpdateFontModal(false);
+  };
+
+  function handleUpdate(updatedValue: boolean) {
+    const requestOptions = {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      body: JSON.stringify(updatedValue ? modifiedLanguages : languages),
+    };
+
+    fetch(
+      `${getBaseUrl()}/media/promptsets/7b6b43c8-080c-4548-8618-362db74e77dd/languages`,
+      requestOptions
+    )
+      .then(() => {
+        hide();
+      })
+      .catch(() => {});
+  }
+
+  function handleFontSelection(item: Font, language: Language) {
+    const index = languages.findIndex(
+      (lang) => lang.languageSupportId === language.languageSupportId
+    );
+    if (index !== -1) {
+      const updatedLanguages = [...languages];
+      updatedLanguages[index].type = item;
+      setLanguages(updatedLanguages);
     }
   }
 
-  function handleInputSelection(e: React.ChangeEvent<HTMLInputElement>) {
-    const language = languages.find(
-      (language) => language.language === e.target.value
+  function handleInputSelection(language: Language) {
+    let isChecked = language?.isAvailableInPromptSet || false;
+    const index = languages.findIndex(
+      (lang) => lang.languageSupportId === language.languageSupportId
     );
-   
+    if (index !== -1) {
+      const updatedLanguages = [...languages];
+      updatedLanguages[index].isAvailableInPromptSet = !isChecked;
+      setLanguages(updatedLanguages);
+    }
   }
+
+  function handlePromptLanguageSave() {
+    const newModifiedLanguages = onPromptLanguageSave(
+      languages,
+      selectedDefaultLanguage
+    );
+    if (newModifiedLanguages.length > 0) {
+      confirmAndPutPromptLanguages();
+    } else {
+      handleUpdate(false);
+    }
+    setModifiedLanguages(newModifiedLanguages);
+  }
+
+  function confirmAndPutPromptLanguages() {
+    setShowUpdateFontModal(true);
+  }
+
+  useEffect(() => {
+   
+  }, []);
+
+  useEffect(() => {
+    if (selectedDefaultLanguage) {
+      setLanguages(
+        languages.map((lang) => {
+          if (
+            lang.languageSupportId === selectedDefaultLanguage.languageSupportId
+          ) {
+            lang.default = true;
+          } else {
+            lang.default = false;
+          }
+          return lang;
+        })
+      );
+    }
+  }, [selectedDefaultLanguage]);
 
   return (
     <div className="edit-language">
@@ -58,13 +152,14 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
                       className="check-input"
                       style={{ cursor: "pointer" }}
                       type="checkbox"
-                      onChange={handleInputSelection}
+                      onChange={() => handleInputSelection(language)}
+                      checked={language.isAvailableInPromptSet}
                     />
                   </span>
                 </div>
                 <div
                   className={
-                    selectedLanguages.includes(language)
+                    language.isAvailableInPromptSet
                       ? "col-md-3"
                       : "text-grey col-md-3"
                   }
@@ -75,19 +170,24 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
                 <div className="col-md-6">
                   <FontDropdown
                     fonts={filteredFonts}
-                    onSelect={handleFontSelection}
-                    selectedFont={selectedFont}
+                    onSelect={(item: Font) =>
+                      handleFontSelection(item, language)
+                    }
+                    selectedFont={language.type || fonts[0]}
                   ></FontDropdown>
                 </div>
                 <div className="col-md-2">
                   <input
                     type="number"
-                    value={fontSizes[index]}
+                    value={language.size}
                     className="ics-input"
                     onChange={(e) => {
-                      const newFontSizes = [...fontSizes];
-                      newFontSizes[index] = parseInt(e.target.value);
-                      setFontSizes(newFontSizes);
+                      const newSize = parseInt(e.target.value);
+                      if (!isNaN(newSize)) {
+                        const updatedLanguages = [...languages];
+                        updatedLanguages[index].size = newSize;
+                        setLanguages(updatedLanguages);
+                      }
                     }}
                     min="1"
                     max="380"
@@ -108,22 +208,28 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
               {fonts.length > 0 && (
                 <Dropdown.Menu>
                   <div className="font-menu">
-                    {languages.map((language, index) => (
-                      <Dropdown.Item
-                        key={language.languageSupportId}
-                        onClick={() => setSelectedDefaultLanguage(language)}
-                        className={
-                          language.languageSupportId ===
-                          selectedDefaultLanguage?.languageSupportId
-                            ? "selected-font"
-                            : ""
-                        }
-                      >
-                        <div className="media">
-                          <h4 className="media-heading">{language.language}</h4>
-                        </div>
-                      </Dropdown.Item>
-                    ))}
+                    {languages
+                      .filter((language) => language.isAvailableInPromptSet)
+                      .map((language) => (
+                        <Dropdown.Item
+                          key={language.languageSupportId}
+                          onClick={() => {
+                            setSelectedDefaultLanguage(language);
+                          }}
+                          className={
+                            language.languageSupportId ===
+                            selectedDefaultLanguage?.languageSupportId
+                              ? "selected-font"
+                              : ""
+                          }
+                        >
+                          <div className="media">
+                            <h4 className="media-heading">
+                              {language.language}
+                            </h4>
+                          </div>
+                        </Dropdown.Item>
+                      ))}
                   </div>
                 </Dropdown.Menu>
               )}
@@ -145,12 +251,22 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
           className="btn btn-primary"
           onClick={(e) => {
             e.stopPropagation();
-            hide();
+            handlePromptLanguageSave();
           }}
         >
           SAVE
         </button>
       </Modal.Footer>
+      <Modal
+        show={showUpdateFontModal}
+        onHide={handleUpdateFontModalClose}
+        size="sm"
+      >
+        <UpdateDefaultFont
+          onHide={handleUpdateFontModalClose}
+          onUpdateDefaultFont={() => handleUpdate(true)}
+        />
+      </Modal>
     </div>
   );
 }

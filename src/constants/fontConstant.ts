@@ -94,11 +94,16 @@ export function filterFonts(fonts: Font[], elementData: Elements): Font[] {
   }
 
   updatedFonts = updatedFonts.filter((font) =>
-    font.supportedDevices.some((device) =>
-      device.startsWith(
-        getDeviceType().split("-")[0] + "-" + getDeviceType().split("-")[1]
-      )
-    )
+    font.supportedDevices.some((device) => {
+      const deviceType = getDeviceType();
+      if (deviceType) {
+        return device.startsWith(
+          deviceType.split("-")[0] + "-" + deviceType.split("-")[1]
+        );
+      } else {
+        return false;
+      }
+    })
   );
 
   const customFonts = updatedFonts
