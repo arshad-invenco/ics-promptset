@@ -18,8 +18,7 @@ export const promptsetSlice = createSlice({
             state.data = action.payload;
             state.isLoading = false;
             state.error = false;
-        },
-        updateInputElement: (state, action) => {
+        }, updateInputElement: (state, action) => {
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
                     assignment.elements = assignment.elements.map((element) => {
@@ -33,8 +32,7 @@ export const promptsetSlice = createSlice({
                 });
                 return state;
             });
-        },
-        updateTouchMap: (state, action) => {
+        }, updateTouchMap: (state, action) => {
             const {area, activePromptEditorId} = action.payload;
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
@@ -53,8 +51,7 @@ export const promptsetSlice = createSlice({
                 });
                 return state;
             });
-        },
-        addElementToAssignment: (state, action) => {
+        }, addElementToAssignment: (state, action) => {
             const {assignmentId, newElement} = action.payload;
             state.data = {
                 ...state.data, states: state.data.states = state.data.states.map((state) => {
@@ -68,8 +65,18 @@ export const promptsetSlice = createSlice({
                     return state;
                 })
             }
-        },
-        deleteElementByID: (state, action) => {
+        }, deleteChildStateDayPartById: (state, action) => {
+            // THIS THING HAPPENS THROUGH API CALL ITSELF
+            const {assignmentId, childStateId} = action.payload;
+            state.data.states = state.data.states.map((state) => {
+                if (state.id === assignmentId) {
+                    state.assignments = state.assignments.filter((assignment) => {
+                        return assignment.id !== childStateId;
+                    });
+                }
+                return state;
+            });
+        }, deleteElementByID: (state, action) => {
             const elementId = action.payload;
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
@@ -78,14 +85,13 @@ export const promptsetSlice = createSlice({
                         return element.id !== elementId;
                     });
                     if (initialLength > assignment.elements.length) {
-                        state.isStateChanged = true; // Set isStateChanged to true
+                        state.isStateChanged = true;
                     }
                     return assignment;
                 });
                 return state;
             });
-        },
-        deleteTouchMapOrAreaById: (state, action) => {
+        }, deleteTouchMapOrAreaById: (state, action) => {
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
                     assignment.elements = assignment.elements.filter((element) => {
@@ -109,8 +115,7 @@ export const promptsetSlice = createSlice({
                 });
                 return state;
             });
-        },
-        addNewTouchMap: (state, action) => {
+        }, addNewTouchMap: (state, action) => {
             const {assignmentId, newTouchMap} = action.payload;
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
@@ -122,13 +127,12 @@ export const promptsetSlice = createSlice({
                 });
                 return state;
             });
-        },
-        addNewAreaToTouchMap: (state, action) => {
+        }, addNewAreaToTouchMap: (state, action) => {
             const {assignmentId, newArea} = action.payload;
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
                     if (assignment.id === assignmentId && assignment.touchmap) {
-                        if (assignment.touchmap.areas){
+                        if (assignment.touchmap.areas) {
                             console.log(newArea, "ADDDIIINNNNGGGGG")
                             assignment.touchmap.areas.push(newArea);
                         } else {
@@ -166,5 +170,6 @@ export const {
     deleteElementByID,
     deleteTouchMapOrAreaById,
     addNewTouchMap,
-    addNewAreaToTouchMap
+    addNewAreaToTouchMap,
+    deleteChildStateDayPartById
 } = promptsetSlice.actions;

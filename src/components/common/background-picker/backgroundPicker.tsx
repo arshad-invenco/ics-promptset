@@ -15,9 +15,10 @@ import ColorPickerModal from "../../PromptBuilder/modals/color-picker-modal/colo
 interface BackgroundPickerProps {
   value: string;
   setValue: (value: string) => void;
+  handleAssetBackground?: (asset:Asset) => void;
 }
 
-function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
+function BackgroundPicker({ value, setValue, handleAssetBackground }: BackgroundPickerProps) {
   const [bgColor, setBgColor] = useState("000000");
   const [bgShow, setBgShow] = useState(false);
   const [colorShow, setColorShow] = useState(false);
@@ -54,6 +55,8 @@ function BackgroundPicker({ value, setValue }: BackgroundPickerProps) {
   const handleAsset = (asset: Asset) => {
     setValue(asset.id);
     setBgShow(false);
+    if (handleAssetBackground)
+      handleAssetBackground(asset);
   };
 
   return (

@@ -47,13 +47,15 @@ function MediaModal({ hide, onAssetSelection, type }: ModalProps) {
     order: "uploaded",
     pageIndex: 0,
     pageSize: 20,
-    ...(type === "video" && { videoExtension: ".webm" }),
+    type: type.toUpperCase(),
+    ...(type === "video" && { videoExtension: ".webm",  }),
   });
   const [sizeQueryParams, setSizeQueryParams] =
     useState<AssetParams>(queryParams);
   const [previousParams, setPreviousParams] = useState<AssetParams>({
     pageIndex: 0,
     pageSize: 20,
+    type: type.toUpperCase(),
   });
 
   //Dropdown Handlers

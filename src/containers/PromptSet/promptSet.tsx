@@ -11,6 +11,7 @@ import {fetchDayPart} from "../../redux/thunks/daypartThunk";
 import {fetchKeyCodes} from "../../redux/thunks/keycodeThunk";
 import {fetchFonts} from "../../redux/thunks/fontThunk";
 import {fetchTouchMasks} from "../../redux/thunks/touchMaskThunk";
+import {LastModifiedInterface} from "../../models/lastModified.modal";
 
 export function PromptSet() {
     // STATES -> CONTEXT_API
@@ -21,7 +22,7 @@ export function PromptSet() {
     const [activeElementId, setActiveElementId] = useState<string>("");
     const [gridViewState, setGridViewState] = useState<boolean>(false);
     const [showPlaylistState, setShowPlaylistState] = useState<boolean>(false);
-
+    const [lastModified, setLastModified] = useState<LastModifiedInterface>({} as LastModifiedInterface);
 
     // CONTEXT_API
     const contextValues = {
@@ -38,7 +39,9 @@ export function PromptSet() {
         gridViewState,
         setGridViewState,
         showPlaylistState,
-        setShowPlaylistState
+        setShowPlaylistState,
+        lastModified,
+        setLastModified
     };
 
     // DISPATCH

@@ -16,6 +16,7 @@ export interface AssetParams {
   minHeight?: number;
   minWidth?: number;
   videoExtension?: string;
+  type:string
 }
 
 export interface AssetResponse {

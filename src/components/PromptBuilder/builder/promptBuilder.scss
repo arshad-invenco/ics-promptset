@@ -6,15 +6,32 @@
   &.prompt-builder-size{
     transition: all .15s linear;
     overflow-x: hidden;
-    padding-right: 10px;
   }
 
   .soft-keys{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 10% 0;
+    align-items: center;
+
+    position: relative;
+
     &.soft-keys-left{
         color: blue;
+        left: 40px;
     }
     &.soft-keys-right{
         color: yellow;
+      right: 40px
+    }
+    .softkey-btn{
+      .soft-key-text{
+        position: relative;
+        top: 15px;
+        color: #9e9e9e;
+      }
     }
   }
 
@@ -35,6 +52,45 @@
     .ics-prompt-builder{
       height: fit-content;
     }
+    .soft-keys-bottom{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      padding: 30px 15%;
+      position: relative;
+      background-color: #424242;
+      top: 5px;
+      .soft-key-text{
+        position: relative;
+        top: 19px;
+        color: #9e9e9e;
+      }
+    }
   }
 
+}
+
+.soft-key-button{
+  border: none;
+  border-radius: 3px;
+  transition: all .15s ease-in-out;
+  color: #fff;
+  font-size: 26px;
+  background-color: #212121;
+  display: flex;
+  align-items: center;
+  transform: scale(2);
+  padding: 2px 6px;
+  box-shadow: 0 3px 0 0 #000;
+  position: relative;
+  top: 0;
+  &:hover{
+    box-shadow: none;
+    top: 3px;
+  }
+  .fa-window-minimize{
+    margin-left: 8px;
+    transform: scale(.8) rotate(90deg);
+  }
 }

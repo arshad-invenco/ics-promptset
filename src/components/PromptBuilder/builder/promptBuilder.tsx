@@ -101,6 +101,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         fontSize: newElement.size,
                         textAnchor: 'center',
                         textDecoration: 'underline',
+                        cursor: "default",
                         dy: '1em'
                     });
                     let bboxInput = inputSvg.getBBox();

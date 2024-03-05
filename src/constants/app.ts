@@ -1,1 +1,1 @@
-export const getBaseUrl = () => "https://api-martini.invencocloud.com/rest/v1";
+export const getBaseUrl = () => "https://api-gin.invencocloud.com/rest/v1";
