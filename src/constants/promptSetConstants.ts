@@ -1,5 +1,14 @@
-import { Font } from "../models/fonts.modal";
 import { PromptType } from "../models/promptset.modal";
+
+let promptSetId="";
+
+export function setPromptSetId(id: string) {
+  promptSetId = id;
+}
+
+export function getPromptSetId() {
+  return promptSetId;
+}
 
 export const AssetsDropdownMapping: {
   [key: string]: { icon: string; text: string; type: string };

@@ -1,4 +1,4 @@
-import {useContext, useEffect, useMemo, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import "./promptTree.scss";
 import { Accordion, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +12,7 @@ import {
 } from "../../../models/promptset.modal";
 import isSequoiaDevice from "../../../services/promptsetService";
 import { promptSetContext } from "../../../hooks/promptsetContext";
-import { STATE } from "../../../constants/promptSetConstants";
+import { STATE, setPromptSetId } from "../../../constants/promptSetConstants";
 import { getDeviceType, setDeviceType } from "../../../constants/deviceType";
 import { AppDispatch } from "../../../redux/store";
 import { fetchSoftKeys } from "../../../redux/thunks/softkeyThunk";
@@ -31,7 +31,6 @@ import { Font } from "../../../models/fonts.modal";
 import { selectFonts } from "../../../redux/selectors/fontSelectors";
 import { filterFonts } from "../../../constants/fontConstant";
 import { selectElementByIdInAssignment } from "../../../redux/selectors/promptSetSelectors";
-import { select, set } from "snapsvg";
 import { selectLanguages } from "../../../redux/selectors/languageSelectors";
 
 export interface PromptSetRootState {
@@ -84,10 +83,10 @@ export default function PromptTree() {
 
   useEffect(() => {
     if (promptsetData && !isLoaded) {
-      console.log(promptsetData,"kkkk");
       setDeviceType(promptsetData.deviceType);
       setCompanyId(promptsetData.company);
       setPromptSet(promptsetData);
+      setPromptSetId(promptsetData.id);
       if (elementData) {
         filterFonts(fonts, elementData);
       }
