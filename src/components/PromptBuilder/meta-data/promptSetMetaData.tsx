@@ -24,7 +24,9 @@ export default function PromptSetMetaData() {
     const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
 
     // CONTEXT_API
-    const {setGridViewState, gridViewState, setShowPlaylistState, showPlaylistState} = useContext(promptSetContext);
+    const {
+        setGridViewState, gridViewState, setShowPlaylistState, showPlaylistState, lastModified
+    } = useContext(promptSetContext);
 
     function handleDropdown() {
         setDropdownStatus(!open);
@@ -55,7 +57,7 @@ export default function PromptSetMetaData() {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [lastModified]);
 
     return (<div className={"ics-prompt-builder-metadata"}>
         <div className="ics-prompt-builder-meta-container">
@@ -73,10 +75,19 @@ export default function PromptSetMetaData() {
 
         <div className="ics-prompt-builder-meta-container">
             <p className="meta-container-title">Last modified by</p>
-            <p className="margin-0">{promptsetData?.modifiedBy?.name}</p>
-            <p className="meta-container-small-text margin-0">
-                {promptsetData?.modifiedBy?.email}
+            <p className="margin-0">
+                {lastModified?.modifiedBy?.name ? lastModified.modifiedBy.name : promptsetData?.modifiedBy?.name}
             </p>
+            <p className="meta-container-small-text margin-0">
+                {lastModified?.modifiedBy?.email ? lastModified.modifiedBy.email : promptsetData?.modifiedBy?.email}
+            </p>
+        </div>
+
+        <div className="ics-prompt-builder-meta-container">
+            <p className="meta-container-title">Modified at</p>
+            <p className="margin-0">{
+                lastModified?.modified ? getDateAndTime(lastModified.modified) : getDateAndTime(promptsetData?.modified)
+            }</p>
         </div>
 
         <div className="ics-prompt-builder-meta-container">
@@ -112,19 +123,19 @@ export default function PromptSetMetaData() {
 
             {languageKeysSet.map((isoCode: any, index: number) => {
                 return (<div key={index} className="row small">
-                        <div className="col-md-4">
-                            {promptsetData?.lang[isoCode].language}
-                            <span>
+                    <div className="col-md-4">
+                        {promptsetData?.lang[isoCode].language}
+                        <span>
                   {promptsetData?.lang[isoCode].promptSetLanguageSupport.default ? " (default)" : ""}
                 </span>
-                        </div>
-                        <div className="col-md-6">
-                            {promptsetData.lang[isoCode].promptSetLanguageSupport.type || ""}
-                        </div>
-                        <div className="col-md-2">
-                            {promptsetData.lang[isoCode].promptSetLanguageSupport.size || ""}
-                        </div>
-                    </div>);
+                    </div>
+                    <div className="col-md-6">
+                        {promptsetData.lang[isoCode].promptSetLanguageSupport.type || ""}
+                    </div>
+                    <div className="col-md-2">
+                        {promptsetData.lang[isoCode].promptSetLanguageSupport.size || ""}
+                    </div>
+                </div>);
             })}
             <button
                 className="btn btn-primary meta-button"

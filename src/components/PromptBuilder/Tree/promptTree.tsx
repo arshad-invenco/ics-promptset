@@ -169,7 +169,7 @@ export default function PromptTree() {
   }
 
   return (
-    <div className="left-container">
+    <div className={`left-container ${getDeviceType()}`}>
       <div className="ics-prompt-tree-container">
         <div className="ics-prompt-set-heading">
           <input className="prompt-heading-input" type="text" value={"njbh"} />
