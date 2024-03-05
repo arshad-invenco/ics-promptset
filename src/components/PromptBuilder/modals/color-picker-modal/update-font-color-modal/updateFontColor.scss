@@ -1,4 +1,4 @@
-.update-default-font {
+.update-font-color {
   .modal-header {
     padding: 1rem 1.5rem;
     h4 {
@@ -14,5 +14,8 @@
     font-weight: 500;
     padding: 1rem 1.5rem;
     gap: 0.5rem;
+    > * {
+      margin: 0;
+    }
   }
 }

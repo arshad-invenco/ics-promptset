@@ -127,6 +127,32 @@ label {
   }
 }
 
+$md-grey-300: #e0e0e0;
+
+.btn-gray {
+  background-color: var(--md-grey-300);
+  border-color: var(--md-grey-300);
+  color: var(--md-grey-900);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--gray-base);
+  }
+
+  &:focus {
+    background-color: darken($md-grey-300, 10%);
+    border-color: darken($md-grey-300, 10%);
+  }
+  &:hover {
+    background-color: darken($md-grey-300, 12%);
+    border-color: darken($md-grey-300, 12%);
+  }
+}
+.text-primary {
+  color: var(--md-indigo-500) !important;
+}
+
 .color-picker-button {
   height: 32px;
   width: 62px;

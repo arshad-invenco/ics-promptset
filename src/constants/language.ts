@@ -66,7 +66,7 @@ let defaultLanguage: { key: number; value: Language } = {} as {
 };
 
 export const getPromptsetLanguages = () => {
-  let promptsetLanguages = Object.values(promptSet.lang);
+  let promptsetLanguages = Object.values(promptSet?.lang || {});
   if (companyLanguages.length >= 1 && promptsetLanguages.length === 0) {
     const companyDefault = companyLanguages.find(
       (item) => item.default === true
@@ -86,7 +86,7 @@ export const getPromptsetLanguages = () => {
   } else {
     promptsetLanguages = promptsetLanguages;
   }
-  languageKeysSet = Object.keys(promptSet.lang);
+  languageKeysSet = Object.keys(promptSet?.lang || {});
   defaultFontSettings = getDefaults();
   return promptsetLanguages;
 };
