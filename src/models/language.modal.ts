@@ -24,5 +24,5 @@ export interface promptSetLanguageSupport {
   type: string;
   size: number;
   default?: boolean;
-  deleted?: boolean;
+  deleted: boolean;
 }
