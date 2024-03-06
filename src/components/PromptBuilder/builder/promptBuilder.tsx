@@ -8,6 +8,7 @@ import {AppDispatch} from "../../../redux/store";
 import {BBox} from "snapsvg";
 import {updateInputElement, updateTouchMapArea} from "../../../redux/reducers/promptsetSlice";
 import {getBaseUrl} from "../../../constants/app";
+import {CENTER, LEFT} from "../../../constants/promptSetConstants";
 
 interface PromptBuilderProps {
     color: string;
@@ -77,24 +78,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             let x = Math.min(Math.max(10, newElement.left || 0), screenWidth);
             let y = Math.min(Math.max(10, newElement.top || 0), screenHeight);
             switch (newElement.type) {
-                case "text":
-                    newElement.top = newElement.top === undefined ? 0 : newElement.top;
-                    newElement.left = newElement.left === undefined ? 0 : newElement.left;
-                    let textSvg = g.text(x, y, newElement.value).attr({
-                        fill: `#${newElement.color}`,
-                        id: newElement.id,
-                        fontSize: newElement.size,
-                        cursor: "pointer !important",
-                        dy: '1em',
-                    });
-
-                    let bbox = textSvg.getBBox();
-                    if (activeElementId === newElement.id) {
-                        svgElement = createWrapperController(bbox, newElement, textSvg);
-                    } else {
-                        svgElement = textSvg;
-                    }
-                    break;
                 case "bg":
                     const colorValidationRegex = /^[0-9A-F]{6}$/i;
                     let elementType = colorValidationRegex.test( newElement.value ) ? 'color' : 'image';
@@ -110,18 +93,75 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         }));
                     }
                     break;
-                case "input":
+                case "text":
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
                     newElement.left = newElement.left === undefined ? 0 : newElement.left;
-                    let inputSvg = g.text(x, y, newElement.value).attr({
+                    let textSvg = g.text(x, y, newElement.value).attr({
                         fill: `#${newElement.color}`,
                         id: newElement.id,
                         fontSize: newElement.size,
-                        textAnchor: 'center',
-                        textDecoration: 'underline',
-                        cursor: "default",
-                        dy: '1em'
+                        cursor: "pointer !important",
+                        dy: '1em',
                     });
+                    if (newElement.textAlign === CENTER){
+                        textSvg.attr({
+                            textAnchor: 'middle',
+                            x: (newElement.width||0  / 2) + x
+                        });
+                    }
+
+                    let bbox = textSvg.getBBox();
+                    if (activeElementId === newElement.id) {
+                        svgElement = createWrapperController(bbox, newElement, textSvg);
+                    } else {
+                        svgElement = textSvg;
+                    }
+                    break;
+                case "input":
+                    newElement.top = newElement.top === undefined ? 0 : newElement.top;
+                    newElement.left = newElement.left === undefined ? 0 : newElement.left;
+                    let inputSvg = g.group();
+
+                    if (newElement.textAlign === CENTER){
+                       let inputCenter = s.text((x + ((newElement.width || 1) / 2)), y, newElement.value).attr({
+                            fill: `#${newElement.color}`,
+                            id: newElement.id,
+                            fontSize: newElement.size,
+                            textAnchor: 'middle',
+                            textDecoration: 'underline',
+                            cursor: "default",
+                            dy: '1em',
+                            fontFamily: newElement.face
+                        });
+                       inputSvg.add(inputCenter);
+                    }
+                    else if(newElement.textAlign === LEFT){
+                        let inputCenter = s.text(x, y, newElement.value).attr({
+                            fill: `#${newElement.color}`,
+                            id: newElement.id,
+                            fontSize: newElement.size,
+                            textAnchor: 'start',
+                            textDecoration: 'underline',
+                            cursor: "default",
+                            dy: '1em',
+                            fontFamily: newElement.face
+                        });
+                        inputSvg.add(inputCenter);
+                    }
+                    else{
+                        let inputCenter = s.text(x+ (newElement.width||0), y, newElement.value).attr({
+                            fill: `#${newElement.color}`,
+                            id: newElement.id,
+                            fontSize: newElement.size,
+                            textAnchor: 'end',
+                            textDecoration: 'underline',
+                            cursor: "default",
+                            dy: '1em',
+                            fontFamily: newElement.face
+                        });
+                        inputSvg.add(inputCenter);
+                    }
+
                     let bboxInput = inputSvg.getBBox();
                     if (activeElementId === newElement.id) {
                         svgElement = createWrapperController(bboxInput, newElement, inputSvg, newElement.type, undefined);
@@ -399,8 +439,9 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0
                 });
             }
-        } else {
-            controller = s.rect(bboxInput.x, bboxInput.y, element?.width || bboxInput.width, element?.height || bboxInput.height).attr({
+        }
+        else {
+            controller = s.rect(element?.left || bboxInput.x, bboxInput.y, element?.width || bboxInput.width, element?.height || bboxInput.height).attr({
                 fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0
             });
         }

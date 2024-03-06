@@ -4,12 +4,12 @@ import { getBaseUrl } from "../../constants/app";
 import request from "../../services/interceptor";
 import { getPromptSetId } from "../../constants/promptSetConstants";
 
-export const fetchPromptSet = createAsyncThunk<PromptSetInterface>(
+export const fetchPromptSet = createAsyncThunk<PromptSetInterface, string>(
   "[prompt set]/fetchPromptSet",
-  async () => {
+  async (id:string) => {
     try {
       const response = await request().get(
-        `${getBaseUrl()}/media/promptsets/7b6b43c8-080c-4548-8618-362db74e77dd`
+        `${getBaseUrl()}/media/promptsets/${id}`
       );
       const data = response.data;
       return data as PromptSetInterface;

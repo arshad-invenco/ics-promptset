@@ -12,7 +12,7 @@ import {
 } from "../../../models/promptset.modal";
 import isSequoiaDevice from "../../../services/promptsetService";
 import { promptSetContext } from "../../../hooks/promptsetContext";
-import { STATE, setPromptSetId } from "../../../constants/promptSetConstants";
+import {STATE, setPromptSetId, getPromptSetId} from "../../../constants/promptSetConstants";
 import { getDeviceType, setDeviceType } from "../../../constants/deviceType";
 import { AppDispatch } from "../../../redux/store";
 import { fetchSoftKeys } from "../../../redux/thunks/softkeyThunk";
@@ -143,7 +143,7 @@ export default function PromptTree() {
       );
 
       if (response) {
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(getPromptSetId()));
       }
     } catch (error) {
       // console.error("Error creating new prompt:", error);

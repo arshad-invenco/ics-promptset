@@ -23,10 +23,12 @@ function UpdateFontColor({ value, hide }: UpdateFontColorProps) {
       );
 
       if (response) {
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(getPromptSetId()));
         hide();
       }
-    } catch (error) {}
+    } catch (error) {
+      hide();
+    }
   };
 
   return (

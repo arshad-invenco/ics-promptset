@@ -6,7 +6,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/promptset' element={<PromptSet />} />
+                <Route path='/media/promptsets/:id' element={<PromptSet/>} />
             </Routes>
         </BrowserRouter>
     );

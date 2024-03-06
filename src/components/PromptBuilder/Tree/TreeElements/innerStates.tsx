@@ -14,7 +14,7 @@ import { promptSetContext } from "../../../../hooks/promptsetContext";
 import {
   AREA,
   BG,
-  CHILD_STATE,
+  CHILD_STATE, getPromptSetId,
   TOUCH_MASK,
   VIDEO,
 } from "../../../../constants/promptSetConstants";
@@ -163,7 +163,7 @@ export default function InnerStates(props: InnerStateProps) {
       })
       .then((res) => {
         setLastModified(res.data);
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(getPromptSetId()));
       })
       .catch((err) => {
         console.log(err);

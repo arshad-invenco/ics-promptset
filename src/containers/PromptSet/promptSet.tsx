@@ -12,6 +12,7 @@ import { fetchKeyCodes } from "../../redux/thunks/keycodeThunk";
 import { fetchFonts } from "../../redux/thunks/fontThunk";
 import { fetchTouchMasks } from "../../redux/thunks/touchMaskThunk";
 import { LastModifiedInterface } from "../../models/lastModified.modal";
+import {useParams} from "react-router-dom";
 
 export function PromptSet() {
   // STATES -> CONTEXT_API
@@ -27,6 +28,10 @@ export function PromptSet() {
   const [lastModified, setLastModified] = useState<LastModifiedInterface>(
     {} as LastModifiedInterface
   );
+
+  // PARAMS
+  const { id } = useParams<{ id: string }>();
+
 
   // CONTEXT_API
   const contextValues = {
@@ -53,7 +58,9 @@ export function PromptSet() {
 
   // EFFECTS
   useEffect(() => {
-    dispatch(fetchPromptSet());
+    if (id) {
+      dispatch(fetchPromptSet(id));
+    }
     dispatch(fetchDayPart());
     dispatch(fetchKeyCodes());
     dispatch(fetchFonts());
