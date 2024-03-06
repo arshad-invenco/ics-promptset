@@ -1,0 +1,23 @@
+.odml {
+  .modal-header {
+    border: none;
+  }
+  .modal-body {
+    .ics-html-wrapper {
+      background-color: var(--md-black-darker);
+      .ics-html-preview {
+        padding: 1rem 1rem;
+        color: var(--md-lime-500);
+        margin: 0;
+        line-height: 1.5rem;
+        font-size: 1.4rem;
+        i {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+  .modal-footer {
+    border: none;
+  }
+}

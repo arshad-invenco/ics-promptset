@@ -4,7 +4,6 @@ import "./dayPart.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {DaypartItem, DayPartRootState,} from "../../../../models/daypart.modal";
 import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
-import axios from "axios";
 import {AppDispatch} from "../../../../redux/store";
 import {fetchPromptSet} from "../../../../redux/thunks/promptSetThunk";
 import {usePromptSetId} from "../../../../hooks/promptsetId";
@@ -55,11 +54,7 @@ function DayPartModal({hide, daypart, childStateId, parentId}: ModalProps) {
         const payload = {
             type: "exception",
             "dayPart": {
-                "id": `${item.id}`,
-                "name": `${item.name}`,
-                "start": 0,
-                "end": 3600000,
-                "active": true
+                "id": `${item.id}`, "name": `${item.name}`, "start": 0, "end": 3600000, "active": true
             },
             "code": null,
             "promptSetLanguageId": null,
@@ -72,8 +67,7 @@ function DayPartModal({hide, daypart, childStateId, parentId}: ModalProps) {
         }
 
 
-        request().post(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts/${childStateId}/exception`
-        , payload)
+        request().post(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts/${childStateId}/exception`, payload)
             .then((res) => {
                 dispatch(fetchPromptSet(promptSetId));
             }).catch((err) => {
@@ -83,48 +77,48 @@ function DayPartModal({hide, daypart, childStateId, parentId}: ModalProps) {
     };
 
     return (<div className="daypart">
-        <Modal.Header>
-            <Modal.Title>Add a day part</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <SearchableDropdown
-                label="Daypart"
-                items={dayParts}
-                placeholder="Daypart"
-                itemRenderer={(daypart: DaypartItem) => (<>
-                    <div className="fw-bold mb5">{daypart.name}</div>
-                    <div className="time mb5">
-                        <i className="fa-regular fa-clock"></i>
-                        {daypart.time}
-                    </div>
-                </>)}
-                onSelect={handleSelect}
-            />
-        </Modal.Body>
-        <Modal.Footer>
-            <button
-                className="btn btn-link"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    hide();
-                }}
-            >
-                CANCEL
-            </button>
-            <div className={selectedDayPart === "Daypart" ? "no-selection" : ""}>
+            <Modal.Header>
+                <Modal.Title>Add a day part</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <SearchableDropdown
+                    label="Daypart"
+                    items={dayParts}
+                    placeholder="Daypart"
+                    itemRenderer={(daypart: DaypartItem) => (<>
+                            <div className="fw-bold mb5">{daypart.name}</div>
+                            <div className="time mb5">
+                                <i className="fa-regular fa-clock"></i>
+                                {daypart.time}
+                            </div>
+                        </>)}
+                    onSelect={handleSelect}
+                />
+            </Modal.Body>
+            <Modal.Footer>
                 <button
-                    disabled={selectedDayPart === "Daypart"}
-                    className="btn btn-primary"
+                    className="btn btn-link"
                     onClick={(e) => {
                         e.stopPropagation();
-                        daypart(selectedDayPart);
+                        hide();
                     }}
                 >
-                    ADD
+                    CANCEL
                 </button>
-            </div>
-        </Modal.Footer>
-    </div>);
+                <div className={selectedDayPart === "Daypart" ? "no-selection" : ""}>
+                    <button
+                        disabled={selectedDayPart === "Daypart"}
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            daypart(selectedDayPart);
+                        }}
+                    >
+                        ADD
+                    </button>
+                </div>
+            </Modal.Footer>
+        </div>);
 }
 
 export default DayPartModal;

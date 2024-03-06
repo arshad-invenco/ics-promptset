@@ -5,6 +5,8 @@ import request from "../../../../../services/interceptor";
 import {useDispatch} from "react-redux";
 import {fetchPromptSet} from "../../../../../redux/thunks/promptSetThunk";
 import {AppDispatch} from "../../../../../redux/store";
+import { useContext } from "react";
+import { promptSetContext } from "../../../../../hooks/promptsetContext";
 import {usePromptSetId} from "../../../../../hooks/promptsetId";
 
 interface UpdateFontColorProps {
@@ -13,6 +15,8 @@ interface UpdateFontColorProps {
 }
 
 function UpdateFontColor({ value, hide }: UpdateFontColorProps) {
+  const { toastDispatch } = useContext(promptSetContext);
+
   const dispatch = useDispatch<AppDispatch>();
 
   const promptSetId = usePromptSetId();
@@ -27,6 +31,10 @@ function UpdateFontColor({ value, hide }: UpdateFontColorProps) {
 
       if (response) {
         dispatch(fetchPromptSet(promptSetId));
+        toastDispatch({
+          type: "ADD_TOAST",
+          payload: { message: "Default font color updated" },
+        });
         hide();
       }
     } catch (error) {
