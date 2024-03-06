@@ -229,10 +229,16 @@ export default function TextControl(props: ElementsProp) {
       <div className="ics-inline-150-block">
         <label>Center shift</label>
         <div className="d-flex-row center-shift">
-          <label className="shift-btn">
+          <label onClick={()=>{
+            setElement({...element, left: promptsetData.screenWidth/2 - ((element?.width || 0) /2)});
+            onChangeInput({...element, left: promptsetData.screenWidth/2 - ((element?.width || 0) /2)});
+          }} className="shift-btn">
             <VerticalAlignCenterRoundedIcon className="icon shift-icon-transform-horizontal" />
           </label>
-          <label className="shift-btn">
+          <label onClick={()=>{
+              setElement({...element, top: promptsetData.screenHeight/2 - ((element?.height || 0) /2)});
+              onChangeInput({...element, top: promptsetData.screenHeight/2 - ((element?.height || 0) /2)});
+          }} className="shift-btn">
             <VerticalAlignCenterRoundedIcon className="icon" />
           </label>
         </div>

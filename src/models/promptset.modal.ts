@@ -30,12 +30,14 @@ interface SoftKeys {
 export interface TouchMapAreas {
   coords: string;
   id: string;
-  shape: string | "circle";
+  shape: string | "circle" | "rect";
   softkeyId?: string;
   softkeyName?: string;
   type: string;
   keyCode?: string;
   keyCodeName?: string;
+  name?:string;
+  alt?:string
 }
 
 export interface Lang {
@@ -148,6 +150,7 @@ export interface Elements {
   bold?: boolean;
   italic?: boolean;
   name?:string;
+  filename?:string;
 }
 
 export interface PromptType {

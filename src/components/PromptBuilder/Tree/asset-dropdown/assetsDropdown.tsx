@@ -72,7 +72,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   );
 
   // CONTEXT API
-  const { setActiveElementId, setActiveControlType } =
+  const { setActiveElementId, setActiveControlType, promptSetData } =
     useContext(promptSetContext);
 
   // EFFECTS
@@ -245,12 +245,14 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
     if (type === TOUCH_MASK) {
       handleShowTouchMask();
     }
-    if (type === "area") {
+    if (type === AREA) {
       let areaElement: TouchMapAreas = {
         id: generateRandomString(10),
         type: "area",
         shape: "rect",
         coords: "0,0,100,50",
+        name: "map" + 1,
+        alt: "map" + 1
       };
       dispatch(
         addNewAreaToTouchMap({

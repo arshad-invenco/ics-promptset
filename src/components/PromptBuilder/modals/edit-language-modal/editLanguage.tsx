@@ -77,7 +77,7 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
         modifiedLanguages
       );
       if (response) {
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(getPromptSetId()));
         dispatch(fetchSoftKeys());
         dispatch(fetchLanguages());
         setCompanyLanguages(response.data);

@@ -14,7 +14,7 @@ import { promptSetContext } from "../../../../hooks/promptsetContext";
 import {
   AREA,
   BG,
-  CHILD_STATE,
+  CHILD_STATE, getPromptSetId,
   TOUCH_MASK,
   VIDEO,
 } from "../../../../constants/promptSetConstants";
@@ -98,6 +98,7 @@ export default function InnerStates(props: InnerStateProps) {
     setActiveElementId,
     activeElementId,
     setLastModified,
+      activePromptEditorId
   } = useContext(promptSetContext);
 
   // REFS
@@ -162,7 +163,7 @@ export default function InnerStates(props: InnerStateProps) {
       })
       .then((res) => {
         setLastModified(res.data);
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(getPromptSetId()));
       })
       .catch((err) => {
         console.log(err);
@@ -272,7 +273,7 @@ export default function InnerStates(props: InnerStateProps) {
                   onDragOver={(e) => e.preventDefault()}
                   key={index}
                   className={`inner-elements ${
-                    activeElementId === element.id ? "active-inner-element" : ""
+                      (activeElementId === element.id && child.id === activePromptEditorId) ? "active-inner-element" : ""
                   } `}
                 >
                   <TreeElements element={element} />

@@ -66,7 +66,7 @@ export const promptsetSlice = createSlice({
                 })
             }
         }, deleteChildStateDayPartById: (state, action) => {
-            // THIS THING HAPPENS THROUGH API CALL ITSELF
+            // THIS THING HAPPENS THROUGH API CALL ITSELF, JUST PLACED IN CASE OF ANY NEED
             const {assignmentId, childStateId} = action.payload;
             state.data.states = state.data.states.map((state) => {
                 if (state.id === assignmentId) {
@@ -145,6 +145,43 @@ export const promptsetSlice = createSlice({
                 return state;
             });
         },
+        updateTouchMapArea: (state, action) => {
+            const {assignmentId, newArea} = action.payload;
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    if (assignment.id === assignmentId && assignment.touchmap) {
+                        assignment.touchmap.areas = assignment.touchmap.areas?.map((area) => {
+                            if (area.id === newArea.id) {
+                                return newArea;
+                            }
+                            return area;
+                        });
+                        state.isStateChanged = true;
+                    }
+                    return assignment;
+                });
+                return state;
+            });
+        },
+        updateBackgroundElement: (state, action) => {
+            const {assignmentId, newElement} = action.payload;
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    if (assignment.id === assignmentId) {
+                        const bgElement = assignment.elements.find((element) => element.type === "bg");
+                        if (bgElement) {
+                            bgElement.value = newElement.value;
+                            bgElement.filename = newElement.filename;
+                            bgElement.name = newElement.name;
+                            state.isStateChanged = true;
+                        }
+                    }
+                    return assignment;
+                });
+                return state;
+            });
+
+        }
     }, extraReducers: (builder) => {
         builder.addCase(fetchPromptSet.fulfilled, (state, action) => {
             state.isLoading = false;
@@ -171,5 +208,7 @@ export const {
     deleteTouchMapOrAreaById,
     addNewTouchMap,
     addNewAreaToTouchMap,
-    deleteChildStateDayPartById
+    deleteChildStateDayPartById,
+    updateTouchMapArea,
+    updateBackgroundElement
 } = promptsetSlice.actions;
