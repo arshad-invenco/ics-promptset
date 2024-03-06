@@ -8,9 +8,12 @@ import { selectFonts } from "../../../../redux/selectors/fontSelectors";
 import { getFilteredFonts } from "../../../../constants/fontConstant";
 import FontDropdown from "../../../common/font-dropdown/fontDropdown";
 import {
+  createModalInfo,
   getLangModalViewItems,
   getPromptsetLanguages,
   onPromptLanguageSave,
+  setCompanyLanguages,
+  setLangModalViewItems,
 } from "../../../../constants/language";
 import UpdateDefaultFont from "./update-default-font-modal/updateDefaultFont";
 import { getBaseUrl } from "../../../../constants/app";
@@ -19,6 +22,7 @@ import request from "../../../../services/interceptor";
 import { AppDispatch } from "../../../../redux/store";
 import { fetchPromptSet } from "../../../../redux/thunks/promptSetThunk";
 import { fetchSoftKeys } from "../../../../redux/thunks/softkeyThunk";
+import { fetchLanguages } from "../../../../redux/thunks/languageThunk";
 
 interface EditLanguageModalProps {
   hide: () => void;
@@ -43,6 +47,8 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
 
   const [selectedDefaultLanguage, setSelectedDefaultLanguage] =
     useState<Language>(defaultLanguage ?? ({} as Language));
+
+  const [isModified, setIsModified] = useState(false);
 
   useEffect(() => {
     if (selectedDefaultLanguage) {
@@ -73,11 +79,11 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
       if (response) {
         dispatch(fetchPromptSet());
         dispatch(fetchSoftKeys());
+        dispatch(fetchLanguages());
+        setCompanyLanguages(response.data);
       }
       hide();
-    } catch (error) {
-      throw error;
-    }
+    } catch (error) {}
   };
 
   function handleFontSelection(item: Font, language: Language) {
@@ -121,15 +127,23 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
     const { languages: newModifiedLanguages, modified: isModified } =
       onPromptLanguageSave(selectedDefaultLanguage);
 
-    setTimeout(() => {
-      if (isModified) {
-        confirmAndPutPromptLanguages();
-      } else {
-        handleUpdate();
-      }
-    }, 1000);
     setModifiedLanguages(newModifiedLanguages);
+    setIsModified(isModified);
   }
+
+  useEffect(() => {
+    if (modifiedLanguages.length > 0) {
+      const timeoutId = setTimeout(() => {
+        if (isModified) {
+          confirmAndPutPromptLanguages();
+        } else {
+          handleUpdate();
+        }
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [modifiedLanguages]);
 
   function confirmAndPutPromptLanguages() {
     setShowUpdateFontModal(true);

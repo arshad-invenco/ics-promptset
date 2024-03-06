@@ -19,7 +19,7 @@
     }
     .meta-buttons-container {
       gap: 0.6rem;
-      .isActive{
+      .isActive {
         background-color: #293475;
         &:hover {
           background-color: #293475 !important;
@@ -30,6 +30,8 @@
       padding: 0.2rem 1rem;
       margin: 0.5rem 1rem 1rem 0;
       font-weight: bold;
+      display: flex;
+      align-items: center;
       i {
         margin-left: 0.3rem;
         font-size: 85%;
