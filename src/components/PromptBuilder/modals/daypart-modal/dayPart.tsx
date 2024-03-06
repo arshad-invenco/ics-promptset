@@ -8,13 +8,17 @@ import axios from "axios";
 import {AppDispatch} from "../../../../redux/store";
 import {fetchPromptSet} from "../../../../redux/thunks/promptSetThunk";
 import {usePromptSetId} from "../../../../hooks/promptsetId";
+import {getBaseUrl} from "../../../../constants/app";
+import request from "../../../../services/interceptor";
 
 interface ModalProps {
     hide: () => void;
     daypart: (arg: string) => void;
+    childStateId: string;
+    parentId: string;
 }
 
-function DayPartModal({hide, daypart}: ModalProps) {
+function DayPartModal({hide, daypart, childStateId, parentId}: ModalProps) {
     // STATES
     const [selectedDayPart, setSelectedDayPart] = useState("Daypart");
 
@@ -49,17 +53,17 @@ function DayPartModal({hide, daypart}: ModalProps) {
         setSelectedDayPart(item.name);
         console.log(item, "DAYYY PPAAARRRTTTT")
         const payload = {
-            "type": "exception",
+            type: "exception",
             "dayPart": {
-                "id": "249ad27e-0867-4ef7-8763-2eba14067623",
-                "name": "sd",
+                "id": `${item.id}`,
+                "name": `${item.name}`,
                 "start": 0,
                 "end": 3600000,
                 "active": true
             },
             "code": null,
             "promptSetLanguageId": null,
-            "parentId": "79270e6d-8fb7-4512-89d2-65e0991b7c1d",
+            "parentId": `${parentId}`,
             "showAssets": false,
             "showAssetsDropdown": false,
             "elements": [],
@@ -68,10 +72,8 @@ function DayPartModal({hide, daypart}: ModalProps) {
         }
 
 
-        axios.post("https://api-martini.invencocloud.com/rest/v1/media/promptsets/7b6b43c8-080c-4548-8618-362db74e77dd/prompts/e1327a34-ef58-49f3-b792-c66e2d4d9e44/exception"
-        , payload, {
-                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-            })
+        request().post(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts/${childStateId}/exception`
+        , payload)
             .then((res) => {
                 dispatch(fetchPromptSet(promptSetId));
             }).catch((err) => {
