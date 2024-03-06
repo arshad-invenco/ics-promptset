@@ -1,0 +1,32 @@
+.toaster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--toast-bg);
+  color: var(--white);
+  box-shadow: 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.5);
+  padding: 0 1.6rem;
+  font-size: 1.4rem;
+  width: fit-content;
+  position: fixed;
+  z-index: 1;
+  min-height: 4rem;
+  top: 92vh;
+
+  .toast-counter {
+    margin: 0 2.4rem 0 0;
+    display: inline;
+    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: var(--white);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.2rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+    top: -0.1rem;
+  }
+}
