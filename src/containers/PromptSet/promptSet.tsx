@@ -1,7 +1,7 @@
 import "./promptSet.scss";
 import PromptTree from "../../components/PromptBuilder/Tree/promptTree";
 import { promptSetContext } from "../../hooks/promptsetContext";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { fetchPromptSet } from "../../redux/thunks/promptSetThunk";
@@ -12,6 +12,8 @@ import { fetchKeyCodes } from "../../redux/thunks/keycodeThunk";
 import { fetchFonts } from "../../redux/thunks/fontThunk";
 import { fetchTouchMasks } from "../../redux/thunks/touchMaskThunk";
 import { LastModifiedInterface } from "../../models/lastModified.modal";
+import { toastReducer } from "../../hooks/toastReducer";
+import ToastComponent from "../../components/common/toast/toast";
 import {useParams} from "react-router-dom";
 
 export function PromptSet() {
@@ -28,6 +30,7 @@ export function PromptSet() {
   const [lastModified, setLastModified] = useState<LastModifiedInterface>(
     {} as LastModifiedInterface
   );
+  const [toasts, toastDispatch] = useReducer(toastReducer, []);
 
   // PARAMS
   const { id } = useParams<{ id: string }>();
@@ -51,6 +54,8 @@ export function PromptSet() {
     setShowPlaylistState,
     lastModified,
     setLastModified,
+    toasts,
+    toastDispatch,
   };
 
   // DISPATCH
@@ -70,6 +75,7 @@ export function PromptSet() {
   return (
     <div className={"layout"}>
       <promptSetContext.Provider value={contextValues}>
+        <ToastComponent />
         <PromptTree />
         <PromptSetEditor />
       </promptSetContext.Provider>

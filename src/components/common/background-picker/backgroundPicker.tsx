@@ -58,8 +58,7 @@ function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgr
   const handleAsset = (asset: Asset) => {
     setValue(asset.id);
     setBgShow(false);
-    if (handleAssetBackground)
-      handleAssetBackground(asset);
+    if (handleAssetBackground) handleAssetBackground(asset);
   };
 
 
@@ -79,12 +78,7 @@ function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgr
         <div className="image" onClick={handleBgShow}>
           <i className="fa fa-picture-o" aria-hidden="true"></i>
         </div>
-        <Modal
-          show={bgShow}
-          onHide={handleBgClose}
-          className="media-modal"
-          size="lg"
-        >
+        <Modal show={bgShow} onHide={handleBgClose} size="xl">
           <MediaModal
             hide={handleBgClose}
             onAssetSelection={handleAsset}

@@ -36,8 +36,8 @@ export interface TouchMapAreas {
   type: string;
   keyCode?: string;
   keyCodeName?: string;
-  name?:string;
-  alt?:string
+  name?: string;
+  alt?: string;
 }
 
 export interface Lang {
@@ -149,8 +149,8 @@ export interface Elements {
   userclass?: string;
   bold?: boolean;
   italic?: boolean;
-  name?:string;
-  filename?:string;
+  name?: string;
+  filename?: string;
 }
 
 export interface PromptType {

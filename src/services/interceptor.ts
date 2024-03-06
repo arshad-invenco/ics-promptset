@@ -46,7 +46,6 @@ const request = () => {
     (error: AxiosError) => {
       const response: AxiosResponse<any, any> | undefined = error?.response;
       if (response?.status === 413) {
-        // Max size of the request is 5mb.
         return Promise.reject(new Error("The size of your input is too big."));
       }
       return Promise.reject(error);
