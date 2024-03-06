@@ -1,28 +1,26 @@
-import { Dropdown, Modal } from "react-bootstrap";
+import {Dropdown, Modal} from "react-bootstrap";
 import "./editLanguage.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { Language } from "../../../../models/language.modal";
-import { Font } from "../../../../models/fonts.modal";
-import { selectFonts } from "../../../../redux/selectors/fontSelectors";
-import { getFilteredFonts } from "../../../../constants/fontConstant";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {Language} from "../../../../models/language.modal";
+import {Font} from "../../../../models/fonts.modal";
+import {selectFonts} from "../../../../redux/selectors/fontSelectors";
+import {getFilteredFonts} from "../../../../constants/fontConstant";
 import FontDropdown from "../../../common/font-dropdown/fontDropdown";
 import {
-  createModalInfo,
   getLangModalViewItems,
   getPromptsetLanguages,
   onPromptLanguageSave,
   setCompanyLanguages,
-  setLangModalViewItems,
 } from "../../../../constants/language";
 import UpdateDefaultFont from "./update-default-font-modal/updateDefaultFont";
-import { getBaseUrl } from "../../../../constants/app";
-import { getPromptSetId } from "../../../../constants/promptSetConstants";
+import {getBaseUrl} from "../../../../constants/app";
 import request from "../../../../services/interceptor";
-import { AppDispatch } from "../../../../redux/store";
-import { fetchPromptSet } from "../../../../redux/thunks/promptSetThunk";
-import { fetchSoftKeys } from "../../../../redux/thunks/softkeyThunk";
-import { fetchLanguages } from "../../../../redux/thunks/languageThunk";
+import {AppDispatch} from "../../../../redux/store";
+import {fetchPromptSet} from "../../../../redux/thunks/promptSetThunk";
+import {fetchSoftKeys} from "../../../../redux/thunks/softkeyThunk";
+import {fetchLanguages} from "../../../../redux/thunks/languageThunk";
+import {usePromptSetId} from "../../../../hooks/promptsetId";
 
 interface EditLanguageModalProps {
   hide: () => void;
@@ -40,6 +38,8 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
   );
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const promptSetId = usePromptSetId();
 
   const defaultLanguage = languages.find(
     (lang) => lang.languageSupportId === defaultLanguageId
@@ -73,11 +73,11 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
   const handleUpdate = async () => {
     try {
       const response = await request().put(
-        `${getBaseUrl()}/media/promptsets/${getPromptSetId()}/languages`,
+        `${getBaseUrl()}/media/promptsets/${promptSetId}/languages`,
         modifiedLanguages
       );
       if (response) {
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(promptSetId));
         dispatch(fetchSoftKeys());
         dispatch(fetchLanguages());
         setCompanyLanguages(response.data);

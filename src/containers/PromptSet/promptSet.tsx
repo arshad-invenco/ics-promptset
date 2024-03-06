@@ -14,6 +14,7 @@ import { fetchTouchMasks } from "../../redux/thunks/touchMaskThunk";
 import { LastModifiedInterface } from "../../models/lastModified.modal";
 import { toastReducer } from "../../hooks/toastReducer";
 import ToastComponent from "../../components/common/toast/toast";
+import {useParams} from "react-router-dom";
 
 export function PromptSet() {
   // STATES -> CONTEXT_API
@@ -30,6 +31,10 @@ export function PromptSet() {
     {} as LastModifiedInterface
   );
   const [toasts, toastDispatch] = useReducer(toastReducer, []);
+
+  // PARAMS
+  const { id } = useParams<{ id: string }>();
+
 
   // CONTEXT_API
   const contextValues = {
@@ -58,7 +63,9 @@ export function PromptSet() {
 
   // EFFECTS
   useEffect(() => {
-    dispatch(fetchPromptSet());
+    if (id) {
+      dispatch(fetchPromptSet(id));
+    }
     dispatch(fetchDayPart());
     dispatch(fetchKeyCodes());
     dispatch(fetchFonts());

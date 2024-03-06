@@ -1,13 +1,13 @@
-import { Modal } from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import "./updateFontColor.scss";
-import { getBaseUrl } from "../../../../../constants/app";
-import { getPromptSetId } from "../../../../../constants/promptSetConstants";
+import {getBaseUrl} from "../../../../../constants/app";
 import request from "../../../../../services/interceptor";
-import { useDispatch } from "react-redux";
-import { fetchPromptSet } from "../../../../../redux/thunks/promptSetThunk";
-import { AppDispatch } from "../../../../../redux/store";
+import {useDispatch} from "react-redux";
+import {fetchPromptSet} from "../../../../../redux/thunks/promptSetThunk";
+import {AppDispatch} from "../../../../../redux/store";
 import { useContext } from "react";
 import { promptSetContext } from "../../../../../hooks/promptsetContext";
+import {usePromptSetId} from "../../../../../hooks/promptsetId";
 
 interface UpdateFontColorProps {
   value: string;
@@ -18,23 +18,28 @@ function UpdateFontColor({ value, hide }: UpdateFontColorProps) {
   const { toastDispatch } = useContext(promptSetContext);
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const promptSetId = usePromptSetId();
+
   const handleUpdateFontColor = async (update: boolean) => {
     try {
       value = value.replace("#", "");
 
       const response = await request().put(
-        `${getBaseUrl()}/media/promptsets/${getPromptSetId()}/font?all=${update}&fontColor=${value}`
+        `${getBaseUrl()}/media/promptsets/${promptSetId}/font?all=${update}&fontColor=${value}`
       );
 
       if (response) {
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(promptSetId));
         toastDispatch({
           type: "ADD_TOAST",
           payload: { message: "Default font color updated" },
         });
         hide();
       }
-    } catch (error) {}
+    } catch (error) {
+      hide();
+    }
   };
 
   return (

@@ -8,3 +8,5 @@ export function useGetDeviceType() {
   );
   return promptsetData.deviceType;
 }
+
+

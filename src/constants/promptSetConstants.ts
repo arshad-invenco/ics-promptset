@@ -6,10 +6,6 @@ export function setPromptSetId(id: string) {
   promptSetId = id;
 }
 
-export function getPromptSetId() {
-  return "4e1132da-18f8-4fc0-8645-a1e8d9e3a275";
-}
-
 export const AssetsDropdownMapping: {
   [key: string]: { icon: string; text: string; type: string };
 } = {
@@ -71,3 +67,7 @@ export const PROMPT_TYPES: PromptType[] = [
   { id: "2", name: "PIN" },
   { id: "3", name: "Data" },
 ];
+
+export const CENTER = "center"
+export const LEFT = "left"
+export const RIGHT = "right"

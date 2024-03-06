@@ -31,6 +31,7 @@ import axios from "axios";
 import { getBaseUrl } from "../../../../constants/app";
 import { fetchPromptSet } from "../../../../redux/thunks/promptSetThunk";
 import NewTouchMask from "../../modals/touch-mask-modal/new-touch-mask-modal/newTouchMask";
+import {usePromptSetId} from "../../../../hooks/promptsetId";
 
 interface InnerStateProps {
   child: Assignment;
@@ -87,6 +88,9 @@ export default function InnerStates(props: InnerStateProps) {
   const [elements, setElements] = useState(child.elements);
   const [showDropdown, setShowDropdown] = useState(false);
 
+  // HOOKS
+    const promptSetId = usePromptSetId();
+
   // REDUX
   const dispatch = useDispatch<AppDispatch>();
 
@@ -98,6 +102,7 @@ export default function InnerStates(props: InnerStateProps) {
     setActiveElementId,
     activeElementId,
     setLastModified,
+      activePromptEditorId
   } = useContext(promptSetContext);
 
   // REFS
@@ -162,7 +167,7 @@ export default function InnerStates(props: InnerStateProps) {
       })
       .then((res) => {
         setLastModified(res.data);
-        dispatch(fetchPromptSet());
+        dispatch(fetchPromptSet(promptSetId));
       })
       .catch((err) => {
         console.log(err);
@@ -272,10 +277,10 @@ export default function InnerStates(props: InnerStateProps) {
                   onDragOver={(e) => e.preventDefault()}
                   key={index}
                   className={`inner-elements ${
-                    activeElementId === element.id ? "active-inner-element" : ""
+                      (activeElementId === element.id && child.id === activePromptEditorId) ? "active-inner-element" : ""
                   } `}
                 >
-                  <TreeElements element={element} />
+                  <TreeElements childState={child.id} element={element} />
                 </div>
               ) : element.lock !== false ? (
                 <div
@@ -287,7 +292,7 @@ export default function InnerStates(props: InnerStateProps) {
                   } `}
                   key={index}
                 >
-                  <TreeElements element={element} />
+                  <TreeElements childState={child.id} element={element} />
                 </div>
               ) : null;
             })}
