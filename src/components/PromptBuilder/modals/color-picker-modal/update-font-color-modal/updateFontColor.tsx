@@ -3,30 +3,30 @@ import "./updateFontColor.scss";
 import { getBaseUrl } from "../../../../../constants/app";
 import { getPromptSetId } from "../../../../../constants/promptSetConstants";
 import request from "../../../../../services/interceptor";
+import { useDispatch } from "react-redux";
+import { fetchPromptSet } from "../../../../../redux/thunks/promptSetThunk";
+import { AppDispatch } from "../../../../../redux/store";
 
 interface UpdateFontColorProps {
   value: string;
-  onUpdateFontColor: (update: boolean) => void;
+  hide: () => void;
 }
 
-function UpdateFontColor({ value, onUpdateFontColor }: UpdateFontColorProps) {
+function UpdateFontColor({ value, hide }: UpdateFontColorProps) {
+  const dispatch = useDispatch<AppDispatch>();
   const handleUpdateFontColor = async (update: boolean) => {
     try {
       value = value.replace("#", "");
-      onUpdateFontColor(update);
 
-      await request().put(
-        `${getBaseUrl()}/media/promptsets/${getPromptSetId()}/font`,
-        {
-          params: {
-            all: update,
-            fontColor: value,
-          },
-        }
+      const response = await request().put(
+        `${getBaseUrl()}/media/promptsets/${getPromptSetId()}/font?all=${update}&fontColor=${value}`
       );
-    } catch (error) {
-      throw error;
-    }
+
+      if (response) {
+        dispatch(fetchPromptSet());
+        hide();
+      }
+    } catch (error) {}
   };
 
   return (
