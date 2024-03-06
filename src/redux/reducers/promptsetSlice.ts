@@ -19,15 +19,18 @@ export const promptsetSlice = createSlice({
             state.isLoading = false;
             state.error = false;
         }, updateInputElement: (state, action) => {
+            const { assignmentId, newElement } = action.payload;
             state.data.states = state.data.states.map((state) => {
                 state.assignments = state.assignments.map((assignment) => {
-                    assignment.elements = assignment.elements.map((element) => {
-                        if (element.id === action.payload.id) {
-                            state.isStateChanged = true;
-                            return action.payload;
+                    if (assignment.id === assignmentId) {
+                        const elementIndex = assignment.elements.findIndex((element) => element.id === newElement.id);
+                        if (elementIndex !== -1) {
+                            assignment.elements[elementIndex] = newElement;
+                        } else {
+                            assignment.elements.push(newElement);
                         }
-                        return element;
-                    });
+                        state.isStateChanged = true;
+                    }
                     return assignment;
                 });
                 return state;
