@@ -1,24 +1,18 @@
-import { useContext, useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import "./promptTree.scss";
-import { Accordion, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import {Accordion, Modal} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
 import InnerStates from "./TreeElements/innerStates";
-import {
-  Assignment,
-  Elements,
-  NewPromptPayload,
-  PromptSetInterface,
-  State,
-} from "../../../models/promptset.modal";
+import {Assignment, Elements, NewPromptPayload, PromptSetInterface, State,} from "../../../models/promptset.modal";
 import isSequoiaDevice from "../../../services/promptsetService";
-import { promptSetContext } from "../../../hooks/promptsetContext";
-import {STATE, setPromptSetId, getPromptSetId} from "../../../constants/promptSetConstants";
-import { getDeviceType, setDeviceType } from "../../../constants/deviceType";
-import { AppDispatch } from "../../../redux/store";
-import { fetchSoftKeys } from "../../../redux/thunks/softkeyThunk";
+import {promptSetContext} from "../../../hooks/promptsetContext";
+import {setPromptSetId, STATE} from "../../../constants/promptSetConstants";
+import {getDeviceType, setDeviceType} from "../../../constants/deviceType";
+import {AppDispatch} from "../../../redux/store";
+import {fetchSoftKeys} from "../../../redux/thunks/softkeyThunk";
 import NewPrompt from "../modals/new-prompt-modal/newPrompt";
-import { fetchPromptSet } from "../../../redux/thunks/promptSetThunk";
-import { getBaseUrl } from "../../../constants/app";
+import {fetchPromptSet} from "../../../redux/thunks/promptSetThunk";
+import {getBaseUrl} from "../../../constants/app";
 import {
   getCompanyId,
   getPromptsetLanguages,
@@ -26,13 +20,14 @@ import {
   setCompanyLanguages,
   setPromptSet,
 } from "../../../constants/language";
-import { fetchLanguages } from "../../../redux/thunks/languageThunk";
-import { Font } from "../../../models/fonts.modal";
-import { selectFonts } from "../../../redux/selectors/fontSelectors";
-import { filterFonts } from "../../../constants/fontConstant";
-import { selectElementByIdInAssignment } from "../../../redux/selectors/promptSetSelectors";
-import { selectLanguages } from "../../../redux/selectors/languageSelectors";
+import {fetchLanguages} from "../../../redux/thunks/languageThunk";
+import {Font} from "../../../models/fonts.modal";
+import {selectFonts} from "../../../redux/selectors/fontSelectors";
+import {filterFonts} from "../../../constants/fontConstant";
+import {selectElementByIdInAssignment} from "../../../redux/selectors/promptSetSelectors";
+import {selectLanguages} from "../../../redux/selectors/languageSelectors";
 import request from "../../../services/interceptor";
+import {usePromptSetId} from "../../../hooks/promptsetId";
 
 export interface PromptSetRootState {
   promptset: {
@@ -76,6 +71,9 @@ export default function PromptTree() {
     setActiveControlType,
     setActivePromptEditorId,
   } = useContext(promptSetContext);
+
+  // HOOKS
+    const promptSetId  = usePromptSetId();
 
   // EFFECTS
   useEffect(() => {
@@ -143,7 +141,7 @@ export default function PromptTree() {
       );
 
       if (response) {
-        dispatch(fetchPromptSet(getPromptSetId()));
+        dispatch(fetchPromptSet(promptSetId));
       }
     } catch (error) {
       // console.error("Error creating new prompt:", error);

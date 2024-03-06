@@ -14,7 +14,7 @@ import { promptSetContext } from "../../../../hooks/promptsetContext";
 import {
   AREA,
   BG,
-  CHILD_STATE, getPromptSetId,
+  CHILD_STATE,
   TOUCH_MASK,
   VIDEO,
 } from "../../../../constants/promptSetConstants";
@@ -31,6 +31,7 @@ import axios from "axios";
 import { getBaseUrl } from "../../../../constants/app";
 import { fetchPromptSet } from "../../../../redux/thunks/promptSetThunk";
 import NewTouchMask from "../../modals/touch-mask-modal/new-touch-mask-modal/newTouchMask";
+import {usePromptSetId} from "../../../../hooks/promptsetId";
 
 interface InnerStateProps {
   child: Assignment;
@@ -86,6 +87,9 @@ export default function InnerStates(props: InnerStateProps) {
   // STATES
   const [elements, setElements] = useState(child.elements);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  // HOOKS
+    const promptSetId = usePromptSetId();
 
   // REDUX
   const dispatch = useDispatch<AppDispatch>();
@@ -163,7 +167,7 @@ export default function InnerStates(props: InnerStateProps) {
       })
       .then((res) => {
         setLastModified(res.data);
-        dispatch(fetchPromptSet(getPromptSetId()));
+        dispatch(fetchPromptSet(promptSetId));
       })
       .catch((err) => {
         console.log(err);
