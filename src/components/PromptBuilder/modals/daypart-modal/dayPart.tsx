@@ -7,7 +7,7 @@ import SearchableDropdown from "../../../common/searchable-dropdown/searchableDr
 import axios from "axios";
 import {AppDispatch} from "../../../../redux/store";
 import {fetchPromptSet} from "../../../../redux/thunks/promptSetThunk";
-import {getPromptSetId} from "../../../../constants/promptSetConstants";
+import {usePromptSetId} from "../../../../hooks/promptsetId";
 
 interface ModalProps {
     hide: () => void;
@@ -23,6 +23,8 @@ function DayPartModal({hide, daypart}: ModalProps) {
 
     // REDUX
     const dispatch = useDispatch<AppDispatch>();
+
+    const promptSetId = usePromptSetId();
 
     const dayParts = Array.isArray(dayPartData) ? dayPartData.map((daypart) => {
         let startTime = convertTime(daypart.start);
@@ -71,7 +73,7 @@ function DayPartModal({hide, daypart}: ModalProps) {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             })
             .then((res) => {
-                dispatch(fetchPromptSet(getPromptSetId()));
+                dispatch(fetchPromptSet(promptSetId));
             }).catch((err) => {
             console.log(err, "DAY PART ERROR")
         })
