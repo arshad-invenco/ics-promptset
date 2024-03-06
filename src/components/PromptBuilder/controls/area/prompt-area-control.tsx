@@ -1,7 +1,7 @@
 import "./prompt-area-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
-import { TouchMapAreas } from "../../../../models/promptset.modal";
-import {useContext, useState} from "react";
+import {PromptSetInterface, TouchMapAreas} from "../../../../models/promptset.modal";
+import {useContext, useEffect, useState} from "react";
 import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Keycode } from "../../../../models/keycode.modal";
@@ -12,6 +12,7 @@ import { AppDispatch } from "../../../../redux/store";
 import { updateTouchMap } from "../../../../redux/reducers/promptsetSlice";
 import { debounce } from "@mui/material";
 import {promptSetContext} from "../../../../hooks/promptsetContext";
+import {PromptSetRootState} from "../../Tree/promptTree";
 
 interface TouchMapAreaProp {
   areaData: TouchMapAreas;
@@ -31,6 +32,13 @@ export function AreaControl(props: TouchMapAreaProp) {
 
   // CONTEXT API
     const { activePromptEditorId } = useContext(promptSetContext);
+
+  //   SELECTORS
+  const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
+
+  useEffect(() => {
+    setArea(areaData);
+  }, [promptsetData]);
 
   const keycodes = useSelector(selectKeycodes).map(({ code, name }) => ({
     id: code,

@@ -6,7 +6,7 @@ import {Elements, State, TouchMapAreas} from "../../../models/promptset.modal";
 import {selectPromptSetAssignmentById} from "../../../redux/selectors/promptSetSelectors";
 import {AppDispatch} from "../../../redux/store";
 import {BBox} from "snapsvg";
-import {updateInputElement} from "../../../redux/reducers/promptsetSlice";
+import {updateInputElement, updateTouchMapArea} from "../../../redux/reducers/promptsetSlice";
 import {getBaseUrl} from "../../../constants/app";
 
 interface PromptBuilderProps {
@@ -58,6 +58,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         dispatch(updateInputElement({...newElement, left: Math.ceil(x), top: Math.ceil(y)}));
     }
 
+    function updateArea(area:TouchMapAreas, x:number, y:number) {
+        let areaCoords = area.coords.split(',');
+        console.log(childState?.id)
+        let newArea = {...area, coords : `${x},${y},${areaCoords[2]},${areaCoords[3]}`}
+        dispatch(updateTouchMapArea({assignmentId:childState?.id, newArea: newArea}));
+
+    }
+
     function initElements(elements: Elements[], areas: TouchMapAreas[]) {
         s = window.Snap("#svg");
         s.clear();
@@ -88,9 +96,19 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     }
                     break;
                 case "bg":
-                    svgElement = g.group(s.rect(0, 0, screenWidth, screenHeight).attr({
-                        fill: `#${newElement.value}`, id: newElement.id
-                    }));
+                    const colorValidationRegex = /^[0-9A-F]{6}$/i;
+                    let elementType = colorValidationRegex.test( newElement.value ) ? 'color' : 'image';
+
+                    if (elementType === 'image'){
+                        elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/source`
+                        svgElement = s.image(elementUrl, 0, 0).attr({
+                            id: newElement.id
+                        });
+                    } else {
+                        svgElement = g.group(s.rect(0, 0, screenWidth, screenHeight).attr({
+                            fill: `#${newElement.value}`, id: newElement.id
+                        }));
+                    }
                     break;
                 case "input":
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
@@ -351,6 +369,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     this.attr({
                         transform: this.data('origTransform') + (this.data('origTransform') ? "T" : "t") + [newX - origBBox.x, newY - origBBox.y]
                     });
+                    updateArea(area, newX, newY);
                 }
                 let stop = function (this: Snap.Element) {
                     const ele = this.getBBox();
@@ -446,11 +465,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         }
         if (NewElementSVG) return g.group(ElementSvg, NewElementSVG); else return g.group(ElementSvg, controllerRect);
     }
-
-    // useEffect(() => {
-    //
-    // }, [elements, childState, gridViewState]);
-
 
     return (<svg id="svg" viewBox={`0 0 ${screenWidth} ${screenHeight}`}>
 

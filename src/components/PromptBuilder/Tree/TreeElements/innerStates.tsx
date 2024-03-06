@@ -98,6 +98,7 @@ export default function InnerStates(props: InnerStateProps) {
     setActiveElementId,
     activeElementId,
     setLastModified,
+      activePromptEditorId
   } = useContext(promptSetContext);
 
   // REFS
@@ -272,7 +273,7 @@ export default function InnerStates(props: InnerStateProps) {
                   onDragOver={(e) => e.preventDefault()}
                   key={index}
                   className={`inner-elements ${
-                    activeElementId === element.id ? "active-inner-element" : ""
+                      (activeElementId === element.id && child.id === activePromptEditorId) ? "active-inner-element" : ""
                   } `}
                 >
                   <TreeElements element={element} />

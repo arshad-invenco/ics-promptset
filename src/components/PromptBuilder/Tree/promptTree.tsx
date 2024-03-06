@@ -111,6 +111,7 @@ export default function PromptTree() {
       if (promptsetData.states[0].assignments.length > 0) {
         setActivePromptEditorId(promptsetData.states[0].assignments[0].id);
       }
+      setPromptSetData(promptsetData);
     }
   }, [promptsetData, fonts, elementData]);
 

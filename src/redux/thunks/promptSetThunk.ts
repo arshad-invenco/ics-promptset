@@ -9,7 +9,7 @@ export const fetchPromptSet = createAsyncThunk<PromptSetInterface>(
   async () => {
     try {
       const response = await request().get(
-        `${getBaseUrl()}/media/promptsets/${getPromptSetId()}`
+        `${getBaseUrl()}/media/promptsets/7b6b43c8-080c-4548-8618-362db74e77dd`
       );
       const data = response.data;
       return data as PromptSetInterface;

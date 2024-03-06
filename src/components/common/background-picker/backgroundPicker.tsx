@@ -16,9 +16,10 @@ interface BackgroundPickerProps {
   value: string;
   setValue: (value: string) => void;
   handleAssetBackground?: (asset:Asset) => void;
+  handleBackgroundColor?: (color: string) => void;
 }
 
-function BackgroundPicker({ value, setValue, handleAssetBackground }: BackgroundPickerProps) {
+function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgroundColor}: BackgroundPickerProps) {
   const [bgColor, setBgColor] = useState("000000");
   const [bgShow, setBgShow] = useState(false);
   const [colorShow, setColorShow] = useState(false);
@@ -50,6 +51,8 @@ function BackgroundPicker({ value, setValue, handleAssetBackground }: Background
   const updateColor = (color: string) => {
     if (color === bgColor && value === color) return;
     setValue(color);
+    if (handleBackgroundColor)
+      handleBackgroundColor(color);
   };
 
   const handleAsset = (asset: Asset) => {
@@ -58,6 +61,7 @@ function BackgroundPicker({ value, setValue, handleAssetBackground }: Background
     if (handleAssetBackground)
       handleAssetBackground(asset);
   };
+
 
   return (
     <div className="ics-bg-picker">
