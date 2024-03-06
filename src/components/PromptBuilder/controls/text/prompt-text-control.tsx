@@ -1,7 +1,7 @@
 import "./prompt-text-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import {Elements, PromptSetInterface} from "../../../../models/promptset.modal";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../../redux/store";
 import { updateInputElement } from "../../../../redux/reducers/promptsetSlice";
@@ -13,6 +13,7 @@ import { filterFonts } from "../../../../constants/fontConstant";
 import {PromptSetRootState} from "../../Tree/promptTree";
 import {getDeviceType} from "../../../../constants/deviceType";
 import isSequoiaDevice from "../../../../services/promptsetService";
+import {promptSetContext} from "../../../../hooks/promptsetContext";
 
 interface ElementsProp {
   elementData: Elements;
@@ -22,6 +23,9 @@ export default function TextControl(props: ElementsProp) {
   const { elementData } = props;
   const fonts: Font[] = useSelector(selectFonts);
   const initialFont = fonts.find((font) => font.fontId === elementData.face);
+
+  // CONTEXT API
+    const { activePromptEditorId } = useContext(promptSetContext);
 
   // STATES
   const [element, setElement] = useState(elementData);
@@ -42,7 +46,7 @@ export default function TextControl(props: ElementsProp) {
 
   // FUNCTIONS
   function onChangeInput(element: Elements) {
-    dispatch(updateInputElement(element));
+    dispatch(updateInputElement({assignmentId: activePromptEditorId, newElement: element}));
   }
 
   function handleFontSelection(item: Font) {

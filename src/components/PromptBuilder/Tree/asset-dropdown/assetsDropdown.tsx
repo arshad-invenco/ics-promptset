@@ -163,7 +163,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       let element = childState.elements.find((element) => element.type === BG);
       if (element) {
         element = { ...element, lock: true };
-        dispatch(updateInputElement(element));
+        dispatch(updateInputElement({assignmentId: childState.id, newElement: element}));
         setActiveElementId(element.id);
         setActiveControlType(BG);
       }
