@@ -15,10 +15,14 @@ import ColorPickerModal from "../../PromptBuilder/modals/color-picker-modal/colo
 interface BackgroundPickerProps {
   value: string;
   setValue: (value: string) => void;
-  handleAssetBackground?: (asset:Asset) => void;
+  handleAssetBackground?: (asset: Asset) => void;
 }
 
-function BackgroundPicker({ value, setValue, handleAssetBackground }: BackgroundPickerProps) {
+function BackgroundPicker({
+  value,
+  setValue,
+  handleAssetBackground,
+}: BackgroundPickerProps) {
   const [bgColor, setBgColor] = useState("000000");
   const [bgShow, setBgShow] = useState(false);
   const [colorShow, setColorShow] = useState(false);
@@ -55,8 +59,7 @@ function BackgroundPicker({ value, setValue, handleAssetBackground }: Background
   const handleAsset = (asset: Asset) => {
     setValue(asset.id);
     setBgShow(false);
-    if (handleAssetBackground)
-      handleAssetBackground(asset);
+    if (handleAssetBackground) handleAssetBackground(asset);
   };
 
   return (
@@ -75,12 +78,7 @@ function BackgroundPicker({ value, setValue, handleAssetBackground }: Background
         <div className="image" onClick={handleBgShow}>
           <i className="fa fa-picture-o" aria-hidden="true"></i>
         </div>
-        <Modal
-          show={bgShow}
-          onHide={handleBgClose}
-          className="media-modal"
-          size="lg"
-        >
+        <Modal show={bgShow} onHide={handleBgClose} size="xl">
           <MediaModal
             hide={handleBgClose}
             onAssetSelection={handleAsset}

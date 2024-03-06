@@ -230,8 +230,13 @@ $md-grey-300: #e0e0e0;
 .modal-sm {
   --bs-modal-width: 40rem;
 }
+
 .modal-lg {
   --bs-modal-width: 60rem;
+}
+
+.modal-xl {
+  --bs-modal-width: 90rem;
 }
 
 .modal-content {

@@ -147,7 +147,7 @@ export interface Elements {
   userclass?: string;
   bold?: boolean;
   italic?: boolean;
-  name?:string;
+  name?: string;
 }
 
 export interface PromptType {
@@ -161,3 +161,4 @@ export interface NewPromptPayload {
   promptSetId?: string;
   description: string;
 }
+

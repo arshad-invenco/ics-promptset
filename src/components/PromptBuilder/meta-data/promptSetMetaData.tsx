@@ -21,6 +21,8 @@ import {
 } from "../../../constants/language";
 import ColorPickerModal from "../modals/color-picker-modal/colorPicker";
 import UpdateFontColor from "../modals/color-picker-modal/update-font-color-modal/updateFontColor";
+import { getOdmlData } from "../../../services/metaDataService";
+import OdmlModal from "../modals/odml-modal/odml";
 
 export default function PromptSetMetaData() {
   // STATES
@@ -31,6 +33,8 @@ export default function PromptSetMetaData() {
   const [showUpdateFontModal, setShowUpdateFontModal] = useState(false);
   const [newFontColor, setNewFontColor] = useState("");
   const [loading, setLoading] = useState(false);
+  const [odmlData, setOdmlData] = useState("");
+  const [showOdmlModal, setShowOdmlModal] = useState(false);
 
   // REF
   const bgPickerRef = useRef<HTMLDivElement>(null);
@@ -47,6 +51,7 @@ export default function PromptSetMetaData() {
     setShowPlaylistState,
     showPlaylistState,
     lastModified,
+    activePromptEditorId,
   } = useContext(promptSetContext);
 
   function handleDropdown() {
@@ -94,6 +99,16 @@ export default function PromptSetMetaData() {
     ) {
       setDropdownStatus(false);
     }
+  };
+
+  const handleOdml = async () => {
+    const odmlData = await getOdmlData(activePromptEditorId);
+    setOdmlData(odmlData);
+    setShowOdmlModal(true);
+  };
+
+  const handleCloseOdmlModal = () => {
+    setShowOdmlModal(false);
   };
 
   useEffect(() => {
@@ -253,7 +268,7 @@ export default function PromptSetMetaData() {
           <button className="btn btn-primary">
             <i className="fas fa-expand-arrows-alt"></i>
           </button>
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" onClick={handleOdml}>
             <i className="fas fa-code"></i>
           </button>
           <button
@@ -272,6 +287,14 @@ export default function PromptSetMetaData() {
           >
             <i className="fas fa-play-circle"></i>
           </button>
+          <Modal
+            show={showOdmlModal}
+            onHide={handleCloseOdmlModal}
+            size="xl"
+            centered
+          >
+            <OdmlModal hide={handleCloseOdmlModal} value={odmlData} />
+          </Modal>
         </div>
       </div>
     </div>
