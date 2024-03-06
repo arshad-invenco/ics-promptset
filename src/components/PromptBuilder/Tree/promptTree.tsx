@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import "./promptTree.scss";
 import { Accordion, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +32,7 @@ import { selectFonts } from "../../../redux/selectors/fontSelectors";
 import { filterFonts } from "../../../constants/fontConstant";
 import { selectElementByIdInAssignment } from "../../../redux/selectors/promptSetSelectors";
 import { selectLanguages } from "../../../redux/selectors/languageSelectors";
+import request from "../../../services/interceptor";
 
 export interface PromptSetRootState {
   promptset: {
@@ -102,9 +103,10 @@ export default function PromptTree() {
 
   useEffect(() => {
     if (
-        promptsetData &&
-        promptsetData.states &&
-        promptsetData.states.length > 0 && !isLoaded
+      promptsetData &&
+      promptsetData.states &&
+      promptsetData.states.length > 0 &&
+      !isLoaded
     ) {
       setActiveStateId(promptsetData.states[0].id);
       setIsLoaded(true);
@@ -127,31 +129,25 @@ export default function PromptTree() {
     setShowNewPromptModal(false);
   };
 
-  const createNewPrompt = (newPrompt: NewPromptPayload) => {
-    newPrompt = {
-      ...newPrompt,
-      promptSetId: promptsetData.id,
-      promptType: newPrompt.promptType.toLowerCase(),
-    };
-    fetch(`${getBaseUrl()}/media/prompts`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      body: JSON.stringify(newPrompt),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data) {
-          dispatch(fetchPromptSet);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  const createNewPrompt = async (newPrompt: NewPromptPayload) => {
+    try {
+      newPrompt = {
+        ...newPrompt,
+        promptSetId: promptsetData.id,
+        promptType: newPrompt.promptType.toLowerCase(),
+      };
+
+      const response = await request().post(
+        `${getBaseUrl()}/media/prompts`,
+        newPrompt
+      );
+
+      if (response) {
+        dispatch(fetchPromptSet());
+      }
+    } catch (error) {
+      // console.error("Error creating new prompt:", error);
+    }
   };
 
   function handleSavePromptSet() {
