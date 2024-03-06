@@ -276,7 +276,7 @@ export default function InnerStates(props: InnerStateProps) {
                       (activeElementId === element.id && child.id === activePromptEditorId) ? "active-inner-element" : ""
                   } `}
                 >
-                  <TreeElements element={element} />
+                  <TreeElements childState={child.id} element={element} />
                 </div>
               ) : element.lock !== false ? (
                 <div
@@ -288,7 +288,7 @@ export default function InnerStates(props: InnerStateProps) {
                   } `}
                   key={index}
                 >
-                  <TreeElements element={element} />
+                  <TreeElements childState={child.id} element={element} />
                 </div>
               ) : null;
             })}

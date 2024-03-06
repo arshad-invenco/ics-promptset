@@ -1,13 +1,14 @@
 import './prompt-image-control.scss'
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import {Elements, PromptSetInterface} from "../../../../models/promptset.modal";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {debounce} from "@mui/material";
 import {AppDispatch} from "../../../../redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";
 import {getBaseUrl} from "../../../../constants/app";
 import {PromptSetRootState} from "../../Tree/promptTree";
+import {promptSetContext} from "../../../../hooks/promptsetContext";
 
 interface ElementsProp {
     elementData: Elements
@@ -22,6 +23,9 @@ export function ImageControl(props: ElementsProp) {
     // STATES
     const [element, setElement] = useState(elementData);
 
+    // CONTEXT API
+    const { activePromptEditorId } = useContext(promptSetContext);
+
     // SELECTORS
     const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
 
@@ -30,7 +34,7 @@ export function ImageControl(props: ElementsProp) {
     }, [promptsetData]);
 
     function onChangeInput(element: Elements) {
-        dispatch(updateInputElement(element));
+        dispatch(updateInputElement({assignmentId: activePromptEditorId, newElement: element}));
     }
 
     const generateImgURL = (value:string) => {

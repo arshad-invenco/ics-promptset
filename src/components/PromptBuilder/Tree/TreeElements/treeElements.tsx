@@ -6,21 +6,25 @@ import {deleteElementByID, updateInputElement} from "../../../../redux/reducers/
 
 interface TreeElementsProps {
   element: Elements;
+  childState: string;
 }
 
 
 export default function TreeElements(props: TreeElementsProps) {
   // PROPS
-  const { element } = props;
+  const { element, childState } = props;
 
   // REDUX
     const dispatch = useDispatch<AppDispatch>();
+
+  //   CONTEXT API
 
   function deleteElement(element: Elements) {
     dispatch(deleteElementByID(element.id));
   }
   function updateBackground(element: Elements) {
-    dispatch(updateInputElement({...element, lock: !element.lock}));
+    const updatedElement = {...element, lock: !element.lock}
+    dispatch(updateInputElement({assignmentId:childState, newElement: updatedElement}));
   }
 
   // parent class    ->   inner-element
