@@ -239,7 +239,7 @@ export default function PromptTree() {
             Save
           </button>
           <button
-            className="btn btn-secondary text-uppercase"
+            className="btn btn-default new-prompt-btn text-uppercase"
             onClick={handleNewPromptShow}
           >
             New Prompt
