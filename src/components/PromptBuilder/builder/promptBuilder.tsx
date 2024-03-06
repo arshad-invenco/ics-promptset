@@ -56,7 +56,8 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     }, [activeElementId, gridViewState, elements, childState, showPlaylistState]);
 
     function updateElement(newElement: Elements, x: number, y: number) {
-        dispatch(updateInputElement({...newElement, left: Math.ceil(x), top: Math.ceil(y)}));
+        const updatedElement = {...newElement, left: Math.ceil(x), top: Math.ceil(y)}
+        dispatch(updateInputElement({assignmentId: childState?.id, newElement: updatedElement}));
     }
 
     function updateArea(area:TouchMapAreas, x:number, y:number) {
