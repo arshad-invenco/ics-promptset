@@ -335,16 +335,14 @@
         }
       }
 
-      .btn-secondary {
+      .new-prompt-btn {
         border-radius: 3px;
-        background-color: #f0f0f0;
-        color: black;
         flex: 1;
+        background-color: #f6f6f6;
         border: none;
-        font-size: 14px;
-        font-weight: 500;
-        padding-right: 1.5em;
-        padding-left: 1.5em;
+        &:hover {
+            background-color: #f6f6f6 !important;
+        }
       }
     }
   }
