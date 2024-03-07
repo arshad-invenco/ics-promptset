@@ -132,7 +132,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                             textDecoration: 'underline',
                             cursor: "default",
                             dy: '1em',
-                            fontFamily: newElement.face
+                            fontFamily: newElement.face?.fontId
                         });
                        inputSvg.add(inputCenter);
                     }

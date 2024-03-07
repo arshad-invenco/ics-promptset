@@ -15,10 +15,10 @@ const ToastComponent = () => {
       {toasts.map((toast, i) => (
         <Toast
           key={i}
-          //   onClose={() =>
-          //     toastDispatch({ type: "REMOVE_TOAST", payload: toast.id as string })
-          //   }
-          delay={toast.delay || 5000000000}
+            onClose={() =>
+              toastDispatch({ type: "REMOVE_TOAST", payload: toast.id as string })
+            }
+          delay={toast.delay || 5000}
           autohide
           className={toast.className || "toaster"}
         >
