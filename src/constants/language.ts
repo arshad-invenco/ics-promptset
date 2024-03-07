@@ -35,7 +35,7 @@ export function getPromptSet() {
   return promptSet;
 }
 
-let isDefaultFontSettingsAvail: boolean = false;
+let isDefaultFontSettingsAvail = false;
 
 export let languageKeysSet: string[] = [];
 
@@ -53,7 +53,7 @@ export function getLangModalViewItems() {
   return langModalViewItems;
 }
 
-let modalState = {
+const modalState = {
   add: false,
   edit: false,
   delete: false,

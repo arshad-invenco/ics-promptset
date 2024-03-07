@@ -7,13 +7,9 @@ export const fetchAssets = createAsyncThunk<
   AssetResponse,
   { queryParams: AssetParams; replace: boolean }
 >("[assets]/fetchAssets", async ({ queryParams, replace }) => {
-  try {
-    const response = await request().get(`${getBaseUrl()}/media/assets`, {
-      params: queryParams,
-    });
-    const data = response.data;
-    return data as AssetResponse;
-  } catch (error) {
-    throw error;
-  }
+  const response = await request().get(`${getBaseUrl()}/media/assets`, {
+    params: queryParams,
+  });
+  const data = response.data;
+  return data as AssetResponse;
 });

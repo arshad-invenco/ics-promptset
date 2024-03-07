@@ -6,12 +6,8 @@ import request from "../../services/interceptor";
 export const fetchKeyCodes = createAsyncThunk<Keycode[]>(
   "[keycode]/fetchKeyCodes",
   async () => {
-    try {
-      const response = await request().get(`${getBaseUrl()}/media/keycodes`);
-      const data = response.data;
-      return data as Keycode[];
-    } catch (error) {
-      throw error;
-    }
+    const response = await request().get(`${getBaseUrl()}/media/keycodes`);
+    const data = response.data;
+    return data as Keycode[];
   }
 );

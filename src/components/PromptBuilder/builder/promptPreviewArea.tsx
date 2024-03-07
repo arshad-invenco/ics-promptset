@@ -17,7 +17,7 @@ export default function PromptPreviewArea() {
   const [showKeyCodeModal, setShowKeyCodeModal] = useState(false);
 
   // SNAP
-  let s = null;
+  const s = null;
 
   // HOOKS
   const deviceType = getDeviceType();
