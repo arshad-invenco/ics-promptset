@@ -183,7 +183,14 @@ export const promptsetSlice = createSlice({
                 });
                 return state;
             });
-
+        },
+        removeIsStateChangedById: (state, action) => {
+            state.data.states = state.data.states.map((state) => {
+                if (state.id === action.payload) {
+                    state.isStateChanged = false;
+                }
+                return state;
+            });
         }
     }, extraReducers: (builder) => {
         builder.addCase(fetchPromptSet.fulfilled, (state, action) => {
@@ -213,5 +220,6 @@ export const {
     addNewAreaToTouchMap,
     deleteChildStateDayPartById,
     updateTouchMapArea,
-    updateBackgroundElement
+    updateBackgroundElement,
+    removeIsStateChangedById
 } = promptsetSlice.actions;

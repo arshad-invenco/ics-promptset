@@ -69,6 +69,19 @@ export interface DayPart {
   company: string;
 }
 
+export interface FontFace {
+  fontId: string;
+  name: string;
+  assetName: string;
+  family: string;
+  type: string;
+  supportedDevices: string[];
+  sourceUrl: string;
+  active: boolean;
+  fileSize: number;
+  mimeType: string;
+}
+
 export interface PromptSetInterface {
   id: string;
   name: string;
@@ -125,12 +138,13 @@ export interface Assignment {
   transactionState: string; //null data, but string after seeing new data
   contactless: boolean;
   thumbnailUrl: string; //null data but string in swagger
-  promptSetLanguageId: string; //null data & no doc in swagger
+  promptSetLanguageId: string;
   touchmap: TouchMap | null;
   softkeys: SoftKeys[]; //[] data but doc in swagger
   type: string;
   parentId: string;
   isAssignmentChanged?: boolean;
+  promptId?: string;
 }
 
 export interface Elements {
@@ -138,7 +152,7 @@ export interface Elements {
   type: string;
   value: string;
   top?: number;
-  face?: string;
+  face?: FontFace;
   left?: number;
   size?: number;
   color?: string;

@@ -14,11 +14,11 @@ import NewPrompt from "../modals/new-prompt-modal/newPrompt";
 import {fetchPromptSet} from "../../../redux/thunks/promptSetThunk";
 import {getBaseUrl} from "../../../constants/app";
 import {
-  getCompanyId,
-  getPromptsetLanguages,
-  setCompanyId,
-  setCompanyLanguages,
-  setPromptSet,
+    getCompanyId,
+    getPromptsetLanguages,
+    setCompanyId,
+    setCompanyLanguages,
+    setPromptSet,
 } from "../../../constants/language";
 import {fetchLanguages} from "../../../redux/thunks/languageThunk";
 import {Font} from "../../../models/fonts.modal";
@@ -28,139 +28,132 @@ import {selectElementByIdInAssignment} from "../../../redux/selectors/promptSetS
 import {selectLanguages} from "../../../redux/selectors/languageSelectors";
 import request from "../../../services/interceptor";
 import {usePromptSetId} from "../../../hooks/promptsetId";
+import {removeIsStateChangedById} from "../../../redux/reducers/promptsetSlice";
 
 export interface PromptSetRootState {
-  promptset: {
-    data: PromptSetInterface;
-    isLoading: boolean;
-    error: any;
-  };
+    promptset: {
+        data: PromptSetInterface; isLoading: boolean; error: any;
+    };
 }
 
 export default function PromptTree() {
-  // REDUX
-  const dispatch = useDispatch<AppDispatch>();
-  const languages = useSelector(selectLanguages);
-  const { activePromptEditorId, activeElementId } =
-    useContext(promptSetContext);
+    // REDUX
+    const dispatch = useDispatch<AppDispatch>();
+    const languages = useSelector(selectLanguages);
+    const {activePromptEditorId, activeElementId} = useContext(promptSetContext);
 
-  // STATES
-  const [isSaving, setIsSaving] = useState(false);
-  const [showNewPromptModal, setShowNewPromptModal] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+    // STATES
+    const [isSaving, setIsSaving] = useState(false);
+    const [showNewPromptModal, setShowNewPromptModal] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-  // SELECTOR
-  const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
-  );
-  const fonts: Font[] = useSelector(selectFonts);
-  const elementData: Elements =
-    useSelector((state: PromptSetRootState & State[]) =>
-      selectElementByIdInAssignment(
-        state,
-        activePromptEditorId,
-        activeElementId
-      )
-    ) || ({} as Elements);
+    // SELECTOR
+    const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
+    const fonts: Font[] = useSelector(selectFonts);
+    const elementData: Elements = useSelector((state: PromptSetRootState & State[]) => selectElementByIdInAssignment(state, activePromptEditorId, activeElementId)) || ({} as Elements);
 
-  // CONTEXT API
-  const {
-    promptSetData,
-    setPromptSetData,
-    setActiveStateId,
-    setActiveControlType,
-    setActivePromptEditorId,
-  } = useContext(promptSetContext);
+    // CONTEXT API
+    const {
+        promptSetData,
+        setPromptSetData,
+        setActiveStateId,
+        setActiveControlType,
+        setActivePromptEditorId,
+        toastDispatch,
+        setLastModified
+    } = useContext(promptSetContext);
 
-  // HOOKS
-    const promptSetId  = usePromptSetId();
+    // HOOKS
+    const promptSetId = usePromptSetId();
 
-  // EFFECTS
-  useEffect(() => {
-    setPromptSetData(promptSetData);
-  }, []);
+    // EFFECTS
+    useEffect(() => {
+        setPromptSetData(promptSetData);
+    }, []);
 
-  useEffect(() => {
-    if (promptsetData && !isLoaded) {
-      setDeviceType(promptsetData.deviceType);
-      setCompanyId(promptsetData.company);
-      setPromptSet(promptsetData);
-      setPromptSetId(promptsetData.id);
-      if (elementData) {
-        filterFonts(fonts, elementData);
-      }
-      if (getDeviceType()) {
-        dispatch(fetchSoftKeys());
-      }
-      if (getCompanyId()) {
-        dispatch(fetchLanguages());
-        getPromptsetLanguages();
-      }
+    useEffect(() => {
+        if (promptsetData && !isLoaded) {
+            setDeviceType(promptsetData.deviceType);
+            setCompanyId(promptsetData.company);
+            setPromptSet(promptsetData);
+            setPromptSetId(promptsetData.id);
+            if (elementData) {
+                filterFonts(fonts, elementData);
+            }
+            if (getDeviceType()) {
+                dispatch(fetchSoftKeys());
+            }
+            if (getCompanyId()) {
+                dispatch(fetchLanguages());
+                getPromptsetLanguages();
+            }
+        }
+    }, [promptsetData]);
+
+    useEffect(() => {
+        if (promptsetData && promptsetData.states && promptsetData.states.length > 0 && !isLoaded) {
+            setActiveStateId(promptsetData.states[0].id);
+            setIsLoaded(true);
+            if (promptsetData.states[0].assignments.length > 0) {
+                setActivePromptEditorId(promptsetData.states[0].assignments[0].id);
+            }
+            setPromptSetData(promptsetData);
+        }
+    }, [promptsetData, fonts, elementData]);
+
+    useEffect(() => {
+        setCompanyLanguages(languages);
+    }, [languages]);
+
+    const handleNewPromptShow = () => {
+        setShowNewPromptModal(true);
+    };
+
+    const handleNewPromptClose = () => {
+        setShowNewPromptModal(false);
+    };
+
+    const createNewPrompt = async (newPrompt: NewPromptPayload) => {
+        try {
+            newPrompt = {
+                ...newPrompt, promptSetId: promptsetData.id, promptType: newPrompt.promptType.toLowerCase(),
+            };
+
+            const response = await request().post(`${getBaseUrl()}/media/prompts`, newPrompt);
+
+            if (response) {
+                dispatch(fetchPromptSet(promptSetId));
+            }
+        } catch (error) {
+            // console.error("Error creating new prompt:", error);
+        }
+    };
+
+    function handleSavePromptSet() {
+        setIsSaving(!isSaving);
+
     }
-  }, [promptsetData]);
 
-  useEffect(() => {
-    if (
-      promptsetData &&
-      promptsetData.states &&
-      promptsetData.states.length > 0 &&
-      !isLoaded
-    ) {
-      setActiveStateId(promptsetData.states[0].id);
-      setIsLoaded(true);
-      if (promptsetData.states[0].assignments.length > 0) {
-        setActivePromptEditorId(promptsetData.states[0].assignments[0].id);
-      }
-      setPromptSetData(promptsetData);
+    function onClickState(state_id: string, child_id: string) {
+        setActiveStateId(state_id);
+        setActiveControlType(STATE);
+        setActivePromptEditorId(child_id);
     }
-  }, [promptsetData, fonts, elementData]);
 
-  useEffect(() => {
-    setCompanyLanguages(languages);
-  }, [languages]);
-
-  const handleNewPromptShow = () => {
-    setShowNewPromptModal(true);
-  };
-
-  const handleNewPromptClose = () => {
-    setShowNewPromptModal(false);
-  };
-
-  const createNewPrompt = async (newPrompt: NewPromptPayload) => {
-    try {
-      newPrompt = {
-        ...newPrompt,
-        promptSetId: promptsetData.id,
-        promptType: newPrompt.promptType.toLowerCase(),
-      };
-
-      const response = await request().post(
-        `${getBaseUrl()}/media/prompts`,
-        newPrompt
-      );
-
-      if (response) {
-        dispatch(fetchPromptSet(promptSetId));
-      }
-    } catch (error) {
-      // console.error("Error creating new prompt:", error);
+    function saveState(item: State) {
+        const updatedAssignments = item.assignments.map(assignment => ({
+            ...assignment, softkeys: [], promptId: assignment.id,
+        }));
+        request().put(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`, updatedAssignments).then((res) => {
+            dispatch(removeIsStateChangedById(item.id));
+            setLastModified(res.data);
+            toastDispatch({
+                type: "ADD_TOAST", payload: {message: "Saved 1 state"},
+            });
+        }).catch((err) => {
+            console.log(err);
+        })
     }
-  };
-
-  function handleSavePromptSet() {
-    setIsSaving(!isSaving);
-  }
-
-  function onClickState(state_id: string, child_id: string) {
-    setActiveStateId(state_id);
-    setActiveControlType(STATE);
-    setActivePromptEditorId(child_id);
-  }
-
-  function saveState() {
-    console.log("state saved");
-  }
 
   return (
     <div className={`left-container ${getDeviceType()}`}>
@@ -203,7 +196,7 @@ export default function PromptTree() {
                             <i
                               onClick={(e) => {
                                 e.stopPropagation();
-                                saveState();
+                                saveState(item);
                               }}
                               className="fa fa-floppy-o "
                             ></i>

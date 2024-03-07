@@ -1,15 +1,14 @@
 import "./prompt-text-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
-import {Elements, PromptSetInterface} from "../../../../models/promptset.modal";
+import {Elements, FontFace, PromptSetInterface} from "../../../../models/promptset.modal";
 import {useContext, useEffect, useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../../../redux/store";
-import { updateInputElement } from "../../../../redux/reducers/promptsetSlice";
-import { debounce } from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch} from "../../../../redux/store";
+import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";
 import FontDropdown from "../../../common/font-dropdown/fontDropdown";
-import { selectFonts } from "../../../../redux/selectors/fontSelectors";
-import { Font } from "../../../../models/fonts.modal";
-import { filterFonts } from "../../../../constants/fontConstant";
+import {selectFonts} from "../../../../redux/selectors/fontSelectors";
+import {Font} from "../../../../models/fonts.modal";
+import {filterFonts} from "../../../../constants/fontConstant";
 import {PromptSetRootState} from "../../Tree/promptTree";
 import {getDeviceType} from "../../../../constants/deviceType";
 import isSequoiaDevice from "../../../../services/promptsetService";
@@ -22,7 +21,7 @@ interface ElementsProp {
 export default function TextControl(props: ElementsProp) {
   const { elementData } = props;
   const fonts: Font[] = useSelector(selectFonts);
-  const initialFont = fonts.find((font) => font.fontId === elementData.face);
+  const initialFont = fonts.find((font) => font.fontId === elementData.face?.fontId);
 
   // CONTEXT API
     const { activePromptEditorId } = useContext(promptSetContext);
@@ -50,9 +49,10 @@ export default function TextControl(props: ElementsProp) {
   }
 
   function handleFontSelection(item: Font) {
+      console.log(item, "FFOOOONNNTTTT");
     if (initialFont) {
       setSelectedFont(item);
-      setElement({ ...element, face: item.fontId });
+      setElement({ ...element, face: item as FontFace });
     }
   }
 
