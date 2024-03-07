@@ -36,8 +36,8 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     // REDUX
     const dispatch = useDispatch<AppDispatch>();
 
-    var s: any = null;
-    var g: any = null;
+    let s: any = null;
+    let g: any = null;
 
     function onClickSVGElement(elementId: string, type: string) {
         console.log('clicked', elementId, type, 'CLICCKKKKEEEDDDDD');
@@ -61,9 +61,9 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     }
 
     function updateArea(area:TouchMapAreas, x:number, y:number) {
-        let areaCoords = area.coords.split(',');
+        const areaCoords = area.coords.split(',');
         console.log(childState?.id)
-        let newArea = {...area, coords : `${x},${y},${areaCoords[2]},${areaCoords[3]}`}
+        const newArea = {...area, coords : `${x},${y},${areaCoords[2]},${areaCoords[3]}`}
         dispatch(updateTouchMapArea({assignmentId:childState?.id, newArea: newArea}));
 
     }
@@ -74,14 +74,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         g = s.group();
         elements.forEach(element => {
             let svgElement;
-            let newElement = {...element};
+            const newElement = {...element};
             let elementUrl = 'media url';
-            let x = Math.min(Math.max(10, newElement.left || 0), screenWidth);
-            let y = Math.min(Math.max(10, newElement.top || 0), screenHeight);
+            const x = Math.min(Math.max(10, newElement.left || 0), screenWidth);
+            const y = Math.min(Math.max(10, newElement.top || 0), screenHeight);
             switch (newElement.type) {
                 case "bg":
                     const colorValidationRegex = /^[0-9A-F]{6}$/i;
-                    let elementType = colorValidationRegex.test( newElement.value ) ? 'color' : 'image';
+                    const elementType = colorValidationRegex.test( newElement.value ) ? 'color' : 'image';
 
                     if (elementType === 'image'){
                         elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/source`
@@ -97,7 +97,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 case "text":
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
                     newElement.left = newElement.left === undefined ? 0 : newElement.left;
-                    let textSvg = g.text(x, y, newElement.value).attr({
+                    const textSvg = g.text(x, y, newElement.value).attr({
                         fill: `#${newElement.color}`,
                         id: newElement.id,
                         fontSize: newElement.size,
@@ -111,7 +111,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         });
                     }
 
-                    let bbox = textSvg.getBBox();
+                    const bbox = textSvg.getBBox();
                     if (activeElementId === newElement.id) {
                         svgElement = createWrapperController(bbox, newElement, textSvg);
                     } else {
@@ -121,10 +121,10 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 case "input":
                     newElement.top = newElement.top === undefined ? 0 : newElement.top;
                     newElement.left = newElement.left === undefined ? 0 : newElement.left;
-                    let inputSvg = g.group();
+                    const inputSvg = g.group();
 
                     if (newElement.textAlign === CENTER){
-                       let inputCenter = s.text((x + ((newElement.width || 1) / 2)), y, newElement.value).attr({
+                       const inputCenter = s.text((x + ((newElement.width || 1) / 2)), y, newElement.value).attr({
                             fill: `#${newElement.color}`,
                             id: newElement.id,
                             fontSize: newElement.size,
@@ -137,7 +137,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                        inputSvg.add(inputCenter);
                     }
                     else if(newElement.textAlign === LEFT){
-                        let inputCenter = s.text(x, y, newElement.value).attr({
+                        const inputCenter = s.text(x, y, newElement.value).attr({
                             fill: `#${newElement.color}`,
                             id: newElement.id,
                             fontSize: newElement.size,
@@ -150,7 +150,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         inputSvg.add(inputCenter);
                     }
                     else{
-                        let inputCenter = s.text(x+ (newElement.width||0), y, newElement.value).attr({
+                        const inputCenter = s.text(x+ (newElement.width||0), y, newElement.value).attr({
                             fill: `#${newElement.color}`,
                             id: newElement.id,
                             fontSize: newElement.size,
@@ -163,7 +163,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         inputSvg.add(inputCenter);
                     }
 
-                    let bboxInput = inputSvg.getBBox();
+                    const bboxInput = inputSvg.getBBox();
                     if (activeElementId === newElement.id) {
                         svgElement = createWrapperController(bboxInput, newElement, inputSvg, newElement.type, undefined);
                     } else {
@@ -172,10 +172,10 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     break;
                 case "image":
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/source`;
-                    let imageElement = g.group(s.image(elementUrl, 0, 0).attr({
+                    const imageElement = g.group(s.image(elementUrl, 0, 0).attr({
                         id: newElement.id, preserveAspectRatio: 'none'
                     })).transform(`t${x},${y}`);
-                    let bboxImage = imageElement.getBBox();
+                    const bboxImage = imageElement.getBBox();
                     if (activeElementId === newElement.id) {
                         svgElement = g.group(s.rect(bboxImage.x, bboxImage.y, bboxImage.width, bboxImage.height).attr({
                             fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0, strokeWidth: 1
@@ -186,10 +186,10 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     break;
                 case "video":
                     elementUrl = `${getBaseUrl()}/media/assets/${newElement.value}/thumbnail`;
-                    let videoElement = s.image(elementUrl, 0, 0, newElement.width, newElement.height).attr({
+                    const videoElement = s.image(elementUrl, 0, 0, newElement.width, newElement.height).attr({
                         id: newElement.id, preserveAspectRatio: 'none'
                     });
-                    let bboxVideo = videoElement.getBBox();
+                    const bboxVideo = videoElement.getBBox();
                     if (activeElementId === newElement.id) {
                         svgElement = g.group(s.rect(bboxVideo.x, bboxVideo.y, bboxVideo.width, bboxVideo.height).attr({
                             fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0, strokeWidth: 1
@@ -205,13 +205,13 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
             if (svgElement) {
                 console.log('svgElement', svgElement, newElement.id, newElement.type);
-                let start = function (this: Snap.Element) {
+                const start = function (this: Snap.Element) {
                     this.data('origTransform', this.transform().local);
                     this.data('origBBox', this.getBBox());
                 }
-                let move = function (this: Snap.Element, dx: number, dy: number) {
+                const move = function (this: Snap.Element, dx: number, dy: number) {
                     // Getting the original bounding box
-                    let origBBox = this.data('origBBox');
+                    const origBBox = this.data('origBBox');
 
                     // Calculating the new position
                     let newX = origBBox.x + dx;
@@ -229,7 +229,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     });
                     updateElement(newElement, newX, newY);
                 }
-                let stop = function (this: Snap.Element) {
+                const stop = function (this: Snap.Element) {
                     const ele = this.getBBox();
                     console.log('finished dragging', ele.x, ele.y, ele.width, ele.height);
                 }
@@ -346,10 +346,10 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
         areas.forEach(area => {
             let areaElement;
-            let coords = area.coords.split(',');
+            const coords = area.coords.split(',');
             switch (area.shape) {
                 case 'circle':
-                    let circleGroup = g.group(s.circle(coords[0], coords[1], coords[3]).attr({
+                    const circleGroup = g.group(s.circle(coords[0], coords[1], coords[3]).attr({
                         id: area.id, fill: '#006400', fillOpacity: 0.5
                     }), s.text(coords[0], coords[1], area.softkeyName).attr({
                         fill: `white`,
@@ -360,7 +360,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         textAnchor: 'middle',
                         dy: '.5em'
                     }));
-                    let circleBBox = circleGroup.getBBox();
+                    const circleBBox = circleGroup.getBBox();
                     if (activeElementId === area.id) {
                         areaElement = createWrapperController(circleBBox, undefined, circleGroup, area.type, area);
                     } else {
@@ -368,7 +368,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     }
                     break;
                 case 'rect':
-                    let rectGroup = g.group(s.rect(coords[0], coords[1], coords[2], coords[3]).attr({
+                    const rectGroup = g.group(s.rect(coords[0], coords[1], coords[2], coords[3]).attr({
                         id: area.id, fill: '#006400', fillOpacity: 0.5
                     }), s.text(coords[0], coords[1], area.softkeyName || area.keyCodeName).attr({
                         fill: `white`,
@@ -379,7 +379,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                         textAnchor: 'start',
                         dy: '1em',
                     }));
-                    let rectBBox = rectGroup.getBBox();
+                    const rectBBox = rectGroup.getBBox();
                     if (activeElementId === area.id) {
                         areaElement = createWrapperController(rectBBox, undefined, rectGroup, area.type, area);
                     } else {
@@ -388,13 +388,13 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     break;
             }
             if (areaElement) {
-                let start = function (this: Snap.Element) {
+                const start = function (this: Snap.Element) {
                     this.data('origTransform', this.transform().local);
                     this.data('origBBox', this.getBBox());
                 }
-                let move = function (this: Snap.Element, dx: number, dy: number) {
+                const move = function (this: Snap.Element, dx: number, dy: number) {
                     // Getting the original bounding box
-                    let origBBox = this.data('origBBox');
+                    const origBBox = this.data('origBBox');
 
                     // Calculating the new position
                     let newX = origBBox.x + dx;
@@ -412,7 +412,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                     });
                     updateArea(area, newX, newY);
                 }
-                let stop = function (this: Snap.Element) {
+                const stop = function (this: Snap.Element) {
                     const ele = this.getBBox();
                 }
                 areaElement.drag(move, start, stop);
@@ -425,9 +425,9 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     }
 
     function createWrapperController(bboxInput: BBox, element?: Elements, ElementSvg?: Snap.Element, type?: string, area?: TouchMapAreas) {
-        let elementBBox = ElementSvg?.getBBox();
+        const elementBBox = ElementSvg?.getBBox();
         console.log(elementBBox, 'elementBBox', type);
-        let coords: number[] = area?.coords.split(',').map(Number) || [0, 0, 0, 0];
+        const coords: number[] = area?.coords.split(',').map(Number) || [0, 0, 0, 0];
         let controller: any;
         let NewElementSVG;
         if (type === 'area') {
@@ -446,8 +446,8 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 fill: '#ffffff', stroke: '#00ff00', fillOpacity: 0
             });
         }
-        let controllerBBox = controller.getBBox();
-        let controllerResize = g.group(s.rect(0, 0, 20, 10).attr({
+        const controllerBBox = controller.getBBox();
+        const controllerResize = g.group(s.rect(0, 0, 20, 10).attr({
             fill: '#32b447', transform: 'matrix(0,1,-1,0,15,-5)', fillOpacity: 0.9
         }), s.rect(0, 0, 10, 20).attr({fill: '#32b447', transform: 'matrix(0,1,-1,0,15,5)', fillOpacity: 0.9})).attr({
             id: 'controllerResize',
@@ -455,18 +455,18 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             transform: `matrix(1,0,0,1,${controllerBBox.x2},${controllerBBox.y2})`
         })
 
-        let controllerRect = g.group(controller, controllerResize);
+        const controllerRect = g.group(controller, controllerResize);
 
         // Define the start function
-        let start = function (this: Snap.Element) {
+        const start = function (this: Snap.Element) {
             this.data('origTransform', this.transform().local);
             this.data('origBBox', this.getBBox());
         }
 
 
         // Define the move function
-        let move = function (this: Snap.Element, dx: number, dy: number) {
-            let origBBox = this.data('origBBox');
+        const move = function (this: Snap.Element, dx: number, dy: number) {
+            const origBBox = this.data('origBBox');
 
             let newSize = Math.max(origBBox.width + dx, origBBox.height + dy);
             // Check if the new size would be outside the boundaries of the SVG container
@@ -483,7 +483,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             controllerResize.mousedown(() => {
                 console.log('Mouse Down');
             })
-            let children = ElementSvg?.children();
+            const children = ElementSvg?.children();
             if (children && children.length > 0) {
                 NewElementSVG = children[0];
                 NewElementSVG.attr({
@@ -492,7 +492,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             }
         }
         // Define the stop function
-        let stop = function (this: Snap.Element) {
+        const stop = function (this: Snap.Element) {
             const ele = this.getBBox();
             console.log('finished dragging', ele);
 

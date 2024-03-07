@@ -1,7 +1,7 @@
 import { getBaseUrl } from "../constants/app";
 import request from "./interceptor";
 
-let isSaving = false;
+const isSaving = false;
 
 export function getIsSaving(): boolean {
   return false;

@@ -358,6 +358,7 @@ export default function InnerStates(props: InnerStateProps) {
                     if (area) {
                       return (
                         <div
+                          key={area.id}
                           onClick={() => {
                             onClickElement(area.id, AREA);
                           }}

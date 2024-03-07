@@ -32,14 +32,14 @@ export function BackgroundControl(props: ElementsProp) {
 
   function handleAsset(asset:Asset){
     console.log(asset, "ASSET")
-    let newElement = {...elementData, value: asset.id, filename: asset.name, name:asset.name};
+    const newElement = {...elementData, value: asset.id, filename: asset.name, name:asset.name};
     dispatch(updateBackgroundElement({assignmentId:childState?.id, newElement:newElement}));
 
   }
 
 
   function handleColor(color:string) {
-    let newElement = {...elementData, value: color.slice(1, color.length)};
+    const newElement = {...elementData, value: color.slice(1, color.length)};
     dispatch(updateBackgroundElement({assignmentId:childState?.id, newElement:newElement}));
   }
 

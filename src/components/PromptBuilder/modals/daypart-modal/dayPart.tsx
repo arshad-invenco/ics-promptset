@@ -33,8 +33,8 @@ function DayPartModal({ hide, daypart }: ModalProps) {
 
   const dayParts = Array.isArray(dayPartData)
     ? dayPartData.map((daypart) => {
-        let startTime = convertTime(daypart.start);
-        let endTime = convertTime(daypart.end);
+        const startTime = convertTime(daypart.start);
+        const endTime = convertTime(daypart.end);
 
         return {
           id: daypart.id,
@@ -46,9 +46,9 @@ function DayPartModal({ hide, daypart }: ModalProps) {
 
   function convertTime(timeInMilliseconds: number) {
     let hour = Math.floor(timeInMilliseconds / 3600000);
-    let minute = Math.floor((timeInMilliseconds % 3600000) / 60000);
+    const minute = Math.floor((timeInMilliseconds % 3600000) / 60000);
 
-    let period = hour < 12 ? "am" : "pm";
+    const period = hour < 12 ? "am" : "pm";
     hour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
 
     return `${hour}:${minute < 10 ? "0" : ""}${minute}${period}`;

@@ -4,9 +4,11 @@ export function toastReducer(
   toasts: Notification[],
   action: ToastAction
 ): Notification[] {
+  let toastExistIndex;
+
   switch (action.type) {
     case "ADD_TOAST":
-      const toastExistIndex = toasts.findIndex(
+      toastExistIndex = toasts.findIndex(
         (existingToast) => existingToast.message === action.payload.message
       );
 
