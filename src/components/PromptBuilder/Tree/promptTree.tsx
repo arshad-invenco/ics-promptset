@@ -29,6 +29,7 @@ import {selectLanguages} from "../../../redux/selectors/languageSelectors";
 import request from "../../../services/interceptor";
 import {usePromptSetId} from "../../../hooks/promptsetId";
 import {removeIsStateChangedById} from "../../../redux/reducers/promptsetSlice";
+import {useReadOnly} from "../../../hooks/readOnly";
 
 export interface PromptSetRootState {
     promptset: {
@@ -65,6 +66,7 @@ export default function PromptTree() {
 
     // HOOKS
     const promptSetId = usePromptSetId();
+    const readOnly = useReadOnly();
 
     // EFFECTS
     useEffect(() => {
@@ -191,7 +193,7 @@ export default function PromptTree() {
                             </span>
                           )}
                         </div>
-                        {item.isStateChanged && (
+                        {item.isStateChanged && !readOnly && (
                           <div className="unsaved-status">
                             <i
                               onClick={(e) => {
@@ -221,33 +223,36 @@ export default function PromptTree() {
             );
           })}
         </div>
-        <div className="prompt-tree-footer">
-          <button
-            className="btn btn-primary text-uppercase"
-            onClick={handleSavePromptSet}
-          >
-            {isSaving && (
-              <i className="fa fa-spinner fa-pulse fa-fw ics-packages-loader"></i>
-            )}
-            Save
-          </button>
-          <button
-            className="btn btn-default new-prompt-btn text-uppercase"
-            onClick={handleNewPromptShow}
-          >
-            New Prompt
-            <i className="fas fa-plus"></i>
-          </button>
-          <Modal
-            show={showNewPromptModal}
-            onHide={handleNewPromptClose}
-            size="sm"
-          >
-            <NewPrompt
-              hide={handleNewPromptClose}
-              newPrompt={createNewPrompt}
-            />
-          </Modal>
+        <div className={`prompt-tree-footer ${readOnly ? 'p-0' : ''}`}>
+            {!readOnly && <>
+                <button
+                    className="btn btn-primary text-uppercase"
+                    onClick={handleSavePromptSet}
+                >
+                    {isSaving && (
+                        <i className="fa fa-spinner fa-pulse fa-fw ics-packages-loader"></i>
+                    )}
+                    Save
+                </button>
+                <button
+                    className="btn btn-default new-prompt-btn text-uppercase"
+                    onClick={handleNewPromptShow}
+                >
+                    New Prompt
+                    <i className="fas fa-plus"></i>
+                </button>
+                <Modal
+                    show={showNewPromptModal}
+                    onHide={handleNewPromptClose}
+                    size="sm"
+                >
+                    <NewPrompt
+                        hide={handleNewPromptClose}
+                        newPrompt={createNewPrompt}
+                    />
+                </Modal>
+            </>}
+
         </div>
       </div>
     </div>

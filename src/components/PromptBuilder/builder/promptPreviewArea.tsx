@@ -12,6 +12,7 @@ import {
 import { Modal } from "react-bootstrap";
 import SaveSoftKey from "../modals/save-soft-key-modal/saveSoftKey";
 import { Keycode } from "../../../models/keycode.modal";
+import {useReadOnly} from "../../../hooks/readOnly";
 
 export default function PromptPreviewArea() {
   const [showKeyCodeModal, setShowKeyCodeModal] = useState(false);
@@ -21,6 +22,7 @@ export default function PromptPreviewArea() {
 
   // HOOKS
   const deviceType = getDeviceType();
+  const readOnly = useReadOnly();
 
   // SELECTORS
   const promptsetData: PromptSetInterface = useSelector(
@@ -75,7 +77,7 @@ export default function PromptPreviewArea() {
       )}
 
       <div className={`ics-prompt-builder-preview-container ${deviceType}`}>
-        <div className="ics-prompt-builder">
+        <div className={`ics-prompt-builder ${readOnly ? 'disable-preview' : ''}`}>
           <PromptBuilder
             color={promptsetData.bg}
             screenWidth={promptsetData.screenWidth}

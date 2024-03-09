@@ -23,6 +23,7 @@ import {getBaseUrl} from "../../../../constants/app";
 import {fetchPromptSet} from "../../../../redux/thunks/promptSetThunk";
 import NewTouchMask from "../../modals/touch-mask-modal/new-touch-mask-modal/newTouchMask";
 import {usePromptSetId} from "../../../../hooks/promptsetId";
+import {useReadOnly} from "../../../../hooks/readOnly";
 
 interface InnerStateProps {
     child: Assignment;
@@ -79,6 +80,7 @@ export default function InnerStates(props: InnerStateProps) {
 
     // HOOKS
     const promptSetId = usePromptSetId();
+    const readOnly = useReadOnly();
 
     // REDUX
     const dispatch = useDispatch<AppDispatch>();
@@ -178,59 +180,59 @@ export default function InnerStates(props: InnerStateProps) {
                                 {child.dayPart ? child.dayPart.name : child.type}
                             </div>
                         </div>
-                        <div className="child-states-right-icons">
-                            {child.isAssignmentChanged && (<ErrorRoundedIcon
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="icons-right-child-states"
-                                />)}
+                        { !readOnly &&  <div className="child-states-right-icons">
+                            {child.isAssignmentChanged && !readOnly && (<ErrorRoundedIcon
+                                onClick={(e) => e.stopPropagation()}
+                                className="icons-right-child-states"
+                            />)}
                             {child.dayPart ? (<i
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    deleteDayPart(child.parentId, child.id);
+                                }}
+                                className="far fa-trash-alt child-state-trash-icon"
+                            ></i>) : (<>
+                                <MoreTimeIcon
+                                    className="icons-right-child-states"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        deleteDayPart(child.parentId, child.id);
+                                        handleShow();
                                     }}
-                                    className="far fa-trash-alt child-state-trash-icon"
-                                ></i>) : (<>
-                                    <MoreTimeIcon
-                                        className="icons-right-child-states"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleShow();
-                                        }}
-                                    />
-                                    <Modal show={show} onHide={handleClose} size="sm">
-                                        <DayPartModal
-                                            childStateId={child.id}
-                                            hide={handleClose}
-                                            daypart={handleDaypart}
-                                            parentId={child.parentId}
-                                        ></DayPartModal>
-                                    </Modal>
-                                </>)}
+                                />
+                                <Modal show={show} onHide={handleClose} size="sm">
+                                    <DayPartModal
+                                        childStateId={child.id}
+                                        hide={handleClose}
+                                        daypart={handleDaypart}
+                                        parentId={child.parentId}
+                                    ></DayPartModal>
+                                </Modal>
+                            </>)}
                             {showDropdown ? (<IndeterminateCheckBoxOutlinedIcon
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setShowDropdown(!showDropdown);
-                                    }}
-                                    className="icons-right-child-states"
-                                />) : (<AddBoxOutlinedIcon
-                                    className="icons-right-child-states"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setShowDropdown(!showDropdown);
-                                        showAssetsDropdown();
-                                    }}
-                                />)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowDropdown(!showDropdown);
+                                }}
+                                className="icons-right-child-states"
+                            />) : (<AddBoxOutlinedIcon
+                                className="icons-right-child-states"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowDropdown(!showDropdown);
+                                    showAssetsDropdown();
+                                }}
+                            />)}
                             {showDropdown && (<div
-                                    ref={dropdownRef}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setShowDropdown(!showDropdown);
-                                    }}
-                                    className="assets-dropdown"
-                                >
-                                    <AssetsDropdown childState={child}/>
-                                </div>)}
-                        </div>
+                                ref={dropdownRef}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowDropdown(!showDropdown);
+                                }}
+                                className="assets-dropdown"
+                            >
+                                <AssetsDropdown childState={child}/>
+                            </div>)}
+                        </div>}
                     </div>
                 </Accordion.Header>
                 <Accordion.Body>
@@ -274,7 +276,7 @@ export default function InnerStates(props: InnerStateProps) {
                                             <i className="far fa-hand-pointer"></i>
                                             Touch Mask
                                         </div>
-                                        <div>
+                                        {!readOnly && <div>
                                             {child.touchmap.isTouchMaskChanged && (
                                                 <i className="fa fa-floppy-o touchmask-save-icon"></i>)}
                                             <i
@@ -306,7 +308,7 @@ export default function InnerStates(props: InnerStateProps) {
                                                     onChange={handleNewTouchMask}
                                                 />
                                             </Modal>
-                                        </div>
+                                        </div>}
                                     </div>
                                 </div>
                                 {/*for touch map*/}
@@ -323,12 +325,12 @@ export default function InnerStates(props: InnerStateProps) {
                                                         <i className="fas fa-square"></i>
                                                         Touch Area
                                                     </div>
-                                                    <i
+                                                    {!readOnly && <i
                                                         onClick={() => {
                                                             deleteTouchMapOrArea(area.id);
                                                         }}
                                                         className="far fa-trash-alt trash-icon"
-                                                    ></i>
+                                                    ></i>}
                                                 </div>
                                             </div>);
                                     }

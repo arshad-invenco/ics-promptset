@@ -23,6 +23,7 @@ import ColorPickerModal from "../modals/color-picker-modal/colorPicker";
 import UpdateFontColor from "../modals/color-picker-modal/update-font-color-modal/updateFontColor";
 import { getOdmlData } from "../../../services/metaDataService";
 import OdmlModal from "../modals/odml-modal/odml";
+import {useReadOnly} from "../../../hooks/readOnly";
 
 export default function PromptSetMetaData() {
   // STATES
@@ -43,6 +44,9 @@ export default function PromptSetMetaData() {
   const promptsetData: PromptSetInterface = useSelector(
     (state: PromptSetRootState) => state.promptset.data
   );
+
+  //   HOOKS
+  const readOnly = useReadOnly();
 
   // CONTEXT_API
   const {
@@ -169,55 +173,58 @@ export default function PromptSetMetaData() {
       <div className="ics-prompt-builder-meta-container">
         <p className="meta-container-title">Default colors</p>
         <div className="d-flex-row meta-buttons-container">
-          <button
-            className="btn btn-primary meta-button"
-            onClick={handleColorShow}
-            disabled={loading}
-          >
-            Font Color
-            {loading && (
-              <i className="fa fa-spinner fa-pulse fa-fw" aria-hidden="true" />
-            )}
-          </button>
-          <div ref={bgPickerRef}>
+          {!readOnly && <>
             <button
-              onClick={handleDropdown}
-              className="btn btn-primary meta-button"
+                className="btn btn-primary meta-button"
+                onClick={handleColorShow}
+                disabled={loading}
             >
-              Background
-              {open ? (
-                <i className="fas fa-chevron-circle-up"></i>
-              ) : (
-                <i className="fas fa-chevron-circle-down"></i>
+              Font Color
+              {loading && (
+                  <i className="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"/>
               )}
             </button>
-            {open && <BackgroundPicker value={value} setValue={setValue} />}
-          </div>
-          <Modal
-            show={colorShow}
-            onHide={handleColorClose}
-            className="color-modal"
-            size="sm"
-            centered
-            backdrop="static"
-          >
-            <ColorPickerModal
-              value={promptsetData?.fontColor || "#000000"}
-              onChange={updateColor}
-              hide={handleColorClose}
-            />
-          </Modal>
-          <Modal
-            show={showUpdateFontModal}
-            onHide={handleUpdateFontModalClose}
-            size="sm"
-            backdrop="static"
-          >
-            <UpdateFontColor
-              value={newFontColor}
-              hide={handleUpdateFontModalClose}
-            />
-          </Modal>
+            <div ref={bgPickerRef}>
+              <button
+                  onClick={handleDropdown}
+                  className="btn btn-primary meta-button"
+              >
+                Background
+                {open ? (
+                    <i className="fas fa-chevron-circle-up"></i>
+                ) : (
+                    <i className="fas fa-chevron-circle-down"></i>
+                )}
+              </button>
+              {open && <BackgroundPicker value={value} setValue={setValue}/>}
+            </div>
+            <Modal
+                show={colorShow}
+                onHide={handleColorClose}
+                className="color-modal"
+                size="sm"
+                centered
+                backdrop="static"
+            >
+              <ColorPickerModal
+                  value={promptsetData?.fontColor || "#000000"}
+                  onChange={updateColor}
+                  hide={handleColorClose}
+              />
+            </Modal>
+            <Modal
+                show={showUpdateFontModal}
+                onHide={handleUpdateFontModalClose}
+                size="sm"
+                backdrop="static"
+            >
+              <UpdateFontColor
+                  value={newFontColor}
+                  hide={handleUpdateFontModalClose}
+              />
+            </Modal>
+          </>}
+
         </div>
       </div>
 
@@ -226,38 +233,38 @@ export default function PromptSetMetaData() {
 
         {languageKeysSet.map((isoCode: any, index: number) => {
           return (
-            <div key={index} className="row small">
-              <div className="col-md-4">
-                {promptsetData?.lang[isoCode].language}
-                <span>
+              <div key={index} className="row small">
+                <div className="col-md-4">
+                  {promptsetData?.lang[isoCode].language}
+                  <span>
                   {promptsetData?.lang[isoCode].promptSetLanguageSupport.default
-                    ? " (default)"
-                    : ""}
+                      ? " (default)"
+                      : ""}
                 </span>
+                </div>
+                <div className="col-md-6">
+                  {promptsetData.lang[isoCode].promptSetLanguageSupport.type ||
+                      ""}
+                </div>
+                <div className="col-md-2">
+                  {promptsetData.lang[isoCode].promptSetLanguageSupport.size ||
+                      ""}
+                </div>
               </div>
-              <div className="col-md-6">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.type ||
-                  ""}
-              </div>
-              <div className="col-md-2">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.size ||
-                  ""}
-              </div>
-            </div>
           );
         })}
-        <button
-          className="btn btn-primary meta-button"
-          onClick={handleEditLanguageShow}
+        {!readOnly && <button
+            className="btn btn-primary meta-button"
+            onClick={handleEditLanguageShow}
         >
           Edit
-        </button>
+        </button>}
         <Modal
-          show={showEditLanguage}
-          onHide={handleEditLanguageClose}
-          size="lg"
+            show={showEditLanguage}
+            onHide={handleEditLanguageClose}
+            size="lg"
         >
-          <EditLanguageModal hide={handleEditLanguageClose} />
+          <EditLanguageModal hide={handleEditLanguageClose}/>
         </Modal>
       </div>
       <div className="ics-prompt-builder-meta-container">
