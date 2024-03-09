@@ -9,6 +9,7 @@ import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";
 import {getBaseUrl} from "../../../../constants/app";
 import {PromptSetRootState} from "../../Tree/promptTree";
 import {promptSetContext} from "../../../../hooks/promptsetContext";
+import {useReadOnly} from "../../../../hooks/readOnly";
 
 interface ElementsProp {
     elementData: Elements
@@ -25,6 +26,9 @@ export function ImageControl(props: ElementsProp) {
 
     // CONTEXT API
     const { activePromptEditorId } = useContext(promptSetContext);
+
+    //   HOOKS
+    const readOnly = useReadOnly();
 
     // SELECTORS
     const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
@@ -44,91 +48,98 @@ export function ImageControl(props: ElementsProp) {
 
     return (
         <div className="ics-prompt-builder-image-controls d-flex-row">
-            <div className="col-md-1">
-                <label>Image</label>
-                <div className="image-preview"
-                     style={{backgroundImage: generateImgURL(element.value),
-                         backgroundPosition: 'center',
-                         backgroundRepeat: 'no-repeat',
-                         backgroundSize: 'contain'}}
-                >
-                </div>
-            </div>
-
-            <div className="d-flex-col dimensions">
-                <label>Dimensions</label>
-                <div className="co-ordinates d-flex-row">
-                    <div className="d-flex-row dimension-control">
-                        <label>X</label>
-                        <input type="number"
-                               value={element.left}
-                               onChange={(e) => {
-                                   const updatedElement = {...element, left: (Number)(e.target.value)};
-                                   setElement(updatedElement);
-                                   onChangeInput(updatedElement);
-                               }}
-                               min={0} className="ics-input dimension-input"/>
-                    </div>
-
-                    <div className="d-flex-row dimension-control">
-                        <label>Y</label>
-                        <input type="number"
-                               value={element.top}
-                               onChange={(e) => {
-                                   const updatedElement = {...element, top: (Number)(e.target.value)};
-                                   setElement(updatedElement);
-                                   onChangeInput(updatedElement);
-                               }}
-                               min={0}
-                               max={promptsetData.screenHeight - (element?.height || 0)}
-                               className="ics-input dimension-input"/>
-                    </div>
-
-                    <div className="d-flex-row dimension-control disabled-control">
-                        <label>W</label>
-                        <input type="number"
-                               value={element.width}
-                               onChange={(e) => {
-                                   const updatedElement = {...element, width: (Number)(e.target.value)};
-                                   setElement(updatedElement);
-                                   onChangeInput(updatedElement);
-                               }}
-                               min={0} className="ics-input dimension-input"/>
-                    </div>
-
-                    <div className="d-flex-row dimension-control disabled-control">
-                        <label>H</label>
-                        <input type="number"
-                               value={element.height}
-                               onChange={(e) => {
-                                   const updatedElement = {...element, height: (Number)(e.target.value)};
-                                   setElement(updatedElement);
-                                   onChangeInput(updatedElement);
-                               }}
-                               min={0} className="ics-input dimension-input"/>
+            {!readOnly ? <>
+                <div className="col-md-1">
+                    <label>Image</label>
+                    <div className="image-preview"
+                         style={{
+                             backgroundImage: generateImgURL(element.value),
+                             backgroundPosition: 'center',
+                             backgroundRepeat: 'no-repeat',
+                             backgroundSize: 'contain'
+                         }}
+                    >
                     </div>
                 </div>
-            </div>
 
+                <div className="d-flex-col dimensions">
+                    <label>Dimensions</label>
+                    <div className="co-ordinates d-flex-row">
+                        <div className="d-flex-row dimension-control">
+                            <label>X</label>
+                            <input type="number"
+                                   value={element.left}
+                                   onChange={(e) => {
+                                       const updatedElement = {...element, left: (Number)(e.target.value)};
+                                       setElement(updatedElement);
+                                       onChangeInput(updatedElement);
+                                   }}
+                                   min={0} className="ics-input dimension-input"/>
+                        </div>
 
-            <div className="ics-inline-150-block">
-                <label>Center shift</label>
-                <div className="d-flex-row center-shift">
-                    <label className="shift-btn">
-                        <VerticalAlignCenterRoundedIcon className="icon shift-icon-transform-horizontal"/>
-                    </label>
-                    <label className="shift-btn">
-                        <VerticalAlignCenterRoundedIcon className="icon"/>
-                    </label>
+                        <div className="d-flex-row dimension-control">
+                            <label>Y</label>
+                            <input type="number"
+                                   value={element.top}
+                                   onChange={(e) => {
+                                       const updatedElement = {...element, top: (Number)(e.target.value)};
+                                       setElement(updatedElement);
+                                       onChangeInput(updatedElement);
+                                   }}
+                                   min={0}
+                                   max={promptsetData.screenHeight - (element?.height || 0)}
+                                   className="ics-input dimension-input"/>
+                        </div>
+
+                        <div className="d-flex-row dimension-control disabled-control">
+                            <label>W</label>
+                            <input type="number"
+                                   value={element.width}
+                                   onChange={(e) => {
+                                       const updatedElement = {...element, width: (Number)(e.target.value)};
+                                       setElement(updatedElement);
+                                       onChangeInput(updatedElement);
+                                   }}
+                                   min={0} className="ics-input dimension-input"/>
+                        </div>
+
+                        <div className="d-flex-row dimension-control disabled-control">
+                            <label>H</label>
+                            <input type="number"
+                                   value={element.height}
+                                   onChange={(e) => {
+                                       const updatedElement = {...element, height: (Number)(e.target.value)};
+                                       setElement(updatedElement);
+                                       onChangeInput(updatedElement);
+                                   }}
+                                   min={0} className="ics-input dimension-input"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            {element.userclass &&
-                <div className="ics-inline-200-block">
-                    <label>Classes</label>
-                    <input type="text" className="ics-input"/>
+
+                <div className="ics-inline-150-block">
+                    <label>Center shift</label>
+                    <div className="d-flex-row center-shift">
+                        <label className="shift-btn">
+                            <VerticalAlignCenterRoundedIcon className="icon shift-icon-transform-horizontal"/>
+                        </label>
+                        <label className="shift-btn">
+                            <VerticalAlignCenterRoundedIcon className="icon"/>
+                        </label>
+                    </div>
                 </div>
+
+                {element.userclass &&
+                    <div className="ics-inline-200-block">
+                        <label>Classes</label>
+                        <input type="text" className="ics-input"/>
+                    </div>
+                }
+            </>
+                : <h4 className="controller-title">Image</h4>
             }
+
         </div>
     )
 }

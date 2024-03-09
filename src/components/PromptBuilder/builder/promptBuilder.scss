@@ -52,6 +52,9 @@
     .ics-prompt-builder{
       height: fit-content;
     }
+    .disable-preview{
+      pointer-events: none;
+    }
     .soft-keys-bottom{
       display: flex;
       align-items: center;

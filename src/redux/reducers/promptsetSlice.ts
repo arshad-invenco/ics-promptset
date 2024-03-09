@@ -136,7 +136,6 @@ export const promptsetSlice = createSlice({
                 state.assignments = state.assignments.map((assignment) => {
                     if (assignment.id === assignmentId && assignment.touchmap) {
                         if (assignment.touchmap.areas) {
-                            console.log(newArea, "ADDDIIINNNNGGGGG")
                             assignment.touchmap.areas.push(newArea);
                         } else {
                             assignment.touchmap.areas = [newArea];
@@ -159,8 +158,9 @@ export const promptsetSlice = createSlice({
                             }
                             return area;
                         });
-                        state.isStateChanged = true;
+                    assignment.touchmap.isTouchMaskChanged = true;
                     }
+                    assignment.isAssignmentChanged = true;
                     return assignment;
                 });
                 return state;
