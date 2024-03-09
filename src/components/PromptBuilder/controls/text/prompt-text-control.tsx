@@ -96,6 +96,7 @@ export default function TextControl(props: ElementsProp) {
               onChangeInput({
               ...element,
               size: Number(e.target.value),
+              height: (elementData?.height || 0) +1,
             });
           }}
           className="ics-input"
