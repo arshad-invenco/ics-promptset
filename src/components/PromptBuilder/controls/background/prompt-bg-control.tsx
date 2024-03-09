@@ -36,14 +36,14 @@ export function BackgroundControl(props: ElementsProp) {
 
     function handleAsset(asset: Asset) {
         console.log(asset, "ASSET")
-        let newElement = {...elementData, value: asset.id, filename: asset.name, name: asset.name};
+        const newElement = {...elementData, value: asset.id, filename: asset.name, name: asset.name};
         dispatch(updateBackgroundElement({assignmentId: childState?.id, newElement: newElement}));
 
     }
 
 
     function handleColor(color: string) {
-        let newElement = {...elementData, value: color.slice(1, color.length)};
+        const newElement = {...elementData, value: color.slice(1, color.length)};
         dispatch(updateBackgroundElement({assignmentId: childState?.id, newElement: newElement}));
     }
 
@@ -70,13 +70,13 @@ export function BackgroundControl(props: ElementsProp) {
     }, []);
 
     return (<div className="ics-prompt-builder-bg-control">
-            {!readOnly ? <div className="ics-inline-85-block" ref={bgPickerRef}>
-                <label>Background</label>
-                <button disabled={!elementData.lock} className="btn btn-primary" onClick={handleDropdown}>
-                    Update
-                </button>
-                {open && <BackgroundPicker handleAssetBackground={handleAsset} value={value} setValue={setValue}
-                                           handleBackgroundColor={handleColor}/>}
-            </div> : <h4 className="controller-title mx-lg-3">Background</h4>}
-        </div>);
+        {!readOnly ? <div className="ics-inline-85-block" ref={bgPickerRef}>
+            <label>Background</label>
+            <button disabled={!elementData.lock} className="btn btn-primary" onClick={handleDropdown}>
+                Update
+            </button>
+            {open && <BackgroundPicker handleAssetBackground={handleAsset} value={value} setValue={setValue}
+                                       handleBackgroundColor={handleColor}/>}
+        </div> : <h4 className="controller-title mx-lg-3">Background</h4>}
+    </div>);
 }

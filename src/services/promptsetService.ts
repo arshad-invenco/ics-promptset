@@ -27,7 +27,7 @@ export function getAsset(element: string, type: string) {
 }
 
 export function getLanguage(languageId: string, lang: Lang) {
-  for (let key in lang) {
+  for (const key in lang) {
     if (lang[key].languageSupportId === languageId) {
       return lang[key].isoCode;
     }

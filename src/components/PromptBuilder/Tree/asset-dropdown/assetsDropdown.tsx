@@ -99,7 +99,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
     console.log(asset, "AAASSSSEEEETTTTT");
 
-    let MediaElement: Elements = {
+    const MediaElement: Elements = {
       id: generateRandomString(10),
       type: asset.type.toLowerCase(),
       value: asset.id,
@@ -169,7 +169,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       }
     }
     if (type === TEXT) {
-      let textElement: NewElement = {
+      const textElement: NewElement = {
         id: generateRandomString(10),
         type: "text",
         value: "Your text goes here",
@@ -204,7 +204,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       setActiveControlType(TEXT);
     }
     if (type === INPUT) {
-      let inputElement: NewElement = {
+      const inputElement: NewElement = {
         id: generateRandomString(10),
         type: "input",
         value: "????",
@@ -246,7 +246,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       handleShowTouchMask();
     }
     if (type === AREA) {
-      let areaElement: TouchMapAreas = {
+      const areaElement: TouchMapAreas = {
         id: generateRandomString(10),
         type: "area",
         shape: "rect",

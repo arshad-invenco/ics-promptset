@@ -67,7 +67,7 @@ function NewTouchMask({ hide, onChange, touchMaskId }: NewTouchMaskProps) {
                     href={`${getPromptSetUrl(promptset.id, {
                       readOnly: "true",
                     })}`}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <p>
                       {promptset.name} : {promptset.code}

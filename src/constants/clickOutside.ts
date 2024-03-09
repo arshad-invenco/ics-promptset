@@ -1,4 +1,4 @@
-let outside: boolean = false;
+let outside = false;
 
 export function setClickOutside(value: boolean) {
   outside = value;

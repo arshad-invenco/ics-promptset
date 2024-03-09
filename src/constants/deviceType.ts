@@ -1,4 +1,4 @@
-let deviceType: string = "";
+let deviceType = "";
 
 export function setDeviceType(type: string) {
   deviceType = type;

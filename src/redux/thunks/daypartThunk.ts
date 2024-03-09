@@ -6,12 +6,8 @@ import request from "../../services/interceptor";
 export const fetchDayPart = createAsyncThunk<DayPart[]>(
   "[daypart]/fetchDayPart",
   async () => {
-    try {
-      const response = await request().get(`${getBaseUrl()}/media/dayparts`);
-      const data = response.data;
-      return data as DayPart[];
-    } catch (error) {
-      throw error;
-    }
+    const response = await request().get(`${getBaseUrl()}/media/dayparts`);
+    const data = response.data;
+    return data as DayPart[];
   }
 );

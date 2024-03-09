@@ -17,7 +17,7 @@ export const selectPromptSetAssignmentById = createSelector(
       return null;
     }
 
-    for (let state of states) {
+    for (const state of states) {
       if (state.assignments) {
         const assignment = state.assignments.find(
           (assignment) => assignment.id === id
@@ -39,7 +39,7 @@ export const selectElementByIdInAssignment = createSelector(
             return null;
         }
 
-        for (let state of states) {
+        for (const state of states) {
             if (state.assignments) {
                 const assignment = state.assignments.find(
                     (assignment) => assignment.id === assignmentId
