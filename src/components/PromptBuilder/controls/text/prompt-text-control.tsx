@@ -18,6 +18,8 @@ import { getDeviceType } from "../../../../constants/deviceType";
 import isSequoiaDevice from "../../../../services/promptsetService";
 import { promptSetContext } from "../../../../hooks/promptsetContext";
 import { useReadOnly } from "../../../../hooks/readOnly";
+import { Modal } from "react-bootstrap";
+import ColorPickerModal from "../../modals/color-picker-modal/colorPicker";
 
 interface ElementsProp {
   elementData: Elements;
@@ -29,6 +31,7 @@ export default function TextControl(props: ElementsProp) {
   const initialFont = fonts.find(
     (font) => font.fontId === elementData.face?.fontId
   );
+  const [showColorPicker, setShowColorPicker] = useState(false);
 
   // CONTEXT API
   const { activePromptEditorId } = useContext(promptSetContext);
@@ -70,6 +73,15 @@ export default function TextControl(props: ElementsProp) {
     setElement({ ...element, face: item as FontFace });
   }
 
+  const handleColorClose = () => {
+    setShowColorPicker(false);
+  };
+
+  const updateColor = (color: string) => {
+    setElement({ ...element, color: color.replace("#", "") });
+    onChangeInput({ ...element, color: color.replace("#", "") });
+  };
+
   // EFFECTS
   useEffect(() => {
     const updatedFonts = filterFonts(fonts, elementData);
@@ -99,8 +111,22 @@ export default function TextControl(props: ElementsProp) {
             <button
               style={{ backgroundColor: `#${element.color}` }}
               className={"color-picker-button"}
+              onClick={() => setShowColorPicker(true)}
             ></button>
           </div>
+          <Modal
+            show={showColorPicker}
+            onHide={handleColorClose}
+            className="color-modal"
+            size="sm"
+            centered
+          >
+            <ColorPickerModal
+              value={element.color ?? ""}
+              onChange={updateColor}
+              hide={handleColorClose}
+            />
+          </Modal>
 
           <div className="ics-inline-90-block">
             <label>Size</label>
