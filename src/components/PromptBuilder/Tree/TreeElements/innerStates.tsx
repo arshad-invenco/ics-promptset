@@ -57,7 +57,7 @@ export default function InnerStates(props: InnerStateProps) {
         if (update) {
             setShowSaveTouchMask(true);
         } else {
-            request().put(`${getBaseUrl()}/media/touchmaps/${childState?.touchmap?.id}/areas`, childState?.touchmap?.areas).then((res) => {
+            request().put(`${getBaseUrl()}/media/touchmaps/${childState?.touchmap?.id}/areas`, childState?.touchmap?.areas).then(() => {
                 dispatch(fetchTouchMasks());
                 toastDispatch({
                     type: "ADD_TOAST", payload: {message: "Touch mask overriden"},

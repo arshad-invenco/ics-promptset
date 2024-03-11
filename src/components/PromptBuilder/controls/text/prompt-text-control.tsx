@@ -22,7 +22,7 @@ interface ElementsProp {
 export default function TextControl(props: ElementsProp) {
   const { elementData } = props;
   const fonts: Font[] = useSelector(selectFonts);
-  const initialFont = fonts.find((font) => font.fontId === elementData.face?.fontId);
+  const initialFont = fonts.find((font) => font.fontId === elementData.face);
 
   // CONTEXT API
     const { activePromptEditorId } = useContext(promptSetContext);
@@ -56,7 +56,7 @@ export default function TextControl(props: ElementsProp) {
       console.log(item, "FFOOOONNNTTTT");
     if (initialFont) {
       setSelectedFont(item);
-      setElement({ ...element, face: item as FontFace });
+      setElement({ ...element, face: item.fontId });
     }
   }
 
