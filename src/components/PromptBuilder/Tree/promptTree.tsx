@@ -132,7 +132,32 @@ export default function PromptTree() {
     };
 
     function handleSavePromptSet() {
-        setIsSaving(!isSaving);
+        let payload : Assignment[] = [];
+
+        promptsetData.states.map((state) => {
+            if (state.isStateChanged) {
+                state.assignments.map((assignment) => {
+                        let value = {...assignment, promptId: assignment.id}
+                        payload.push({...assignment, promptId: assignment.id});
+                })
+            }
+        });
+
+        if (payload.length > 0) {
+            setIsSaving(!isSaving);
+            request().put(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`, payload).then((res) => {
+                setLastModified(res.data);
+                toastDispatch({
+                    type: "ADD_TOAST", payload: {message: "Saved 1 state"},
+                });
+                dispatch(fetchPromptSet(promptSetId));
+                setIsSaving(false);
+            })
+        } else{
+            toastDispatch({
+                type: "ADD_TOAST", payload: {message: "You do not have any unsaved changes."},
+            });
+        }
 
     }
 
