@@ -1,6 +1,6 @@
-import {useContext, useEffect, useRef, useState} from "react";
-import {Accordion, Modal} from "react-bootstrap";
-import {showAssetsDropdown} from "../../../../hooks/common";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Accordion, Modal } from "react-bootstrap";
+import { showAssetsDropdown } from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import TreeElements from "./treeElements";
 import AssetsDropdown from "../asset-dropdown/assetsDropdown";
@@ -10,8 +10,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {PromptSetRootState} from "../promptTree";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
-import {promptSetContext} from "../../../../hooks/promptsetContext";
-import {AREA, BG, CHILD_STATE, TOUCH_MASK, VIDEO,} from "../../../../constants/promptSetConstants";
+import { promptSetContext } from "../../../../hooks/promptsetContext";
+import {
+  AREA,
+  BG,
+  CHILD_STATE,
+  TOUCH_MASK,
+  VIDEO,
+} from "../../../../constants/promptSetConstants";
 import DayPartModal from "../../modals/daypart-modal/dayPart";
 import {AppDispatch} from "../../../../redux/store";
 import {
@@ -20,11 +26,14 @@ import {
     removeIsTouchMaskChangedById
 } from "../../../../redux/reducers/promptsetSlice";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
-import {getClickOutside, setClickOutside,} from "../../../../constants/clickOutside";
+import {
+  getClickOutside,
+  setClickOutside,
+} from "../../../../constants/clickOutside";
 import SaveTouchMask from "../../modals/touch-mask-modal/save-touch-mask-modal/saveTouchMask";
 import axios from "axios";
-import {getBaseUrl} from "../../../../constants/app";
-import {fetchPromptSet} from "../../../../redux/thunks/promptSetThunk";
+import { getBaseUrl } from "../../../../constants/app";
+import { fetchPromptSet } from "../../../../redux/thunks/promptSetThunk";
 import NewTouchMask from "../../modals/touch-mask-modal/new-touch-mask-modal/newTouchMask";
 import {usePromptSetId} from "../../../../hooks/promptsetId";
 import {useReadOnly} from "../../../../hooks/readOnly";
@@ -33,25 +42,25 @@ import {selectPromptSetAssignmentById} from "../../../../redux/selectors/promptS
 import {fetchTouchMasks} from "../../../../redux/thunks/touchMaskThunk";
 
 interface InnerStateProps {
-    child: Assignment;
-    index: number;
+  child: Assignment;
+  index: number;
 }
 
 export default function InnerStates(props: InnerStateProps) {
-    const {child, index} = props;
-    const [show, setShow] = useState(false);
-    const [showSaveTouchMask, setShowSaveTouchMask] = useState(false);
-    const [showNewTouchMask, setShowNewTouchMask] = useState(false);
+  const { child, index } = props;
+  const [show, setShow] = useState(false);
+  const [showSaveTouchMask, setShowSaveTouchMask] = useState(false);
+  const [showNewTouchMask, setShowNewTouchMask] = useState(false);
 
-    const handleShow = () => {
-        setClickOutside(true);
-        setShow(true);
-    };
+  const handleShow = () => {
+    setClickOutside(true);
+    setShow(true);
+  };
 
-    const handleClose = () => {
-        setClickOutside(false);
-        setShow(false);
-    };
+  const handleClose = () => {
+    setClickOutside(false);
+    setShow(false);
+  };
 
     const handleNewTouchMask = (update: boolean) => {
         if (update) {
@@ -68,17 +77,17 @@ export default function InnerStates(props: InnerStateProps) {
         handleNewTouchMaskClose();
     };
 
-    const handleNewTouchMaskShow = () => {
-        setShowNewTouchMask(true);
-    };
+  const handleNewTouchMaskShow = () => {
+    setShowNewTouchMask(true);
+  };
 
-    const handleNewTouchMaskClose = () => {
-        setShowNewTouchMask(false);
-    };
+  const handleNewTouchMaskClose = () => {
+    setShowNewTouchMask(false);
+  };
 
-    const handleSaveTouchClose = () => {
-        setShowSaveTouchMask(false);
-    };
+  const handleSaveTouchClose = () => {
+    setShowSaveTouchMask(false);
+  };
 
     const handleSaveTouchMask = (maskName: string) => {
         let payload = {...childState?.touchmap, name:maskName};
@@ -93,19 +102,21 @@ export default function InnerStates(props: InnerStateProps) {
         })
     };
 
-    // SELECTOR
-    const lang: Lang = useSelector((state: PromptSetRootState) => state.promptset.data.lang);
+  // SELECTOR
+  const lang: Lang = useSelector(
+    (state: PromptSetRootState) => state.promptset.data.lang
+  );
 
-    // STATES
-    const [elements, setElements] = useState(child.elements);
-    const [showDropdown, setShowDropdown] = useState(false);
+  // STATES
+  const [elements, setElements] = useState(child.elements);
+  const [showDropdown, setShowDropdown] = useState(false);
 
-    // HOOKS
-    const promptSetId = usePromptSetId();
-    const readOnly = useReadOnly();
+  // HOOKS
+  const promptSetId = usePromptSetId();
+  const readOnly = useReadOnly();
 
-    // REDUX
-    const dispatch = useDispatch<AppDispatch>();
+  // REDUX
+  const dispatch = useDispatch<AppDispatch>();
 
     // Context API
     const {
@@ -128,80 +139,87 @@ export default function InnerStates(props: InnerStateProps) {
     const childState = useSelector((state: PromptSetRootState & State[]) => selectPromptSetAssignmentById(state, activePromptEditorId));
 
 
-    // EFFECTS
-    useEffect(() => {
-        setElements(child.elements);
+  // EFFECTS
+  useEffect(() => {
+    setElements(child.elements);
 
-        function handleClickOutside(event: MouseEvent) {
-            if (dropdownRef.current && !(dropdownRef.current as Node).contains(event.target as Node) && !getClickOutside()) {
-                setShowDropdown(false);
-            }
-        }
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [elements, child]);
-
-    function handleElementSort() {
-        const elementsClone = [...child.elements];
-        const temp = elementsClone[dragElement.current];
-        elementsClone[dragElement.current] = elementsClone[draggedOverElement.current];
-        elementsClone[draggedOverElement.current] = temp;
-        setElements(elementsClone);
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as Node).contains(event.target as Node) &&
+        !getClickOutside()
+      ) {
+        setShowDropdown(false);
+      }
     }
 
-    function onClickChildState() {
-        setActiveControlType(CHILD_STATE);
-        setActivePromptEditorId(child.id);
-        setActiveStateId(child.parentId);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [elements, child]);
 
-    function onClickElement(touch_mask_id: string, type: string) {
-        setActiveControlType(type);
-        setActivePromptEditorId(child.id);
-        setActiveStateId(child.parentId);
-        setActiveElementId(touch_mask_id);
-    }
+  function handleElementSort() {
+    const elementsClone = [...child.elements];
+    const temp = elementsClone[dragElement.current];
+    elementsClone[dragElement.current] =
+      elementsClone[draggedOverElement.current];
+    elementsClone[draggedOverElement.current] = temp;
+    setElements(elementsClone);
+  }
 
-    function handleDaypart(item: string) {
-        setShow(false);
-    }
+  function onClickChildState() {
+    setActiveControlType(CHILD_STATE);
+    setActivePromptEditorId(child.id);
+    setActiveStateId(child.parentId);
+  }
 
-    function deleteTouchMapOrArea(touchMapId: string) {
-        dispatch(deleteTouchMapOrAreaById(touchMapId));
-    }
+  function onClickElement(touch_mask_id: string, type: string) {
+    setActiveControlType(type);
+    setActivePromptEditorId(child.id);
+    setActiveStateId(child.parentId);
+    setActiveElementId(touch_mask_id);
+  }
 
-    function deleteDayPart(assignmentId: string, childStateId: string) {
-        console.log(assignmentId, childStateId);
-        axios
-            .delete(`${getBaseUrl()}/media/prompt/${childStateId}`, {
-                headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
-            })
-            .then((res) => {
-                setLastModified(res.data);
-                dispatch(fetchPromptSet(promptSetId));
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
+  function handleDaypart(item: string) {
+    setShow(false);
+  }
 
-    return (<Accordion alwaysOpen>
-            <Accordion.Item eventKey="0">
-                <Accordion.Header
-                    onClick={() => {
-                        onClickChildState();
-                    }}
-                >
-                    <div className="prompt-set-child-status">
-                        <div className="child-status-left-container">
-                            <div className="child-status-icon">
-                                <i className="fa fa-clone"></i>
-                            </div>
-                            <div className="child-status-middle-text text-capitalize">
-                                {child.promptSetLanguageId && (<span className="text-uppercase">
+  function deleteTouchMapOrArea(touchMapId: string) {
+    dispatch(deleteTouchMapOrAreaById(touchMapId));
+  }
+
+  function deleteDayPart(assignmentId: string, childStateId: string) {
+    console.log(assignmentId, childStateId);
+    axios
+      .delete(`${getBaseUrl()}/media/prompt/${childStateId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => {
+        setLastModified(res.data);
+        dispatch(fetchPromptSet(promptSetId));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  return (
+    <Accordion alwaysOpen defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header
+          onClick={() => {
+            onClickChildState();
+          }}
+        >
+          <div className="prompt-set-child-status">
+            <div className="child-status-left-container">
+              <div className="child-status-icon">
+                <i className="fa fa-clone"></i>
+              </div>
+              <div className="child-status-middle-text text-capitalize">
+                {child.promptSetLanguageId && (
+                  <span className="text-uppercase">
                     {getLanguage(child.promptSetLanguageId, lang)}:{" "}
                   </span>)}
                                 {child.dayPart ? child.dayPart.name : child.type}
@@ -305,10 +323,7 @@ export default function InnerStates(props: InnerStateProps) {
                                         </div>
                                         {!readOnly && <div>
                                             {child.touchmap.isTouchMaskChanged && (
-                                                <i onClick={()=>{
-                                                    setActivePromptEditorId(child.id);
-                                                    setShowNewTouchMask(true);
-                                                }} className="fa fa-floppy-o touchmask-save-icon"></i>)}
+                                                <i className="fa fa-floppy-o touchmask-save-icon"></i>)}
                                             <i
                                                 onClick={() => {
                                                     if (child?.touchmap?.id) {
