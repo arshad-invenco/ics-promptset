@@ -23,6 +23,16 @@ export const promptsetSlice = createSlice({
       state.isLoading = false;
       state.error = false;
     },
+    updateStateById: (state, action) => {
+      const { id, newTransactionState } = action.payload;
+      state.data.states = state.data.states.map((state) => {
+        if (state.id === id) {
+          state.transactionState = newTransactionState;
+          state.isStateChanged = true;
+        }
+        return state;
+      });
+    },
     updateInputElement: (state, action) => {
       const { assignmentId, newElement } = action.payload;
       state.data.states = state.data.states.map((state) => {
@@ -251,6 +261,7 @@ export const promptsetSlice = createSlice({
 
 export const {
   setPromptSetData,
+  updateStateById,
   updateInputElement,
   updateTouchMap,
   addElementToAssignment,
