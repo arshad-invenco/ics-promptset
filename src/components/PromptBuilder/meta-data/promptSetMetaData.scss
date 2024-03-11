@@ -41,5 +41,28 @@
       top: 68%;
       right: 3%;
     }
+    .size-label {
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: inline;
+      padding: 0.2em 0.6em 0.3em;
+      text-align: center;
+      vertical-align: baseline;
+      white-space: nowrap;
+      color: var(--white);
+      border-radius: 0.25em;
+    }
+    .label-blue {
+      background-color: var(--md-blue-500);
+    }
+    .label-danger {
+      background-color: var(--md-red-500);
+    }
+    .warning-text {
+      margin-top: 1rem;
+      font-size: 85%;
+      color: var(--md-grey-500);
+      max-width: 25rem;
+    }
   }
 }

@@ -26,7 +26,7 @@
         width: 100%;
         font-size: 17px;
         font-weight: bold;
-        padding: 7px 0;
+        padding: 5px 42px 5px 10px;
         margin-right: -1px;
         height: auto;
         background-color: white;
@@ -37,6 +37,9 @@
         &:focus {
           outline: none;
         }
+      }
+      .disabled-input {
+        cursor: not-allowed;
       }
     }
 
