@@ -39,7 +39,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
   // SELECTORS
   const childState = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId)
+    selectPromptSetAssignmentById(state, activePromptEditorId),
   );
 
   // REDUX
@@ -74,7 +74,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       updateInputElement({
         assignmentId: childState?.id,
         newElement: updatedElement,
-      })
+      }),
     );
   }
 
@@ -86,7 +86,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       coords: `${x},${y},${areaCoords[2]},${areaCoords[3]}`,
     };
     dispatch(
-      updateTouchMapArea({ assignmentId: childState?.id, newArea: newArea })
+      updateTouchMapArea({ assignmentId: childState?.id, newArea: newArea }),
     );
   }
 
@@ -119,7 +119,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               s.rect(0, 0, screenWidth, screenHeight).attr({
                 fill: `#${newElement.value}`,
                 id: newElement.id,
-              })
+              }),
             );
           }
           break;
@@ -131,7 +131,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           var words = newElement.value.split(" ");
 
           // Create an array to hold the lines of text
-          var lines:any = [];
+          var lines: any = [];
           var currLine = 0;
           lines[0] = [];
 
@@ -150,10 +150,13 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             var textWidth = tempText.getBBox().width;
 
             // Check if adding this word would exceed the maximum width
-            var lineWidth = lines[currLine].reduce(function (sum:any, word:any) {
+            var lineWidth = lines[currLine].reduce(function (
+              sum: any,
+              word: any,
+            ) {
               return sum + word.width;
             }, 0);
-            if (lineWidth + textWidth > (newElement.width??0)) {
+            if (lineWidth + textWidth > (newElement.width ?? 0)) {
               // Start a new line
               currLine += 1;
               lines[currLine] = [];
@@ -173,15 +176,19 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           tempGroup.remove();
 
           // Create the actual text elements
-          lines.forEach(function (line:any, i:any) {
+          lines.forEach(function (line: any, i: any) {
             var text = line
-              .map(function (word:any) {
+              .map(function (word: any) {
                 return word.text;
               })
               .join(" ");
 
             var textElement = g
-              .text(newElement.left, (newElement.top??0) + i * (newElement.size??0), text)
+              .text(
+                newElement.left,
+                (newElement.top ?? 0) + i * (newElement.size ?? 0),
+                text,
+              )
               .attr({
                 fill: `#${newElement.color}`,
                 id: newElement.id,
@@ -193,20 +200,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             if (newElement.textAlign === CENTER) {
               textElement.attr({
                 textAnchor: "middle",
-                x: (newElement.width??0) / 2 + (newElement.left??0),
+                x: (newElement.width ?? 0) / 2 + (newElement.left ?? 0),
               });
             }
             tempGroup.add(textElement);
-
-            
           });
           if (activeElementId === newElement.id) {
             const bbox = tempGroup.getBBox();
-            svgElement = createWrapperController(
-              bbox,
-              newElement,
-              tempGroup
-            );
+            svgElement = createWrapperController(bbox, newElement, tempGroup);
           } else {
             svgElement = tempGroup;
           }
@@ -228,7 +229,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 textDecoration: "underline",
                 cursor: "default",
                 dy: "1em",
-                fontFamily: newElement.face?.fontId,
+                fontFamily: newElement.face,
               });
             inputSvg.add(inputCenter);
           } else if (newElement.textAlign === LEFT) {
@@ -266,7 +267,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               newElement,
               inputSvg,
               newElement.type,
-              undefined
+              undefined,
             );
           } else {
             svgElement = inputSvg;
@@ -281,7 +282,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               s.image(elementUrl, 0, 0).attr({
                 id: newElement.id,
                 preserveAspectRatio: "none",
-              })
+              }),
             )
             .transform(`t${x},${y}`);
           const bboxImage = imageElement.getBBox();
@@ -292,7 +293,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   bboxImage.x,
                   bboxImage.y,
                   bboxImage.width,
-                  bboxImage.height
+                  bboxImage.height,
                 )
                 .attr({
                   fill: "#ffffff",
@@ -300,7 +301,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   fillOpacity: 0,
                   strokeWidth: 1,
                 }),
-              imageElement
+              imageElement,
             );
           } else {
             svgElement = imageElement;
@@ -324,7 +325,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   bboxVideo.x,
                   bboxVideo.y,
                   bboxVideo.width,
-                  bboxVideo.height
+                  bboxVideo.height,
                 )
                 .attr({
                   fill: "#ffffff",
@@ -332,7 +333,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   fillOpacity: 0,
                   strokeWidth: 1,
                 }),
-              videoElement
+              videoElement,
             );
           } else {
             svgElement = videoElement;
@@ -399,14 +400,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             s.line(i, 0, i, screenHeight).attr({
               stroke: "#616161",
               strokeWidth: 3,
-            })
+            }),
           );
         } else {
           line = g.group(
             s.line(i, 0, i, screenHeight).attr({
               stroke: "#616161",
               strokeWidth: 1,
-            })
+            }),
           );
         }
       }
@@ -417,14 +418,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             s.line(0, i, screenWidth, i).attr({
               stroke: "#616161",
               strokeWidth: 3,
-            })
+            }),
           );
         } else {
           line = g.group(
             s.line(0, i, screenWidth, i).attr({
               stroke: "#616161",
               strokeWidth: 1,
-            })
+            }),
           );
         }
       }
@@ -519,7 +520,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               opacity: 0.8,
               textAnchor: "middle",
               dy: ".5em",
-            })
+            }),
           );
           const circleBBox = circleGroup.getBBox();
           if (activeElementId === area.id) {
@@ -528,7 +529,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               undefined,
               circleGroup,
               area.type,
-              area
+              area,
             );
           } else {
             areaElement = circleGroup;
@@ -551,7 +552,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 opacity: 0.8,
                 textAnchor: "start",
                 dy: "1em",
-              })
+              }),
           );
           const rectBBox = rectGroup.getBBox();
           if (activeElementId === area.id) {
@@ -560,7 +561,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               undefined,
               rectGroup,
               area.type,
-              area
+              area,
             );
           } else {
             areaElement = rectGroup;
@@ -614,7 +615,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     element?: Elements,
     ElementSvg?: Snap.Element,
     type?: string,
-    area?: TouchMapAreas
+    area?: TouchMapAreas,
   ) {
     const elementBBox = ElementSvg?.getBBox();
     console.log(elementBBox, "elementBBox", type);
@@ -647,7 +648,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           element?.left || bboxInput.x,
           element?.top || bboxInput.y,
           element?.width || bboxInput.width,
-          element?.height || bboxInput.height
+          element?.height || bboxInput.height,
         )
         .attr({
           fill: "#ffffff",
@@ -667,7 +668,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           fill: "#32b447",
           transform: "matrix(0,1,-1,0,15,5)",
           fillOpacity: 0.9,
-        })
+        }),
       )
       .attr({
         id: "controllerResize",

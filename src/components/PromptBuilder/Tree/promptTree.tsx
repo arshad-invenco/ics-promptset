@@ -60,7 +60,7 @@ export default function PromptTree() {
 
   // SELECTOR
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
+    (state: PromptSetRootState) => state.promptset.data,
   );
   const fonts: Font[] = useSelector(selectFonts);
   const elementData: Elements =
@@ -68,8 +68,8 @@ export default function PromptTree() {
       selectElementByIdInAssignment(
         state,
         activePromptEditorId,
-        activeElementId
-      )
+        activeElementId,
+      ),
     ) || ({} as Elements);
 
   // CONTEXT API
@@ -118,7 +118,7 @@ export default function PromptTree() {
         setInitialState(false);
         onClickState(
           promptsetData.states[0].id,
-          promptsetData.states[0].assignments[0].id
+          promptsetData.states[0].assignments[0].id,
         );
       }
     }
@@ -161,7 +161,7 @@ export default function PromptTree() {
 
     const response = await request().post(
       `${getBaseUrl()}/media/prompts`,
-      newPrompt
+      newPrompt,
     );
 
     if (response) {
@@ -169,25 +169,39 @@ export default function PromptTree() {
     }
   };
 
-  const handlePromptNameChange = () => {
-    if (!readOnly) {
+  function handleSavePromptSet() {
+    let payload: Assignment[] = [];
+
+    promptsetData.states.map((state) => {
+      if (state.isStateChanged) {
+        state.assignments.map((assignment) => {
+          let value = { ...assignment, promptId: assignment.id };
+          payload.push({ ...assignment, promptId: assignment.id });
+        });
+      }
+    });
+
+    if (payload.length > 0) {
+      setIsSaving(!isSaving);
       request()
-        .put(`${getBaseUrl()}/media/promptsets/${promptSetId}`, {
-          name: promptSetData.name,
-          fontColor: promptSetData.fontColor,
-        })
-        .then(() => {
-          dispatch(fetchPromptSet(promptSetId));
+        .put(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`, payload)
+        .then((res) => {
+          setLastModified(res.data);
           toastDispatch({
             type: "ADD_TOAST",
-            payload: { message: "Prompt Set name updated" },
+            payload: {
+              message: `Saved ${payload.length} state${payload.length > 1 ? "s" : ""}`,
+            },
           });
+          dispatch(fetchPromptSet(promptSetId));
+          setIsSaving(false);
         });
+    } else {
+      toastDispatch({
+        type: "ADD_TOAST",
+        payload: { message: "You do not have any unsaved changes." },
+      });
     }
-  };
-
-  function handleSavePromptSet() {
-    setIsSaving(!isSaving);
   }
 
   function onClickState(state_id: string, child_id: string) {
@@ -205,7 +219,7 @@ export default function PromptTree() {
     request()
       .put(
         `${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`,
-        updatedAssignments
+        updatedAssignments,
       )
       .then((res) => {
         dispatch(removeIsStateChangedById(item.id));
@@ -217,6 +231,23 @@ export default function PromptTree() {
       })
       .catch((err) => {});
   }
+
+  const handlePromptNameChange = () => {
+    if (!readOnly) {
+      request()
+        .put(`${getBaseUrl()}/media/promptsets/${promptSetId}`, {
+          name: promptSetData.name,
+          fontColor: promptSetData.fontColor,
+        })
+        .then(() => {
+          dispatch(fetchPromptSet(promptSetId));
+          toastDispatch({
+            type: "ADD_TOAST",
+            payload: { message: "Prompt Set name updated" },
+          });
+        });
+    }
+  };
 
   return (
     <div className={`left-container ${getDeviceType()}`}>
@@ -286,7 +317,7 @@ export default function PromptTree() {
                               <InnerStates child={child} index={index} />
                             </div>
                           );
-                        }
+                        },
                       )}
                     </Accordion.Body>
                   </Accordion.Item>

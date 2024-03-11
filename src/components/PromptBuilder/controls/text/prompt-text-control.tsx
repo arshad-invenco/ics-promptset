@@ -28,10 +28,8 @@ interface ElementsProp {
 export default function TextControl(props: ElementsProp) {
   const { elementData } = props;
   const fonts: Font[] = useSelector(selectFonts);
-  const initialFont = fonts.find(
-    (font) => font.fontId === elementData.face?.fontId
-  );
   const [showColorPicker, setShowColorPicker] = useState(false);
+  const initialFont = fonts.find((font) => font.fontId === elementData.face);
 
   // CONTEXT API
   const { activePromptEditorId } = useContext(promptSetContext);
@@ -46,31 +44,25 @@ export default function TextControl(props: ElementsProp) {
   // REDUX
   const dispatch = useDispatch<AppDispatch>();
 
-  // SELECTORS
-  const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
-  );
+    // SELECTORS
+    const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
 
-  //   HOOKS
-  const readOnly = useReadOnly();
+    //   HOOKS
+    const readOnly = useReadOnly();
 
-  useEffect(() => {
-    setElement(elementData);
-  }, [promptsetData]);
+    useEffect(() => {
+        setElement(elementData);
+    }, [promptsetData]);
 
   // FUNCTIONS
   function onChangeInput(element: Elements) {
-    dispatch(
-      updateInputElement({
-        assignmentId: activePromptEditorId,
-        newElement: element,
-      })
-    );
+    dispatch(updateInputElement({assignmentId: activePromptEditorId, newElement: element}));
   }
 
   function handleFontSelection(item: Font) {
-    setSelectedFont(item);
-    setElement({ ...element, face: item as FontFace });
+      setSelectedFont(item);
+      setElement({ ...elementData, face: item.fontId });
+      onChangeInput({ ...elementData, face: item.fontId });
   }
 
   const handleColorClose = () => {

@@ -87,7 +87,7 @@ export function filterFonts(fonts: Font[], elementData: Elements): Font[] {
 
   if (elementData && elementData.face) {
     updatedFonts = fonts.filter(
-      (font) => !(font.active === false && font.fontId !== elementData.face?.fontId)
+        (font) => !(font.active === false && font.fontId !== elementData.face)
     );
   } else {
     updatedFonts = fonts.filter((font) => font.active === true);

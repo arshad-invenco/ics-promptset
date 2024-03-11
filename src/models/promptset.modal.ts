@@ -152,7 +152,7 @@ export interface Elements {
   type: string;
   value: string;
   top?: number;
-  face?: FontFace;
+  face?: string;
   left?: number;
   size?: number;
   color?: string;
