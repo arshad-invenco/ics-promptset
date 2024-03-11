@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {promptSetContext} from "../../../hooks/promptsetContext";
 import {useDispatch, useSelector} from "react-redux";
 import {PromptSetRootState} from "../Tree/promptTree";
-import {Elements, State, TouchMapAreas} from "../../../models/promptset.modal";
+import {Elements, PromptSetInterface, State, TouchMapAreas} from "../../../models/promptset.modal";
 import {selectPromptSetAssignmentById} from "../../../redux/selectors/promptSetSelectors";
 import {AppDispatch} from "../../../redux/store";
 import {BBox} from "snapsvg";
@@ -32,6 +32,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
     // SELECTORS
     const childState = useSelector((state: PromptSetRootState & State[]) => selectPromptSetAssignmentById(state, activePromptEditorId));
+    const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
 
     // REDUX
     const dispatch = useDispatch<AppDispatch>();
@@ -53,7 +54,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         }
         console.log("CALLED")
         initElements(elements, childState?.touchmap?.areas || []);
-    }, [activeElementId, gridViewState, elements, childState, showPlaylistState]);
+    }, [activeElementId, gridViewState, elements, childState, showPlaylistState, promptsetData]);
 
     function updateElement(newElement: Elements, x: number, y: number) {
         const updatedElement = {...newElement, left: Math.ceil(x), top: Math.ceil(y)}

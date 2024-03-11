@@ -132,13 +132,13 @@ export default function PromptTree() {
     };
 
     function handleSavePromptSet() {
-        let payload : Assignment[] = [];
+        let payload: Assignment[] = [];
 
         promptsetData.states.map((state) => {
             if (state.isStateChanged) {
                 state.assignments.map((assignment) => {
-                        let value = {...assignment, promptId: assignment.id}
-                        payload.push({...assignment, promptId: assignment.id});
+                    let value = {...assignment, promptId: assignment.id}
+                    payload.push({...assignment, promptId: assignment.id});
                 })
             }
         });
@@ -148,12 +148,13 @@ export default function PromptTree() {
             request().put(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`, payload).then((res) => {
                 setLastModified(res.data);
                 toastDispatch({
-                    type: "ADD_TOAST", payload: {message: "Saved 1 state"},
+                    type: "ADD_TOAST",
+                    payload: {message: `Saved ${payload.length} state${payload.length > 1 ? "s" : ""}`},
                 });
                 dispatch(fetchPromptSet(promptSetId));
                 setIsSaving(false);
             })
-        } else{
+        } else {
             toastDispatch({
                 type: "ADD_TOAST", payload: {message: "You do not have any unsaved changes."},
             });
@@ -182,104 +183,90 @@ export default function PromptTree() {
         })
     }
 
-  return (
-    <div className={`left-container ${getDeviceType()}`}>
-      <div className="ics-prompt-tree-container">
-        <div className="ics-prompt-set-heading">
-          <input className="prompt-heading-input" type="text" value={"njbh"} />
-        </div>
-        <div className="ics-prompt-builder-state">
-          {promptsetData?.states?.map((item: State, index: number) => {
-            return (
-              <div key={index} className="state-item">
-                <Accordion alwaysOpen>
-                  <Accordion.Item eventKey="0">
-                    <Accordion.Header
-                      onClick={() => {
-                        onClickState(item.id, item.assignments[0].id);
-                      }}
-                    >
-                      <div className="prompt-set-status">
-                        <div className="left-status">
-                          <div className="status-icon">
-                            {item.secure && isSequoiaDevice("G7-100-8") && (
-                              <i className="fas fa-shield-alt"></i>
-                            )}
-                          </div>
-                          <div
-                            onClick={() => {}}
-                            className="middle-text-status"
-                          >
-                            {item.code.toUpperCase()}
-                          </div>
-                          {item.transactionState && (
-                            <span className="state-label">
+    return (<div className={`left-container ${getDeviceType()}`}>
+            <div className="ics-prompt-tree-container">
+                <div className="ics-prompt-set-heading">
+                    <input className="prompt-heading-input" type="text" value={"njbh"}/>
+                </div>
+                <div className="ics-prompt-builder-state">
+                    {promptsetData?.states?.map((item: State, index: number) => {
+                        return (<div key={index} className="state-item">
+                                <Accordion alwaysOpen>
+                                    <Accordion.Item eventKey="0">
+                                        <Accordion.Header
+                                            onClick={() => {
+                                                onClickState(item.id, item.assignments[0].id);
+                                            }}
+                                        >
+                                            <div className="prompt-set-status">
+                                                <div className="left-status">
+                                                    <div className="status-icon">
+                                                        {item.secure && isSequoiaDevice("G7-100-8") && (
+                                                            <i className="fas fa-shield-alt"></i>)}
+                                                    </div>
+                                                    <div
+                                                        onClick={() => {
+                                                        }}
+                                                        className="middle-text-status"
+                                                    >
+                                                        {item.code.toUpperCase()}
+                                                    </div>
+                                                    {item.transactionState && (<span className="state-label">
                               {item.transactionState}
-                            </span>
-                          )}
-                        </div>
-                        {item.isStateChanged && !readOnly && (
-                          <div className="unsaved-status">
-                            <i
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                saveState(item);
-                              }}
-                              className="fa fa-floppy-o "
-                            ></i>
-                          </div>
-                        )}
-                      </div>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      {item.assignments.map(
-                        (child: Assignment, index: number) => {
-                          return (
-                            <div key={index} className="inner-accordion">
-                              <InnerStates child={child} index={index} />
-                            </div>
-                          );
-                        }
-                      )}
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
-              </div>
-            );
-          })}
-        </div>
-        <div className={`prompt-tree-footer ${readOnly ? 'p-0' : ''}`}>
-            {!readOnly && <>
-                <button
-                    className="btn btn-primary text-uppercase"
-                    onClick={handleSavePromptSet}
-                >
-                    {isSaving && (
-                        <i className="fa fa-spinner fa-pulse fa-fw ics-packages-loader"></i>
-                    )}
-                    Save
-                </button>
-                <button
-                    className="btn btn-default new-prompt-btn text-uppercase"
-                    onClick={handleNewPromptShow}
-                >
-                    New Prompt
-                    <i className="fas fa-plus"></i>
-                </button>
-                <Modal
-                    show={showNewPromptModal}
-                    onHide={handleNewPromptClose}
-                    size="sm"
-                >
-                    <NewPrompt
-                        hide={handleNewPromptClose}
-                        newPrompt={createNewPrompt}
-                    />
-                </Modal>
-            </>}
+                            </span>)}
+                                                </div>
+                                                {item.isStateChanged && !readOnly && (<div className="unsaved-status">
+                                                        <i
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                saveState(item);
+                                                            }}
+                                                            className="fa fa-floppy-o "
+                                                        ></i>
+                                                    </div>)}
+                                            </div>
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                            {item.assignments.map((child: Assignment, index: number) => {
+                                                return (<div key={index} className="inner-accordion">
+                                                        <InnerStates child={child} index={index}/>
+                                                    </div>);
+                                            })}
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </div>);
+                    })}
+                </div>
+                <div className={`prompt-tree-footer ${readOnly ? 'p-0' : ''}`}>
+                    {!readOnly && <>
+                        <button
+                            className="btn btn-primary text-uppercase"
+                            onClick={handleSavePromptSet}
+                        >
+                            {isSaving && (<i className="fa fa-spinner fa-pulse fa-fw ics-packages-loader"></i>)}
+                            Save
+                        </button>
+                        <button
+                            className="btn btn-default new-prompt-btn text-uppercase"
+                            onClick={handleNewPromptShow}
+                        >
+                            New Prompt
+                            <i className="fas fa-plus"></i>
+                        </button>
+                        <Modal
+                            show={showNewPromptModal}
+                            onHide={handleNewPromptClose}
+                            size="sm"
+                        >
+                            <NewPrompt
+                                hide={handleNewPromptClose}
+                                newPrompt={createNewPrompt}
+                            />
+                        </Modal>
+                    </>}
 
-        </div>
-      </div>
-    </div>
-  );
+                </div>
+            </div>
+        </div>);
 }

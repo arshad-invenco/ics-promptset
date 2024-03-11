@@ -53,11 +53,9 @@ export default function TextControl(props: ElementsProp) {
   }
 
   function handleFontSelection(item: Font) {
-      console.log(item, "FFOOOONNNTTTT");
-    if (initialFont) {
       setSelectedFont(item);
-      setElement({ ...element, face: item.fontId });
-    }
+      setElement({ ...elementData, face: item.fontId });
+      onChangeInput({ ...elementData, face: item.fontId });
   }
 
   // EFFECTS
