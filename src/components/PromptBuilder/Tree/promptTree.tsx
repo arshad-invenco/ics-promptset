@@ -153,23 +153,36 @@ export default function PromptTree() {
   };
 
   const createNewPrompt = async (newPrompt: NewPromptPayload) => {
-    try {
-      newPrompt = {
-        ...newPrompt,
-        promptSetId: promptsetData.id,
-        promptType: newPrompt.promptType.toLowerCase(),
-      };
+    newPrompt = {
+      ...newPrompt,
+      promptSetId: promptsetData.id,
+      promptType: newPrompt.promptType.toLowerCase(),
+    };
 
-      const response = await request().post(
-        `${getBaseUrl()}/media/prompts`,
-        newPrompt
-      );
+    const response = await request().post(
+      `${getBaseUrl()}/media/prompts`,
+      newPrompt
+    );
 
-      if (response) {
-        dispatch(fetchPromptSet(promptSetId));
-      }
-    } catch (error) {
-      // console.error("Error creating new prompt:", error);
+    if (response) {
+      dispatch(fetchPromptSet(promptSetId));
+    }
+  };
+
+  const handlePromptNameChange = () => {
+    if (!readOnly) {
+      request()
+        .put(`${getBaseUrl()}/media/promptsets/${promptSetId}`, {
+          name: promptSetData.name,
+          fontColor: promptSetData.fontColor,
+        })
+        .then(() => {
+          dispatch(fetchPromptSet(promptSetId));
+          toastDispatch({
+            type: "ADD_TOAST",
+            payload: { message: "Prompt Set name updated" },
+          });
+        });
     }
   };
 
@@ -202,16 +215,25 @@ export default function PromptTree() {
           payload: { message: "Saved 1 state" },
         });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }
 
   return (
     <div className={`left-container ${getDeviceType()}`}>
       <div className="ics-prompt-tree-container">
         <div className="ics-prompt-set-heading">
-          <input className="prompt-heading-input" type="text" value={"njbh"} />
+          <input
+            className={`prompt-heading-input ${
+              readOnly ? "disabled-input" : ""
+            }`}
+            type="text"
+            value={promptSetData.name}
+            onChange={(e) => {
+              setPromptSetData({ ...promptSetData, name: e.target.value });
+            }}
+            readOnly={readOnly}
+            onBlur={handlePromptNameChange}
+          />
         </div>
         <div className="ics-prompt-builder-state">
           {promptsetData?.states?.map((item: State, index: number) => {
