@@ -191,7 +191,21 @@ export const promptsetSlice = createSlice({
                 }
                 return state;
             });
+        },
+        removeIsTouchMaskChangedById: (state, action) => {
+            const assignmentId = action.payload;
+            state.data.states = state.data.states.map((state) => {
+                state.assignments = state.assignments.map((assignment) => {
+                    if (assignment.id === assignmentId && assignment.touchmap) {
+                        assignment.touchmap.isTouchMaskChanged = false;
+                        assignment.isAssignmentChanged = false;
+                    }
+                    return assignment;
+                });
+                return state;
+            });
         }
+
     }, extraReducers: (builder) => {
         builder.addCase(fetchPromptSet.fulfilled, (state, action) => {
             state.isLoading = false;
@@ -221,5 +235,6 @@ export const {
     deleteChildStateDayPartById,
     updateTouchMapArea,
     updateBackgroundElement,
-    removeIsStateChangedById
+    removeIsStateChangedById,
+    removeIsTouchMaskChangedById
 } = promptsetSlice.actions;

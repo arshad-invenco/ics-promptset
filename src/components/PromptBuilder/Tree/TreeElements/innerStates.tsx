@@ -4,7 +4,7 @@ import {showAssetsDropdown} from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import TreeElements from "./treeElements";
 import AssetsDropdown from "../asset-dropdown/assetsDropdown";
-import {Assignment, Elements, Lang} from "../../../../models/promptset.modal";
+import {Assignment, Elements, Lang, State} from "../../../../models/promptset.modal";
 import {getLanguage} from "../../../../services/promptsetService";
 import {useDispatch, useSelector} from "react-redux";
 import {PromptSetRootState} from "../promptTree";
@@ -14,7 +14,11 @@ import {promptSetContext} from "../../../../hooks/promptsetContext";
 import {AREA, BG, CHILD_STATE, TOUCH_MASK, VIDEO,} from "../../../../constants/promptSetConstants";
 import DayPartModal from "../../modals/daypart-modal/dayPart";
 import {AppDispatch} from "../../../../redux/store";
-import {deleteTouchMapOrAreaById} from "../../../../redux/reducers/promptsetSlice";
+import {
+    deleteTouchMapOrAreaById,
+    removeIsStateChangedById,
+    removeIsTouchMaskChangedById
+} from "../../../../redux/reducers/promptsetSlice";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import {getClickOutside, setClickOutside,} from "../../../../constants/clickOutside";
 import SaveTouchMask from "../../modals/touch-mask-modal/save-touch-mask-modal/saveTouchMask";
@@ -24,6 +28,9 @@ import {fetchPromptSet} from "../../../../redux/thunks/promptSetThunk";
 import NewTouchMask from "../../modals/touch-mask-modal/new-touch-mask-modal/newTouchMask";
 import {usePromptSetId} from "../../../../hooks/promptsetId";
 import {useReadOnly} from "../../../../hooks/readOnly";
+import request from "../../../../services/interceptor";
+import {selectPromptSetAssignmentById} from "../../../../redux/selectors/promptSetSelectors";
+import {fetchTouchMasks} from "../../../../redux/thunks/touchMaskThunk";
 
 interface InnerStateProps {
     child: Assignment;
@@ -50,7 +57,13 @@ export default function InnerStates(props: InnerStateProps) {
         if (update) {
             setShowSaveTouchMask(true);
         } else {
-            //Send Areas as Post request
+            request().put(`${getBaseUrl()}/media/touchmaps/${childState?.touchmap?.id}/areas`, childState?.touchmap?.areas).then((res) => {
+                dispatch(fetchTouchMasks());
+                toastDispatch({
+                    type: "ADD_TOAST", payload: {message: "Touch mask overriden"},
+                });
+                dispatch(removeIsTouchMaskChangedById(childState?.id));
+            })
         }
         handleNewTouchMaskClose();
     };
@@ -68,7 +81,16 @@ export default function InnerStates(props: InnerStateProps) {
     };
 
     const handleSaveTouchMask = (maskName: string) => {
-        //Send Post request to create new touch mask
+        let payload = {...childState?.touchmap, name:maskName};
+        request().post(`${getBaseUrl()}/media/touchmaps`,payload ).then((res) => {
+            dispatch(fetchTouchMasks());
+            toastDispatch({
+                type: "ADD_TOAST", payload: {message: "Touch mask saved"},
+            });
+            dispatch(removeIsTouchMaskChangedById(childState?.id));
+        }).catch((err) => {
+            console.log(err);
+        })
     };
 
     // SELECTOR
@@ -93,13 +115,18 @@ export default function InnerStates(props: InnerStateProps) {
         setActiveElementId,
         activeElementId,
         setLastModified,
-        activePromptEditorId
+        activePromptEditorId,
+        toastDispatch
     } = useContext(promptSetContext);
 
     // REFS
     const dragElement = useRef(0);
     const draggedOverElement = useRef(0);
     const dropdownRef = useRef(null);
+
+    // SELECTORS
+    const childState = useSelector((state: PromptSetRootState & State[]) => selectPromptSetAssignmentById(state, activePromptEditorId));
+
 
     // EFFECTS
     useEffect(() => {
@@ -278,7 +305,10 @@ export default function InnerStates(props: InnerStateProps) {
                                         </div>
                                         {!readOnly && <div>
                                             {child.touchmap.isTouchMaskChanged && (
-                                                <i className="fa fa-floppy-o touchmask-save-icon"></i>)}
+                                                <i onClick={()=>{
+                                                    setActivePromptEditorId(child.id);
+                                                    setShowNewTouchMask(true);
+                                                }} className="fa fa-floppy-o touchmask-save-icon"></i>)}
                                             <i
                                                 onClick={() => {
                                                     if (child?.touchmap?.id) {
