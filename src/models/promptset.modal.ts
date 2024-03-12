@@ -19,7 +19,7 @@ interface Template {
   name: string;
 }
 
-interface SoftKeys {
+export interface SoftKeys {
   fontColor: string;
   fontSize: 0;
   keycode: string;

@@ -241,6 +241,18 @@ export const promptsetSlice = createSlice({
         return state;
       });
     },
+    pushSoftKeysToAssignmentById: (state, action) => {
+      const { assignmentId, softKey } = action.payload;
+      state.data.states = state.data.states.map((state) => {
+        state.assignments = state.assignments.map((assignment) => {
+          if (assignment.id === assignmentId) {
+            assignment.softkeys.push(softKey);
+          }
+          return assignment;
+        });
+        return state;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPromptSet.fulfilled, (state, action) => {

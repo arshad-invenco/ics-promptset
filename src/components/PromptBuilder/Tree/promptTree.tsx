@@ -229,7 +229,13 @@ export default function PromptTree() {
           payload: { message: "Saved 1 state" },
         });
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+        toastDispatch({
+          type: "ADD_TOAST",
+          payload: { message: err.response.data.message },
+        });
+      });
   }
 
   const handlePromptNameChange = () => {
