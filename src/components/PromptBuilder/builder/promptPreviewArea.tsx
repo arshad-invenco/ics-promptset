@@ -42,10 +42,10 @@ export default function PromptPreviewArea() {
 
   // SELECTORS
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data,
+    (state: PromptSetRootState) => state.promptset.data
   );
   const activeChild = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId),
+    selectPromptSetAssignmentById(state, activePromptEditorId)
   );
 
   const handleKeyCodeModalShow = (softKey: string) => {
@@ -59,19 +59,18 @@ export default function PromptPreviewArea() {
 
   const handleKeyCode = (item: Keycode) => {
     setShowKeyCodeModal(false);
-    if (item.code) {
-      let softKey = {
-        softkey: currentKey,
-        keycode: item.code,
-        label: item.name,
-      };
-      dispatch(
-        updateSoftKeyByAssignmentId({
-          assignmentId: activePromptEditorId,
-          newSoftKey: softKey,
-        }),
-      );
-    }
+    let softKey = {
+      softkey: currentKey,
+      keycode: item.code,
+      label: item.name,
+    };
+    console.log(softKey,"sofffff");
+    dispatch(
+      updateSoftKeyByAssignmentId({
+        assignmentId: activePromptEditorId,
+        newSoftKey: softKey,
+      })
+    );
   };
 
   useEffect(() => {
@@ -95,7 +94,7 @@ export default function PromptPreviewArea() {
               <i className="fa fa-chevron-right"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>,
+          </div>
         );
       }
     } else if (position === RIGHT) {
@@ -113,7 +112,7 @@ export default function PromptPreviewArea() {
               <i className="fa fa-chevron-left"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>,
+          </div>
         );
       }
     } else {
@@ -131,7 +130,7 @@ export default function PromptPreviewArea() {
               <i className="fa fa-window-minimize fa-rotate-90"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>,
+          </div>
         );
       }
     }
