@@ -9,6 +9,8 @@ interface SearchableDropdownProps {
   isGroup?: boolean;
   placeholder: string;
   selectedCode?: string;
+  reset?: boolean;
+  setReset?: () => void;
 }
 
 function SearchableDropdown({
@@ -19,6 +21,8 @@ function SearchableDropdown({
   placeholder,
   isGroup = false,
   selectedCode,
+  reset,
+  setReset,
 }: SearchableDropdownProps) {
   const refs = useRef<RefObject<HTMLLIElement>[]>([]);
   const [open, setOpenStatus] = useState(false);
@@ -31,6 +35,7 @@ function SearchableDropdown({
     const selectedItem = flatOptions.find((item) => item.name === selectedCode);
     return selectedItem?.id;
   };
+
   const [activeIndex, setActiveIndex] = useState(
     isGroup
       ? selectedCode
@@ -145,6 +150,13 @@ function SearchableDropdown({
       block: "end",
     });
   }, [activeIndex]);
+
+  useEffect(() => {
+    if(reset){
+      setSelectedOption(placeholder);
+      setReset && setReset();
+    }
+  }, [selectedCode]);
 
   const renderListItem = (item: any) => (
     <li
