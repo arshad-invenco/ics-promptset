@@ -4,7 +4,7 @@ import SearchableDropdown from "../../../common/searchable-dropdown/searchableDr
 import { useSelector } from "react-redux";
 import { Keycode } from "../../../../models/keycode.modal";
 import { selectKeycodes } from "../../../../redux/selectors/keycodeSelectors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { get } from "http";
 
 interface SaveSoftKeyProps {
@@ -25,7 +25,7 @@ function SaveSoftKey({ hide, onChange, currentSoftKey }: SaveSoftKeyProps) {
   };
 
   const [selectedCode, setSelectedCode] = useState<Keycode>(
-    getSelectedCode() || ({} as Keycode)
+    getSelectedCode() || ({} as Keycode),
   );
 
   const handleSelect = (keycode: Keycode) => {

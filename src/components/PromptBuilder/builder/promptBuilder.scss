@@ -60,13 +60,18 @@
     }
     .soft-keys-bottom{
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       flex-direction: row;
       padding: 30px 15%;
       position: relative;
       background-color: #424242;
       top: 5px;
+      .soft-key-button-container{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
       .soft-key-text{
         position: relative;
         top: 19px;

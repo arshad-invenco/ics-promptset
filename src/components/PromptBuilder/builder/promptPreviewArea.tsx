@@ -7,7 +7,7 @@ import {
   SoftKeys,
   State,
 } from "../../../models/promptset.modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PromptSetRootState } from "../Tree/promptTree";
 import {
   enableSoftKey,
@@ -20,15 +20,21 @@ import { useReadOnly } from "../../../hooks/readOnly";
 import { BOTTOM, LEFT, RIGHT } from "../../../constants/promptSetConstants";
 import { promptSetContext } from "../../../hooks/promptsetContext";
 import { selectPromptSetAssignmentById } from "../../../redux/selectors/promptSetSelectors";
+import { AppDispatch } from "../../../redux/store";
+import { updateSoftKeyByAssignmentId } from "../../../redux/reducers/promptsetSlice";
 
 export default function PromptPreviewArea() {
   // STATES
   const [showKeyCodeModal, setShowKeyCodeModal] = useState(false);
   const [softKeys, setSoftKeys] = useState<SoftKeys[]>([]);
   const [currentSoftKey, setCurrentSoftKey] = useState<string>("");
+  const [currentKey, setCurrentKey] = useState<number>(-1);
 
   // CONTEXT API
   const { activePromptEditorId } = useContext(promptSetContext);
+
+  // REDUX
+  const dispatch = useDispatch<AppDispatch>();
 
   // HOOKS
   const deviceType = getDeviceType();
@@ -36,10 +42,10 @@ export default function PromptPreviewArea() {
 
   // SELECTORS
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
+    (state: PromptSetRootState) => state.promptset.data,
   );
   const activeChild = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId)
+    selectPromptSetAssignmentById(state, activePromptEditorId),
   );
 
   const handleKeyCodeModalShow = (softKey: string) => {
@@ -53,7 +59,19 @@ export default function PromptPreviewArea() {
 
   const handleKeyCode = (item: Keycode) => {
     setShowKeyCodeModal(false);
-    
+    if (item.code) {
+      let softKey = {
+        softkey: currentKey,
+        keycode: item.code,
+        label: item.name,
+      };
+      dispatch(
+        updateSoftKeyByAssignmentId({
+          assignmentId: activePromptEditorId,
+          newSoftKey: softKey,
+        }),
+      );
+    }
   };
 
   useEffect(() => {
@@ -70,13 +88,14 @@ export default function PromptPreviewArea() {
             <button
               className="soft-key-button"
               onClick={() => {
+                setCurrentKey(id);
                 handleKeyCodeModalShow(softKey?.label ?? "");
               }}
             >
               <i className="fa fa-chevron-right"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>
+          </div>,
         );
       }
     } else if (position === RIGHT) {
@@ -86,6 +105,7 @@ export default function PromptPreviewArea() {
           <div key={id} className="softkey-btn">
             <button
               onClick={() => {
+                setCurrentKey(id);
                 handleKeyCodeModalShow(softKey?.label ?? "");
               }}
               className="soft-key-button"
@@ -93,7 +113,7 @@ export default function PromptPreviewArea() {
               <i className="fa fa-chevron-left"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>
+          </div>,
         );
       }
     } else {
@@ -104,13 +124,14 @@ export default function PromptPreviewArea() {
             <button
               className="soft-key-button"
               onClick={() => {
+                setCurrentKey(id);
                 handleKeyCodeModalShow(softKey?.label ?? "");
               }}
             >
               <i className="fa fa-window-minimize fa-rotate-90"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>
+          </div>,
         );
       }
     }
