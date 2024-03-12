@@ -243,7 +243,6 @@ export const promptsetSlice = createSlice({
     },
     updateSoftKeyByAssignmentId: (state, action) => {
       const { assignmentId, newSoftKey } = action.payload;
-      console.log("newSoftKey", newSoftKey);
 
       state.data.states = state.data.states.map((state) => {
         state.assignments = state.assignments.map((assignment) => {
@@ -251,12 +250,17 @@ export const promptsetSlice = createSlice({
             const softKeyIndex = assignment.softkeys.findIndex(
               (softKey) => softKey.softkey === newSoftKey.softkey,
             );
-            if (softKeyIndex !== -1) {
+            if (softKeyIndex !== -1 && newSoftKey.label) {
               assignment.softkeys[softKeyIndex] = {
                 ...assignment.softkeys[softKeyIndex],
                 ...newSoftKey,
               };
-            } else {
+            } else if(softKeyIndex !== -1 && !newSoftKey.label){
+              assignment.softkeys = assignment.softkeys.filter(
+                (softKey) => softKey.softkey !== newSoftKey.softkey
+              );
+            }
+             else {
               assignment.softkeys.push(newSoftKey);
             }
             state.isStateChanged = true;

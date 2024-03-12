@@ -4,8 +4,7 @@ import SearchableDropdown from "../../../common/searchable-dropdown/searchableDr
 import { useSelector } from "react-redux";
 import { Keycode } from "../../../../models/keycode.modal";
 import { selectKeycodes } from "../../../../redux/selectors/keycodeSelectors";
-import { useEffect, useState } from "react";
-import { get } from "http";
+import { useState } from "react";
 
 interface SaveSoftKeyProps {
   hide: () => void;
@@ -25,11 +24,17 @@ function SaveSoftKey({ hide, onChange, currentSoftKey }: SaveSoftKeyProps) {
   };
 
   const [selectedCode, setSelectedCode] = useState<Keycode>(
-    getSelectedCode() || ({} as Keycode),
+    getSelectedCode() || ({} as Keycode)
   );
+
+  const [isReset, setIsReset] = useState(false);
 
   const handleSelect = (keycode: Keycode) => {
     setSelectedCode(keycode);
+  };
+
+  const handleReset = () => {
+    setIsReset(false);
   };
 
   return (
@@ -49,12 +54,20 @@ function SaveSoftKey({ hide, onChange, currentSoftKey }: SaveSoftKeyProps) {
           )}
           onSelect={handleSelect}
           selectedCode={selectedCode?.name}
+          reset={isReset}
+          setReset={handleReset}
         />
       </Modal.Body>
       <Modal.Footer>
         <div className="left-side">
           {selectedCode.name && (
-            <button className="btn btn-gray text-danger" onClick={hide}>
+            <button
+              className="btn btn-gray text-danger"
+              onClick={() => {
+                setIsReset(true);
+                setSelectedCode({} as Keycode);
+              }}
+            >
               RESET
             </button>
           )}
