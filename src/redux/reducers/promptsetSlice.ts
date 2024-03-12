@@ -23,6 +23,16 @@ export const promptsetSlice = createSlice({
       state.isLoading = false;
       state.error = false;
     },
+    updateStateById: (state, action) => {
+      const { id, newTransactionState } = action.payload;
+      state.data.states = state.data.states.map((state) => {
+        if (state.id === id) {
+          state.transactionState = newTransactionState;
+          state.isStateChanged = true;
+        }
+        return state;
+      });
+    },
     updateInputElement: (state, action) => {
       const { assignmentId, newElement } = action.payload;
       state.data.states = state.data.states.map((state) => {
@@ -231,6 +241,18 @@ export const promptsetSlice = createSlice({
         return state;
       });
     },
+    pushSoftKeysToAssignmentById: (state, action) => {
+      const { assignmentId, softKey } = action.payload;
+      state.data.states = state.data.states.map((state) => {
+        state.assignments = state.assignments.map((assignment) => {
+          if (assignment.id === assignmentId) {
+            assignment.softkeys.push(softKey);
+          }
+          return assignment;
+        });
+        return state;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPromptSet.fulfilled, (state, action) => {
@@ -251,6 +273,7 @@ export const promptsetSlice = createSlice({
 
 export const {
   setPromptSetData,
+  updateStateById,
   updateInputElement,
   updateTouchMap,
   addElementToAssignment,
