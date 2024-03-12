@@ -18,12 +18,13 @@
   .prompt-set-preview-area {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
     overflow: hidden;
     -webkit-height: calc(100vh - 50px);
 
     .ics-prompt-builder-preview-wrapper {
-      width: calc(100% - 280px);
-      -webkit-width: calc(100% - 270px);
+      width: calc(100% - 290px);
+      -webkit-width: calc(100% - 290px);
 
       &.expended {
         position: absolute;
