@@ -144,6 +144,17 @@ export default function PromptTree() {
     setCompanyLanguages(languages);
   }, [languages]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   const handleNewPromptShow = () => {
     setShowNewPromptModal(true);
   };
@@ -175,8 +186,11 @@ export default function PromptTree() {
     promptsetData.states.map((state) => {
       if (state.isStateChanged) {
         state.assignments.map((assignment) => {
-          let value = { ...assignment, promptId: assignment.id };
-          payload.push({ ...assignment, promptId: assignment.id });
+          payload.push({
+            ...assignment,
+            promptId: assignment.id,
+            softkeys: assignment.softkeys.length > 0 ? assignment.softkeys : [],
+          });
         });
       }
     });
@@ -213,7 +227,7 @@ export default function PromptTree() {
   function saveState(item: State) {
     const updatedAssignments = item.assignments.map((assignment) => ({
       ...assignment,
-      softkeys: [],
+      softkeys: assignment.softkeys.length > 0 ? assignment.softkeys : [],
       promptId: assignment.id,
     }));
     request()
