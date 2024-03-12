@@ -1,0 +1,21 @@
+.save-soft-key {
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left-side {
+      button {
+        &:hover {
+          color: var(--white) !important ;
+          background-color: var(--md-red-700) !important;
+          border-color: var(--md-red-800);
+        }
+      }
+    }
+    .right-side {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}

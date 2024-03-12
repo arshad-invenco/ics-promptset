@@ -4,7 +4,7 @@ import SearchableDropdown from "../../../common/searchable-dropdown/searchableDr
 import { useSelector } from "react-redux";
 import { Keycode } from "../../../../models/keycode.modal";
 import { selectKeycodes } from "../../../../redux/selectors/keycodeSelectors";
-import {  useState } from "react";
+import { useState } from "react";
 
 interface SaveSoftKeyProps {
   hide: () => void;
@@ -25,7 +25,7 @@ function SaveSoftKey({ hide, onChange }: SaveSoftKeyProps) {
   };
 
   return (
-    <div>
+    <div className="save-soft-key">
       <Modal.Header>
         <h4>Soft Key Code</h4>
       </Modal.Header>
@@ -40,18 +40,28 @@ function SaveSoftKey({ hide, onChange }: SaveSoftKeyProps) {
             </>
           )}
           onSelect={handleSelect}
+          selectedCode={selectedCode?.name}
         />
       </Modal.Body>
       <Modal.Footer>
-        <button className="btn btn-link" onClick={hide}>
-          CANCEL
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => onChange(selectedCode || ({} as Keycode))}
-        >
-          SAVE
-        </button>
+        <div className="left-side">
+          {selectedCode && (
+            <button className="btn btn-gray text-danger" onClick={hide}>
+              RESET
+            </button>
+          )}
+        </div>
+        <div className="right-side">
+          <button className="btn btn-link" onClick={hide}>
+            CANCEL
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => onChange(selectedCode || ({} as Keycode))}
+          >
+            SAVE
+          </button>
+        </div>
       </Modal.Footer>
     </div>
   );
