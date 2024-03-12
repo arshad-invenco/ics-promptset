@@ -5,20 +5,28 @@ import { useSelector } from "react-redux";
 import { Keycode } from "../../../../models/keycode.modal";
 import { selectKeycodes } from "../../../../redux/selectors/keycodeSelectors";
 import { useState } from "react";
+import { get } from "http";
 
 interface SaveSoftKeyProps {
   hide: () => void;
   onChange: (keycode: Keycode) => void;
+  currentSoftKey: string;
 }
 
-function SaveSoftKey({ hide, onChange }: SaveSoftKeyProps) {
-  const [selectedCode, setSelectedCode] = useState<Keycode>();
-
+function SaveSoftKey({ hide, onChange, currentSoftKey }: SaveSoftKeyProps) {
   const keycodes = useSelector(selectKeycodes).map(({ code, name }) => ({
     id: code,
     code,
     name,
   }));
+
+  const getSelectedCode = () => {
+    return keycodes.find((keycode) => keycode.name === currentSoftKey);
+  };
+
+  const [selectedCode, setSelectedCode] = useState<Keycode>(
+    getSelectedCode() || ({} as Keycode)
+  );
 
   const handleSelect = (keycode: Keycode) => {
     setSelectedCode(keycode);
@@ -45,7 +53,7 @@ function SaveSoftKey({ hide, onChange }: SaveSoftKeyProps) {
       </Modal.Body>
       <Modal.Footer>
         <div className="left-side">
-          {selectedCode && (
+          {selectedCode.name && (
             <button className="btn btn-gray text-danger" onClick={hide}>
               RESET
             </button>

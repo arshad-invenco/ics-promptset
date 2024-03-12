@@ -25,6 +25,7 @@ export default function PromptPreviewArea() {
   // STATES
   const [showKeyCodeModal, setShowKeyCodeModal] = useState(false);
   const [softKeys, setSoftKeys] = useState<SoftKeys[]>([]);
+  const [currentSoftKey, setCurrentSoftKey] = useState<string>("");
 
   // CONTEXT API
   const { activePromptEditorId } = useContext(promptSetContext);
@@ -35,23 +36,25 @@ export default function PromptPreviewArea() {
 
   // SELECTORS
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data,
+    (state: PromptSetRootState) => state.promptset.data
   );
   const activeChild = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId),
+    selectPromptSetAssignmentById(state, activePromptEditorId)
   );
 
-  const handleKeyCodeModalShow = (softKeyId: number) => {
+  const handleKeyCodeModalShow = (softKey: string) => {
     setShowKeyCodeModal(true);
-    console.log(activeChild, "activeChild");
-    console.log(softKeyId, "softKeyId");
+    setCurrentSoftKey(softKey);
   };
 
   const handleKeyCodeModalClose = () => {
     setShowKeyCodeModal(false);
   };
 
-  const handleKeyCode = (item: Keycode) => {};
+  const handleKeyCode = (item: Keycode) => {
+    setShowKeyCodeModal(false);
+    
+  };
 
   useEffect(() => {
     if (activeChild?.softkeys) setSoftKeys(activeChild.softkeys);
@@ -67,13 +70,13 @@ export default function PromptPreviewArea() {
             <button
               className="soft-key-button"
               onClick={() => {
-                handleKeyCodeModalShow(id);
+                handleKeyCodeModalShow(softKey?.label ?? "");
               }}
             >
               <i className="fa fa-chevron-right"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>,
+          </div>
         );
       }
     } else if (position === RIGHT) {
@@ -83,14 +86,14 @@ export default function PromptPreviewArea() {
           <div key={id} className="softkey-btn">
             <button
               onClick={() => {
-                handleKeyCodeModalShow(id);
+                handleKeyCodeModalShow(softKey?.label ?? "");
               }}
               className="soft-key-button"
             >
               <i className="fa fa-chevron-left"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>,
+          </div>
         );
       }
     } else {
@@ -98,11 +101,16 @@ export default function PromptPreviewArea() {
         const softKey = softKeys.find((softKey) => softKey.softkey === id);
         keys.push(
           <div key={id} className="soft-key-button-container">
-            <button className="soft-key-button">
+            <button
+              className="soft-key-button"
+              onClick={() => {
+                handleKeyCodeModalShow(softKey?.label ?? "");
+              }}
+            >
               <i className="fa fa-window-minimize fa-rotate-90"></i>
             </button>
             <p className="soft-key-text">{softKey?.label}</p>
-          </div>,
+          </div>
         );
       }
     }
@@ -137,7 +145,11 @@ export default function PromptPreviewArea() {
         </div>
       )}
       <Modal show={showKeyCodeModal} onHide={handleKeyCodeModalClose} size="sm">
-        <SaveSoftKey hide={handleKeyCodeModalClose} onChange={handleKeyCode} />
+        <SaveSoftKey
+          hide={handleKeyCodeModalClose}
+          onChange={handleKeyCode}
+          currentSoftKey={currentSoftKey}
+        />
       </Modal>
     </div>
   );
