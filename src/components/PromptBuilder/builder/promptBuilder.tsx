@@ -376,7 +376,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         };
         const stop = function (this: Snap.Element) {
           const ele = this.getBBox();
-          console.log("finished dragging", ele.x, ele.y, ele.width, ele.height);
         };
         svgElement.click(() => {
           // console.log("svgElement clicked");
@@ -716,6 +715,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         });
       }
     };
+    
     // Define the stop function
     const stop = function (this: Snap.Element) {
       const ele = this.getBBox();
