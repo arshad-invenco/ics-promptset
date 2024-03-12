@@ -3,17 +3,17 @@
   display: flex;
   font-size: 1.4rem;
   flex-wrap: wrap;
-  padding: 5px 10px 10px 5px;
+  padding: .5rem 1rem 1rem .5rem;
 
   .alignment-control{
-    gap: 3px;
+    gap: .3rem;
     .align{
-      width: 40px;
+      width: 4rem;
     }
     .align-btn-active{
-      color: #fff;
-      border-color: #293475;
-      background-color: #32408f;
+      color: var(--white);
+      border-color: var(--btn-primary-border-hover);
+      background-color: var(--btn-primary-bg-hover);
     }
   }
 }

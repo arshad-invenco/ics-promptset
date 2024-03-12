@@ -1,59 +1,59 @@
 .ics-prompt-builder-controls {
   width: 100%;
-  min-height: 75px;
+  min-height: 7.5rem;
   height: fit-content;
-  border-bottom: 1px solid #e0e0e0;
-  background-color: #fff;
+  border-bottom: .1rem solid var(--md-grey-300);
+  background-color: var(--white);
 
   .state-controller {
-    padding: 5px 10px;
+    padding: .5rem 1rem;
     display: flex;
     flex-direction: column;
     .code {
-      color: #616161;
-      font-size: 18px;
+      color: var(--md-grey-700);
+      font-size: 1.8rem;
       font-weight: bold;
       margin: 0;
     }
     .description {
-      margin-bottom: 3px;
-      line-height: 16px;
-      color: #616161;
-      font-size: 15px;
+      margin-bottom: .3rem;
+      line-height: 1.6rem;
+      color: var(--md-grey-700);
+      font-size: 1.5rem;
     }
     .horizontal-border {
-      margin: 10px -10px;
-      border-bottom: 1px solid var(--border-default);
+      margin: 1rem -1rem;
+      border-bottom: .1rem solid var(--border-default);
     }
     .transaction-state-dropdown {
-      width: 188px;
-      margin: 5px 0;
-      padding-right: 5px;
+      width: 18.8rem;
+      margin: .5rem 0;
+      padding-right: .5rem;
       float: left;
     }
   }
   .child-state-controller {
-    color: #616161;
+    color: var(--md-grey-700);
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    padding: .5rem 1rem;
     .title {
-      margin-top: 5px;
-      margin-bottom: 10px;
+      margin-top: .5rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       .clock-icon {
-        font-size: 20px;
-        margin-right: 5px;
+        font-size: 2rem;
+        margin-right: .5rem;
       }
       .code {
-        font-size: 18px;
+        font-size: 1.8rem;
         font-weight: bold;
         margin: 0;
       }
     }
     .exception-time {
-      margin: 5px 0 10px 10px;
+      margin: .5rem 0 1rem 1rem;
     }
   }
 }
@@ -62,14 +62,14 @@
 
 //DIMENSIONS
 .dimensions {
-  padding: 0 10px;
+  padding: 0 1rem;
   .co-ordinates {
-    gap: 5px;
+    gap: .5rem;
     .dimension-control {
-      gap: 5px;
+      gap: .5rem;
       justify-content: center;
       .dimension-input {
-        width: 75px;
+        width: 7.5rem;
         margin: 0;
       }
     }
@@ -78,12 +78,12 @@
 
 //CENTER SHIFT
 .center-shift {
-  gap: 2px;
+  gap: .2rem;
   .shift-btn {
-    padding: 6px 12px;
+    padding: .6rem 1.2rem;
     cursor: pointer;
     .icon {
-      font-size: 24px;
+      font-size: 2.4rem;
     }
     .shift-icon-transform-horizontal {
       transform: rotate(90deg);
@@ -103,14 +103,14 @@
   }
   input {
     border: none;
-    background-color: #fafafa;
+    background-color: var(--md-grey-50);
     color: rgba(0, 0, 0, 0.137);
   }
 }
 
 .controller-title{
-  color: #616161;
-  margin: 5px 0;
+  color: var(--md-grey-700);
+  margin: .5rem 0;
   font-size: 1.8rem;
   font-weight: bold;
 }

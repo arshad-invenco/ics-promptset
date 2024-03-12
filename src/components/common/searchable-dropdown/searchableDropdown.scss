@@ -112,7 +112,7 @@
 }
 
 .list-items::-webkit-scrollbar-thumb {
-  border: 3px solid #fff;
+  border: .3rem solid var(--white);
   border-radius: 5em;
   background-color: rgba(0, 0, 0, 0.26);
 }
