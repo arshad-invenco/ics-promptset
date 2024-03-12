@@ -131,7 +131,7 @@
 
           .accordion-collapse {
             .accordion-body {
-              padding-bottom: 3rem;
+              padding: 0 0 0 3rem;
 
               .inner-accordion {
                 //INNER STATES
@@ -242,7 +242,7 @@
                     .element {
                       .trash-icon {
                         font-weight: normal;
-                        color: var(e96a63) !important;
+                        color: var(--icon-color-trash) !important;
                       }
                     }
                   }
