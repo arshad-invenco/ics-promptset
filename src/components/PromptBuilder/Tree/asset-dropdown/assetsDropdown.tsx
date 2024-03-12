@@ -68,7 +68,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
   // SELECTORS
   const { deviceType, screenWidth, fontColor } = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
+    (state: PromptSetRootState) => state.promptset.data,
   );
 
   // CONTEXT API
@@ -114,7 +114,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       addElementToAssignment({
         assignmentId: childState.id,
         newElement: MediaElement,
-      })
+      }),
     );
     setActiveElementId(MediaElement.id);
     setActiveControlType(asset.type);
@@ -135,7 +135,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
     console.log(touchMask, "TTTOOOCCCHHHHH");
     if (touchMask) {
       dispatch(
-        addNewTouchMap({ assignmentId: childState.id, newTouchMap: touchMask })
+        addNewTouchMap({ assignmentId: childState.id, newTouchMap: touchMask }),
       );
     } else {
       //Create new touch mask
@@ -163,7 +163,12 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       let element = childState.elements.find((element) => element.type === BG);
       if (element) {
         element = { ...element, lock: true };
-        dispatch(updateInputElement({assignmentId: childState.id, newElement: element}));
+        dispatch(
+          updateInputElement({
+            assignmentId: childState.id,
+            newElement: element,
+          }),
+        );
         setActiveElementId(element.id);
         setActiveControlType(BG);
       }
@@ -198,7 +203,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         addElementToAssignment({
           assignmentId: childState.id,
           newElement: textElement,
-        })
+        }),
       );
       setActiveElementId(textElement.id);
       setActiveControlType(TEXT);
@@ -233,7 +238,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         addElementToAssignment({
           assignmentId: childState.id,
           newElement: inputElement,
-        })
+        }),
       );
       setActiveElementId(inputElement.id);
       setActiveControlType(INPUT);
@@ -252,13 +257,13 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         shape: "rect",
         coords: "0,0,100,50",
         name: "map" + 1,
-        alt: "map" + 1
+        alt: "map" + 1,
       };
       dispatch(
         addNewAreaToTouchMap({
           assignmentId: childState.id,
           newArea: areaElement,
-        })
+        }),
       );
       setActiveElementId(areaElement.id);
       setActiveControlType(AREA);
@@ -284,7 +289,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
           </div>
         );
       })}
-      <Modal show={show} onHide={handleClose} className="media-modal" size="lg">
+      <Modal show={show} onHide={handleClose} className="media-modal" size="xl">
         <MediaModal
           hide={handleClose}
           onAssetSelection={handleAsset}
