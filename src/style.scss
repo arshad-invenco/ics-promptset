@@ -90,9 +90,9 @@ label {
 
 .button-white {
   transition: all ease-in 0.1s;
-  padding: 6px 12px;
-  border: 1px solid #c9c9c9;
-  border-radius: 3px;
+  padding: .6rem 1.2rem;
+  border: .1rem solid #c9c9c9;
+  border-radius: .3rem;
   background-color: #f6f6f6;
 }
 
@@ -113,8 +113,8 @@ label {
   font-size: 1.4rem;
   &:-webkit-autofill {
     -webkit-box-shadow: inset 0 0 0 624.938rem white !important;
-    border-radius: 3px !important;
-    height: 34px;
+    border-radius: .3rem !important;
+    height: 3.4rem;
   }
   &::placeholder {
     opacity: 1;
@@ -154,10 +154,10 @@ $md-grey-300: #e0e0e0;
 }
 
 .color-picker-button {
-  height: 32px;
-  width: 62px;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
+  height: 3.2rem;
+  width: 6.2rem;
+  border: .1rem solid #e0e0e0;
+  border-radius: .3rem;
 }
 
 .d-flex-row {
@@ -177,44 +177,44 @@ $md-grey-300: #e0e0e0;
 }
 
 .ics-inline-75-block {
-  width: 75px;
-  min-height: 1px;
-  padding: 0 10px;
+  width: 7.5rem;
+  min-height: .1rem;
+  padding: 0 1rem;
 }
 .ics-inline-85-block {
-  width: 85px;
-  min-height: 1px;
-  padding: 0 10px;
+  width: 8.5rem;
+  min-height: .1rem;
+  padding: 0 1rem;
 }
 
 .ics-inline-90-block {
-  width: 90px;
-  min-height: 1px;
-  padding: 0 10px;
+  width: 9rem;
+  min-height: .1rem;
+  padding: 0 1rem;
 }
 
 .ics-inline-115-block {
-  width: 115px;
-  min-height: 1px;
-  padding: 0 10px;
+  width: 11.5rem;
+  min-height: .1rem;
+  padding: 0 1rem;
 }
 
 .ics-inline-150-block {
-  width: 150px;
-  min-height: 1px;
-  padding: 0 10px;
+  width: 15rem;
+  min-height: .1rem;
+  padding: 0 1rem;
 }
 
 .ics-inline-200-block {
-  width: 200px;
-  min-height: 1px;
-  padding: 0 10px;
+  width: 20rem;
+  min-height: .1rem;
+  padding: 0 1rem;
 }
 
 .ics-inline-250-block {
-  width: 250px;
-  min-height: 1px;
-  padding: 0 10px;
+  width: 25rem;
+  min-height: .1rem;
+  padding: 0 1rem;
   float: left;
 }
 

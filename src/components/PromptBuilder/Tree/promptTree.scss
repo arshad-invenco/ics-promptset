@@ -1,34 +1,34 @@
 .left-container {
-  width: 330px;
+  width: 33rem;
   transition: all 0.25s ease-in-out;
   &.G6-200 {
-    width: 500px;
+    width: 50rem;
   }
   &.G7-100 {
-    width: 500px;
+    width: 50rem;
   }
   &.G6-300 {
-    width: 500px;
+    width: 50rem;
   }
 
   .ics-prompt-tree-container {
     height: fit-content;
-    border-right: 1px solid #e0e0e0;
-    background-color: white;
+    border-right: .1rem solid var(--md-grey-300);
+    background-color: var(--white);
     width: 100%;
 
     .ics-prompt-set-heading {
       width: 100%;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: .1rem solid var(--md-grey-300);
 
       .prompt-heading-input {
         width: 100%;
-        font-size: 17px;
+        font-size: 1.7rem;
         font-weight: bold;
-        padding: 5px 42px 5px 10px;
-        margin-right: -1px;
+        padding: .5rem 4.2rem .5rem 1rem;
+        margin-right: -.1rem;
         height: auto;
-        background-color: white;
+        background-color: var(--white);
         border: none;
         transition: background 0.25s ease-in-out;
         border-radius: 0;
@@ -43,7 +43,7 @@
     }
 
     .ics-prompt-builder-state {
-      height: 600px;
+      height: 60rem;
       overflow-y: scroll;
 
       .accordion {
@@ -52,8 +52,8 @@
 
           .accordion-header {
             .accordion-button {
-              background-color: white;
-              padding: 8px 10px 8px 5px;
+              background-color: var(--white);
+              padding: .8rem 1rem .8rem .5rem;
 
               &:focus {
                 box-shadow: none !important;
@@ -73,50 +73,50 @@
 
                   .status-icon {
                     i {
-                      color: #bdbdd3;
-                      font-size: 18px;
+                      color: var(--icon-color-sheild);
+                      font-size: 1.8rem;
                     }
 
-                    width: 20px;
+                    width: 2rem;
                   }
 
                   .middle-text-status {
-                    color: #616161;
+                    color: var(--md-grey-700);
                     font-weight: bold;
-                    font-size: 14px;
-                    padding-top: 2px;
-                    padding-left: 13px;
-                    max-width: 180px;
+                    font-size: 1.4rem;
+                    padding-top: .2rem;
+                    padding-left: 1.3rem;
+                    max-width: 18rem;
                     overflow: hidden;
                     display: flex;
                     align-items: center;
                   }
 
                   .state-label {
-                    padding: 3px 5px 3px 5px;
-                    letter-spacing: 1px;
-                    color: #212121;
-                    background-color: #e0e0e0;
+                    padding: .3rem .5rem .3rem .5rem;
+                    letter-spacing: .1rem;
+                    color: var(--md-grey-900);
+                    background-color: var(--md-grey-300);
                     font-size: 75%;
                     line-height: 1;
                     border-radius: 0.25em;
                     height: fit-content;
-                    margin-left: 5px;
+                    margin-left: .5rem;
                     font-weight: bold;
                   }
                 }
 
                 .unsaved-status {
                   i {
-                    color: #616161;
-                    font-size: 18px;
-                    margin-right: 35px;
+                    color: var(--md-grey-700);
+                    font-size: 1.8rem;
+                    margin-right: 3.5rem;
                   }
                 }
               }
 
               &:hover {
-                background-color: #f5f5f5;
+                background-color: var(--md-grey-100);
               }
             }
 
@@ -131,7 +131,7 @@
 
           .accordion-collapse {
             .accordion-body {
-              padding: 0 0 0 30px;
+              padding: 0 0 0 3rem;
 
               .inner-accordion {
                 //INNER STATES
@@ -149,78 +149,78 @@
 
                     .child-status-icon {
                       i {
-                        color: #9e9e9e;
-                        font-size: 18px;
+                        color: var(--md-grey-500);
+                        font-size: 1.8rem;
                       }
                     }
 
                     .child-status-middle-text {
                       font-weight: bold;
-                      color: #757575;
-                      font-size: 13px;
-                      padding-left: 13px;
+                      color: var(--md-grey-600);
+                      font-size: 1.3rem;
+                      padding-left: 1.3rem;
                     }
                   }
 
                   .child-states-right-icons {
                     display: flex;
-                    gap: 5px;
-                    color: #9e9e9e;
-                    margin-right: 7px;
+                    gap: .5rem;
+                    color: var(--md-grey-500);
+                    margin-right: .7rem;
                     align-items: center;
                     .child-state-trash-icon {
                       font-size: 1.6rem;
                       &:hover {
-                        color: #616161;
+                        color: var(--md-grey-700);
                       }
                     }
 
                     .icons-right-child-states {
-                      font-size: 21px;
+                      font-size: 2.1rem;
                       font-weight: 700;
 
                       &:hover {
-                        color: #616161;
+                        color: var(--md-grey-700);
                       }
                     }
 
                     .assets-dropdown {
                       position: absolute;
-                      top: 34px;
-                      right: 8px;
+                      top: 3.4rem;
+                      right: .8rem;
                       z-index: 3;
                       text-align: left;
-                      border: 1px solid #e0e0e0;
-                      border-radius: 3px;
-                      background-color: #fff;
+                      border: .1rem solid var(--md-grey-300);
+                      border-radius: .3rem;
+                      background-color: var(--white);
                       box-shadow:
-                        0 1px 3px 0 rgba(0, 0, 0, 0.2),
-                        0 1px 8px 0 rgba(0, 0, 0, 0.14),
-                        0 2px 1px -1px rgba(0, 0, 0, 0.12);
-                      color: #9e9e9e;
+                        0 .1rem .3rem 0 rgba(0, 0, 0, 0.2),
+                        0 .1rem .8rem 0 rgba(0, 0, 0, 0.14),
+                        0 .2rem .1rem -.1rem rgba(0, 0, 0, 0.12);
+                      color: var(--md-grey-500);
 
                       .asset-item {
                         line-height: 1.42857143;
-                        padding: 4px 5px;
-                        border-bottom: 1px solid #e0e0e0;
+                        padding: .4rem .5rem;
+                        border-bottom: .1rem solid var(--md-grey-300);
                         display: flex;
-                        width: 200px;
-                        color: #757575;
+                        width: 20rem;
+                        color: var(--md-grey-600);
 
                         &:last-child {
                           border-bottom: none;
                         }
 
                         &:hover {
-                          background-color: #f5f5f5;
+                          background-color: var(--md-grey-100);
                         }
 
                         .dropdown-icon {
-                          width: 30px;
-                          color: #9e9e9e;
-                          font-size: 17px;
+                          width: 3rem;
+                          color: var(--md-grey-500);
+                          font-size: 1.7rem;
                           i {
-                            font-size: 18px;
+                            font-size: 1.8rem;
                           }
                         }
                         .dropdown-text {
@@ -233,26 +233,26 @@
 
                 .elements-list {
                   .active-inner-element {
-                    background-color: #eee;
+                    background-color: var(--md-grey-200);
                     .element .element-left-container {
                       i {
-                        color: #616161 !important;
+                        color: var(--md-grey-700) !important;
                       }
                     }
                     .element {
                       .trash-icon {
                         font-weight: normal;
-                        color: #e96a63 !important;
+                        color: var(--icon-color-trash) !important;
                       }
                     }
                   }
                   .inner-elements {
                     //ELEMENTS
-                    padding: 8px 10px 8px 20px;
+                    padding: .8rem 1rem .8rem 2rem;
 
                     &:hover {
                       cursor: pointer;
-                      background-color: #f5f5f5;
+                      background-color: var(--md-grey-100);
 
                       .element .element-left-container .grab-icon {
                         opacity: 1;
@@ -261,41 +261,41 @@
 
                     .element {
                       font-weight: bold;
-                      font-size: 13px;
-                      color: #757575;
+                      font-size: 1.3rem;
+                      color: var(--md-grey-600);
                       display: flex;
                       align-items: center;
                       justify-content: space-between;
 
                       .element-left-container {
                         .grab-icon {
-                          font-size: 20px;
-                          color: #bdbdbd;
-                          margin-left: -20px;
-                          margin-top: -2px;
+                          font-size: 2rem;
+                          color: var(--md-grey-400);
+                          margin-left: -2rem;
+                          margin-top: -.2rem;
                           opacity: 0;
                           transition: opacity 0.25s ease-in-out;
                         }
 
                         i {
-                          font-size: 18px;
-                          width: 28px;
-                          color: #c3c3c3;
+                          font-size: 1.8rem;
+                          width: 2.8rem;
+                          color: var(--icon-color-elements);
                         }
                       }
 
                       .touchmask-save-icon {
-                        font-size: 18px;
-                        margin-right: 10px;
+                        font-size: 1.8rem;
+                        margin-right: 1rem;
                       }
 
                       .trash-icon {
-                        font-size: 16px;
-                        margin-right: 37px;
-                        color: #9e9e9e;
+                        font-size: 1.6rem;
+                        margin-right: 3.7rem;
+                        color: var(--md-grey-500);
 
                         &:hover {
-                          color: #616161;
+                          color: var(--md-grey-700);
                         }
                       }
                       .margin-right-0 {
@@ -305,7 +305,7 @@
                   }
 
                   .element-type-area {
-                    margin-left: 26px;
+                    margin-left: 2.6rem;
                   }
                 }
               }
@@ -316,10 +316,10 @@
     }
 
     .prompt-tree-footer {
-      background-color: #e0e0e0;
-      padding: 10px;
+      background-color: var(--md-grey-300);
+      padding: 1rem;
       display: flex;
-      gap: 10px;
+      gap: 1rem;
       align-items: center;
       justify-content: space-between;
 
@@ -328,12 +328,12 @@
       }
 
       .new-prompt-btn {
-        border-radius: 3px;
+        border-radius: .3rem;
         display: flex;
         align-items: center;
         justify-content: center;
         flex: 1;
-        background-color: #f6f6f6;
+        background-color: var(--btn-default-bg);
         border: none;
         gap: 0.3rem;
         svg {
@@ -341,7 +341,7 @@
           stroke-width: 2;
         }
         &:hover {
-          background-color: #f6f6f6 !important;
+          background-color: var(--btn-default-bg) !important;
         }
       }
     }

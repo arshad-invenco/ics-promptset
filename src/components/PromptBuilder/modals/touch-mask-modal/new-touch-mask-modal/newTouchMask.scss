@@ -9,13 +9,13 @@
         list-style: none;
         a {
           display: block;
-          padding: 8px;
+          padding: .8rem;
           transition: all 0.25s ease-in-out;
           text-decoration: none;
-          color: #424242;
-          border-bottom: 1px solid #e0e0e0;
+          color: var(--md-grey-800);
+          border-bottom: .1rem solid var(--md-grey-300);
           &:hover {
-            background-color: #3f51b5;
+            background-color: var(--md-indigo-500);
             color: var(--white);
             .version {
               color: var(--white);
@@ -28,7 +28,7 @@
           .version {
             font-size: 1.2rem;
             margin-right: 1rem;
-            color: #757575;
+            color: var(--md-grey-600);
           }
           .badge {
             display: inline;
