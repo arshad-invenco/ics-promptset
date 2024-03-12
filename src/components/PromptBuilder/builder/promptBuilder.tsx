@@ -723,8 +723,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       let newSize = origBBox.width + dx;
       let newSizeY = origBBox.height + dy;
       // Check if the new size would be outside the boundaries of the SVG container
-      if (newSize >= screenWidth) newSize = screenWidth;
-      if (newSizeY >= screenHeight) newSizeY = screenHeight;
 
       if (type === "input") {
         // Apply the new size
@@ -753,18 +751,18 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             element.width + newSize,
             element.height + newSizeY,
           );
-      } else {
+      }
+      // AREA
+      else {
         let areaX = Number(area?.coords.split(",")[0]);
         let areaY = Number(area?.coords.split(",")[1]);
         let areaW = Number(area?.coords.split(",")[2]);
         let areaH = Number(area?.coords.split(",")[3]);
 
-        if (area && areaH + areaY + newSizeY >= screenHeight)
-          newSizeY = screenHeight - Number(area.coords.split(",")[3]);
-        if (area && areaW + areaX + newSize >= screenWidth)
-          newSize = screenWidth - Number(area.coords.split(",")[2]);
-        if (area && areaW + newSize <= 0) newSize = 0;
-        if (area && areaH + newSizeY <= 0) newSizeY = 0;
+        if (areaW + areaX + newSize >= screenWidth) return;
+        if (areaH + areaY + newSizeY >= screenHeight) return;
+        if (area && areaW + newSize <= 0) return;
+        if (area && areaH + newSizeY <= 0) return;
 
         controller.attr({
           width: controllerBBox.width + newSize,
@@ -787,8 +785,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           id: "NewElementSVG",
         });
       }
-
-      console.log(element, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
     };
 
     // Define the stop function
