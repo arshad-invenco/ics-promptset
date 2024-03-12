@@ -1,7 +1,6 @@
 import { createContext } from "react";
 import { PromptSetInterface } from "../models/promptset.modal";
 import { LastModifiedInterface } from "../models/lastModified.modal";
-import { Notification, ToastAction } from "../models/toast.modal";
 
 interface PromptSetContextInterface {
   promptSetData: PromptSetInterface;
@@ -20,8 +19,6 @@ interface PromptSetContextInterface {
   setShowPlaylistState: React.Dispatch<React.SetStateAction<boolean>>;
   lastModified: LastModifiedInterface;
   setLastModified: React.Dispatch<React.SetStateAction<LastModifiedInterface>>;
-  toasts: Notification[];
-  toastDispatch: React.Dispatch<ToastAction>;
 }
 
 const initialContextValue = {
@@ -45,9 +42,7 @@ const initialContextValue = {
   setShowPlaylistState: () => {},
   lastModified: {} as LastModifiedInterface,
   setLastModified: () => {},
-  toasts: [],
-  toastDispatch: (_action: ToastAction) => {},
-};
+ };
 
 export const promptSetContext =
   createContext<PromptSetContextInterface>(initialContextValue);

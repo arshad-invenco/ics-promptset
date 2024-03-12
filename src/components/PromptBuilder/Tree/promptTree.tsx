@@ -37,6 +37,7 @@ import { usePromptSetId } from "../../../hooks/promptsetId";
 import { removeIsStateChangedById } from "../../../redux/reducers/promptsetSlice";
 import { useReadOnly } from "../../../hooks/readOnly";
 import AddIcon from "@mui/icons-material/Add";
+import { addToasts } from "../../../redux/reducers/toastSlice";
 
 export interface PromptSetRootState {
   promptset: {
@@ -61,7 +62,7 @@ export default function PromptTree() {
 
   // SELECTOR
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data,
+    (state: PromptSetRootState) => state.promptset.data
   );
   const fonts: Font[] = useSelector(selectFonts);
   const elementData: Elements =
@@ -69,8 +70,8 @@ export default function PromptTree() {
       selectElementByIdInAssignment(
         state,
         activePromptEditorId,
-        activeElementId,
-      ),
+        activeElementId
+      )
     ) || ({} as Elements);
 
   // CONTEXT API
@@ -80,7 +81,6 @@ export default function PromptTree() {
     setActiveStateId,
     setActiveControlType,
     setActivePromptEditorId,
-    toastDispatch,
     setLastModified,
   } = useContext(promptSetContext);
 
@@ -119,7 +119,7 @@ export default function PromptTree() {
         setInitialState(false);
         onClickState(
           promptsetData.states[0].id,
-          promptsetData.states[0].assignments[0].id,
+          promptsetData.states[0].assignments[0].id
         );
       }
     }
@@ -173,7 +173,7 @@ export default function PromptTree() {
 
     const response = await request().post(
       `${getBaseUrl()}/media/prompts`,
-      newPrompt,
+      newPrompt
     );
 
     if (response) {
@@ -205,26 +205,17 @@ export default function PromptTree() {
         .put(`${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`, payload)
         .then((res) => {
           setLastModified(res.data);
-          toastDispatch({
-            type: "ADD_TOAST",
-            payload: {
+          dispatch(
+            addToasts({
               message: `Saved ${payload.length} state${payload.length > 1 ? "s" : ""}`,
-            },
-          });
+            })
+          );
           dispatch(fetchPromptSet(promptSetId));
           setIsSaving(false);
         })
-        .catch((err) => {
-          toastDispatch({
-            type: "ADD_TOAST",
-            payload: { message: err.response.data.message },
-          });
-        });
+        .catch(() => {});
     } else {
-      toastDispatch({
-        type: "ADD_TOAST",
-        payload: { message: "You do not have any unsaved changes." },
-      });
+      dispatch(addToasts({ message: "You do not have any unsaved changes." }));
     }
   }
 
@@ -246,22 +237,14 @@ export default function PromptTree() {
     request()
       .put(
         `${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`,
-        updatedAssignments,
+        updatedAssignments
       )
       .then((res) => {
         dispatch(removeIsStateChangedById(item.id));
         setLastModified(res.data);
-        toastDispatch({
-          type: "ADD_TOAST",
-          payload: { message: "Saved 1 state" },
-        });
+        dispatch(addToasts({ message: "Saved 1 state" }));
       })
-      .catch((err) => {
-        toastDispatch({
-          type: "ADD_TOAST",
-          payload: { message: err.response.data.message },
-        });
-      });
+      .catch(() => {});
   }
 
   const handlePromptNameChange = () => {
@@ -273,11 +256,9 @@ export default function PromptTree() {
         })
         .then(() => {
           dispatch(fetchPromptSet(promptSetId));
-          toastDispatch({
-            type: "ADD_TOAST",
-            payload: { message: "Prompt Set name updated" },
-          });
-        });
+          dispatch(addToasts({ message: "Prompt Set name updated" }));
+        })
+        .catch(() => {});
     }
   };
 
@@ -349,7 +330,7 @@ export default function PromptTree() {
                               <InnerStates child={child} index={index} />
                             </div>
                           );
-                        },
+                        }
                       )}
                     </Accordion.Body>
                   </Accordion.Item>

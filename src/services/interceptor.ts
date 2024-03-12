@@ -1,5 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getBaseUrl } from "../constants/app";
+import { addToasts } from "../redux/reducers/toastSlice";
+import { ErrorResponse } from "react-router-dom";
 
 const request = () => {
   const instance = axios.create({
@@ -44,10 +46,9 @@ const request = () => {
       return response;
     },
     (error: AxiosError) => {
-      const response: AxiosResponse<any, any> | undefined = error?.response;
-      if (response?.status === 413) {
-        return Promise.reject(new Error("The size of your input is too big."));
-      }
+      const store = require("../redux/store").default;
+      const errorMessage = (error?.response?.data as any)?.message;
+      store.dispatch(addToasts({ message: errorMessage ?? error.message }));
       return Promise.reject(error);
     }
   );

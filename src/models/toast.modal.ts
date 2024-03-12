@@ -1,26 +1,10 @@
-export interface Notification {
-  id?: string;
+export interface Toasts {
   message: string;
   className?: string;
   delay?: number;
   count?: number;
 }
 
-type AddToastAction = {
-  type: "ADD_TOAST";
-  payload: Notification;
-};
-
-type RemoveToastAction = {
-  type: "REMOVE_TOAST";
-  payload: string;
-};
-
-type ClearToastsAction = {
-  type: "CLEAR_TOASTS";
-};
-
-export type ToastAction =
-  | AddToastAction
-  | RemoveToastAction
-  | ClearToastsAction;
+export interface ToastsState {
+  toasts: Toasts[];
+}

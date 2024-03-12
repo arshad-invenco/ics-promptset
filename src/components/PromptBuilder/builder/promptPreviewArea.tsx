@@ -64,7 +64,7 @@ export default function PromptPreviewArea() {
       keycode: item.code,
       label: item.name,
     };
-    console.log(softKey,"sofffff");
+    
     dispatch(
       updateSoftKeyByAssignmentId({
         assignmentId: activePromptEditorId,

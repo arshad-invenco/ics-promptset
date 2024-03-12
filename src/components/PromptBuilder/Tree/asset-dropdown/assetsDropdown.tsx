@@ -39,6 +39,7 @@ import { TouchMask } from "../../../../models/touchMask.modal";
 
 interface AssetsDropdownProps {
   childState: Assignment;
+  hide: () => void;
 }
 
 interface NewElement {
@@ -68,7 +69,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
   // SELECTORS
   const { deviceType, screenWidth, fontColor } = useSelector(
-    (state: PromptSetRootState) => state.promptset.data,
+    (state: PromptSetRootState) => state.promptset.data
   );
 
   // CONTEXT API
@@ -91,13 +92,12 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   const handleClose = () => {
     setClickOutside(false);
     setShow(false);
+    props.hide();
   };
 
   const handleAsset = (asset: Asset) => {
     setShow(false);
     setSelectedAsset(asset);
-
-    console.log(asset, "AAASSSSEEEETTTTT");
 
     const MediaElement: Elements = {
       id: generateRandomString(10),
@@ -114,10 +114,11 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
       addElementToAssignment({
         assignmentId: childState.id,
         newElement: MediaElement,
-      }),
+      })
     );
     setActiveElementId(MediaElement.id);
     setActiveControlType(asset.type);
+    props.hide();
   };
 
   const handleShowTouchMask = () => {
@@ -132,10 +133,9 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
 
   const handleTouchMask = (touchMask: TouchMask | null) => {
     setShowTouchMask(false);
-    console.log(touchMask, "TTTOOOCCCHHHHH");
     if (touchMask) {
       dispatch(
-        addNewTouchMap({ assignmentId: childState.id, newTouchMap: touchMask }),
+        addNewTouchMap({ assignmentId: childState.id, newTouchMap: touchMask })
       );
     } else {
       //Create new touch mask
@@ -167,11 +167,12 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
           updateInputElement({
             assignmentId: childState.id,
             newElement: element,
-          }),
+          })
         );
         setActiveElementId(element.id);
         setActiveControlType(BG);
       }
+      props.hide();
     }
     if (type === TEXT) {
       const textElement: NewElement = {
@@ -203,10 +204,11 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         addElementToAssignment({
           assignmentId: childState.id,
           newElement: textElement,
-        }),
+        })
       );
       setActiveElementId(textElement.id);
       setActiveControlType(TEXT);
+      props.hide();
     }
     if (type === INPUT) {
       const inputElement: NewElement = {
@@ -238,10 +240,11 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         addElementToAssignment({
           assignmentId: childState.id,
           newElement: inputElement,
-        }),
+        })
       );
       setActiveElementId(inputElement.id);
       setActiveControlType(INPUT);
+      props.hide();
     }
     if (type === IMAGE || type === VIDEO) {
       handleShow();
@@ -263,10 +266,11 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
         addNewAreaToTouchMap({
           assignmentId: childState.id,
           newArea: areaElement,
-        }),
+        })
       );
       setActiveElementId(areaElement.id);
       setActiveControlType(AREA);
+      props.hide();
     }
   }
 

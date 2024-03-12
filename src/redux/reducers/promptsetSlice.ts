@@ -259,7 +259,8 @@ export const promptsetSlice = createSlice({
               assignment.softkeys = assignment.softkeys.filter(
                 (softKey) => softKey.softkey !== newSoftKey.softkey,
               );
-            } else {
+            }
+            else if (assignment.softkeys.length > 0 && newSoftKey.label) {
               assignment.softkeys.push(newSoftKey);
             }
             state.isStateChanged = true;
