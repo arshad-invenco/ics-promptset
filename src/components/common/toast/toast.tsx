@@ -1,23 +1,22 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { Toast } from "react-bootstrap";
-import { promptSetContext } from "../../../hooks/promptsetContext";
 import "./toast.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { select } from "snapsvg";
+import { selectToasts } from "../../../redux/selectors/toastSelectors";
+import { Toasts } from "../../../models/toast.modal";
+import { removeToast } from "../../../redux/reducers/toastSlice";
 
 const ToastComponent = () => {
-  const { toasts, toastDispatch } = useContext(promptSetContext);
-
-  useEffect(() => {
-    console.log(toasts);
-  }, [toasts]);
+  const dispatch = useDispatch();
+  const toasts: Toasts[] = useSelector(selectToasts);
 
   return (
     <>
       {toasts.map((toast, i) => (
         <Toast
           key={i}
-            onClose={() =>
-              toastDispatch({ type: "REMOVE_TOAST", payload: toast.id as string })
-            }
+          onClose={() => dispatch(removeToast(toast))}
           delay={toast.delay || 5000}
           autohide
           className={toast.className || "toaster"}

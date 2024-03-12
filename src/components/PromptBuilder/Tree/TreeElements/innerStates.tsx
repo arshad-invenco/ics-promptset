@@ -44,6 +44,7 @@ import { useReadOnly } from "../../../../hooks/readOnly";
 import request from "../../../../services/interceptor";
 import { selectPromptSetAssignmentById } from "../../../../redux/selectors/promptSetSelectors";
 import { fetchTouchMasks } from "../../../../redux/thunks/touchMaskThunk";
+import { addToasts } from "../../../../redux/reducers/toastSlice";
 
 interface InnerStateProps {
   child: Assignment;
@@ -73,16 +74,14 @@ export default function InnerStates(props: InnerStateProps) {
       request()
         .put(
           `${getBaseUrl()}/media/touchmaps/${childState?.touchmap?.id}/areas`,
-          childState?.touchmap?.areas,
+          childState?.touchmap?.areas
         )
         .then(() => {
           dispatch(fetchTouchMasks());
-          toastDispatch({
-            type: "ADD_TOAST",
-            payload: { message: "Touch mask overriden" },
-          });
+          dispatch(addToasts({ message: "Touch mask overriden" }));
           dispatch(removeIsTouchMaskChangedById(childState?.id));
-        });
+        })
+        .catch(() => {});
     }
     handleNewTouchMaskClose();
   };
@@ -103,22 +102,17 @@ export default function InnerStates(props: InnerStateProps) {
     let payload = { ...childState?.touchmap, name: maskName };
     request()
       .post(`${getBaseUrl()}/media/touchmaps`, payload)
-      .then((res) => {
+      .then(() => {
         dispatch(fetchTouchMasks());
-        toastDispatch({
-          type: "ADD_TOAST",
-          payload: { message: "Touch mask saved" },
-        });
+        dispatch(addToasts({ message: "Touch mask saved" }));
         dispatch(removeIsTouchMaskChangedById(childState?.id));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => {});
   };
 
   // SELECTOR
   const lang: Lang = useSelector(
-    (state: PromptSetRootState) => state.promptset.data.lang,
+    (state: PromptSetRootState) => state.promptset.data.lang
   );
 
   // STATES
@@ -141,7 +135,6 @@ export default function InnerStates(props: InnerStateProps) {
     activeElementId,
     setLastModified,
     activePromptEditorId,
-    toastDispatch,
   } = useContext(promptSetContext);
 
   // REFS
@@ -151,7 +144,7 @@ export default function InnerStates(props: InnerStateProps) {
 
   // SELECTORS
   const childState = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId),
+    selectPromptSetAssignmentById(state, activePromptEditorId)
   );
 
   // EFFECTS
@@ -214,9 +207,7 @@ export default function InnerStates(props: InnerStateProps) {
         setLastModified(res.data);
         dispatch(fetchPromptSet(promptSetId));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => {});
   }
 
   return (
@@ -303,7 +294,12 @@ export default function InnerStates(props: InnerStateProps) {
                     }}
                     className="assets-dropdown"
                   >
-                    <AssetsDropdown childState={child} />
+                    <AssetsDropdown
+                      childState={child}
+                      hide={() => {
+                        setShowDropdown(false);
+                      }}
+                    />
                   </div>
                 )}
               </div>

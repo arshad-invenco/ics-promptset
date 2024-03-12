@@ -7,9 +7,11 @@ import { fontSlice } from "./reducers/fontSlice";
 import { assetSlice } from "./reducers/mediaSlice";
 import { touchMaskSlice } from "./reducers/touchMaskSlice";
 import { languageSlice } from "./reducers/languageSlice";
+import { toastsSlice } from "./reducers/toastSlice";
 
 const store = configureStore({
   reducer: {
+    toasts: toastsSlice.reducer,
     promptset: promptsetSlice.reducer,
     daypart: daypartSlice.reducer,
     keycode: keycodeSlice.reducer,
@@ -21,6 +23,6 @@ const store = configureStore({
   },
 });
 
-export type PromptRootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export default store;
