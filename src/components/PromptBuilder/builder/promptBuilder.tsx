@@ -675,7 +675,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         transform: `matrix(1,0,0,1,${controllerBBox.x2},${controllerBBox.y2})`,
       });
 
-    const controllerRect = g.group(controller, controllerResize);
+    // const controllerRect = g.group(controller, controllerResize);
 
     // Define the start function
     const start = function (this: Snap.Element) {
@@ -687,20 +687,18 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     const move = function (this: Snap.Element, dx: number, dy: number) {
       const origBBox = this.data("origBBox");
 
-      let newSize = Math.max(origBBox.width + dx, origBBox.height + dy);
+      let newSize = origBBox.width + dx;
+      let newSizeY = origBBox.height + dy;
       // Check if the new size would be outside the boundaries of the SVG container
       if (newSize > screenWidth) newSize = screenWidth;
-      if (newSize > screenHeight) newSize = screenHeight;
 
       // Apply the new size
       controller.attr({
         width: controllerBBox.width + newSize,
-        height: controllerBBox.height + newSize,
+        height: controllerBBox.height + newSizeY,
       });
       controllerResize.attr({
-        transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${
-          controllerBBox.y2 + newSize
-        })`,
+        transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSizeY})`,
       });
       controllerResize.mousedown(() => {
         console.log("Mouse Down");
@@ -710,12 +708,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         NewElementSVG = children[0];
         NewElementSVG.attr({
           width: controllerBBox.width + newSize,
-          height: controllerBBox.height + newSize,
+          height: controllerBBox.height + newSizeY,
           id: "NewElementSVG",
         });
       }
     };
-    
+
     // Define the stop function
     const stop = function (this: Snap.Element) {
       const ele = this.getBBox();
@@ -728,7 +726,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     if (type === "area") {
     }
     if (NewElementSVG) return g.group(ElementSvg, NewElementSVG);
-    else return g.group(ElementSvg, controllerRect);
+    else return g.group(ElementSvg, controller);
   }
 
   return <svg id="svg" viewBox={`0 0 ${screenWidth} ${screenHeight}`}></svg>;

@@ -15,12 +15,13 @@ import { fetchTouchMasks } from "../../redux/thunks/touchMaskThunk";
 import { LastModifiedInterface } from "../../models/lastModified.modal";
 import { toastReducer } from "../../hooks/toastReducer";
 import ToastComponent from "../../components/common/toast/toast";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { usePromptSetId } from "../../hooks/promptsetId";
 
 export function PromptSet() {
   // STATES -> CONTEXT_API
   const [promptSetData, setPromptSetData] = useState<PromptSetInterface>(
-    {} as PromptSetInterface
+    {} as PromptSetInterface,
   );
   const [activeStateId, setActiveStateId] = useState<string>("");
   const [activeControlType, setActiveControlType] = useState<string>("");
@@ -29,13 +30,15 @@ export function PromptSet() {
   const [gridViewState, setGridViewState] = useState<boolean>(false);
   const [showPlaylistState, setShowPlaylistState] = useState<boolean>(false);
   const [lastModified, setLastModified] = useState<LastModifiedInterface>(
-    {} as LastModifiedInterface
+    {} as LastModifiedInterface,
   );
   const [toasts, toastDispatch] = useReducer(toastReducer, []);
 
   // PARAMS
   const { id } = useParams<{ id: string }>();
 
+  // HOOKs
+  const promptsetId = usePromptSetId();
 
   // CONTEXT_API
   const contextValues = {
@@ -73,13 +76,27 @@ export function PromptSet() {
     dispatch(fetchTouchMasks());
   }, []);
 
+  const loading = () => {
+    return (
+      <div className="loader">
+        <div className="spinner-border text-primary" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={"layout"}>
-      <promptSetContext.Provider value={contextValues}>
-        <ToastComponent />
-        <PromptTree />
-        <PromptSetEditor />
-      </promptSetContext.Provider>
+      {promptsetId ? (
+        <promptSetContext.Provider value={contextValues}>
+          <ToastComponent />
+          <PromptTree />
+          <PromptSetEditor />
+        </promptSetContext.Provider>
+      ) : (
+        loading()
+      )}
     </div>
   );
 }
