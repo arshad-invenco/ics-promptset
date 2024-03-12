@@ -54,18 +54,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
   let g: any = null;
 
   function onClickSVGElement(elementId: string, type: string) {
-    console.log("clicked", elementId, type, "CLICCKKKKEEEDDDDD");
     setActiveElementId(elementId);
     setActiveControlType(type);
   }
 
   useEffect(() => {
-    console.log(activeElementId);
-    console.log(gridViewState, "GRRIIIDDDD");
     if (childState?.elements) {
       setElements(childState.elements);
     }
-    console.log("CALLED");
     initElements(elements, childState?.touchmap?.areas || []);
   }, [activeElementId, gridViewState, elements, childState, showPlaylistState]);
 
@@ -103,7 +99,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
   function updateArea(area: TouchMapAreas, x: number, y: number, type: string) {
     const areaCoords = area.coords.split(",");
-    console.log(childState?.id);
     let newArea;
     if (type === POSITION) {
       newArea = {
@@ -381,7 +376,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       }
 
       if (svgElement) {
-        console.log("svgElement", svgElement, newElement.id, newElement.type);
         const start = function (this: Snap.Element) {
           this.data("origTransform", this.transform().local);
           this.data("origBBox", this.getBBox());
@@ -415,7 +409,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           const ele = this.getBBox();
         };
         svgElement.click(() => {
-          // console.log("svgElement clicked");
           onClickSVGElement(newElement.id, newElement.type);
         });
         if (newElement.type !== "bg" && newElement.type !== "video") {
@@ -654,7 +647,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     area?: TouchMapAreas,
   ) {
     const elementBBox = ElementSvg?.getBBox();
-    console.log(elementBBox, "elementBBox", type);
     const coords: number[] = area?.coords.split(",").map(Number) || [
       0, 0, 0, 0,
     ];
@@ -722,10 +714,21 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
       let newSize = origBBox.width + dx;
       let newSizeY = origBBox.height + dy;
-      // Check if the new size would be outside the boundaries of the SVG container
+
+      if (
+        element &&
+        element?.width &&
+        element?.left &&
+        element?.height &&
+        element?.top
+      ) {
+        if (element?.width + element.left + newSize >= screenWidth) return;
+        if (element.height + element.top + newSizeY >= screenHeight) return;
+      }
+      if (element?.width + newSize <= 0) return;
+      if (element?.height + newSizeY <= 0) return;
 
       if (type === "input") {
-        // Apply the new size
         controller.attr({
           width: controllerBBox.width + newSize,
         });
@@ -742,18 +745,13 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         controllerResize.attr({
           transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSizeY})`,
         });
-        controllerResize.mousedown(() => {
-          console.log("Mouse Down");
-        });
         if (element)
           updateSizeOfElement(
             element,
             element.width + newSize,
             element.height + newSizeY,
           );
-      }
-      // AREA
-      else {
+      } else {
         let areaX = Number(area?.coords.split(",")[0]);
         let areaY = Number(area?.coords.split(",")[1]);
         let areaW = Number(area?.coords.split(",")[2]);
@@ -787,13 +785,10 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       }
     };
 
-    // Define the stop function
     const stop = function (this: Snap.Element) {
       const ele = this.getBBox();
-      console.log("finished dragging", ele);
     };
 
-    // Call the drag function on the controllerRectResize
     controllerResize.drag(move, start, stop);
 
     if (type === "area") {

@@ -13,44 +13,44 @@
     flex-direction: column;
     height: 100%;
     justify-content: flex-start;
-    gap: 85px;
+    gap: 8.5rem;
     padding: 12% 0;
     align-items: flex-start;
     position: relative;
 
     &.soft-keys-left{
         color: blue;
-        left: 17px;
+        left: 1.7rem;
     }
     &.soft-keys-right{
         color: yellow;
-      right: 40px
+      right: 4rem
     }
     .softkey-btn{
       width: 0;
       flex: 1;
       .soft-key-text{
         position: relative;
-        top: 15px;
-        left: -5px;
-        font-size: 11px;
-        color: #9e9e9e;
+        top: 1.5rem;
+        left: -.5rem;
+        font-size: 1.1rem;
+        color: var(--md-grey-500);
       }
     }
   }
 
   .ics-prompt-builder-preview-container{
-    background-color: #424242;
+    background-color: var(--md-grey-800);
     width: 100%;
     height: fit-content;
     &.G6-200 {
-      padding: 30px 32px 5px;
+      padding: 3rem 3.2rem .5rem;
     }
     &.G7-100 {
-      padding: 48px 57px 38px;
+      padding: 4.8rem 5.7rem 3.8rem;
     }
     &.G7-100-15, &.G6-300, &.G7-100-8 {
-      padding: 30px 32px 20px;
+      padding: 3rem 3.2rem 2rem;
     }
 
     .ics-prompt-builder{
@@ -64,10 +64,10 @@
       align-items: flex-start;
       justify-content: space-between;
       flex-direction: row;
-      padding: 30px 5%;
+      padding: 3rem 5%;
       position: relative;
-      background-color: #424242;
-      top: 5px;
+      background-color: var(--md-grey-800);
+      top: .5rem;
       .soft-key-button-container{
         display: flex;
         flex: 1;
@@ -76,9 +76,9 @@
       }
       .soft-key-text{
         position: relative;
-        top: 19px;
-        font-size: 11px;
-        color: #9e9e9e;
+        top: 1.9rem;
+        font-size: 1.1rem;
+        color: var(--md-grey-500);
       }
     }
   }
@@ -87,24 +87,24 @@
 
 .soft-key-button{
   border: none;
-  border-radius: 3px;
+  border-radius: .3rem;
   transition: all .15s ease-in-out;
-  color: #fff;
-  font-size: 26px;
-  background-color: #212121;
+  color: var(--white);
+  font-size: 2.6rem;
+  background-color: var(--md-grey-900);
   display: flex;
   align-items: center;
   transform: scale(2);
-  padding: 2px 6px;
-  box-shadow: 0 3px 0 0 #000;
+  padding: .2rem .6rem;
+  box-shadow: 0 .3rem 0 0 var(--gray-base);
   position: relative;
   top: 0;
   &:hover{
     box-shadow: none;
-    top: 3px;
+    top: .3rem;
   }
   .fa-window-minimize{
-    margin-left: 8px;
+    margin-left: .8rem;
     transform: scale(.8) rotate(90deg);
   }
 }

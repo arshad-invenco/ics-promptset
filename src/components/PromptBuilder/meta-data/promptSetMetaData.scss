@@ -20,9 +20,9 @@
     .meta-buttons-container {
       gap: 0.6rem;
       .isActive {
-        background-color: #293475;
+        background-color: var(--btn-primary-border-hover);
         &:hover {
-          background-color: #293475 !important;
+          background-color: var(--btn-primary-border-hover) !important;
         }
       }
     }

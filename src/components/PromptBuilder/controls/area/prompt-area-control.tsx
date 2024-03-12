@@ -1,18 +1,22 @@
 import "./prompt-area-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
-import {PromptSetInterface, TouchMapAreas} from "../../../../models/promptset.modal";
-import {useContext, useEffect, useState} from "react";
+import {
+  PromptSetInterface,
+  TouchMapAreas,
+} from "../../../../models/promptset.modal";
+import { useContext, useEffect, useState } from "react";
 import SearchableDropdown from "../../../common/searchable-dropdown/searchableDropdown";
-import {useDispatch, useSelector} from "react-redux";
-import {Keycode} from "../../../../models/keycode.modal";
+import { useDispatch, useSelector } from "react-redux";
+import { Keycode } from "../../../../models/keycode.modal";
 
-import {selectKeycodes} from "../../../../redux/selectors/keycodeSelectors";
-import {selectSoftKeys} from "../../../../redux/selectors/softkeySelectors";
-import {AppDispatch} from "../../../../redux/store";
-import {updateTouchMap} from "../../../../redux/reducers/promptsetSlice";
-import {promptSetContext} from "../../../../hooks/promptsetContext";
-import {PromptSetRootState} from "../../Tree/promptTree";
-import {useReadOnly} from "../../../../hooks/readOnly";
+import { selectKeycodes } from "../../../../redux/selectors/keycodeSelectors";
+import { selectSoftKeys } from "../../../../redux/selectors/softkeySelectors";
+import { AppDispatch } from "../../../../redux/store";
+import { updateTouchMap } from "../../../../redux/reducers/promptsetSlice";
+import { promptSetContext } from "../../../../hooks/promptsetContext";
+import { PromptSetRootState } from "../../Tree/promptTree";
+import { useReadOnly } from "../../../../hooks/readOnly";
+import { HORIZONTAL, VERTICAL } from "../../../../constants/promptSetConstants";
 
 interface TouchMapAreaProp {
   areaData: TouchMapAreas;
@@ -27,17 +31,19 @@ export function AreaControl(props: TouchMapAreaProp) {
   // STATES
   const [area, setArea] = useState(areaData);
   const [selectedCode, setSelectedCode] = useState(
-    area?.softkeyName || area?.keyCodeName
+    area?.softkeyName || area?.keyCodeName,
   );
 
   // CONTEXT API
-    const { activePromptEditorId } = useContext(promptSetContext);
+  const { activePromptEditorId } = useContext(promptSetContext);
 
   //   HOOKS
   const readOnly = useReadOnly();
 
   //   SELECTORS
-  const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
+  const promptsetData: PromptSetInterface = useSelector(
+    (state: PromptSetRootState) => state.promptset.data,
+  );
 
   useEffect(() => {
     setArea(areaData);
@@ -53,7 +59,7 @@ export function AreaControl(props: TouchMapAreaProp) {
       id: code,
       code,
       name,
-    })
+    }),
   );
 
   const groupedCodeItems: GroupedCodeItems[] = [
@@ -64,10 +70,10 @@ export function AreaControl(props: TouchMapAreaProp) {
   const handleSelect = (item: Keycode) => {
     setSelectedCode(item.name);
     const selectedKeyCode = keycodes.find(
-      (keycode) => keycode.name === item.name
+      (keycode) => keycode.name === item.name,
     );
     const selectedSoftKey = softkeys.find(
-      (softkey) => softkey.name === item.name
+      (softkey) => softkey.name === item.name,
     );
     if (selectedKeyCode) {
       const { softkeyId, softkeyName, ...rest } = area;
@@ -76,7 +82,7 @@ export function AreaControl(props: TouchMapAreaProp) {
         keyCode: selectedKeyCode.code,
         keyCodeName: selectedKeyCode.name,
       });
-        onChangeInputArea({
+      onChangeInputArea({
         ...rest,
         keyCode: selectedKeyCode.code,
         keyCodeName: selectedKeyCode.name,
@@ -89,7 +95,7 @@ export function AreaControl(props: TouchMapAreaProp) {
         softkeyId: selectedSoftKey.id,
         softkeyName: selectedSoftKey.name,
       });
-        onChangeInputArea({
+      onChangeInputArea({
         ...rest,
         softkeyId: selectedSoftKey.id,
         softkeyName: selectedSoftKey.name,
@@ -101,46 +107,56 @@ export function AreaControl(props: TouchMapAreaProp) {
   const dispatch = useDispatch<AppDispatch>();
 
   function onChangeInputArea(area: TouchMapAreas) {
-    dispatch(updateTouchMap({area, activePromptEditorId}));
+    dispatch(updateTouchMap({ area, activePromptEditorId }));
   }
 
-
+  function getUpdatedShiftValue(coords: string, shift: string) {
+    const [x, y, w, h] = coords.split(",");
+    if (shift === HORIZONTAL) {
+      const newX = promptsetData.screenWidth / 2 - parseInt(w) / 2;
+      const newY = parseInt(y);
+      return `${newX},${newY},${w},${h}`;
+    } else {
+      const newX = parseInt(x);
+      const newY = promptsetData.screenHeight / 2 - parseInt(h) / 2;
+      return `${newX},${newY},${w},${h}`;
+    }
+  }
 
   return (
     <div className="ics-prompt-builder-area-controls d-flex-row">
-
-      {!readOnly ?
-          <>
-        <div className="ics-inline-115-block">
-          <label>Type</label>
-          <div className="area-controls d-flex-row">
-            <div
+      {!readOnly ? (
+        <>
+          <div className="ics-inline-115-block">
+            <label>Type</label>
+            <div className="area-controls d-flex-row">
+              <div
                 onClick={() => {
-                  setArea({...area, shape: "rect"});
-                  onChangeInputArea({...area, shape: "rect"});
+                  setArea({ ...area, shape: "rect" });
+                  onChangeInputArea({ ...area, shape: "rect" });
                 }}
                 className={`shape rectangle ${
-                    area.shape === "rect" ? "selected" : ""
+                  area.shape === "rect" ? "selected" : ""
                 } `}
-            ></div>
-            <div
+              ></div>
+              <div
                 onClick={() => {
-                  setArea({...area, shape: "circle"});
-                  onChangeInputArea({...area, shape: "circle"});
+                  setArea({ ...area, shape: "circle" });
+                  onChangeInputArea({ ...area, shape: "circle" });
                 }}
                 className={`shape circle ${
-                    area.shape === "circle" ? "selected" : ""
+                  area.shape === "circle" ? "selected" : ""
                 }`}
-            ></div>
+              ></div>
+            </div>
           </div>
-        </div>
 
-        <div className="d-flex-col dimensions">
-          <label>Dimensions</label>
-          <div className="co-ordinates d-flex-row">
-            <div className="d-flex-row dimension-control">
-              <label>X</label>
-              <input
+          <div className="d-flex-col dimensions">
+            <label>Dimensions</label>
+            <div className="co-ordinates d-flex-row">
+              <div className="d-flex-row dimension-control">
+                <label>X</label>
+                <input
                   type="number"
                   min={0}
                   value={(area.coords?.split(",") ?? [""])[0]}
@@ -148,20 +164,20 @@ export function AreaControl(props: TouchMapAreaProp) {
                     const updatedArea = {
                       ...area,
                       coords: `${e.target.value},${area.coords
-                          .split(",")
-                          .slice(1)
-                          .join(",")}`,
+                        .split(",")
+                        .slice(1)
+                        .join(",")}`,
                     };
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
                   className="ics-input dimension-input"
-              />
-            </div>
+                />
+              </div>
 
-            <div className="d-flex-row dimension-control">
-              <label>Y</label>
-              <input
+              <div className="d-flex-row dimension-control">
+                <label>Y</label>
+                <input
                   type="number"
                   min={0}
                   value={(area.coords?.split(",") ?? [""])[1]}
@@ -169,19 +185,19 @@ export function AreaControl(props: TouchMapAreaProp) {
                     const updatedArea = {
                       ...area,
                       coords: `${area.coords.split(",")[0]},${
-                          e.target.value
+                        e.target.value
                       },${area.coords.split(",").slice(2).join(",")}`,
                     };
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
                   className="ics-input dimension-input"
-              />
-            </div>
+                />
+              </div>
 
-            <div className="d-flex-row dimension-control">
-              <label>W</label>
-              <input
+              <div className="d-flex-row dimension-control">
+                <label>W</label>
+                <input
                   type="number"
                   min={0}
                   value={(area.coords?.split(",") ?? [""])[2]}
@@ -189,19 +205,19 @@ export function AreaControl(props: TouchMapAreaProp) {
                     const updatedArea = {
                       ...area,
                       coords: `${area.coords.split(",").slice(0, 2)},${
-                          e.target.value
+                        e.target.value
                       },${area.coords.split(",")[3]}`,
                     };
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
                   className="ics-input dimension-input"
-              />
-            </div>
+                />
+              </div>
 
-            <div className="d-flex-row dimension-control">
-              <label>H</label>
-              <input
+              <div className="d-flex-row dimension-control">
+                <label>H</label>
+                <input
                   type="number"
                   min={0}
                   value={(area.coords?.split(",") ?? [""])[3]}
@@ -209,50 +225,69 @@ export function AreaControl(props: TouchMapAreaProp) {
                     const updatedArea = {
                       ...area,
                       coords: `${area.coords.split(",").slice(0, 3)},${
-                          e.target.value
+                        e.target.value
                       }`,
                     };
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
                   className="ics-input dimension-input"
-              />
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="ics-inline-150-block">
-          <label>Center shift</label>
-          <div className="d-flex-row center-shift">
-            <label className="shift-btn">
-              <VerticalAlignCenterRoundedIcon className="icon shift-icon-transform-horizontal"/>
-            </label>
-            <label className="shift-btn">
-              <VerticalAlignCenterRoundedIcon className="icon"/>
-            </label>
+          <div className="ics-inline-150-block">
+            <label>Center shift</label>
+            <div className="d-flex-row center-shift">
+              <label
+                onClick={() => {
+                  const updatedArea = {
+                    ...area,
+                    coords: getUpdatedShiftValue(area.coords, HORIZONTAL),
+                  };
+                  setArea(updatedArea);
+                  onChangeInputArea(updatedArea);
+                }}
+                className="shift-btn"
+              >
+                <VerticalAlignCenterRoundedIcon className="icon shift-icon-transform-horizontal" />
+              </label>
+              <label
+                onClick={() => {
+                  const updatedArea = {
+                    ...area,
+                    coords: getUpdatedShiftValue(area.coords, VERTICAL),
+                  };
+                  setArea(updatedArea);
+                  onChangeInputArea(updatedArea);
+                }}
+                className="shift-btn"
+              >
+                <VerticalAlignCenterRoundedIcon className="icon" />
+              </label>
+            </div>
           </div>
-        </div>
 
-        <div className="ics-inline-200-block">
-          <SearchableDropdown
+          <div className="ics-inline-200-block">
+            <SearchableDropdown
               label="Key or Code"
               items={groupedCodeItems}
               itemRenderer={(codeItem: Keycode) => (
-                  <>
-                    <div>{codeItem.name}</div>
-                  </>
+                <>
+                  <div>{codeItem.name}</div>
+                </>
               )}
               onSelect={handleSelect}
               isGroup={true}
               selectedCode={selectedCode}
               placeholder="Soft Key or Key Code"
-          ></SearchableDropdown>
-        </div>
-      </>
-        : <h4 className="controller-title">Touch Area</h4>
-      }
-
-
+            ></SearchableDropdown>
+          </div>
+        </>
+      ) : (
+        <h4 className="controller-title">Touch Area</h4>
+      )}
     </div>
   );
 }

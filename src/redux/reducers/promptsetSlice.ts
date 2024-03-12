@@ -193,8 +193,8 @@ export const promptsetSlice = createSlice({
               },
             );
             assignment.touchmap.isTouchMaskChanged = true;
+            assignment.isAssignmentChanged = true;
           }
-          assignment.isAssignmentChanged = true;
           return assignment;
         });
         return state;
@@ -255,9 +255,9 @@ export const promptsetSlice = createSlice({
                 ...assignment.softkeys[softKeyIndex],
                 ...newSoftKey,
               };
-            } else if(softKeyIndex !== -1 && !newSoftKey.label){
+            } else if (softKeyIndex !== -1 && !newSoftKey.label) {
               assignment.softkeys = assignment.softkeys.filter(
-                (softKey) => softKey.softkey !== newSoftKey.softkey
+                (softKey) => softKey.softkey !== newSoftKey.softkey,
               );
             }
             else if (assignment.softkeys.length > 0 && newSoftKey.label) {
