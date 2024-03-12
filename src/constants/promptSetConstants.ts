@@ -68,6 +68,8 @@ export const PROMPT_TYPES: PromptType[] = [
   { id: "3", name: "Data" },
 ];
 
-export const CENTER = "center"
-export const LEFT = "left"
-export const RIGHT = "right"
+export const CENTER = "center";
+export const LEFT = "left";
+export const RIGHT = "right";
+export const TOP = "top";
+export const BOTTOM = "bottom";

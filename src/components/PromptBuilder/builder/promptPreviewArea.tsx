@@ -17,7 +17,7 @@ import { Modal } from "react-bootstrap";
 import SaveSoftKey from "../modals/save-soft-key-modal/saveSoftKey";
 import { Keycode } from "../../../models/keycode.modal";
 import { useReadOnly } from "../../../hooks/readOnly";
-import { LEFT, RIGHT } from "../../../constants/promptSetConstants";
+import { BOTTOM, LEFT, RIGHT } from "../../../constants/promptSetConstants";
 import { promptSetContext } from "../../../hooks/promptsetContext";
 import { selectPromptSetAssignmentById } from "../../../redux/selectors/promptSetSelectors";
 
@@ -57,7 +57,7 @@ export default function PromptPreviewArea() {
     if (activeChild?.softkeys) setSoftKeys(activeChild.softkeys);
   }, [promptsetData, activePromptEditorId]);
 
-  const sideSoftKeys = (start: number, end: number, position: string) => {
+  const renderSoftKeys = (start: number, end: number, position: string) => {
     const keys = [];
     if (position === LEFT) {
       for (let id = start; id <= end; id++) {
@@ -76,7 +76,7 @@ export default function PromptPreviewArea() {
           </div>,
         );
       }
-    } else {
+    } else if (position === RIGHT) {
       for (let id = start; id <= end; id++) {
         const softKey = softKeys.find((softKey) => softKey.softkey === id);
         keys.push(
@@ -93,14 +93,27 @@ export default function PromptPreviewArea() {
           </div>,
         );
       }
+    } else {
+      for (let id = start; id <= end; id++) {
+        const softKey = softKeys.find((softKey) => softKey.softkey === id);
+        keys.push(
+          <div key={id} className="soft-key-button-container">
+            <button className="soft-key-button">
+              <i className="fa fa-window-minimize fa-rotate-90"></i>
+            </button>
+            <p className="soft-key-text">{softKey?.label}</p>
+          </div>,
+        );
+      }
     }
     return keys;
   };
+
   return (
     <div className="ics-prompt-builder-preview-wrapper prompt-builder-size">
       {enableSoftKey(getDeviceType()) && (
         <div className={"soft-keys-left soft-keys"}>
-          {sideSoftKeys(5, 8, LEFT)}
+          {renderSoftKeys(5, 8, LEFT)}
         </div>
       )}
       <div className={`ics-prompt-builder-preview-container ${deviceType}`}>
@@ -114,39 +127,13 @@ export default function PromptPreviewArea() {
           />
         </div>
         {enableSoftKeysBottom(getDeviceType()) && (
-          <div className="soft-keys-bottom">
-            <div className="soft-key-button-container">
-              <button className="soft-key-button">
-                <i className="fa fa-window-minimize fa-rotate-90"></i>
-              </button>
-              <p className="soft-key-text">Text</p>
-            </div>
-
-            <div className="soft-key-button-container">
-              <button className="soft-key-button">
-                <i className="fa fa-window-minimize fa-rotate-90"></i>
-              </button>
-              <p className="soft-key-text">Text</p>
-            </div>
-            <div className="soft-key-button-container">
-              <button className="soft-key-button">
-                <i className="fa fa-window-minimize fa-rotate-90"></i>
-              </button>
-              <p className="soft-key-text">Text</p>
-            </div>
-            <div className="soft-key-button-container">
-              <button className="soft-key-button">
-                <i className="fa fa-window-minimize fa-rotate-90"></i>
-              </button>
-              <p className="soft-key-text">Text</p>
-            </div>
-          </div>
+          <div className="soft-keys-bottom">{renderSoftKeys(1, 4, BOTTOM)}</div>
         )}
       </div>
 
       {enableSoftKey(getDeviceType()) && (
         <div className={"soft-keys-right soft-keys"}>
-          {sideSoftKeys(9, 12, RIGHT)}
+          {renderSoftKeys(9, 12, RIGHT)}
         </div>
       )}
       <Modal show={showKeyCodeModal} onHide={handleKeyCodeModalClose} size="sm">
