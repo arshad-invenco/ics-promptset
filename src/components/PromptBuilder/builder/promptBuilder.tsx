@@ -15,7 +15,12 @@ import {
   updateTouchMapArea,
 } from "../../../redux/reducers/promptsetSlice";
 import { getBaseUrl } from "../../../constants/app";
-import { CENTER, LEFT } from "../../../constants/promptSetConstants";
+import {
+  CENTER,
+  LEFT,
+  POSITION,
+  SIZE,
+} from "../../../constants/promptSetConstants";
 
 interface PromptBuilderProps {
   color: string;
@@ -78,13 +83,40 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     );
   }
 
-  function updateArea(area: TouchMapAreas, x: number, y: number) {
+  function updateSizeOfElement(
+    newElement: Elements,
+    width: number,
+    height: number,
+  ) {
+    const updatedElement = {
+      ...newElement,
+      width: Number(Math.ceil(width)),
+      height: Number(Math.ceil(height)),
+    };
+    dispatch(
+      updateInputElement({
+        assignmentId: childState?.id,
+        newElement: updatedElement,
+      }),
+    );
+  }
+
+  function updateArea(area: TouchMapAreas, x: number, y: number, type: string) {
     const areaCoords = area.coords.split(",");
     console.log(childState?.id);
-    const newArea = {
-      ...area,
-      coords: `${x},${y},${areaCoords[2]},${areaCoords[3]}`,
-    };
+    let newArea;
+    if (type === POSITION) {
+      newArea = {
+        ...area,
+        coords: `${Math.ceil(x)},${Math.ceil(y)},${areaCoords[2]},${areaCoords[3]}`,
+      };
+    }
+    if (type === SIZE) {
+      newArea = {
+        ...area,
+        coords: `${areaCoords[0]},${areaCoords[1]},${Number(areaCoords[2]) + Math.ceil(x)},${Number(areaCoords[3]) + Math.ceil(y)}`,
+      };
+    }
     dispatch(
       updateTouchMapArea({ assignmentId: childState?.id, newArea: newArea }),
     );
@@ -207,7 +239,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           });
           if (activeElementId === newElement.id) {
             const bbox = tempGroup.getBBox();
-            svgElement = createWrapperController(bbox, newElement, tempGroup);
+            svgElement = createWrapperController(
+              bbox,
+              newElement,
+              tempGroup,
+              newElement.type,
+            );
           } else {
             svgElement = tempGroup;
           }
@@ -595,7 +632,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               (this.data("origTransform") ? "T" : "t") +
               [newX - origBBox.x, newY - origBBox.y],
           });
-          updateArea(area, newX, newY);
+          updateArea(area, newX, newY, POSITION);
         };
         const stop = function (this: Snap.Element) {
           const ele = this.getBBox();
@@ -675,34 +712,72 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         transform: `matrix(1,0,0,1,${controllerBBox.x2},${controllerBBox.y2})`,
       });
 
-    // const controllerRect = g.group(controller, controllerResize);
-
-    // Define the start function
     const start = function (this: Snap.Element) {
       this.data("origTransform", this.transform().local);
       this.data("origBBox", this.getBBox());
     };
 
-    // Define the move function
     const move = function (this: Snap.Element, dx: number, dy: number) {
       const origBBox = this.data("origBBox");
 
       let newSize = origBBox.width + dx;
       let newSizeY = origBBox.height + dy;
       // Check if the new size would be outside the boundaries of the SVG container
-      if (newSize > screenWidth) newSize = screenWidth;
+      if (newSize >= screenWidth) newSize = screenWidth;
+      if (newSizeY >= screenHeight) newSizeY = screenHeight;
 
-      // Apply the new size
-      controller.attr({
-        width: controllerBBox.width + newSize,
-        height: controllerBBox.height + newSizeY,
-      });
-      controllerResize.attr({
-        transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSizeY})`,
-      });
-      controllerResize.mousedown(() => {
-        console.log("Mouse Down");
-      });
+      if (type === "input") {
+        // Apply the new size
+        controller.attr({
+          width: controllerBBox.width + newSize,
+        });
+        controllerResize.attr({
+          transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2})`,
+        });
+        if (element && element.height)
+          updateSizeOfElement(element, element.width + newSize, element.height);
+      } else if (type === "text") {
+        controller.attr({
+          width: controllerBBox.width + newSize,
+          height: controllerBBox.height + newSizeY,
+        });
+        controllerResize.attr({
+          transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSizeY})`,
+        });
+        controllerResize.mousedown(() => {
+          console.log("Mouse Down");
+        });
+        if (element)
+          updateSizeOfElement(
+            element,
+            element.width + newSize,
+            element.height + newSizeY,
+          );
+      } else {
+        let areaX = Number(area?.coords.split(",")[0]);
+        let areaY = Number(area?.coords.split(",")[1]);
+        let areaW = Number(area?.coords.split(",")[2]);
+        let areaH = Number(area?.coords.split(",")[3]);
+
+        if (area && areaH + areaY + newSizeY >= screenHeight)
+          newSizeY = screenHeight - Number(area.coords.split(",")[3]);
+        if (area && areaW + areaX + newSize >= screenWidth)
+          newSize = screenWidth - Number(area.coords.split(",")[2]);
+        if (area && areaW + newSize <= 0) newSize = 0;
+        if (area && areaH + newSizeY <= 0) newSizeY = 0;
+
+        controller.attr({
+          width: controllerBBox.width + newSize,
+          height: controllerBBox.height + newSizeY,
+        });
+        controllerResize.attr({
+          transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSizeY})`,
+        });
+        if (type === "area" && area) {
+          updateArea(area, newSize, newSizeY, SIZE);
+        }
+      }
+
       const children = ElementSvg?.children();
       if (children && children.length > 0) {
         NewElementSVG = children[0];
@@ -712,6 +787,8 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           id: "NewElementSVG",
         });
       }
+
+      console.log(element, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
     };
 
     // Define the stop function
