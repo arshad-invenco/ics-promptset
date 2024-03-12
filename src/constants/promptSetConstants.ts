@@ -75,3 +75,5 @@ export const TOP = "top";
 export const BOTTOM = "bottom";
 export const POSITION = "middle";
 export const SIZE = "size";
+export const HORIZONTAL = "horizontal";
+export const VERTICAL = "vertical";
