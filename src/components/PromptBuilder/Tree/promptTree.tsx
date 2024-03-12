@@ -61,7 +61,7 @@ export default function PromptTree() {
 
   // SELECTOR
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
+    (state: PromptSetRootState) => state.promptset.data,
   );
   const fonts: Font[] = useSelector(selectFonts);
   const elementData: Elements =
@@ -69,8 +69,8 @@ export default function PromptTree() {
       selectElementByIdInAssignment(
         state,
         activePromptEditorId,
-        activeElementId
-      )
+        activeElementId,
+      ),
     ) || ({} as Elements);
 
   // CONTEXT API
@@ -119,7 +119,7 @@ export default function PromptTree() {
         setInitialState(false);
         onClickState(
           promptsetData.states[0].id,
-          promptsetData.states[0].assignments[0].id
+          promptsetData.states[0].assignments[0].id,
         );
       }
     }
@@ -145,6 +145,17 @@ export default function PromptTree() {
     setCompanyLanguages(languages);
   }, [languages]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   const handleNewPromptShow = () => {
     setShowNewPromptModal(true);
   };
@@ -162,7 +173,7 @@ export default function PromptTree() {
 
     const response = await request().post(
       `${getBaseUrl()}/media/prompts`,
-      newPrompt
+      newPrompt,
     );
 
     if (response) {
@@ -176,8 +187,14 @@ export default function PromptTree() {
     promptsetData.states.map((state) => {
       if (state.isStateChanged) {
         state.assignments.map((assignment) => {
-          let value = { ...assignment, promptId: assignment.id };
-          payload.push({ ...assignment, promptId: assignment.id });
+          payload.push({
+            ...assignment,
+            promptId: assignment.id,
+            softkeys:
+              assignment.softkeys && assignment.softkeys.length > 0
+                ? assignment.softkeys
+                : [],
+          });
         });
       }
     });
@@ -196,6 +213,12 @@ export default function PromptTree() {
           });
           dispatch(fetchPromptSet(promptSetId));
           setIsSaving(false);
+        })
+        .catch((err) => {
+          toastDispatch({
+            type: "ADD_TOAST",
+            payload: { message: err.response.data.message },
+          });
         });
     } else {
       toastDispatch({
@@ -214,13 +237,16 @@ export default function PromptTree() {
   function saveState(item: State) {
     const updatedAssignments = item.assignments.map((assignment) => ({
       ...assignment,
-      softkeys: [],
+      softkeys:
+        assignment.softkeys && assignment.softkeys.length > 0
+          ? assignment.softkeys
+          : [],
       promptId: assignment.id,
     }));
     request()
       .put(
         `${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`,
-        updatedAssignments
+        updatedAssignments,
       )
       .then((res) => {
         dispatch(removeIsStateChangedById(item.id));
@@ -231,7 +257,6 @@ export default function PromptTree() {
         });
       })
       .catch((err) => {
-        console.log(err);
         toastDispatch({
           type: "ADD_TOAST",
           payload: { message: err.response.data.message },
@@ -324,7 +349,7 @@ export default function PromptTree() {
                               <InnerStates child={child} index={index} />
                             </div>
                           );
-                        }
+                        },
                       )}
                     </Accordion.Body>
                   </Accordion.Item>
@@ -347,7 +372,7 @@ export default function PromptTree() {
                 onClick={handleNewPromptShow}
               >
                 NEW PROMPT
-                <AddIcon  />
+                <AddIcon />
               </button>
               <Modal
                 show={showNewPromptModal}

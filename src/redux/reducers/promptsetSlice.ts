@@ -241,12 +241,25 @@ export const promptsetSlice = createSlice({
         return state;
       });
     },
-    pushSoftKeysToAssignmentById: (state, action) => {
-      const { assignmentId, softKey } = action.payload;
+    updateSoftKeyByAssignmentId: (state, action) => {
+      const { assignmentId, newSoftKey } = action.payload;
+      console.log("newSoftKey", newSoftKey);
+
       state.data.states = state.data.states.map((state) => {
         state.assignments = state.assignments.map((assignment) => {
           if (assignment.id === assignmentId) {
-            assignment.softkeys.push(softKey);
+            const softKeyIndex = assignment.softkeys.findIndex(
+              (softKey) => softKey.softkey === newSoftKey.softkey,
+            );
+            if (softKeyIndex !== -1) {
+              assignment.softkeys[softKeyIndex] = {
+                ...assignment.softkeys[softKeyIndex],
+                ...newSoftKey,
+              };
+            } else {
+              assignment.softkeys.push(newSoftKey);
+            }
+            state.isStateChanged = true;
           }
           return assignment;
         });
@@ -286,4 +299,5 @@ export const {
   updateBackgroundElement,
   removeIsStateChangedById,
   removeIsTouchMaskChangedById,
+  updateSoftKeyByAssignmentId,
 } = promptsetSlice.actions;
