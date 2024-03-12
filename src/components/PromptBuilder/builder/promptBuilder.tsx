@@ -239,7 +239,12 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           });
           if (activeElementId === newElement.id) {
             const bbox = tempGroup.getBBox();
-            svgElement = createWrapperController(bbox, newElement, tempGroup);
+            svgElement = createWrapperController(
+              bbox,
+              newElement,
+              tempGroup,
+              newElement.type,
+            );
           } else {
             svgElement = tempGroup;
           }
@@ -718,8 +723,8 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       let newSize = origBBox.width + dx;
       let newSizeY = origBBox.height + dy;
       // Check if the new size would be outside the boundaries of the SVG container
-      if (newSize > screenWidth) newSize = screenWidth;
-      if (newSizeY > screenHeight) newSizeY = screenHeight;
+      if (newSize >= screenWidth) newSize = screenWidth;
+      if (newSizeY >= screenHeight) newSizeY = screenHeight;
 
       if (type === "input") {
         // Apply the new size
@@ -749,6 +754,18 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             element.height + newSizeY,
           );
       } else {
+        let areaX = Number(area?.coords.split(",")[0]);
+        let areaY = Number(area?.coords.split(",")[1]);
+        let areaW = Number(area?.coords.split(",")[2]);
+        let areaH = Number(area?.coords.split(",")[3]);
+
+        if (area && areaH + areaY + newSizeY >= screenHeight)
+          newSizeY = screenHeight - Number(area.coords.split(",")[3]);
+        if (area && areaW + areaX + newSize >= screenWidth)
+          newSize = screenWidth - Number(area.coords.split(",")[2]);
+        if (area && areaW + newSize <= 0) newSize = 0;
+        if (area && areaH + newSizeY <= 0) newSizeY = 0;
+
         controller.attr({
           width: controllerBBox.width + newSize,
           height: controllerBBox.height + newSizeY,
@@ -756,12 +773,6 @@ export default function PromptBuilder(props: PromptBuilderProps) {
         controllerResize.attr({
           transform: `matrix(1,0,0,1,${controllerBBox.x2 + newSize},${controllerBBox.y2 + newSizeY})`,
         });
-        if (element)
-          updateSizeOfElement(
-            element,
-            element.width + newSize,
-            element.height + newSizeY,
-          );
         if (type === "area" && area) {
           updateArea(area, newSize, newSizeY, SIZE);
         }
