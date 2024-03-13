@@ -283,10 +283,10 @@ export default function PromptSetMetaData() {
 
         {languageKeysSet.map((isoCode: any, index: number) => {
           return (
-            <div key={index} className="row small">
+            <div key={index} className="row">
               <div className="col-md-4">
                 {promptsetData?.lang[isoCode].language}
-                <span>
+                <span className="small">
                   {promptsetData?.lang[isoCode].promptSetLanguageSupport.default
                     ? " (default)"
                     : ""}

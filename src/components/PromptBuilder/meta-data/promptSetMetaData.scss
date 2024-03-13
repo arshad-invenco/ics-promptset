@@ -5,8 +5,14 @@
   .ics-prompt-builder-meta-container {
     padding: 1rem;
     border-bottom: 0.1rem solid var(--border-default);
-    font-family: "Roboto", "Helvetica Neue", -apple-system, BlinkMacSystemFont,
-      Arial, sans-serif, system-ui;
+    font-family:
+      "Roboto",
+      "Helvetica Neue",
+      -apple-system,
+      BlinkMacSystemFont,
+      Arial,
+      sans-serif,
+      system-ui;
     p {
       margin: 0;
     }
@@ -19,7 +25,7 @@
     }
     .meta-buttons-container {
       gap: 0.6rem;
-      padding: .5rem 1rem 1rem 1rem;
+      padding: 0.5rem 1rem 1rem 0rem;
       position: relative;
       .isActive {
         background-color: var(--btn-primary-border-hover);
@@ -60,6 +66,11 @@
       font-size: 85%;
       color: var(--md-grey-500);
       max-width: 25rem;
+    }
+    .col-md-2,
+    .col-md-4,
+    .col-md-6 {
+      font-size: 1.19rem;
     }
   }
 }
