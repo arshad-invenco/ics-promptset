@@ -28,10 +28,9 @@
     .ics-prompt-builder-preview-wrapper {
       width: calc(100% - 29.5rem);
 
-      &.expended {
+      &.expanded {
         position: absolute;
-        -webkit-width: calc(100% - 7.5rem);
-        width: calc(100% - 7.5rem);
+        width: calc(100% - 16.5%);
       }
     }
   }

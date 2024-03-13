@@ -132,8 +132,8 @@ export default function Controllers() {
             <option value="null" selected>
               Select transaction state
             </option>
-            <option value="idle">Idle</option>
-            <option value="fueling">Fueling</option>
+            <option value="Idle">Idle</option>
+            <option value="Fueling">Fueling</option>
           </select>
         </div>
       ) : activeControlType === CHILD_STATE ? (
