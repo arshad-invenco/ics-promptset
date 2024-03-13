@@ -28,7 +28,6 @@ import { useReadOnly } from "../../../hooks/readOnly";
 export default function PromptSetMetaData() {
   // STATES
   const [open, setDropdownStatus] = useState(false);
-  const [value, setValue] = useState("#000000");
   const [showEditLanguage, setShowEditLanguage] = useState(false);
   const [colorShow, setColorShow] = useState(false);
   const [showUpdateFontModal, setShowUpdateFontModal] = useState(false);
@@ -45,6 +44,7 @@ export default function PromptSetMetaData() {
   const promptsetData: PromptSetInterface = useSelector(
     (state: PromptSetRootState) => state.promptset.data
   );
+  const [value, setValue] = useState(promptsetData.bg || "#000000");
 
   //   HOOKS
   const readOnly = useReadOnly();
@@ -240,7 +240,13 @@ export default function PromptSetMetaData() {
                     <i className="fas fa-chevron-circle-down"></i>
                   )}
                 </button>
-                {open && <BackgroundPicker value={value} setValue={setValue} />}
+                {open && (
+                  <BackgroundPicker
+                    value={value}
+                    setValue={setValue}
+                    update={true}
+                  />
+                )}
               </div>
               <Modal
                 show={colorShow}
@@ -251,7 +257,7 @@ export default function PromptSetMetaData() {
                 backdrop="static"
               >
                 <ColorPickerModal
-                  value={promptsetData?.fontColor || "#000000"}
+                  value={"#" + promptsetData?.fontColor || "#000000"}
                   onChange={updateColor}
                   hide={handleColorClose}
                 />

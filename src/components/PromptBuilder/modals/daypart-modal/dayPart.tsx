@@ -59,7 +59,6 @@ function DayPartModal({ hide, daypart, childStateId, parentId }: ModalProps) {
 
   const handleSelect = (item: DaypartItem) => {
     setSelectedDayPart(item.name);
-    console.log(item, "DAYYY PPAAARRRTTTT");
     const payload = {
       type: "exception",
       dayPart: {

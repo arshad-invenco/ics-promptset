@@ -14,7 +14,7 @@ interface ColorPickerProps {
 }
 
 function ColorPickerModal({ value, onChange, hide }: ColorPickerProps) {
-  const [color, setColor] = useState(`#${value}`);
+  const [color, setColor] = useState(value);
   const [inputValue, setInputValue] = useState(color);
   const [selectedTab, setSelectedTab] = useState<string>("spectrum");
   const { addToHistory, getHistory, resetHistory } = useColorHistory();
@@ -42,9 +42,9 @@ function ColorPickerModal({ value, onChange, hide }: ColorPickerProps) {
     const colorObj = tinycolor(newColor);
     if (colorObj.isValid()) {
       const luminance = colorObj.getLuminance();
-      return luminance > 0.5 ? "var(--gray-base)" : "var(--white)";
+      return luminance > 0.5 ? "#000" : "#fff";
     } else {
-      return "var(--white)";
+      return "#fff";
     }
   }
 
@@ -89,11 +89,19 @@ function ColorPickerModal({ value, onChange, hide }: ColorPickerProps) {
         )}
         {selectedTab === "history" && (
           <div className="history">
-            <div className="color-picker-history-clear">
-              <button className="btn btn-link" onClick={resetHistory}>
-                CLEAR
-              </button>
-            </div>
+            {history.length > 0 && (
+              <div className="color-picker-history-clear">
+                <button
+                  className="btn btn-link"
+                  onClick={() => {
+                    resetHistory();
+                    setHistory([]);
+                  }}
+                >
+                  CLEAR
+                </button>
+              </div>
+            )}
             <div className="color-picker-history">
               {history.map((color, index) => (
                 <button
@@ -108,6 +116,11 @@ function ColorPickerModal({ value, onChange, hide }: ColorPickerProps) {
                   <span>{color.toString()}</span>
                 </button>
               ))}
+              {history.length === 0 && (
+                <div className="color-picker-history-empty">
+                  <span>No History</span>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -131,7 +144,13 @@ function ColorPickerModal({ value, onChange, hide }: ColorPickerProps) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <button className="btn btn-block btn-default" onClick={hide}>
+        <button
+          className="btn btn-block btn-default"
+          onClick={() => {
+            addToHistory(color);
+            hide();
+          }}
+        >
           Cancel
         </button>
 
