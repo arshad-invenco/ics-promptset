@@ -19,6 +19,8 @@
     }
     .meta-buttons-container {
       gap: 0.6rem;
+      padding: .5rem 1rem 1rem 1rem;
+      position: relative;
       .isActive {
         background-color: var(--btn-primary-border-hover);
         &:hover {
@@ -28,7 +30,6 @@
     }
     .meta-button {
       padding: 0.2rem 1rem;
-      margin: 0.5rem 1rem 1rem 0;
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -36,10 +37,6 @@
         margin-left: 0.3rem;
         font-size: 85%;
       }
-    }
-    .ics-bg-picker {
-      top: 68%;
-      right: 3%;
     }
     .size-label {
       font-size: 1.2rem;
