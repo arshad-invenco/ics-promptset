@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { getBaseUrl } from "../constants/app";
 import { addToasts } from "../redux/reducers/toastSlice";
-import { ErrorResponse } from "react-router-dom";
 
 const request = () => {
   const instance = axios.create({

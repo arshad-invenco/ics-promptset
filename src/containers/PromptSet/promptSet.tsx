@@ -15,6 +15,7 @@ import { LastModifiedInterface } from "../../models/lastModified.modal";
 import ToastComponent from "../../components/common/toast/toast";
 import { useParams } from "react-router-dom";
 import { usePromptSetId } from "../../hooks/promptsetId";
+import Loader from "../../components/common/loader/loader";
 
 export function PromptSet() {
   // STATES -> CONTEXT_API
@@ -72,13 +73,7 @@ export function PromptSet() {
   }, []);
 
   const loading = () => {
-    return (
-      <div className="loader">
-        <div className="spinner-border text-primary" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
+    return <Loader global={true} />;
   };
 
   return (

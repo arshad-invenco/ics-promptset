@@ -11,16 +11,24 @@ import {
   setClickOutside,
 } from "../../../constants/clickOutside";
 import ColorPickerModal from "../../PromptBuilder/modals/color-picker-modal/colorPicker";
+import { updateBackground } from "../../../services/metaDataService";
 
 interface BackgroundPickerProps {
   value: string;
   setValue: (value: string) => void;
-  handleAssetBackground?: (asset:Asset) => void;
+  handleAssetBackground?: (asset: Asset) => void;
   handleBackgroundColor?: (color: string) => void;
+  update?: boolean;
 }
 
-function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgroundColor}: BackgroundPickerProps) {
-  const [bgColor, setBgColor] = useState("000000");
+function BackgroundPicker({
+  value,
+  setValue,
+  handleAssetBackground,
+  handleBackgroundColor,
+  update,
+}: BackgroundPickerProps) {
+  const [bgColor, setBgColor] = useState("#000000");
   const [bgShow, setBgShow] = useState(false);
   const [colorShow, setColorShow] = useState(false);
 
@@ -51,27 +59,34 @@ function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgr
   const updateColor = (color: string) => {
     if (color === bgColor && value === color) return;
     setValue(color);
-    if (handleBackgroundColor)
-      handleBackgroundColor(color);
+    setBgColor(color);
+    if (handleBackgroundColor) handleBackgroundColor(color);
+    if (update) {
+      setClickOutside(false);
+      updateBackground(color.replace("#", ""));
+    }
   };
 
   const handleAsset = (asset: Asset) => {
     setValue(asset.id);
     setBgShow(false);
     if (handleAssetBackground) handleAssetBackground(asset);
+    if (update) {
+      setClickOutside(false);
+      updateBackground(asset.id);
+    }
   };
-
 
   return (
     <div className="ics-bg-picker">
       <div className="selected-bg">
-        {value.length > 6 ? (
+        {value.length > 7 ? (
           <div
             className="image"
             style={{ backgroundImage: generateImgURL() }}
           ></div>
         ) : (
-          <div className="color" style={{ backgroundColor: "#" + value }}></div>
+          <div className="color" style={{ backgroundColor: value }}></div>
         )}
       </div>
       <div className="select-bg">

@@ -36,7 +36,8 @@
               width: 1.4rem !important;
               height: 1.4rem !important;
               border-radius: 5em !important;
-              box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.5),
+              box-shadow:
+                0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.5),
                 inset 0 0 0.2rem 0 rgba(0, 0, 0, 0.5) !important;
               border: 0.2rem solid var(--white) !important;
             }
@@ -93,6 +94,14 @@
           display: block;
           width: 100%;
         }
+      }
+      .color-picker-history-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: var(--md-grey-700);
+        padding-top: 2.5em;
       }
     }
     .tab-selection {

@@ -44,25 +44,32 @@ export default function TextControl(props: ElementsProp) {
   // REDUX
   const dispatch = useDispatch<AppDispatch>();
 
-    // SELECTORS
-    const promptsetData: PromptSetInterface = useSelector((state: PromptSetRootState) => state.promptset.data);
+  // SELECTORS
+  const promptsetData: PromptSetInterface = useSelector(
+    (state: PromptSetRootState) => state.promptset.data
+  );
 
-    //   HOOKS
-    const readOnly = useReadOnly();
+  //   HOOKS
+  const readOnly = useReadOnly();
 
-    useEffect(() => {
-        setElement(elementData);
-    }, [promptsetData]);
+  useEffect(() => {
+    setElement(elementData);
+  }, [promptsetData]);
 
   // FUNCTIONS
   function onChangeInput(element: Elements) {
-    dispatch(updateInputElement({assignmentId: activePromptEditorId, newElement: element}));
+    dispatch(
+      updateInputElement({
+        assignmentId: activePromptEditorId,
+        newElement: element,
+      })
+    );
   }
 
   function handleFontSelection(item: Font) {
-      setSelectedFont(item);
-      setElement({ ...elementData, face: item.fontId });
-      onChangeInput({ ...elementData, face: item.fontId });
+    setSelectedFont(item);
+    setElement({ ...elementData, face: item.fontId });
+    onChangeInput({ ...elementData, face: item.fontId });
   }
 
   const handleColorClose = () => {
@@ -114,7 +121,7 @@ export default function TextControl(props: ElementsProp) {
             centered
           >
             <ColorPickerModal
-              value={element.color ?? ""}
+              value={("#" + element.color) ?? ""}
               onChange={updateColor}
               hide={handleColorClose}
             />
