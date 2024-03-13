@@ -22,7 +22,7 @@ interface ElementsProp {
 export function BackgroundControl(props: ElementsProp) {
   const { elementData } = props;
   const [open, setDropdownStatus] = useState(false);
-const [value, setValue] = useState("#" + elementData.value);
+  const [value, setValue] = useState("#" + elementData.value);
 
   // REDUX
   const dispatch = useDispatch<AppDispatch>();
@@ -39,7 +39,6 @@ const [value, setValue] = useState("#" + elementData.value);
   const readOnly = useReadOnly();
 
   function handleAsset(asset: Asset) {
-    console.log(asset, "ASSET");
     const newElement = {
       ...elementData,
       value: asset.id,

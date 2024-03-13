@@ -198,7 +198,6 @@ export default function InnerStates(props: InnerStateProps) {
   }
 
   function deleteDayPart(assignmentId: string, childStateId: string) {
-    console.log(assignmentId, childStateId);
     axios
       .delete(`${getBaseUrl()}/media/prompt/${childStateId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
