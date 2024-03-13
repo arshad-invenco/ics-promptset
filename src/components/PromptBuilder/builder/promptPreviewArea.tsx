@@ -1,3 +1,4 @@
+import React from "react";
 import "./promptBuilder.scss";
 import { getDeviceType } from "../../../constants/deviceType";
 import PromptBuilder from "./promptBuilder";

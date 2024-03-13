@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext, useEffect, useState } from "react";
 import "./promptTree.scss";
 import { Accordion, Modal } from "react-bootstrap";

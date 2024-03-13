@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import React from "react";
 import { Toast } from "react-bootstrap";
 import "./toast.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { select } from "snapsvg";
 import { selectToasts } from "../../../redux/selectors/toastSelectors";
 import { Toasts } from "../../../models/toast.modal";
 import { removeToast } from "../../../redux/reducers/toastSlice";
