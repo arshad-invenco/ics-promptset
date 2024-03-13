@@ -1,3 +1,4 @@
+import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Font } from "../../../models/fonts.modal";
 import "./fontDropdown.scss";

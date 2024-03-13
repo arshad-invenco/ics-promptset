@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
+import React from "react";
 import "./backgroundPicker.scss";
-import ColorPicker from "../../PromptBuilder/modals/color-picker-modal/colorPicker";
 import { getBaseUrl } from "../../../constants/app";
 import { Modal } from "react-bootstrap";
 import MediaModal from "../../PromptBuilder/modals/media-modal/mediaModal";
 import { Asset } from "../../../models/media.modal";
 import { IMAGE } from "../../../constants/promptSetConstants";
 import {
-  getClickOutside,
   setClickOutside,
 } from "../../../constants/clickOutside";
 import ColorPickerModal from "../../PromptBuilder/modals/color-picker-modal/colorPicker";

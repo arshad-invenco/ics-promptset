@@ -1,9 +1,9 @@
+import React from "react";
 import { Modal } from "react-bootstrap";
 import "./newTouchMask.scss";
 import { useEffect, useState } from "react";
 import { TouchMaskPromptSets } from "../../../../../models/touchMask.modal";
 import { getBaseUrl, getPromptSetUrl } from "../../../../../constants/app";
-import { get } from "http";
 import {
   getPromptSetStatus,
   getPromptSetStatusColor,

@@ -1,8 +1,8 @@
+import React from "react";
 import "./prompt-text-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import {
   Elements,
-  FontFace,
   PromptSetInterface,
 } from "../../../../models/promptset.modal";
 import { useContext, useEffect, useState } from "react";
