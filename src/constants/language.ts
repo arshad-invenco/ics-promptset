@@ -1,6 +1,5 @@
-import { set } from "snapsvg";
-import { Language } from "../models/language.modal";
-import { Lang, PromptSetInterface } from "../models/promptset.modal";
+import { FaceType, Language } from "../models/language.modal";
+import { PromptSetInterface } from "../models/promptset.modal";
 import isSequoiaDevice from "../services/promptsetService";
 import { getDeviceType } from "./deviceType";
 import { getFilteredFonts } from "./fontConstant";
@@ -39,11 +38,15 @@ let isDefaultFontSettingsAvail = false;
 
 export let languageKeysSet: string[] = [];
 
-let defaultFontSettings: any = [];
+let defaultFontSettings: {
+  fontFace: FaceType;
+  isoCode: string;
+  fontSize: number;
+}[] = [];
 
 export let langModalViewItems: Language[] = [];
 
-export let defaultLanguageList: any = [];
+export let defaultLanguageList: string[] = [];
 
 export function setLangModalViewItems(languages: Language[]) {
   langModalViewItems = languages;
@@ -92,11 +95,19 @@ export const getPromptsetLanguages = () => {
 };
 
 const getDefaults = () => {
-  let defaults: any = {};
+  let defaults: {
+    fontFace: FaceType;
+    isoCode: string;
+    fontSize: number;
+  }[] = [];
   if (companyLanguages.length === 0 && languageKeysSet.length === 0) {
     defaults = getDefaultFontSettings();
   } else {
-    defaults = createDefaultFontSettings();
+    defaults = createDefaultFontSettings() as {
+      fontFace: FaceType;
+      isoCode: string;
+      fontSize: number;
+    }[];
   }
   return defaults;
 };
@@ -118,14 +129,20 @@ const getDefaultFontSettings = () => {
 
 const createDefaultFontSettings = () => {
   const tempDefaultFontSettings = [];
-  const promptsetLanguages = Object.values(promptSet.lang); // Get promptset languages
-  for (const lang of promptsetLanguages) {
-    const fallbackDefault: { size: number; face: any } = {
+  const promptsetLanguages = Object.values(promptSet.lang);
+  for (let lang of promptsetLanguages) {
+    let fallbackDefault:{ size: number; face: FaceType } = {
       size: 0,
-      face: null,
+      face: {
+        fontId: "",
+        name: "",
+        family: "",
+        type: "",
+        supportedDevices: [],
+        active: true,
+      },
     };
     if (isSequoiaDevice(promptSet.deviceType)) {
-      // Set fallback defaults based on device type
       fallbackDefault.size = 48;
       fallbackDefault.face = {
         fontId: "Liberation Sans",
@@ -146,21 +163,35 @@ const createDefaultFontSettings = () => {
         active: true,
       };
     }
-
-    if (lang.promptSetLanguageSupport.type === null) {
-      lang.promptSetLanguageSupport.type = fallbackDefault.face.name;
+    if (
+      lang?.promptSetLanguageSupport?.type === null ||
+      lang?.promptSetLanguageSupport?.type === undefined
+    ) {
+      const newPromptSetLanguageSupport = {
+        ...lang.promptSetLanguageSupport,
+        type: fallbackDefault.face ? fallbackDefault.face?.name : "",
+      };
+      lang = { ...lang, promptSetLanguageSupport: newPromptSetLanguageSupport };
     }
 
-    if (lang.promptSetLanguageSupport.size === null) {
-      lang.promptSetLanguageSupport.size = fallbackDefault.size;
+    if (
+      lang?.promptSetLanguageSupport?.size === null ||
+      lang?.promptSetLanguageSupport?.size === undefined
+    ) {
+      const newPromptSetLanguageSupport = {
+        ...lang.promptSetLanguageSupport,
+        size: fallbackDefault.size,
+      };
+      lang = { ...lang, promptSetLanguageSupport: newPromptSetLanguageSupport };
     }
     const font = getFilteredFonts().find(
-      (item) => item.name === lang.promptSetLanguageSupport.type
+      (item) => item && item.name === lang?.promptSetLanguageSupport?.type
     );
+
     const defaultItem = {
-      isoCode: lang.isoCode,
+      isoCode: lang?.isoCode,
       fontFace: font,
-      fontSize: lang.promptSetLanguageSupport.size,
+      fontSize: lang?.promptSetLanguageSupport?.size,
     };
     tempDefaultFontSettings.push(defaultItem);
   }
@@ -168,7 +199,7 @@ const createDefaultFontSettings = () => {
 };
 
 export const createModalInfo = () => {
-  for (const companyLanguage of companyLanguages) {
+  for (let companyLanguage of companyLanguages) {
     const languageDetails = getTypeAndSize(
       companyLanguage.languageSupportId || ""
     );
@@ -190,9 +221,16 @@ export const createModalInfo = () => {
 };
 
 export const getTypeAndSize = (languageSupportId: string) => {
-  const fallbackDefault: { size: number; face: any } = {
+  let fallbackDefault: { size: number; face: FaceType } = {
     size: 0,
-    face: null,
+    face: {
+      fontId: "",
+      name: "",
+      family: "",
+      type: "",
+      supportedDevices: [],
+      active: true,
+    },
   };
   const deviceType = getDeviceType();
   if (isSequoiaDevice(deviceType)) {
@@ -260,7 +298,7 @@ export const handleLanguageCheck = (
 
 export const createDefaultLanguageList = () => {
   defaultLanguageList = languageKeysSet.filter((item: string) => {
-    return promptSet.lang[item].promptSetLanguageSupport.default;
+    return promptSet?.lang[item]?.promptSetLanguageSupport?.default;
   });
 };
 

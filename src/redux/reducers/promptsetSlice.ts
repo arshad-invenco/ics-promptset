@@ -255,15 +255,16 @@ export const promptsetSlice = createSlice({
                 ...assignment.softkeys[softKeyIndex],
                 ...newSoftKey,
               };
+              state.isStateChanged = true;
             } else if (softKeyIndex !== -1 && !newSoftKey.label) {
               assignment.softkeys = assignment.softkeys.filter(
                 (softKey) => softKey.softkey !== newSoftKey.softkey,
               );
-            }
-            else if (assignment.softkeys.length > 0 && newSoftKey.label) {
+              state.isStateChanged = true;
+            } else if (newSoftKey.label) {
               assignment.softkeys.push(newSoftKey);
+              state.isStateChanged = true;
             }
-            state.isStateChanged = true;
           }
           return assignment;
         });

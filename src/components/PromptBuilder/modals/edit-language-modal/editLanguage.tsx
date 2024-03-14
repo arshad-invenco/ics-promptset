@@ -223,7 +223,7 @@ function EditLanguageModal({ hide }: EditLanguageModalProps) {
                   <input
                     type="number"
                     value={language.size}
-                    className="ics-input"
+                    className="ics-input-react"
                     onChange={(e) => {
                       const newSize = parseInt(e.target.value);
                       if (!isNaN(newSize)) {

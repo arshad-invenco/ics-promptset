@@ -172,7 +172,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                 />
               </div>
 
@@ -192,7 +192,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                 />
               </div>
 
@@ -212,7 +212,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                 />
               </div>
 
@@ -232,7 +232,7 @@ export function AreaControl(props: TouchMapAreaProp) {
                     setArea(updatedArea);
                     onChangeInputArea(updatedArea);
                   }}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                 />
               </div>
             </div>

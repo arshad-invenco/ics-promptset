@@ -21,7 +21,6 @@
 .G6-300 {
   .prompt-set-preview-area {
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
     overflow: hidden;
 
@@ -30,7 +29,7 @@
 
       &.expanded {
         position: absolute;
-        width: calc(100% - 16.5%);
+        width: calc(100% - 18%);
       }
     }
   }

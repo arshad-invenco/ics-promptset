@@ -101,7 +101,7 @@ export default function TextControl(props: ElementsProp) {
                 setElement({ ...element, value: e.target.value });
                 onChangeInput({ ...element, value: e.target.value });
               }}
-              className="ics-input"
+              className="ics-input-react"
             />
           </div>
 
@@ -140,7 +140,7 @@ export default function TextControl(props: ElementsProp) {
                   height: (elementData?.height || 0) + 1,
                 });
               }}
-              className="ics-input"
+              className="ics-input-react"
               min="1"
               max="380"
             />
@@ -212,7 +212,7 @@ export default function TextControl(props: ElementsProp) {
                     });
                   }}
                   min={0}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                 />
               </div>
 
@@ -229,7 +229,7 @@ export default function TextControl(props: ElementsProp) {
                     });
                   }}
                   min={0}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                 />
               </div>
 
@@ -246,7 +246,7 @@ export default function TextControl(props: ElementsProp) {
                     });
                   }}
                   min={0}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                 />
               </div>
 
@@ -263,7 +263,7 @@ export default function TextControl(props: ElementsProp) {
                     });
                   }}
                   min={0}
-                  className="ics-input dimension-input"
+                  className="ics-input-react dimension-input"
                   readOnly={true}
                 />
               </div>
@@ -322,7 +322,7 @@ export default function TextControl(props: ElementsProp) {
                   setElement({ ...element, userclass: e.target.value });
                   onChangeInput({ ...element, userclass: e.target.value });
                 }}
-                className="ics-input"
+                className="ics-input-react"
               />
             </div>
           )}

@@ -316,7 +316,7 @@ function MediaModal({ hide, onAssetSelection, type }: ModalProps) {
           </Dropdown>
           <div className="media-input">
             <input
-              className="ics-input"
+              className="ics-input-react"
               placeholder="Search"
               onChange={handleInputChange}
               value={searchTerm}

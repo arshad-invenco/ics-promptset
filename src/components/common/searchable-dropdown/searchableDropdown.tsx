@@ -207,7 +207,7 @@ function SearchableDropdown({
           <input
             placeholder={placeholder}
             aria-label="Select box"
-            className="ics-input"
+            className="ics-input-react"
             onChange={(e) => setInputValue(e.target.value)}
             onBlur={(e) => {
               e.stopPropagation();

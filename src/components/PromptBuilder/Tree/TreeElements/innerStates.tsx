@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Accordion, Modal } from "react-bootstrap";
+import { Accordion, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { showAssetsDropdown } from "../../../../hooks/common";
 import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import TreeElements from "./treeElements";
@@ -52,6 +52,10 @@ interface InnerStateProps {
   index: number;
 }
 
+export interface ToolTipProps {
+  text: string;
+}
+
 export default function InnerStates(props: InnerStateProps) {
   const { child, index } = props;
   const [show, setShow] = useState(false);
@@ -62,6 +66,13 @@ export default function InnerStates(props: InnerStateProps) {
     setClickOutside(true);
     setShow(true);
   };
+
+  // TOOLTIP
+  const renderTooltip = (props: ToolTipProps) => (
+    <Tooltip id="button-tooltip" {...props} className="ics-tooltip">
+      {props.text}
+    </Tooltip>
+  );
 
   const handleClose = () => {
     setClickOutside(false);
@@ -75,7 +86,7 @@ export default function InnerStates(props: InnerStateProps) {
       request()
         .put(
           `${getBaseUrl()}/media/touchmaps/${childState?.touchmap?.id}/areas`,
-          childState?.touchmap?.areas
+          childState?.touchmap?.areas,
         )
         .then(() => {
           dispatch(fetchTouchMasks());
@@ -113,7 +124,7 @@ export default function InnerStates(props: InnerStateProps) {
 
   // SELECTOR
   const lang: Lang = useSelector(
-    (state: PromptSetRootState) => state.promptset.data.lang
+    (state: PromptSetRootState) => state.promptset.data.lang,
   );
 
   // STATES
@@ -145,7 +156,7 @@ export default function InnerStates(props: InnerStateProps) {
 
   // SELECTORS
   const childState = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId)
+    selectPromptSetAssignmentById(state, activePromptEditorId),
   );
 
   // EFFECTS
@@ -250,13 +261,21 @@ export default function InnerStates(props: InnerStateProps) {
                   ></i>
                 ) : (
                   <>
-                    <MoreTimeIcon
-                      className="icons-right-child-states"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleShow();
-                      }}
-                    />
+                    <OverlayTrigger
+                      placement="left"
+                      delay={{ show: 25, hide: 25 }}
+                      overlay={renderTooltip({
+                        text: "Add daypart",
+                      })}
+                    >
+                      <MoreTimeIcon
+                        className="icons-right-child-states"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleShow();
+                        }}
+                      />
+                    </OverlayTrigger>
                     <Modal show={show} onHide={handleClose} size="sm">
                       <DayPartModal
                         childStateId={child.id}
@@ -268,22 +287,38 @@ export default function InnerStates(props: InnerStateProps) {
                   </>
                 )}
                 {showDropdown ? (
-                  <IndeterminateCheckBoxOutlinedIcon
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowDropdown(!showDropdown);
-                    }}
-                    className="icons-right-child-states"
-                  />
+                  <OverlayTrigger
+                    placement="left"
+                    delay={{ show: 25, hide: 25 }}
+                    overlay={renderTooltip({
+                      text: "Add daypart",
+                    })}
+                  >
+                    <IndeterminateCheckBoxOutlinedIcon
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDropdown(!showDropdown);
+                      }}
+                      className="icons-right-child-states"
+                    />
+                  </OverlayTrigger>
                 ) : (
-                  <AddBoxOutlinedIcon
-                    className="icons-right-child-states"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowDropdown(!showDropdown);
-                      showAssetsDropdown();
-                    }}
-                  />
+                  <OverlayTrigger
+                    placement="left"
+                    delay={{ show: 25, hide: 25 }}
+                    overlay={renderTooltip({
+                      text: "Add assets",
+                    })}
+                  >
+                    <AddBoxOutlinedIcon
+                      className="icons-right-child-states"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDropdown(!showDropdown);
+                        showAssetsDropdown();
+                      }}
+                    />
+                  </OverlayTrigger>
                 )}
                 {showDropdown && (
                   <div
@@ -355,13 +390,21 @@ export default function InnerStates(props: InnerStateProps) {
                     {!readOnly && (
                       <div>
                         {child.touchmap.isTouchMaskChanged && (
-                          <i
-                            onClick={() => {
-                              setActivePromptEditorId(child.id);
-                              setShowNewTouchMask(true);
-                            }}
-                            className="fa fa-floppy-o touchmask-save-icon"
-                          ></i>
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 25, hide: 250 }}
+                            overlay={renderTooltip({
+                              text: "Save Touch Mask",
+                            })}
+                          >
+                            <i
+                              onClick={() => {
+                                setActivePromptEditorId(child.id);
+                                setShowNewTouchMask(true);
+                              }}
+                              className="fa fa-floppy-o touchmask-save-icon"
+                            ></i>
+                          </OverlayTrigger>
                         )}
                         <i
                           onClick={() => {

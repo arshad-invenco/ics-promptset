@@ -26,3 +26,12 @@ export interface promptSetLanguageSupport {
   default?: boolean;
   deleted: boolean;
 }
+
+export interface FaceType {
+  fontId: string;
+  name: string;
+  family: string;
+  type: string;
+  supportedDevices: string[];
+  active: boolean;
+}

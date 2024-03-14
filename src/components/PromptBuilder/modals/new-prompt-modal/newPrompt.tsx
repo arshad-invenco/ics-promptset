@@ -54,7 +54,7 @@ function NewPrompt({ hide, newPrompt }: NewPromptProps) {
             onChange={(e) =>
               setNewPromptData({ ...newPromptData, code: e.target.value })
             }
-            className="ics-input"
+            className="ics-input-react"
           />
         </div>
         <div className="form-group">
@@ -82,7 +82,7 @@ function NewPrompt({ hide, newPrompt }: NewPromptProps) {
                 description: e.target.value,
               })
             }
-            className="ics-input"
+            className="ics-input-react"
           />
         </div>
       </Modal.Body>

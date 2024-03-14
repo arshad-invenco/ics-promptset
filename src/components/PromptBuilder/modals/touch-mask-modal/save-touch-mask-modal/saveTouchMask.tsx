@@ -19,7 +19,7 @@ function SaveTouchMask({ hide, newTouchMask }: SaveTouchMaskProps) {
       <Modal.Body>
         <p>Enter a name for the touch mask</p>
         <input
-          className="ics-input"
+          className="ics-input-react"
           value={touchMaskName}
           onChange={(e) => {
             setTouchMaskName(e.target.value);

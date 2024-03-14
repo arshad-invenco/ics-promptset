@@ -21,7 +21,6 @@ import {
   VIDEO,
 } from "../../../constants/promptSetConstants";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
-import "../../../style.scss";
 import { formatTime } from "../../../hooks/common";
 import { BackgroundControl } from "./background/prompt-bg-control";
 import { ImageControl } from "./image/prompt-image-control";
@@ -126,7 +125,7 @@ export default function Controllers() {
           <p className="description">{state?.description}</p>
           <div className="horizontal-border" />
           <select
-            className="ics-input transaction-state-dropdown"
+            className="ics-input-react transaction-state-dropdown"
             value={state?.transactionState}
             onChange={handleTransactionStateChange}
           >
