@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useContext, useEffect, useState } from "react";
 import { promptSetContext } from "../../../hooks/promptsetContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,7 @@ interface PromptBuilderProps {
   screenHeight: number;
 }
 
-export default function PromptBuilder(props: PromptBuilderProps) {
+function PromptBuilder(props: PromptBuilderProps) {
   const { color, screenHeight, screenWidth } = props;
   const [elements, setElements] = useState<Elements[]>([]);
 
@@ -45,7 +45,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
   // SELECTORS
   const childState = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId)
+    selectPromptSetAssignmentById(state, activePromptEditorId),
   );
 
   // REDUX
@@ -76,14 +76,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       updateInputElement({
         assignmentId: childState?.id,
         newElement: updatedElement,
-      })
+      }),
     );
   }
 
   function updateSizeOfElement(
     newElement: Elements,
     width: number,
-    height: number
+    height: number,
   ) {
     const updatedElement = {
       ...newElement,
@@ -94,7 +94,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       updateInputElement({
         assignmentId: childState?.id,
         newElement: updatedElement,
-      })
+      }),
     );
   }
 
@@ -114,7 +114,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
       };
     }
     dispatch(
-      updateTouchMapArea({ assignmentId: childState?.id, newArea: newArea })
+      updateTouchMapArea({ assignmentId: childState?.id, newArea: newArea }),
     );
   }
 
@@ -147,7 +147,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               s.rect(0, 0, screenWidth, screenHeight).attr({
                 fill: `#${newElement.value}`,
                 id: newElement.id,
-              })
+              }),
             );
           }
           break;
@@ -180,7 +180,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             // Check if adding this word would exceed the maximum width
             var lineWidth = lines[currLine].reduce(function (
               sum: any,
-              word: any
+              word: any,
             ) {
               return sum + word.width;
             }, 0);
@@ -215,7 +215,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               .text(
                 newElement.left,
                 (newElement.top ?? 0) + i * (newElement.size ?? 0),
-                text
+                text,
               )
               .attr({
                 fill: `#${newElement.color}`,
@@ -239,7 +239,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               bbox,
               newElement,
               tempGroup,
-              newElement.type
+              newElement.type,
             );
           } else {
             svgElement = tempGroup;
@@ -300,7 +300,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               newElement,
               inputSvg,
               newElement.type,
-              undefined
+              undefined,
             );
           } else {
             svgElement = inputSvg;
@@ -315,7 +315,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               s.image(elementUrl, 0, 0).attr({
                 id: newElement.id,
                 preserveAspectRatio: "none",
-              })
+              }),
             )
             .transform(`t${x},${y}`);
           const bboxImage = imageElement.getBBox();
@@ -326,7 +326,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   bboxImage.x,
                   bboxImage.y,
                   bboxImage.width,
-                  bboxImage.height
+                  bboxImage.height,
                 )
                 .attr({
                   fill: "#ffffff",
@@ -334,7 +334,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   fillOpacity: 0,
                   strokeWidth: 1,
                 }),
-              imageElement
+              imageElement,
             );
           } else {
             svgElement = imageElement;
@@ -358,7 +358,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   bboxVideo.x,
                   bboxVideo.y,
                   bboxVideo.width,
-                  bboxVideo.height
+                  bboxVideo.height,
                 )
                 .attr({
                   fill: "#ffffff",
@@ -366,7 +366,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                   fillOpacity: 0,
                   strokeWidth: 1,
                 }),
-              videoElement
+              videoElement,
             );
           } else {
             svgElement = videoElement;
@@ -430,14 +430,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             s.line(i, 0, i, screenHeight).attr({
               stroke: "#616161",
               strokeWidth: 3,
-            })
+            }),
           );
         } else {
           line = g.group(
             s.line(i, 0, i, screenHeight).attr({
               stroke: "#616161",
               strokeWidth: 1,
-            })
+            }),
           );
         }
       }
@@ -448,14 +448,14 @@ export default function PromptBuilder(props: PromptBuilderProps) {
             s.line(0, i, screenWidth, i).attr({
               stroke: "#616161",
               strokeWidth: 3,
-            })
+            }),
           );
         } else {
           line = g.group(
             s.line(0, i, screenWidth, i).attr({
               stroke: "#616161",
               strokeWidth: 1,
-            })
+            }),
           );
         }
       }
@@ -550,7 +550,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               opacity: 0.8,
               textAnchor: "middle",
               dy: ".5em",
-            })
+            }),
           );
           const circleBBox = circleGroup.getBBox();
           if (activeElementId === area.id) {
@@ -559,7 +559,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               undefined,
               circleGroup,
               area.type,
-              area
+              area,
             );
           } else {
             areaElement = circleGroup;
@@ -582,7 +582,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
                 opacity: 0.8,
                 textAnchor: "start",
                 dy: "1em",
-              })
+              }),
           );
           const rectBBox = rectGroup.getBBox();
           if (activeElementId === area.id) {
@@ -591,7 +591,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
               undefined,
               rectGroup,
               area.type,
-              area
+              area,
             );
           } else {
             areaElement = rectGroup;
@@ -645,7 +645,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
     element?: Elements,
     ElementSvg?: Snap.Element,
     type?: string,
-    area?: TouchMapAreas
+    area?: TouchMapAreas,
   ) {
     const elementBBox = ElementSvg?.getBBox();
     const coords: number[] = area?.coords.split(",").map(Number) || [
@@ -677,7 +677,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           element?.left || bboxInput.x,
           element?.top || bboxInput.y,
           element?.width || bboxInput.width,
-          element?.height || bboxInput.height
+          element?.height || bboxInput.height,
         )
         .attr({
           fill: "#ffffff",
@@ -697,7 +697,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           fill: "#32b447",
           transform: "matrix(0,1,-1,0,15,5)",
           fillOpacity: 0.9,
-        })
+        }),
       )
       .attr({
         id: "controllerResize",
@@ -750,7 +750,7 @@ export default function PromptBuilder(props: PromptBuilderProps) {
           updateSizeOfElement(
             element,
             element.width + newSize,
-            element.height + newSizeY
+            element.height + newSizeY,
           );
       } else {
         let areaX = Number(area?.coords.split(",")[0]);
@@ -800,3 +800,4 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
   return <svg id="svg" viewBox={`0 0 ${screenWidth} ${screenHeight}`}></svg>;
 }
+export default memo(PromptBuilder);
