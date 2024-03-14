@@ -13,8 +13,8 @@ body {
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e9eaed;
@@ -22,7 +22,7 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  monospace;
 }
 
 label {
@@ -37,6 +37,7 @@ label {
   padding: 0.6rem 1.2rem;
   transition: all ease-in 0.1s;
   line-height: 1.42857143;
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.65;
@@ -54,12 +55,14 @@ label {
     border-color: var(--btn-primary-border-focus);
     background-color: var(--btn-primary-bg-hover);
   }
+
   &:hover,
   &:active {
     outline: none;
     border-color: var(--btn-primary-border-hover) !important;
     background-color: var(--btn-primary-bg-hover) !important;
   }
+
   &:disabled {
     border-color: var(--btn-primary-bg-hover);
     background-color: var(--md-indigo-500);
@@ -76,11 +79,13 @@ label {
     border-color: var(--btn-default-border) !important;
     background-color: var(--btn-default-bg-hover) !important;
   }
+
   &:active {
     outline: none;
     border-color: var(--btn-default-border-active) !important;
     background-color: var(--btn-default-bg-active) !important;
   }
+
   &:focus {
     outline: none;
     border-color: var(--btn-default-border-focus);
@@ -113,15 +118,18 @@ label {
   background-image: none;
   border: 0.1rem solid var(--border-default);
   font-size: 1.4rem;
+
   &:-webkit-autofill {
     -webkit-box-shadow: inset 0 0 0 624.938rem white !important;
     border-radius: 0.3rem !important;
     height: 3.4rem;
   }
+
   &::placeholder {
     opacity: 1;
     color: #9e9e9e;
   }
+
   &:focus {
     box-shadow: inset 0 0 0 0.1rem rgba(68, 138, 255, 0.75);
     border-color: rgba(68, 138, 255, 0.75);
@@ -146,11 +154,13 @@ $md-grey-300: #e0e0e0;
     background-color: darken($md-grey-300, 10%);
     border-color: darken($md-grey-300, 10%);
   }
+
   &:hover {
     background-color: darken($md-grey-300, 12%);
     border-color: darken($md-grey-300, 12%);
   }
 }
+
 .text-primary {
   color: var(--md-indigo-500) !important;
 }
@@ -183,6 +193,7 @@ $md-grey-300: #e0e0e0;
   min-height: 0.1rem;
   padding: 0 1rem;
 }
+
 .ics-inline-85-block {
   width: 8.5rem;
   min-height: 0.1rem;
@@ -291,6 +302,26 @@ $md-grey-300: #e0e0e0;
   h4 {
     font-size: 1.8rem;
     font-weight: 500;
+  }
+}
+
+.ics-tooltip {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  &.show {
+    opacity: 1;
+  }
+
+  .tooltip-arrow {
+    --bs-tooltip-bg: #212121;
+  }
+
+  .tooltip-inner {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    background-color: #212121;
   }
 }
 .small{

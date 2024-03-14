@@ -1,6 +1,5 @@
-import React from "react";
 import "./promptSetMetaData.scss";
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { PromptSetInterface } from "../../../models/promptset.modal";
 import { useSelector } from "react-redux";
 import { PromptSetRootState } from "../Tree/promptTree";
@@ -10,7 +9,7 @@ import {
   setClickOutside,
 } from "../../../constants/clickOutside";
 import BackgroundPicker from "../../common/background-picker/backgroundPicker";
-import { Modal } from "react-bootstrap";
+import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import EditLanguageModal from "../modals/edit-language-modal/editLanguage";
 import { promptSetContext } from "../../../hooks/promptsetContext";
 import {
@@ -25,6 +24,7 @@ import UpdateFontColor from "../modals/color-picker-modal/update-font-color-moda
 import { fileSize, getOdmlData } from "../../../services/metaDataService";
 import OdmlModal from "../modals/odml-modal/odml";
 import { useReadOnly } from "../../../hooks/readOnly";
+import { ToolTipProps } from "../Tree/TreeElements/innerStates";
 
 export default function PromptSetMetaData() {
   // STATES
@@ -38,12 +38,18 @@ export default function PromptSetMetaData() {
   const [showOdmlModal, setShowOdmlModal] = useState(false);
   const [totalSize, setTotalSize] = useState(0);
 
+  const renderTooltip = (props: ToolTipProps) => (
+    <Tooltip id="button-tooltip" {...props} className="ics-tooltip">
+      {props.text}
+    </Tooltip>
+  );
+
   // REF
   const bgPickerRef = useRef<HTMLDivElement>(null);
 
   // SELECTORS
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
+    (state: PromptSetRootState) => state.promptset.data,
   );
   const [value, setValue] = useState(promptsetData.bg || "#000000");
 
@@ -326,31 +332,71 @@ export default function PromptSetMetaData() {
       </div>
       <div className="ics-prompt-builder-meta-container">
         <div className="d-flex-row meta-buttons-container">
-          <button className="btn btn-primary">
-            <i className="fas fa-angle-double-right"></i>
-          </button>
-          <button className="btn btn-primary">
-            <i className="fas fa-expand-arrows-alt"></i>
-          </button>
-          <button className="btn btn-primary" onClick={handleOdml}>
-            <i className="fas fa-code"></i>
-          </button>
-          <button
-            onClick={() => {
-              setGridViewState(!gridViewState);
-            }}
-            className={`btn btn-primary ${gridViewState ? "isActive" : ""}`}
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip({
+              text: "Hide metadata",
+            })}
           >
-            <i className="fas fa-th"></i>
-          </button>
-          <button
-            onClick={() => {
-              setShowPlaylistState(!showPlaylistState);
-            }}
-            className={`btn btn-primary ${showPlaylistState ? "isActive" : ""}`}
+            <button className="btn btn-primary">
+              <i className="fas fa-angle-double-right"></i>
+            </button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip({
+              text: "Fullscreen mode",
+            })}
           >
-            <i className="fas fa-play-circle"></i>
-          </button>
+            <button className="btn btn-primary">
+              <i className="fas fa-expand-arrows-alt"></i>
+            </button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip({
+              text: "View as ODML",
+            })}
+          >
+            <button className="btn btn-primary" onClick={handleOdml}>
+              <i className="fas fa-code"></i>
+            </button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip({
+              text: `${gridViewState ? "Hide grid" : "Grid View"}`,
+            })}
+          >
+            <button
+              onClick={() => {
+                setGridViewState(!gridViewState);
+              }}
+              className={`btn btn-primary ${gridViewState ? "isActive" : ""}`}
+            >
+              <i className="fas fa-th"></i>
+            </button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip({
+              text: `${showPlaylistState ? "Hide playlist guide" : "Show playlist guide"}`,
+            })}
+          >
+            <button
+              onClick={() => {
+                setShowPlaylistState(!showPlaylistState);
+              }}
+              className={`btn btn-primary ${showPlaylistState ? "isActive" : ""}`}
+            >
+              <i className="fas fa-play-circle"></i>
+            </button>
+          </OverlayTrigger>
           <Modal
             show={showOdmlModal}
             onHide={handleCloseOdmlModal}
