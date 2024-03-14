@@ -282,23 +282,23 @@ export default function PromptSetMetaData() {
       <div className="ics-prompt-builder-meta-container">
         <p className="meta-container-title">Languages and default fonts</p>
 
-        {languageKeysSet.map((isoCode: any, index: number) => {
+        {languageKeysSet.map((isoCode: string, index: number) => {
           return (
             <div key={index} className="row">
               <div className="col-md-4">
-                {promptsetData?.lang[isoCode].language}
+                {promptsetData?.lang[isoCode]?.language}
                 <span className="small">
-                  {promptsetData?.lang[isoCode].promptSetLanguageSupport.default
+                  {promptsetData?.lang[isoCode]?.promptSetLanguageSupport?.default
                     ? " (default)"
                     : ""}
                 </span>
               </div>
               <div className="col-md-6">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.type ||
+                {promptsetData.lang[isoCode]?.promptSetLanguageSupport?.type ||
                   ""}
               </div>
               <div className="col-md-2">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.size ||
+                {promptsetData.lang[isoCode]?.promptSetLanguageSupport?.size ||
                   ""}
               </div>
             </div>
