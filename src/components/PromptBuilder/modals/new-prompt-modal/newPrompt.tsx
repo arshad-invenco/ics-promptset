@@ -1,6 +1,7 @@
+import React from "react";
 import { Modal } from "react-bootstrap";
 import "./newPrompt.scss";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   NewPromptPayload,
   PromptType,

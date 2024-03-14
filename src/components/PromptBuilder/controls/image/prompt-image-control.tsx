@@ -1,8 +1,8 @@
+import React from "react";
 import './prompt-image-control.scss'
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import {Elements, PromptSetInterface} from "../../../../models/promptset.modal";
 import {useContext, useEffect, useState} from "react";
-import {debounce} from "@mui/material";
 import {AppDispatch} from "../../../../redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import {updateInputElement} from "../../../../redux/reducers/promptsetSlice";

@@ -1,11 +1,13 @@
 import { getBaseUrl } from "../constants/app";
+import { addToasts } from "../redux/reducers/toastSlice";
 import request from "./interceptor";
-
-const isSaving = false;
 
 export function getIsSaving(): boolean {
   return false;
 }
+const store = require("../redux/store").default;
+
+const promptSetId = store.getState().promptset.data.id;
 
 export async function getOdmlData(id: string): Promise<string> {
   try {
@@ -24,4 +26,17 @@ export function fileSize(size: number) {
   const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
   return `${Number((size / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
+}
+
+export function updateBackground(id: string) {
+  return request()
+    .put(`${getBaseUrl()}/media/promptsets/${promptSetId}/bg?bg=${id}`, [])
+    .then((response) => {
+      if (response) {
+        store.dispatch(
+          addToasts({ message: "Default background updated", count: 1 })
+        );
+      }
+    })
+    .catch(() => {});
 }

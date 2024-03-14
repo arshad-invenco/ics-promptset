@@ -1,26 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import React from "react";
 import "./backgroundPicker.scss";
-import ColorPicker from "../../PromptBuilder/modals/color-picker-modal/colorPicker";
 import { getBaseUrl } from "../../../constants/app";
 import { Modal } from "react-bootstrap";
 import MediaModal from "../../PromptBuilder/modals/media-modal/mediaModal";
 import { Asset } from "../../../models/media.modal";
 import { IMAGE } from "../../../constants/promptSetConstants";
-import {
-  getClickOutside,
-  setClickOutside,
-} from "../../../constants/clickOutside";
+import { setClickOutside } from "../../../constants/clickOutside";
 import ColorPickerModal from "../../PromptBuilder/modals/color-picker-modal/colorPicker";
+import { updateBackground } from "../../../services/metaDataService";
 
 interface BackgroundPickerProps {
   value: string;
   setValue: (value: string) => void;
-  handleAssetBackground?: (asset:Asset) => void;
+  handleAssetBackground?: (asset: Asset) => void;
   handleBackgroundColor?: (color: string) => void;
+  hide: () => void;
+  update?: boolean;
 }
 
-function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgroundColor}: BackgroundPickerProps) {
-  const [bgColor, setBgColor] = useState("000000");
+function BackgroundPicker({
+  value,
+  setValue,
+  handleAssetBackground,
+  handleBackgroundColor,
+  update,
+  hide,
+}: BackgroundPickerProps) {
+  const [bgColor, setBgColor] = useState("#000000");
   const [bgShow, setBgShow] = useState(false);
   const [colorShow, setColorShow] = useState(false);
 
@@ -32,6 +39,7 @@ function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgr
   const handleBgClose = () => {
     setBgShow(false);
     setClickOutside(false);
+    hide();
   };
 
   const handleColorShow = () => {
@@ -42,6 +50,7 @@ function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgr
   const handleColorClose = () => {
     setClickOutside(false);
     setColorShow(false);
+    hide();
   };
 
   const generateImgURL = () => {
@@ -51,27 +60,36 @@ function BackgroundPicker({ value, setValue, handleAssetBackground ,handleBackgr
   const updateColor = (color: string) => {
     if (color === bgColor && value === color) return;
     setValue(color);
-    if (handleBackgroundColor)
-      handleBackgroundColor(color);
+    setBgColor(color);
+    if (handleBackgroundColor) handleBackgroundColor(color);
+    if (update) {
+      setClickOutside(false);
+      updateBackground(color.replace("#", ""));
+    }
+    hide();
   };
 
   const handleAsset = (asset: Asset) => {
     setValue(asset.id);
     setBgShow(false);
     if (handleAssetBackground) handleAssetBackground(asset);
+    if (update) {
+      setClickOutside(false);
+      updateBackground(asset.id);
+    }
+    hide();
   };
-
 
   return (
     <div className="ics-bg-picker">
       <div className="selected-bg">
-        {value.length > 6 ? (
+        {value.length > 7 ? (
           <div
             className="image"
             style={{ backgroundImage: generateImgURL() }}
           ></div>
         ) : (
-          <div className="color" style={{ backgroundColor: "#" + value }}></div>
+          <div className="color" style={{ backgroundColor: value }}></div>
         )}
       </div>
       <div className="select-bg">

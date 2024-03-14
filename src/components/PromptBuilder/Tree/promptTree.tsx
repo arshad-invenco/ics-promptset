@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import "./promptTree.scss";
-import { Accordion, Modal } from "react-bootstrap";
+import { Accordion, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import InnerStates from "./TreeElements/innerStates";
+import InnerStates, { ToolTipProps } from "./TreeElements/innerStates";
 import {
   Assignment,
   Elements,
@@ -62,7 +62,7 @@ export default function PromptTree() {
 
   // SELECTOR
   const promptsetData: PromptSetInterface = useSelector(
-    (state: PromptSetRootState) => state.promptset.data
+    (state: PromptSetRootState) => state.promptset.data,
   );
   const fonts: Font[] = useSelector(selectFonts);
   const elementData: Elements =
@@ -70,8 +70,8 @@ export default function PromptTree() {
       selectElementByIdInAssignment(
         state,
         activePromptEditorId,
-        activeElementId
-      )
+        activeElementId,
+      ),
     ) || ({} as Elements);
 
   // CONTEXT API
@@ -83,6 +83,13 @@ export default function PromptTree() {
     setActivePromptEditorId,
     setLastModified,
   } = useContext(promptSetContext);
+
+  // TOOLTIP
+  const renderTooltip = (props: ToolTipProps) => (
+    <Tooltip id="button-tooltip" {...props} className="ics-tooltip">
+      {props.text}
+    </Tooltip>
+  );
 
   // HOOKS
   const promptSetId = usePromptSetId();
@@ -119,7 +126,7 @@ export default function PromptTree() {
         setInitialState(false);
         onClickState(
           promptsetData.states[0].id,
-          promptsetData.states[0].assignments[0].id
+          promptsetData.states[0].assignments[0].id,
         );
       }
     }
@@ -173,7 +180,7 @@ export default function PromptTree() {
 
     const response = await request().post(
       `${getBaseUrl()}/media/prompts`,
-      newPrompt
+      newPrompt,
     );
 
     if (response) {
@@ -208,7 +215,7 @@ export default function PromptTree() {
           dispatch(
             addToasts({
               message: `Saved ${payload.length} state${payload.length > 1 ? "s" : ""}`,
-            })
+            }),
           );
           dispatch(fetchPromptSet(promptSetId));
           setIsSaving(false);
@@ -237,7 +244,7 @@ export default function PromptTree() {
     request()
       .put(
         `${getBaseUrl()}/media/promptsets/${promptSetId}/prompts`,
-        updatedAssignments
+        updatedAssignments,
       )
       .then((res) => {
         dispatch(removeIsStateChangedById(item.id));
@@ -311,13 +318,21 @@ export default function PromptTree() {
                         </div>
                         {item.isStateChanged && !readOnly && (
                           <div className="unsaved-status">
-                            <i
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                saveState(item);
-                              }}
-                              className="fa fa-floppy-o "
-                            ></i>
+                            <OverlayTrigger
+                              placement="left"
+                              delay={{ show: 25, hide: 25 }}
+                              overlay={renderTooltip({
+                                text: "Save prompts",
+                              })}
+                            >
+                              <i
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  saveState(item);
+                                }}
+                                className="fa fa-floppy-o "
+                              ></i>
+                            </OverlayTrigger>
                           </div>
                         )}
                       </div>
@@ -330,7 +345,7 @@ export default function PromptTree() {
                               <InnerStates child={child} index={index} />
                             </div>
                           );
-                        }
+                        },
                       )}
                     </Accordion.Body>
                   </Accordion.Item>

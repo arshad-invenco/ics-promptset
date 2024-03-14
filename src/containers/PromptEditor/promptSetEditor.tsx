@@ -1,3 +1,4 @@
+import React from "react";
 import Controllers from "../../components/PromptBuilder/controls/controllers";
 import PromptPreviewArea from "../../components/PromptBuilder/builder/promptPreviewArea";
 import PromptSetMetaData from "../../components/PromptBuilder/meta-data/promptSetMetaData";

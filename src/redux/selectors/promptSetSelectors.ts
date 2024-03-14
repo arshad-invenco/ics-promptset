@@ -10,7 +10,7 @@ export const selectPromptSetStateById = createSelector(
   (state: PromptSetRootState) => state.promptset.data.states,
   (_: State[], id: string) => id,
   (data: State[], id: string) =>
-    data ? data.find((item: { id: string }) => item.id === id) : null,
+    data ? data.find((item: { id: string }) => item.id === id) : null
 );
 
 export const selectPromptSetAssignmentById = createSelector(
@@ -24,7 +24,7 @@ export const selectPromptSetAssignmentById = createSelector(
     for (const state of states) {
       if (state.assignments) {
         const assignment = state.assignments.find(
-          (assignment) => assignment.id === id,
+          (assignment) => assignment.id === id
         );
         if (assignment) {
           return assignment;
@@ -32,7 +32,7 @@ export const selectPromptSetAssignmentById = createSelector(
       }
     }
     return null;
-  },
+  }
 );
 
 export const selectElementByIdInAssignment = createSelector(
@@ -49,11 +49,11 @@ export const selectElementByIdInAssignment = createSelector(
     for (const state of states) {
       if (state.assignments) {
         const assignment = state.assignments.find(
-          (assignment) => assignment.id === assignmentId,
+          (assignment) => assignment.id === assignmentId
         );
         if (assignment && assignment.elements) {
           const element = assignment.elements.find(
-            (element) => element.id === elementId,
+            (element) => element.id === elementId
           );
           if (element) {
             return element;
@@ -62,7 +62,7 @@ export const selectElementByIdInAssignment = createSelector(
       }
     }
     return null;
-  },
+  }
 );
 
 export const selectAreaInTouchMap = createSelector(
@@ -81,7 +81,7 @@ export const selectAreaInTouchMap = createSelector(
           assignment.touchmap.areas
         ) {
           const area = assignment.touchmap.areas.find(
-            (area: TouchMapAreas) => area.id === areaId,
+            (area: TouchMapAreas) => area.id === areaId
           );
           return area || null;
         }
@@ -89,5 +89,8 @@ export const selectAreaInTouchMap = createSelector(
     }
 
     return null;
-  },
+  }
 );
+
+export const selectPromptSetId = (state: PromptSetRootState) =>
+  state.promptset.data.id;

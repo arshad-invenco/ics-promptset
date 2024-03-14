@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 import { useContext, useEffect, useState } from "react";
 import { promptSetContext } from "../../../hooks/promptsetContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +29,7 @@ interface PromptBuilderProps {
   screenHeight: number;
 }
 
-export default function PromptBuilder(props: PromptBuilderProps) {
+function PromptBuilder(props: PromptBuilderProps) {
   const { color, screenHeight, screenWidth } = props;
   const [elements, setElements] = useState<Elements[]>([]);
 
@@ -799,3 +800,4 @@ export default function PromptBuilder(props: PromptBuilderProps) {
 
   return <svg id="svg" viewBox={`0 0 ${screenWidth} ${screenHeight}`}></svg>;
 }
+export default memo(PromptBuilder);

@@ -1,3 +1,4 @@
+import React from "react";
 import "./controllers.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -53,32 +54,26 @@ export default function Controllers() {
 
   // SELECTORS
   const STATE = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetStateById(state, activeStateId),
+    selectPromptSetStateById(state, activeStateId)
   );
   const childState = useSelector((state: PromptSetRootState & State[]) =>
-    selectPromptSetAssignmentById(state, activePromptEditorId),
+    selectPromptSetAssignmentById(state, activePromptEditorId)
   );
   const elementData: Elements =
     useSelector((state: PromptSetRootState & State[]) =>
       selectElementByIdInAssignment(
         state,
         activePromptEditorId,
-        activeElementId,
-      ),
+        activeElementId
+      )
     ) || ({} as Elements);
   const areaData =
     useSelector((state: PromptSetRootState & State[]) =>
-      selectAreaInTouchMap(state, activePromptEditorId, activeElementId),
+      selectAreaInTouchMap(state, activePromptEditorId, activeElementId)
     ) || ({} as TouchMapAreas);
 
-  // LOGS
-  console.log(state, "data");
-  console.log(activePromptEditorId, "activeChildStateId");
-  console.log(childState, "childState");
-  console.log(elementData, "elementData");
-
   function handleTransactionStateChange(
-    event: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>
   ) {
     const selectedValue = event.target.value;
     if (selectedValue !== "null") {
@@ -86,14 +81,14 @@ export default function Controllers() {
         updateStateById({
           id: activeStateId,
           newTransactionState: selectedValue,
-        }),
+        })
       );
     } else {
       dispatch(
         updateStateById({
           id: activeStateId,
           newTransactionState: null,
-        }),
+        })
       );
     }
   }
@@ -138,8 +133,8 @@ export default function Controllers() {
             <option value="null" selected>
               Select transaction state
             </option>
-            <option value="idle">Idle</option>
-            <option value="fueling">Fueling</option>
+            <option value="Idle">Idle</option>
+            <option value="Fueling">Fueling</option>
           </select>
         </div>
       ) : activeControlType === CHILD_STATE ? (

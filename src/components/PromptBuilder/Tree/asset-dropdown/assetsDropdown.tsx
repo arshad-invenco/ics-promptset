@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext, useEffect, useState } from "react";
 import isSequoiaDevice, {
   find,
@@ -129,6 +130,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   const handleCloseTouchMask = () => {
     setClickOutside(false);
     setShowTouchMask(false);
+    props.hide();
   };
 
   const handleTouchMask = (touchMask: TouchMask | null) => {
@@ -140,6 +142,7 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
     } else {
       //Create new touch mask
     }
+    props.hide();
   };
 
   function fetchAssets() {
@@ -155,8 +158,6 @@ export default function AssetsDropdown(props: AssetsDropdownProps) {
   }
 
   function handleAdd(childState: Assignment, type: string) {
-    // TODO: Check from languages data
-    // const isNoMultiLanguagePromptSet = companyLanguages.length === 0;
     const isMultiLanguagePromptSet = true;
 
     if (type === BG) {

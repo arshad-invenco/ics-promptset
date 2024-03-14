@@ -1,3 +1,4 @@
+import React from "react";
 import { RefObject, useEffect, useRef, useState } from "react";
 import "./searchableDropdown.scss";
 

@@ -1,3 +1,4 @@
+import React from "react";
 import "./prompt-area-control.scss";
 import VerticalAlignCenterRoundedIcon from "@mui/icons-material/VerticalAlignCenterRounded";
 import {

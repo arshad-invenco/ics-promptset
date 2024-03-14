@@ -1,3 +1,4 @@
+import React from "react";
 import { Modal } from "react-bootstrap";
 import { TouchMask } from "../../../../models/touchMask.modal";
 import "./selectTouchMask.scss";

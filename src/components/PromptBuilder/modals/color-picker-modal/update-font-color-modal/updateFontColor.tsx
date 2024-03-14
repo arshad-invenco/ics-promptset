@@ -1,3 +1,4 @@
+import React from "react";
 import { Modal } from "react-bootstrap";
 import "./updateFontColor.scss";
 import { getBaseUrl } from "../../../../../constants/app";
@@ -5,8 +6,6 @@ import request from "../../../../../services/interceptor";
 import { useDispatch } from "react-redux";
 import { fetchPromptSet } from "../../../../../redux/thunks/promptSetThunk";
 import { AppDispatch } from "../../../../../redux/store";
-import { useContext } from "react";
-import { promptSetContext } from "../../../../../hooks/promptsetContext";
 import { usePromptSetId } from "../../../../../hooks/promptsetId";
 import { addToasts } from "../../../../../redux/reducers/toastSlice";
 

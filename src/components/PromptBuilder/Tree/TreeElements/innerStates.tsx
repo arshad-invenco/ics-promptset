@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Accordion, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { showAssetsDropdown } from "../../../../hooks/common";
@@ -209,7 +210,6 @@ export default function InnerStates(props: InnerStateProps) {
   }
 
   function deleteDayPart(assignmentId: string, childStateId: string) {
-    console.log(assignmentId, childStateId);
     axios
       .delete(`${getBaseUrl()}/media/prompt/${childStateId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -390,13 +390,21 @@ export default function InnerStates(props: InnerStateProps) {
                     {!readOnly && (
                       <div>
                         {child.touchmap.isTouchMaskChanged && (
-                          <i
-                            onClick={() => {
-                              setActivePromptEditorId(child.id);
-                              setShowNewTouchMask(true);
-                            }}
-                            className="fa fa-floppy-o touchmask-save-icon"
-                          ></i>
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 25, hide: 250 }}
+                            overlay={renderTooltip({
+                              text: "Save Touch Mask",
+                            })}
+                          >
+                            <i
+                              onClick={() => {
+                                setActivePromptEditorId(child.id);
+                                setShowNewTouchMask(true);
+                              }}
+                              className="fa fa-floppy-o touchmask-save-icon"
+                            ></i>
+                          </OverlayTrigger>
                         )}
                         <i
                           onClick={() => {

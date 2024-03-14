@@ -29,7 +29,6 @@ import { ToolTipProps } from "../Tree/TreeElements/innerStates";
 export default function PromptSetMetaData() {
   // STATES
   const [open, setDropdownStatus] = useState(false);
-  const [value, setValue] = useState("#000000");
   const [showEditLanguage, setShowEditLanguage] = useState(false);
   const [colorShow, setColorShow] = useState(false);
   const [showUpdateFontModal, setShowUpdateFontModal] = useState(false);
@@ -52,6 +51,7 @@ export default function PromptSetMetaData() {
   const promptsetData: PromptSetInterface = useSelector(
     (state: PromptSetRootState) => state.promptset.data,
   );
+  const [value, setValue] = useState(promptsetData.bg || "#000000");
 
   //   HOOKS
   const readOnly = useReadOnly();
@@ -247,7 +247,14 @@ export default function PromptSetMetaData() {
                     <i className="fas fa-chevron-circle-down"></i>
                   )}
                 </button>
-                {open && <BackgroundPicker value={value} setValue={setValue} />}
+                {open && (
+                  <BackgroundPicker
+                    value={value}
+                    setValue={setValue}
+                    update={true}
+                    hide={handleDropdown}
+                  />
+                )}
               </div>
               <Modal
                 show={colorShow}
@@ -258,7 +265,7 @@ export default function PromptSetMetaData() {
                 backdrop="static"
               >
                 <ColorPickerModal
-                  value={promptsetData?.fontColor || "#000000"}
+                  value={"#" + promptsetData?.fontColor || "#000000"}
                   onChange={updateColor}
                   hide={handleColorClose}
                 />
@@ -282,36 +289,39 @@ export default function PromptSetMetaData() {
       <div className="ics-prompt-builder-meta-container">
         <p className="meta-container-title">Languages and default fonts</p>
 
-        {languageKeysSet.map((isoCode: any, index: number) => {
+        {languageKeysSet.map((isoCode: string, index: number) => {
           return (
-            <div key={index} className="row small">
+            <div key={index} className="row">
               <div className="col-md-4">
-                {promptsetData?.lang[isoCode].language}
-                <span>
-                  {promptsetData?.lang[isoCode].promptSetLanguageSupport.default
+                {promptsetData?.lang[isoCode]?.language}
+                <span className="small">
+                  {promptsetData?.lang[isoCode]?.promptSetLanguageSupport
+                    ?.default
                     ? " (default)"
                     : ""}
                 </span>
               </div>
               <div className="col-md-6">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.type ||
+                {promptsetData.lang[isoCode]?.promptSetLanguageSupport?.type ||
                   ""}
               </div>
               <div className="col-md-2">
-                {promptsetData.lang[isoCode].promptSetLanguageSupport.size ||
+                {promptsetData.lang[isoCode]?.promptSetLanguageSupport?.size ||
                   ""}
               </div>
             </div>
           );
         })}
-        {!readOnly && (
-          <button
-            className="btn btn-primary meta-button"
-            onClick={handleEditLanguageShow}
-          >
-            Edit
-          </button>
-        )}
+        <div className="d-flex-row meta-buttons-container">
+          {!readOnly && (
+            <button
+              className="btn btn-primary meta-button"
+              onClick={handleEditLanguageShow}
+            >
+              Edit
+            </button>
+          )}
+        </div>
         <Modal
           show={showEditLanguage}
           onHide={handleEditLanguageClose}
