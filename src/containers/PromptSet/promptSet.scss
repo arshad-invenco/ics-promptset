@@ -20,15 +20,12 @@
     flex-wrap: wrap;
     gap: 1rem;
     overflow: hidden;
-    -webkit-height: calc(100vh - 5rem);
 
     .ics-prompt-builder-preview-wrapper {
-      width: calc(100% - 29rem);
-      -webkit-width: calc(100% - 29rem);
+      width: calc(100% - 29.5rem);
 
       &.expended {
         position: absolute;
-        -webkit-width: calc(100% - 7.5rem);
         width: calc(100% - 7.5rem);
       }
     }
