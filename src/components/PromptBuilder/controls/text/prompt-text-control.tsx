@@ -121,7 +121,7 @@ export default function TextControl(props: ElementsProp) {
             centered
           >
             <ColorPickerModal
-              value={("#" + element.color) ?? ""}
+              value={"#" + element.color ?? ""}
               onChange={updateColor}
               hide={handleColorClose}
             />

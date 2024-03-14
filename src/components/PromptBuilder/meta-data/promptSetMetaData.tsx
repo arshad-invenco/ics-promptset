@@ -246,6 +246,7 @@ export default function PromptSetMetaData() {
                     value={value}
                     setValue={setValue}
                     update={true}
+                    hide={handleDropdown}
                   />
                 )}
               </div>
@@ -288,7 +289,8 @@ export default function PromptSetMetaData() {
               <div className="col-md-4">
                 {promptsetData?.lang[isoCode]?.language}
                 <span className="small">
-                  {promptsetData?.lang[isoCode]?.promptSetLanguageSupport?.default
+                  {promptsetData?.lang[isoCode]?.promptSetLanguageSupport
+                    ?.default
                     ? " (default)"
                     : ""}
                 </span>
@@ -304,14 +306,16 @@ export default function PromptSetMetaData() {
             </div>
           );
         })}
-        {!readOnly && (
-          <button
-            className="btn btn-primary meta-button"
-            onClick={handleEditLanguageShow}
-          >
-            Edit
-          </button>
-        )}
+        <div className="d-flex-row meta-buttons-container">
+          {!readOnly && (
+            <button
+              className="btn btn-primary meta-button"
+              onClick={handleEditLanguageShow}
+            >
+              Edit
+            </button>
+          )}
+        </div>
         <Modal
           show={showEditLanguage}
           onHide={handleEditLanguageClose}

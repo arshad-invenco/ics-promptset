@@ -1,4 +1,5 @@
 import { getBaseUrl } from "../constants/app";
+import { addToasts } from "../redux/reducers/toastSlice";
 import request from "./interceptor";
 
 export function getIsSaving(): boolean {
@@ -28,8 +29,14 @@ export function fileSize(size: number) {
 }
 
 export function updateBackground(id: string) {
-  return request().put(
-    `${getBaseUrl()}/media/promptsets/${promptSetId}/bg?bg=${id}`,
-    []
-  );
+  return request()
+    .put(`${getBaseUrl()}/media/promptsets/${promptSetId}/bg?bg=${id}`, [])
+    .then((response) => {
+      if (response) {
+        store.dispatch(
+          addToasts({ message: "Default background updated", count: 1 })
+        );
+      }
+    })
+    .catch(() => {});
 }

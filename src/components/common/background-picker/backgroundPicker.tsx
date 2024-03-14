@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import React from "react";
 import "./backgroundPicker.scss";
 import { getBaseUrl } from "../../../constants/app";
@@ -6,9 +6,7 @@ import { Modal } from "react-bootstrap";
 import MediaModal from "../../PromptBuilder/modals/media-modal/mediaModal";
 import { Asset } from "../../../models/media.modal";
 import { IMAGE } from "../../../constants/promptSetConstants";
-import {
-  setClickOutside,
-} from "../../../constants/clickOutside";
+import { setClickOutside } from "../../../constants/clickOutside";
 import ColorPickerModal from "../../PromptBuilder/modals/color-picker-modal/colorPicker";
 import { updateBackground } from "../../../services/metaDataService";
 
@@ -17,6 +15,7 @@ interface BackgroundPickerProps {
   setValue: (value: string) => void;
   handleAssetBackground?: (asset: Asset) => void;
   handleBackgroundColor?: (color: string) => void;
+  hide: () => void;
   update?: boolean;
 }
 
@@ -26,6 +25,7 @@ function BackgroundPicker({
   handleAssetBackground,
   handleBackgroundColor,
   update,
+  hide,
 }: BackgroundPickerProps) {
   const [bgColor, setBgColor] = useState("#000000");
   const [bgShow, setBgShow] = useState(false);
@@ -39,6 +39,7 @@ function BackgroundPicker({
   const handleBgClose = () => {
     setBgShow(false);
     setClickOutside(false);
+    hide();
   };
 
   const handleColorShow = () => {
@@ -49,6 +50,7 @@ function BackgroundPicker({
   const handleColorClose = () => {
     setClickOutside(false);
     setColorShow(false);
+    hide();
   };
 
   const generateImgURL = () => {
@@ -64,6 +66,7 @@ function BackgroundPicker({
       setClickOutside(false);
       updateBackground(color.replace("#", ""));
     }
+    hide();
   };
 
   const handleAsset = (asset: Asset) => {
@@ -74,6 +77,7 @@ function BackgroundPicker({
       setClickOutside(false);
       updateBackground(asset.id);
     }
+    hide();
   };
 
   return (

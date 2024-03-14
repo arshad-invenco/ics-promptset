@@ -22,7 +22,7 @@ const ToastComponent = () => {
         >
           <span>
             <span>
-              {toast.count && toast.count > 1 && (
+              {toast.count && toast.count > 0 && (
                 <span className="toast-counter">{toast.count}</span>
               )}
             </span>

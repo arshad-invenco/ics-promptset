@@ -106,6 +106,7 @@ export function BackgroundControl(props: ElementsProp) {
               value={value}
               setValue={setValue}
               handleBackgroundColor={handleColor}
+              hide={handleDropdown}
             />
           )}
         </div>
